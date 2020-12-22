@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react"
-import { grass } from '../RawGrassCode'
+import { grass } from '../helpers/rawGrassCode'
 import { useFrame } from 'react-three-fiber'
 
 import { Hill } from '../Hill'
@@ -14,7 +14,9 @@ const GrassHill = ({position, rotation}) => {
   let thisFrame
 
   useEffect(() => { 
-    ref.current.frustumCulled = false
+    ref.current.traverse((object) => {
+      object.frustumCulled = false
+    })
   })
 
   useFrame(() => {

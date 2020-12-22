@@ -1,12 +1,58 @@
-import React, { useRef } from "react"
-import { ground } from '../RawGrassCode'
+import React, { useRef, useEffect } from "react"
+import { Perlin } from '../helpers/perlin'
+import { ground } from '../helpers/rawGrassCode'
+import verticesData from './vertices.json'
 
-const Hill = ({position, rotation, color}) => {
+const CustomHill = ({position}) => {
+  const terrainRef = useRef()
+
+  useEffect(() => {
+    const terrain = terrainRef.current
+    console.log({terrain})
+    // let peak = 40;
+    // let smoothing = 300;
+    // let perlin = new Perlin()
+    
+    const vertices = terrain.geometry.attributes.position.array;
+    let verticesIndex = 0
+
+    for (let i = 0; i <= vertices.length; i += 3) {
+      // var noiseResult = peak * perlin.noise(
+      //   vertices[i]/smoothing, 
+      //   vertices[i+1]/smoothing
+      // )
+      
+      const vertexData = verticesData.data[verticesIndex]
+
+      vertices[i+2] = vertexData
+      verticesIndex += 1
+    }
+    
+    terrain.geometry.attributes.position.needsUpdate = true
+    terrain.geometry.computeVertexNormals()
+    terrain.rotation.x = -Math.PI / 2
+    terrain.rotation.z = 1.5
+  })
+
   return (
-    <primitive object={ground.clone()} />
+    <>
+      <fog attach="fog" args={['transparent', 550, 800]} />
+      <ambientLight intensity={0.1} position={position}/>
+      <mesh ref={terrainRef} position={[-450,-30,-150]}>
+        <planeBufferGeometry attach="geometry" args={[1000, 500, 256, 256]}/>
+        <meshLambertMaterial attach="material" color={"lightblue"}/>
+      </mesh>
+    </>
+  )
+}
+
+const Hill = ({position}) => {
+  return (
+    <primitive object={ground.clone()} position={position} />
   )
 }
 
 export {
-  Hill
+  Hill,
+  CustomHill
 }

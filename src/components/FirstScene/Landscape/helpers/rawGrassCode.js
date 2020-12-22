@@ -22,7 +22,7 @@ var radius = 240;
 var pos = new THREE.Vector2(0.01, 0.01);
 
 //Number of blades
-var instances = 40000;
+var instances = 41111;
 
 //Lighting variables for grass
 var ambientStrength = 0.7;
@@ -45,7 +45,7 @@ noiseTexture.wrapT = THREE.RepeatWrapping;
 
 //************** Ground **************
 //Ground material is a modification of the existing THREE.MeshPhongMaterial rather than one from scratch
-var groundBaseGeometry = new THREE.PlaneBufferGeometry(width, width, resolution, resolution);
+var groundBaseGeometry = new THREE.PlaneBufferGeometry(width, width, resolution, resolution)
 groundBaseGeometry.lookAt(new THREE.Vector3(0,1,0));
 groundBaseGeometry.verticesNeedUpdate = true;
 
@@ -53,7 +53,7 @@ var groundGeometry = new THREE.PlaneBufferGeometry(width, width, resolution, res
 groundGeometry.addAttribute('basePosition', groundBaseGeometry.getAttribute("position"));
 groundGeometry.lookAt(new THREE.Vector3(0,1,0));
 groundGeometry.verticesNeedUpdate = true;
-var groundMaterial = new THREE.MeshPhongMaterial({color: 0x4e5054 });
+var groundMaterial = new THREE.MeshPhongMaterial({color: "pink" });
 
 var sharedPrefix = `
 uniform sampler2D noiseTexture;

@@ -5,7 +5,6 @@ import * as THREE from "three"
 
 const Flower = () => {
   const gltfRef = useRef()
-  const directionalLightRef = useRef()
   const gltf = useGLTFLoader("TestFlowerAnimation.gltf")
 
   useEffect(() => { 
@@ -29,7 +28,6 @@ const Flower = () => {
           castShadow
           position={[0, -30,300]}
           intensity={0.5} 
-          ref={directionalLightRef}   
       />
       <primitive object={gltf.scene} dispose={null} ref={gltfRef} />
     </>
