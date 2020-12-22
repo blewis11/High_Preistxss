@@ -9,9 +9,9 @@ const CustomHill = ({position}) => {
   useEffect(() => {
     const terrain = terrainRef.current
     console.log({terrain})
-    // let peak = 40;
-    // let smoothing = 300;
-    // let perlin = new Perlin()
+    let peak = 40;
+    let smoothing = 300;
+    let perlin = new Perlin()
     
     const vertices = terrain.geometry.attributes.position.array;
     let verticesIndex = 0
@@ -36,11 +36,10 @@ const CustomHill = ({position}) => {
 
   return (
     <>
-      <fog attach="fog" args={['transparent', 550, 800]} />
       <ambientLight intensity={0.1} position={position}/>
       <mesh ref={terrainRef} position={[-450,-30,-150]}>
         <planeBufferGeometry attach="geometry" args={[1000, 500, 256, 256]}/>
-        <meshLambertMaterial attach="material" color={"lightblue"}/>
+        <meshLambertMaterial attach="material" color={0x81c9ef}/>
       </mesh>
     </>
   )

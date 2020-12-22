@@ -53,7 +53,8 @@ var groundGeometry = new THREE.PlaneBufferGeometry(width, width, resolution, res
 groundGeometry.addAttribute('basePosition', groundBaseGeometry.getAttribute("position"));
 groundGeometry.lookAt(new THREE.Vector3(0,1,0));
 groundGeometry.verticesNeedUpdate = true;
-var groundMaterial = new THREE.MeshPhongMaterial({color: "pink" });
+var groundMaterial = new THREE.MeshPhongMaterial()
+groundMaterial.emissive = 0xffffff
 
 var sharedPrefix = `
 uniform sampler2D noiseTexture;

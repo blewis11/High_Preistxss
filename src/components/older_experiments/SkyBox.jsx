@@ -3,11 +3,10 @@ import { useThree } from "react-three-fiber"
 import { useCubeTextureLoader } from "drei"
 
 // Loads the skybox texture and applies it to the scene.
-const SkyBox = () => {
-
+const SkyBox = ({path, images}) => {
   const envMap = useCubeTextureLoader(
-    ['skybox_nz.jpg', 'skybox_nx.jpg', 'skybox_py.jpg', 'skybox_ny.jpg', 'skybox_pz.jpg', 'skybox_nz.jpg'], 
-    { path: 'cube/' }
+    images, 
+    { path }
   )
 
   const { scene } = useThree()
@@ -15,12 +14,12 @@ const SkyBox = () => {
   return null
 }
 
-const SkyBoxExample = () => {
+const SkyBoxExample = (props) => {
 
   return (
     <>
-      <Suspense fallback={null}>
-        <SkyBox />
+      <Suspense fallback={null} >
+        <SkyBox {...props} />
       </Suspense>
     </>
   )
