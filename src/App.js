@@ -1,4 +1,4 @@
-import React from "react"
+import React, { Suspense } from "react"
 import { connect } from "react-redux"
 
 import { toggleLight } from './redux/Counter/actions'
@@ -11,7 +11,9 @@ const App = (props) => {
     <>
       <HeaderGrass /> 
       <div className="main">
-        <FirstScene />
+        <Suspense fallback={null}>
+          <FirstScene />
+        </Suspense>
       </div>
 
       {/* <HeaderLandscape />

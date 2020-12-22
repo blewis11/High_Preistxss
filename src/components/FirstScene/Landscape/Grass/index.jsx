@@ -29,7 +29,6 @@ const GrassHill = ({position, rotation}) => {
 
   return (
     <group position={position} rotation={rotation}>
-      <Flower />
       <primitive ref={ref} object={grass.clone()} /> 
       <Hill />
     </group>

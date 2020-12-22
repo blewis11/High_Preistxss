@@ -1,36 +1,30 @@
-import React, { useEffect, useState, useRef } from "react"
+import React, { useEffect, useState, useRef, Suspense } from "react"
 import { useFrame } from 'react-three-fiber'
-import { useGLTFLoader } from "drei"
+import { useFBXLoader } from "drei"
 import * as THREE from "three"
 
-const Flower = () => {
-  const gltfRef = useRef()
-  const gltf = useGLTFLoader("TestFlowerAnimation.gltf")
+const Flower = ({position, rotationY, rotationZ, scale }) => {
+  const fbxRef = useRef()
+  const fbx = useFBXLoader("flowers/FlowerTest3.fbx")
 
-  useEffect(() => { 
+  useEffect(() => {
     // position flower in scene 
-    gltf.scene.position.x = 0
-    gltf.scene.position.y = -50
-    gltf.scene.position.z = 300
+    fbx.scale.set(scale,scale,scale)
+    fbx.rotation.y = rotationY
+    fbx.rotation.z = rotationZ
   })
 
   const [ mixer ] = useState(() => new THREE.AnimationMixer())  
-  useEffect(() => void mixer.clipAction(gltf.animations[0], gltfRef.current).play(), [])
+  useEffect(() => void mixer.clipAction(fbx.animations[0], fbxRef.current).play(), [])
 
   useFrame(() => {
-    mixer.update(0.001)
+    mixer.update(0.002)
   })
 
   return (
-    <>
-    <spotLight
-          color={0xc9a7d3}
-          castShadow
-          position={[0, -30,300]}
-          intensity={0.5} 
-      />
-      <primitive object={gltf.scene} dispose={null} ref={gltfRef} />
-    </>
+    <Suspense fallback={null}>
+      <primitive object={fbx} dispose={null} ref={fbxRef} position={position}/>
+    </Suspense>
   )
 }
 
