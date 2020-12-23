@@ -3,9 +3,9 @@ import { useFrame } from 'react-three-fiber'
 import { useFBXLoader } from "drei"
 import * as THREE from "three"
 
-const Flower = ({position, rotationY, rotationZ, scale }) => {
+const Flower = ({position, rotationY, rotationZ, scale, fbx}) => {
   const fbxRef = useRef()
-  const fbx = useFBXLoader("flowers/FlowerTest3.fbx")
+  const lightRef = useRef()
 
   useEffect(() => {
     // position flower in scene 
@@ -16,7 +16,6 @@ const Flower = ({position, rotationY, rotationZ, scale }) => {
 
   const [ mixer ] = useState(() => new THREE.AnimationMixer())  
   useEffect(() => void mixer.clipAction(fbx.animations[0], fbxRef.current).play(), [])
-
   useFrame(() => {
     mixer.update(0.002)
   })

@@ -1,6 +1,6 @@
 import React, { Suspense, useRef } from "react"
 import { Canvas } from "react-three-fiber"
-import { OrbitControls, Stats, useFBXLoader } from "drei"
+import { OrbitControls, Stats, useFBXLoader, useGLTFLoader } from "drei"
 
 import { SkyBoxExample } from '../older_experiments/SkyBox'
 import { GrassHill } from './Landscape/Grass'
@@ -23,13 +23,15 @@ const FirstScene = () => {
     <Canvas
         colorManagement
         shadowMap
-        camera={{ position: [79, 3, 38], fov: 35 }}>
+        camera={{ position: [79, 5, 38], fov: 35 }}>
         <color attach="background" args={["grey"]}   />
         <fog attach="fog" args={[0xcbced2, 230, 800]} />
 
         {/* debugging helpers */}
-        {/* <axisHelper args={25}/> */}
+        <axisHelper args={25}/>
         <Stats />
+
+        <ambientLight intensity={1} />
 
         <SkyBoxExample path={'scene1_background/'} images={['px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'pz.jpg', 'nz.jpg']}/>
         <Suspense fallback={null}> 
@@ -41,8 +43,19 @@ const FirstScene = () => {
           <GrassHill position={[-90,-5,-100]} rotation={[0.1,-0.3,0]}  />
 
           {/* flowers */}
-          <Flower position={[0,-6,30]} rotationY={-0.7} rotationZ={-0.7} scale={0.1} />
-          {/* <Flower position={[0,-6,-30]} rotationY={-0.7} rotationZ={-0.7} scale={0.2} /> */}
+          <Flower position={[0,-6,-30]} rotationY={-0.7} rotationZ={-0.7} scale={0.1} fbx={useFBXLoader("flowers/Flower1.fbx")} />
+          <Flower position={[4,-4,-25]} rotationY={-2} rotationZ={-0.7} scale={0.2} fbx={useFBXLoader("flowers/Flower2.fbx")}/>
+
+          <Flower position={[0,-12, 30]} rotationY={-0.7} rotationZ={-0.7} scale={0.1} fbx={useFBXLoader("flowers/Flower3.fbx")} />
+          <Flower position={[-5,-12, 30]} rotationY={-2} rotationZ={-0.9} scale={0.15} fbx={useFBXLoader("flowers/Flower4.fbx")}/>
+
+          <Flower position={[-35,-10, 15]} rotationY={-2} rotationZ={-0.7} scale={0.2} fbx={useFBXLoader("flowers/Flower5.fbx")}/>
+          
+          <Flower position={[-135,-15, 35]} rotationY={-0.5} rotationZ={-0.7} scale={0.1} fbx={useFBXLoader("flowers/Flower6.fbx")}/>
+          <Flower position={[-145,-15, 25]} rotationY={-2} rotationZ={-0.7} scale={0.3} fbx={useFBXLoader("flowers/Flower7.fbx")}/>
+
+          <Flower position={[45,-2, -15]} rotationY={-2} rotationZ={-0.7} scale={0.2} fbx={useFBXLoader("flowers/Flower8.fbx")}/>
+          <Flower position={[-145, -3, -180]} rotationY={-1.5} rotationZ={-0.7} scale={0.1} fbx={useFBXLoader("flowers/Flower9.fbx")}/>
 
           {/* background plain hills */}
           <CustomHill position={[-90,0,-100]}/>
