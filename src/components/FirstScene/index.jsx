@@ -8,6 +8,7 @@ import { CustomHill } from './Landscape/Hill'
 import { Flower } from './Landscape/Flower'
 import { LightSource } from './LightSource'
 
+
 const HeaderGrass = () => {
   return (
     <div className="header-major">
@@ -17,7 +18,7 @@ const HeaderGrass = () => {
 }
 
 const FirstScene = () => {
-  const lightRef = useRef()
+  // const lightRef = useRef() 
 
   return (
     <Canvas
@@ -25,14 +26,13 @@ const FirstScene = () => {
         shadowMap
         camera={{ position: [79, 5, 38], fov: 35 }}>
         <color attach="background" args={["grey"]}   />
-        <fog attach="fog" args={[0xcbced2, 230, 800]} />
+        <fog attach="fog" args={[0xcbced2, 1, 800]} />
 
         {/* debugging helpers */}
         <axisHelper args={25}/>
         <Stats />
 
         <ambientLight intensity={1} />
-
         <SkyBoxExample path={'scene1_background/'} images={['px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'pz.jpg', 'nz.jpg']}/>
         <Suspense fallback={null}> 
           {/* <LightSource lightRef={lightRef} /> */}
@@ -59,7 +59,7 @@ const FirstScene = () => {
 
           {/* background plain hills */}
           <CustomHill position={[-90,0,-100]}/>
-          <OrbitControls />
+          <OrbitControls/>
       </Suspense> 
     </Canvas>
   )
