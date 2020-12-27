@@ -16,13 +16,20 @@ var delta = width/resolution;
 //Radius of the sphere onto which the ground plane is bent
 var radius = 240;
 
+//Rotation around Y axis in range [0, 2*PI]
+var azimuth = 0.4;
+
+//Sun
+//Height over horizon in range [0, PI/2.0]
+var elevation = 0.2;
+
 //The global coordinates
 //The geometry never leaves a box of width*width around (0, 0)
 //But we track where in space the camera would be globally
 var pos = new THREE.Vector2(0.01, 0.01);
 
 //Number of blades
-var instances = 41111;
+var instances = 51211;
 
 //Lighting variables for grass
 var ambientStrength = 0.7;
@@ -54,7 +61,7 @@ groundGeometry.addAttribute('basePosition', groundBaseGeometry.getAttribute("pos
 groundGeometry.lookAt(new THREE.Vector3(0,1,0));
 groundGeometry.verticesNeedUpdate = true;
 var groundMaterial = new THREE.MeshPhongMaterial()
-groundMaterial.emissive = 0xffffff
+groundMaterial.color = new THREE.Color(0x9a6c9b)
 
 var sharedPrefix = `
 uniform sampler2D noiseTexture;
@@ -141,8 +148,10 @@ groundMaterial.onBeforeCompile = function ( shader ) {
 };
 
 var ground = new THREE.Mesh(groundGeometry, groundMaterial);
-
 ground.geometry.computeVertexNormals();
+
+console.log({ground})
+
 // scene.add(ground);
 
 //************** Grass **************
@@ -171,6 +180,7 @@ varying vec3 vNormal;
 varying vec3 vPosition;
 varying float frc;
 varying float idx;
+varying float baseYPosition;
 
 //https://www.geeks3d.com/20141201/how-to-rotate-a-vertex-by-a-quaternion-in-glsl/
 vec3 rotateVectorByQuaternion(vec3 v, vec4 q){
@@ -222,7 +232,8 @@ void main() {
 	pos.x = globalPos.x - tile.x * width;
 	pos.z = globalPos.z - tile.z * width;
 
-	pos.y = max(0.0, placeOnSphere(pos)) - radius;
+  pos.y = max(0.0, placeOnSphere(pos)) - radius;
+  baseYPosition = pos.y;
 	pos.y += getYPosition(vec2(pos.x+delta*posX, pos.z+delta*posZ));
 	
 	//Wind is sine waves in time
@@ -260,6 +271,8 @@ uniform float translucencyStrength;
 uniform float shininess;
 uniform vec3 lightColour;
 uniform vec3 sunDirection;
+uniform vec3 sunPosition;
+uniform vec3 grassBottomColour;
 
 
 //Surface uniforms
@@ -272,6 +285,7 @@ varying float idx;
 varying vec2 vUv;
 varying vec3 vNormal;
 varying vec3 vPosition;
+varying float baseYPosition;
 
 vec3 ACESFilm(vec3 x){
 	float a = 2.51;
@@ -299,12 +313,12 @@ void main() {
 	}
 
   //Get colour data from texture
-	vec3 textureColour = pow(vec3(0.2,0.4,1), vec3(1));
+	vec3 textureColour = pow(vec3(0.2,0.4,1), vec3(1)); // BEJAL: this is the light blue of the grass
   //Add different green tones towards root
 	vec3 mixColour = idx > 0.75 ? vec3(0.00, 0.00, 0.06) : vec3(0.00, 0.00, 0.08);
-  textureColour = mix(pow(mixColour, vec3(1)), textureColour, frc);
+  textureColour = mix(mixColour, textureColour, frc); // Creates a gradient of black to blue based on frc (lower = black)
 
-	vec3 lightTimesTexture = lightColour * textureColour;
+	vec3 lightTimesTexture = lightColour * textureColour; // BEJAL: is just the textureColour,  since lightColour is white
   vec3 ambient = textureColour;
 	vec3 lightDir = normalize(sunDirection);
 
@@ -324,7 +338,7 @@ void main() {
   float spec = pow(max(dot(normal, halfwayDir), 0.0), shininess);
   
   //Colour of light sharply reflected into the camera
-  vec3 specular = spec * specularColour * lightColour;
+  vec3 specular = spec * specularColour * lightColour; // HERE
 
 	//https://en.wikibooks.org/wiki/GLSL_Programming/Unity/Translucent_Surfaces
 	vec3 diffuseTranslucency = vec3(0);
@@ -344,10 +358,13 @@ void main() {
 
   //Gamma correction 1.0/2.2 = 0.4545...
 	col = pow(col, vec3(0.4545));
-
-	//Add a shadow towards root
-	col = mix(vec3(0.0, 0.2, 0.0), col, frc);
-
+  
+  //Add a shadow towards root
+  
+  float yPosMinZero = max(sunPosition.y, 0.0);
+  float test = (yPosMinZero - baseYPosition) / yPosMinZero;
+  test = 1.0 - (test * 0.2);
+  col = mix(grassBottomColour, col, test); 
   gl_FragColor = vec4(col, 1.0);
 }`;
 
@@ -486,13 +503,15 @@ var grassMaterial = new THREE.RawShaderMaterial( {
     map: { value: grassTexture},
     alphaMap: { value: alphaMap},
     noiseTexture: { value: noiseTexture},
-    // sunDirection: {type: 'vec3', value: new THREE.Vector3(Math.sin(azimuth), Math.sin(elevation), -Math.cos(azimuth))},
+    sunDirection: {type: 'vec3', value: new THREE.Vector3(Math.sin(azimuth), Math.sin(elevation), -Math.cos(azimuth))},
+    sunPosition: {type: 'vec3', value: new THREE.Vector3(0, 10, 0)},
     ambientStrength: {type: 'float', value: ambientStrength},
     translucencyStrength: {type: 'float', value: translucencyStrength},
     diffuseStrength: {type: 'float', value: diffuseStrength},
     specularStrength: {type: 'float', value: specularStrength},
     shininess: {type: 'float', value: shininess},
     lightColour: {type: 'vec3', value: sunColour},
+    grassBottomColour: { type: 'vec3', value: new THREE.Color(0x885f89)},
     specularColour: {type: 'vec3', value: specularColour},
     ...fogParams
   },
@@ -503,6 +522,7 @@ var grassMaterial = new THREE.RawShaderMaterial( {
 
 const grass = new THREE.Mesh(instancedGeometry, grassMaterial);
 
+console.log(new THREE.Vector3(Math.sin(azimuth), Math.sin(elevation), -Math.cos(azimuth)))
 
 export {
   grass,

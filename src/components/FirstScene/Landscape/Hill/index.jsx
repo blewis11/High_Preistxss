@@ -36,10 +36,10 @@ const CustomHill = ({position}) => {
 
   return (
     <>
-      <ambientLight intensity={0.1} position={position}/>
-      <mesh ref={terrainRef} position={[-450,-30,-150]}>
+      <ambientLight intensity={0.1} />
+      <mesh ref={terrainRef} position={[-450,-10,-150]}>
         <planeBufferGeometry attach="geometry" args={[1000, 500, 256, 256]}/>
-        <meshLambertMaterial attach="material" color={0x81c9ef}/>
+        <meshLambertMaterial attach="material" color={0x9a6c9b}/>
       </mesh>
     </>
   )

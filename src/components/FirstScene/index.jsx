@@ -24,7 +24,7 @@ const FirstScene = () => {
     <Canvas
         colorManagement
         shadowMap
-        camera={{ position: [-87, 3.36, 0.65], fov: 35 }}>
+        camera={{ position: [-87, -0.72, -0.20], fov: 35 }}>
         <color attach="background" args={["grey"]}   />
         <fog attach="fog" args={[0xcbced2, 1, 800]} />
 
@@ -32,7 +32,7 @@ const FirstScene = () => {
         <axisHelper args={25}/>
         <Stats />
 
-        <ambientLight intensity={1} />
+        <ambientLight intensity={0.3} />
         <SkyBoxExample path={'scene1_backgroundv2/'} images={['px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'pz.jpg', 'nz.jpg']}/>
         <Suspense fallback={null}> 
           {/* <LightSource lightRef={lightRef} /> */}
