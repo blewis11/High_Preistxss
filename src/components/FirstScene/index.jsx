@@ -1,15 +1,15 @@
-import React, { Suspense, useRef, useEffect, useState } from 'react'
-import { Canvas, useFrame } from 'react-three-fiber'
+import React, { Suspense, useRef, useEffect, useState, useMemo } from 'react'
+import { Canvas, useFrame, useLoader } from 'react-three-fiber'
 import { OrbitControls, useFBXLoader, useTextureLoader } from 'drei'
 import DatGui, { DatNumber } from 'react-dat-gui'
 
 import { GrassHill } from './Landscape/Grass'
-import { CustomHill } from './Landscape/Hill'
 import { Flower } from './Landscape/Flower'
 
 import * as THREE from 'three'
 
 import { Lensflare, LensflareElement } from 'three/examples/jsm/objects/Lensflare'
+import { ObjectLoader } from 'three'
 
 const HeaderGrass = () => {
   return (
@@ -80,18 +80,22 @@ const SkyBox = () => {
   var skyMaterial = new THREE.MeshFaceMaterial(materialArray)
   var skyBox = new THREE.Mesh(skyGeometry, skyMaterial)
 
-  return <primitive object={skyBox} rotation={[0, 3.1, 0]} />
+  return (
+    <>
+      <primitive object={skyBox} rotation={[0, 3.1, 0]} position={[0, -5, 0]} />
+    </>
+  )
 }
 
 const FirstScene = () => {
   const [state, setState] = useState({
-    positionX: -25,
-    positionY: 75,
-    positionZ: 82,
-    rotationX: -4,
-    rotationY: 1.2,
-    rotationZ: -2.5,
-    scale: 0.2,
+    positionX: 25,
+    positionY: 36,
+    positionZ: 40,
+    rotationX: -4.4,
+    rotationY: 0.6,
+    rotationZ: -2.1,
+    scale: 0.101,
   })
 
   const handleUpdate = newData => {
@@ -99,23 +103,27 @@ const FirstScene = () => {
     setState({ ...state.data, ...newData })
   }
 
+  function useObjectLoader(path) {
+    return useLoader(ObjectLoader, path)
+  }
+
   return (
     <>
-      <Canvas colorManagement shadowMap camera={{ position: [-87, -1, -0.2], fov: 35 }}>
+      <Canvas colorManagement shadowMap camera={{ position: [-65, -1, -0.2], fov: 35 }}>
         <color attach="background" args={['grey']} />
-        <fog attach="fog" args={[0xcbced2, 1, 800]} />
 
         {/* debugging helpers */}
-        <axisHelper args={25} />
+        {/* <axisHelper args={25} /> */}
+        <ambientLight intensity={0.5} />
         <Suspense fallback={null}>
           <SkyBox />
         </Suspense>
-        <group position={[0, -5, 0]}>
+        <group position={[10, -5, 0]}>
           <Suspense fallback={null}>
             {/* <FlowerTemp state={state} /> */}
             <Flower
               state={{
-                positionX: -45,
+                positionX: -30,
                 positionY: 60,
                 positionZ: 62,
                 rotationX: -4,
@@ -125,9 +133,69 @@ const FirstScene = () => {
               }}
               newFlower={useFBXLoader('flowers/Flower0.fbx')}
             />
+            <Flower
+              state={{
+                positionX: 15,
+                positionY: 74,
+                positionZ: 26,
+                rotationX: -5,
+                rotationY: 0.6,
+                rotationZ: -1.7,
+                scale: 0.15,
+              }}
+              newFlower={useFBXLoader('flowers/Flower2.fbx')}
+            />
+            <Flower
+              state={{
+                positionX: 19,
+                positionY: 86,
+                positionZ: 52,
+                rotationX: -4.3,
+                rotationY: 0.8,
+                rotationZ: -2.8,
+                scale: 0.15,
+              }}
+              newFlower={useFBXLoader('flowers/Flower3.fbx')}
+            />
+            <Flower
+              state={{
+                positionX: -17,
+                positionY: 96,
+                positionZ: 26,
+                rotationX: -5.5,
+                rotationY: 0.6,
+                rotationZ: -1.7,
+                scale: 0.15,
+              }}
+              newFlower={useFBXLoader('flowers/Flower4.fbx')}
+            />
+            <Flower
+              state={{
+                positionX: 25,
+                positionY: 66,
+                positionZ: 40,
+                rotationX: -5.5,
+                rotationY: 0.6,
+                rotationZ: -1.7,
+                scale: 0.101,
+              }}
+              newFlower={useFBXLoader('flowers/Flower5.fbx')}
+            />
+            <Flower
+              state={{
+                positionX: 25,
+                positionY: 36,
+                positionZ: 40,
+                rotationX: -4.4,
+                rotationY: 0.6,
+                rotationZ: -2.1,
+                scale: 0.101,
+              }}
+              newFlower={useFBXLoader('flowers/Flower6.fbx')}
+            />
           </Suspense>
 
-          <hemisphereLight args={[0x080820, 0xffdaec, 1]} />
+          {/* <hemisphereLight args={[0x080820, 0xffdaec, 1]} /> */}
           <Suspense fallback={null}>
             {/* foreground grassy hills */}
             <group rotation={[0, -2.7, 0]} scale={[0.5, 0.5, 0.5]} position={[-50, 0, 0]}>

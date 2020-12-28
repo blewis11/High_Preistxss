@@ -23,11 +23,10 @@ const Flower = ({ state, newFlower }) => {
   })
 
   const light = new THREE.PointLight(0xff0040, 1, 30)
-
-  const textureFlare0 = useTextureLoader('lensflare0.png')
-  const lensflare = new Lensflare()
-  lensflare.addElement(new LensflareElement(textureFlare0, 50, 0, light.color))
-  light.add(lensflare)
+  // const textureFlare0 = useTextureLoader('lensflare0.png')
+  // const lensflare = new Lensflare()
+  // lensflare.addElement(new LensflareElement(textureFlare0, 50, 0, light.color))
+  // light.add(lensflare)
 
   useFrame(() => {
     const time = Date.now() * 0.0005
@@ -39,7 +38,7 @@ const Flower = ({ state, newFlower }) => {
 
   return (
     <>
-      {/* <primitive object={light} /> */}
+      <primitive object={light} />
       <primitive
         object={newFlower}
         ref={flowerRef}
@@ -49,6 +48,4 @@ const Flower = ({ state, newFlower }) => {
   )
 }
 
-export {
-  Flower
-}
+export { Flower }
