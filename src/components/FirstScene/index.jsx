@@ -1,7 +1,9 @@
 import React, { Suspense, useRef, useEffect, useState, useMemo } from 'react'
-import { Canvas, useFrame, useLoader } from 'react-three-fiber'
-import { OrbitControls, useFBXLoader, useTextureLoader } from 'drei'
-import DatGui, { DatNumber } from 'react-dat-gui'
+import { Canvas, useFrame } from 'react-three-fiber'
+import { OrbitControls, useFBXLoader, useTextureLoader, Stats } from 'drei'
+import DatGui, { DatNumber, DatColor } from 'react-dat-gui'
+
+import Effects from './Effect.jsx'
 
 import { GrassHill } from './Landscape/Grass'
 import { Flower } from './Landscape/Flower'
@@ -87,24 +89,25 @@ const SkyBox = () => {
   )
 }
 
+const PointLight = ({ state }) => {
+  const sphere = new THREE.SphereBufferGeometry(0.1, 16, 8)
+  const light = new THREE.PointLight(state.color, state.intensity, state.distance)
+  light.add(new THREE.Mesh(sphere, new THREE.MeshBasicMaterial({ color: light.color })))
+  light.decay = 2
+  return <primitive object={light} position={state.position} />
+}
+
 const FirstScene = () => {
   const [state, setState] = useState({
-    positionX: 25,
-    positionY: 36,
-    positionZ: 40,
-    rotationX: -4.4,
-    rotationY: 0.6,
-    rotationZ: -2.1,
-    scale: 0.101,
+    intensity: 1.3,
+    positionX: -39,
+    positionY: 5,
+    positionZ: -9,
   })
 
   const handleUpdate = newData => {
     console.log({ newData })
     setState({ ...state.data, ...newData })
-  }
-
-  function useObjectLoader(path) {
-    return useLoader(ObjectLoader, path)
   }
 
   return (
@@ -114,6 +117,8 @@ const FirstScene = () => {
 
         {/* debugging helpers */}
         {/* <axisHelper args={25} /> */}
+        {/* <Stats /> */}
+        {/* <hemisphereLight intensity={0.5} skyColor={0x9a6c9b} groundColor={'pink'} /> */}
         <ambientLight intensity={0.5} />
         <Suspense fallback={null}>
           <SkyBox />
@@ -121,6 +126,9 @@ const FirstScene = () => {
         <group position={[10, -5, 0]}>
           <Suspense fallback={null}>
             {/* <FlowerTemp state={state} /> */}
+            <PointLight
+              state={{ color: 'red', position: [-54, 2, 8], intensity: 1.5, distance: 25 }}
+            />
             <Flower
               state={{
                 positionX: -30,
@@ -132,6 +140,14 @@ const FirstScene = () => {
                 scale: 0.15,
               }}
               newFlower={useFBXLoader('flowers/Flower0.fbx')}
+            />
+            <PointLight
+              state={{
+                color: 0xb22121,
+                position: [-39, 5, -9],
+                intensity: 1.3,
+                distance: 25,
+              }}
             />
             <Flower
               state={{
@@ -156,6 +172,10 @@ const FirstScene = () => {
                 scale: 0.15,
               }}
               newFlower={useFBXLoader('flowers/Flower3.fbx')}
+            />
+
+            <PointLight
+              state={{ color: 'red', position: [-54, 2, 8], intensity: 1.5, distance: 25 }}
             />
             <Flower
               state={{
@@ -195,7 +215,6 @@ const FirstScene = () => {
             />
           </Suspense>
 
-          {/* <hemisphereLight args={[0x080820, 0xffdaec, 1]} /> */}
           <Suspense fallback={null}>
             {/* foreground grassy hills */}
             <group rotation={[0, -2.7, 0]} scale={[0.5, 0.5, 0.5]} position={[-50, 0, 0]}>
@@ -206,16 +225,14 @@ const FirstScene = () => {
             <OrbitControls />
           </Suspense>
         </group>
+        <Effects />
       </Canvas>
-      {/* <DatGui data={state} onUpdate={handleUpdate} className={'header-major'}>
+      <DatGui data={state} onUpdate={handleUpdate} className={'header-major'}>
         <DatNumber path="positionX" label="positionX" min={-500} max={500} step={1} />
         <DatNumber path="positionY" label="positionY" min={-500} max={500} step={1} />
         <DatNumber path="positionZ" label="positionZ" min={-500} max={500} step={1} />
-        <DatNumber path="rotationX" label="rotationX" min={-10} max={10} step={0.1} />
-        <DatNumber path="rotationY" label="rotationY" min={-10} max={10} step={0.1} />
-        <DatNumber path="rotationZ" label="rotationZ" min={-10} max={10} step={0.1} />
-        <DatNumber path="scale" label="scale" min={-1} max={1} step={0.05} />
-      </DatGui> */}
+        <DatNumber path="intensity" label="intensity" min={0} max={5} step={0.1} />
+      </DatGui>
     </>
   )
 }
