@@ -9,7 +9,7 @@ import "./App.scss"
 const App = (props) => {
   return (
     <>
-      <HeaderGrass /> 
+      {/* <HeaderGrass />  */}
       <div className="main">
         <Suspense fallback={null}>
           <FirstScene />

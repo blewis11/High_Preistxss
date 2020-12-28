@@ -1,76 +1,79 @@
- /* eslint-disable */
- 
-import * as THREE from "three"
+/* eslint-disable */
+
+import * as THREE from 'three'
 
 //Variables for blade mesh
-var joints = 4;
-var bladeWidth = 0.12;
-var bladeHeight = 0.7;
+var joints = 4
+var bladeWidth = 0.12
+var bladeHeight = 0.7
 
 //Patch side length
-var width = 120;
+var width = 120
 //Number of vertices on ground plane side
-var resolution = 64;
+var resolution = 64
 //Distance between two ground plane vertices
-var delta = width/resolution;
+var delta = width / resolution
 //Radius of the sphere onto which the ground plane is bent
-var radius = 240;
+var radius = 240
 
 //Rotation around Y axis in range [0, 2*PI]
-var azimuth = 0.4;
+var azimuth = 0.4
 
 //Sun
 //Height over horizon in range [0, PI/2.0]
-var elevation = 0.2;
+var elevation = 0.2
 
 //The global coordinates
 //The geometry never leaves a box of width*width around (0, 0)
 //But we track where in space the camera would be globally
-var pos = new THREE.Vector2(0.01, 0.01);
+var pos = new THREE.Vector2(0.01, 0.01)
 
 //Number of blades
-var instances = 51211;
+var instances = 51211
 
 //Lighting variables for grass
-var ambientStrength = 0.7;
-var translucencyStrength = 1.5;
-var specularStrength = 0.5;
-var diffuseStrength = 1.5;
-var shininess = 256;
-var sunColour = new THREE.Vector3(1.0, 1.0, 1.0);
-var specularColour = new THREE.Vector3(1.0, 1.0, 1.0);
+var ambientStrength = 0.7
+var translucencyStrength = 1.5
+var specularStrength = 0.5
+var diffuseStrength = 1.5
+var shininess = 256
+var sunColour = new THREE.Vector3(1.0, 1.0, 1.0)
+var specularColour = new THREE.Vector3(1.0, 1.0, 1.0)
 
 //Get alpha map and blade texture
 //These have been taken from "Realistic real-time grass rendering" by Eddie Lee, 2010
-var loader = new THREE.TextureLoader();
-loader.crossOrigin = '';
-var grassTexture = loader.load( 'https://al-ro.github.io/images/grass/blade_diffuse.jpg' );
-var alphaMap = loader.load( 'https://al-ro.github.io/images/grass/blade_alpha.jpg' );
-var noiseTexture = loader.load( 'https://al-ro.github.io/images/grass/perlinFbm.jpg' );
-noiseTexture.wrapS = THREE.RepeatWrapping;
-noiseTexture.wrapT = THREE.RepeatWrapping;
+var loader = new THREE.TextureLoader()
+loader.crossOrigin = ''
+var grassTexture = loader.load('https://al-ro.github.io/images/grass/blade_diffuse.jpg')
+var alphaMap = loader.load('https://al-ro.github.io/images/grass/blade_alpha.jpg')
+var noiseTexture = loader.load('https://al-ro.github.io/images/grass/perlinFbm.jpg')
+noiseTexture.wrapS = THREE.RepeatWrapping
+noiseTexture.wrapT = THREE.RepeatWrapping
 
 //************** Ground **************
 //Ground material is a modification of the existing THREE.MeshPhongMaterial rather than one from scratch
 var groundBaseGeometry = new THREE.PlaneBufferGeometry(width, width, resolution, resolution)
-groundBaseGeometry.lookAt(new THREE.Vector3(0,1,0));
-groundBaseGeometry.verticesNeedUpdate = true;
+groundBaseGeometry.lookAt(new THREE.Vector3(0, 1, 0))
+groundBaseGeometry.verticesNeedUpdate = true
 
-var groundGeometry = new THREE.PlaneBufferGeometry(width, width, resolution, resolution);
-groundGeometry.addAttribute('basePosition', groundBaseGeometry.getAttribute("position"));
-groundGeometry.lookAt(new THREE.Vector3(0,1,0));
-groundGeometry.verticesNeedUpdate = true;
+var groundGeometry = new THREE.PlaneBufferGeometry(width, width, resolution, resolution)
+groundGeometry.addAttribute('basePosition', groundBaseGeometry.getAttribute('position'))
+groundGeometry.lookAt(new THREE.Vector3(0, 1, 0))
+groundGeometry.verticesNeedUpdate = true
 var groundMaterial = new THREE.MeshPhongMaterial()
 groundMaterial.color = new THREE.Color(0x9a6c9b)
+groundMaterial.emissive = 0xffffff
 
 var sharedPrefix = `
 uniform sampler2D noiseTexture;
 float getYPosition(vec2 p){
 	return 8.0*(2.0*texture2D(noiseTexture, p/800.0).r - 1.0);
 }
-`;
+`
 
-var groundVertexPrefix = sharedPrefix + ` 
+var groundVertexPrefix =
+  sharedPrefix +
+  `
 attribute vec3 basePosition;
 uniform float delta;
 uniform float posX;
@@ -105,7 +108,7 @@ vec3 getNormal(vec3 pos){
 
   vec3 tempP = getPosition(pos, eps, 0.0);
   vec3 tempN = getPosition(pos, -eps, 0.0);
-  
+
   vec3 slopeX = tempP - tempN;
 
   tempP = getPosition(pos, 0.0, eps);
@@ -116,20 +119,20 @@ vec3 getNormal(vec3 pos){
   vec3 norm = normalize(cross(slopeZ, slopeX));
   return norm;
 }
-`;
+`
 
-var groundShader;
-groundMaterial.onBeforeCompile = function ( shader ) {
-  shader.uniforms.delta = { value: delta };
-  shader.uniforms.posX = { value: pos.x };
-  shader.uniforms.posZ = { value: pos.y };
-  shader.uniforms.radius = { value: radius };
-  shader.uniforms.width = { value: width };
-	shader.uniforms.noiseTexture = { value: noiseTexture };
-  shader.vertexShader = groundVertexPrefix + shader.vertexShader;
+var groundShader
+groundMaterial.onBeforeCompile = function(shader) {
+  shader.uniforms.delta = { value: delta }
+  shader.uniforms.posX = { value: pos.x }
+  shader.uniforms.posZ = { value: pos.y }
+  shader.uniforms.radius = { value: radius }
+  shader.uniforms.width = { value: width }
+  shader.uniforms.noiseTexture = { value: noiseTexture }
+  shader.vertexShader = groundVertexPrefix + shader.vertexShader
   shader.vertexShader = shader.vertexShader.replace(
-      '#include <beginnormal_vertex>',
-      `//https://dev.to/maurobringolf/a-neat-trick-to-compute-modulo-of-negative-numbers-111e
+    '#include <beginnormal_vertex>',
+    `//https://dev.to/maurobringolf/a-neat-trick-to-compute-modulo-of-negative-numbers-111e
 			vec3 pos = vec3(0);
       pos.x = basePosition.x - mod(mod((delta*posX),delta) + delta, delta);
       pos.z = basePosition.z - mod(mod((delta*posZ),delta) + delta, delta);
@@ -138,24 +141,26 @@ groundMaterial.onBeforeCompile = function ( shader ) {
       vec3 objectNormal = getNormal(pos);
 #ifdef USE_TANGENT
       vec3 objectTangent = vec3( tangent.xyz );
-#endif`
-      );
+#endif`,
+  )
   shader.vertexShader = shader.vertexShader.replace(
-      '#include <begin_vertex>',
-      `vec3 transformed = vec3(pos);`
-      );
-  groundShader = shader;
-};
+    '#include <begin_vertex>',
+    `vec3 transformed = vec3(pos);`,
+  )
+  groundShader = shader
+}
 
-var ground = new THREE.Mesh(groundGeometry, groundMaterial);
-ground.geometry.computeVertexNormals();
+var ground = new THREE.Mesh(groundGeometry, groundMaterial)
+ground.geometry.computeVertexNormals()
 
-console.log({ground})
+console.log({ ground })
 
 // scene.add(ground);
 
 //************** Grass **************
-var grassVertexSource = sharedPrefix + `
+var grassVertexSource =
+  sharedPrefix +
+  `
 precision mediump float;
 attribute vec3 position;
 attribute vec3 normal;
@@ -201,7 +206,9 @@ float placeOnSphere(vec3 v){
 void main() {
 
 	//Vertex height in blade geometry
-	frc = position.y / float(` + bladeHeight + `);
+	frc = position.y / float(` +
+  bladeHeight +
+  `);
 
 	//Scale vertices
   vec3 vPosition = position;
@@ -235,7 +242,7 @@ void main() {
   pos.y = max(0.0, placeOnSphere(pos)) - radius;
   baseYPosition = pos.y;
 	pos.y += getYPosition(vec2(pos.x+delta*posX, pos.z+delta*posZ));
-	
+
 	//Wind is sine waves in time
 	float noise = sin(0.1 * pos.x + time);
 	float halfAngle = noise * 0.1;
@@ -256,7 +263,7 @@ void main() {
 
   gl_Position = projectionMatrix * modelViewMatrix * vec4(vPosition, 1.0);
 
-}`;
+}`
 
 var grassFragmentSource = `
 precision mediump float;
@@ -336,7 +343,7 @@ void main() {
   vec3 halfwayDir = normalize(lightDir + viewDirection);
   //How much a fragment directly reflects the light to the camera
   float spec = pow(max(dot(normal, halfwayDir), 0.0), shininess);
-  
+
   //Colour of light sharply reflected into the camera
   vec3 specular = spec * specularColour * lightColour; // HERE
 
@@ -358,173 +365,172 @@ void main() {
 
   //Gamma correction 1.0/2.2 = 0.4545...
 	col = pow(col, vec3(0.4545));
-  
+
   //Add a shadow towards root
-  
+
   float yPosMinZero = max(sunPosition.y, 0.0);
   float test = (yPosMinZero - baseYPosition) / yPosMinZero;
   test = 1.0 - (test * 0.2);
-  col = mix(grassBottomColour, col, test); 
+  col = mix(grassBottomColour, col, frc);
   gl_FragColor = vec4(col, 1.0);
-}`;
+}`
 
 //Define base geometry that will be instanced. We use a plane for an individual blade of grass
-var grassBaseGeometry = new THREE.PlaneBufferGeometry(bladeWidth, bladeHeight, 1, joints);
-grassBaseGeometry.translate(0, bladeHeight/2, 0);
+var grassBaseGeometry = new THREE.PlaneBufferGeometry(bladeWidth, bladeHeight, 1, joints)
+grassBaseGeometry.translate(0, bladeHeight / 2, 0)
 
 //Define the bend of the grass blade as the combination of three quaternion rotations
-let vertex = new THREE.Vector3();
-let quaternion0 = new THREE.Quaternion();
-let quaternion1 = new THREE.Quaternion();
-let x, y, z, w, angle, sinAngle, rotationAngle;
+let vertex = new THREE.Vector3()
+let quaternion0 = new THREE.Quaternion()
+let quaternion1 = new THREE.Quaternion()
+let x, y, z, w, angle, sinAngle, rotationAngle
 
 //Rotate around Y
-angle = 0.05;
-sinAngle = Math.sin(angle / 2.0);
-let rotationAxis = new THREE.Vector3(0, 1, 0);
-x = rotationAxis.x * sinAngle;
-y = rotationAxis.y * sinAngle;
-z = rotationAxis.z * sinAngle;
-w = Math.cos(angle / 2.0);
-quaternion0.set(x, y, z, w);
+angle = 0.05
+sinAngle = Math.sin(angle / 2.0)
+let rotationAxis = new THREE.Vector3(0, 1, 0)
+x = rotationAxis.x * sinAngle
+y = rotationAxis.y * sinAngle
+z = rotationAxis.z * sinAngle
+w = Math.cos(angle / 2.0)
+quaternion0.set(x, y, z, w)
 
 //Rotate around X
-angle = 0.3;
-sinAngle = Math.sin(angle / 2.0);
-rotationAxis.set(1, 0, 0);
-x = rotationAxis.x * sinAngle;
-y = rotationAxis.y * sinAngle;
-z = rotationAxis.z * sinAngle;
-w = Math.cos(angle / 2.0);
-quaternion1.set(x, y, z, w);
+angle = 0.3
+sinAngle = Math.sin(angle / 2.0)
+rotationAxis.set(1, 0, 0)
+x = rotationAxis.x * sinAngle
+y = rotationAxis.y * sinAngle
+z = rotationAxis.z * sinAngle
+w = Math.cos(angle / 2.0)
+quaternion1.set(x, y, z, w)
 
 //Combine rotations to a single quaternion
-quaternion0.multiply(quaternion1);
+quaternion0.multiply(quaternion1)
 
 //Rotate around Z
-angle = 0.1;
-sinAngle = Math.sin(angle / 2.0);
-rotationAxis.set(0, 0, 1);
-x = rotationAxis.x * sinAngle;
-y = rotationAxis.y * sinAngle;
-z = rotationAxis.z * sinAngle;
-w = Math.cos(angle / 2.0);
-quaternion1.set(x, y, z, w);
+angle = 0.1
+sinAngle = Math.sin(angle / 2.0)
+rotationAxis.set(0, 0, 1)
+x = rotationAxis.x * sinAngle
+y = rotationAxis.y * sinAngle
+z = rotationAxis.z * sinAngle
+w = Math.cos(angle / 2.0)
+quaternion1.set(x, y, z, w)
 
 //Combine rotations to a single quaternion
 // quaternion0.multiply(quaternion1);
 
-let quaternion2 = new THREE.Quaternion();
+let quaternion2 = new THREE.Quaternion()
 
 //Bend grass base geometry for more organic look
-for(let v = 0; v < grassBaseGeometry.attributes.position.array.length; v += 3){
-	quaternion2.setFromAxisAngle(new THREE.Vector3(0, 1, 0), Math.PI / 2);
-	vertex.x = grassBaseGeometry.attributes.position.array[v];
-	vertex.y = grassBaseGeometry.attributes.position.array[v+1];
-	vertex.z = grassBaseGeometry.attributes.position.array[v+2];
-	let frac = vertex.y/bladeHeight;
-	quaternion2.slerp(quaternion0, frac);
-	vertex.applyQuaternion(quaternion2);
-	grassBaseGeometry.attributes.position.array[v] = vertex.x;
-	grassBaseGeometry.attributes.position.array[v+1] = vertex.y;
-	grassBaseGeometry.attributes.position.array[v+2] = vertex.z;
+for (let v = 0; v < grassBaseGeometry.attributes.position.array.length; v += 3) {
+  quaternion2.setFromAxisAngle(new THREE.Vector3(0, 1, 0), Math.PI / 2)
+  vertex.x = grassBaseGeometry.attributes.position.array[v]
+  vertex.y = grassBaseGeometry.attributes.position.array[v + 1]
+  vertex.z = grassBaseGeometry.attributes.position.array[v + 2]
+  let frac = vertex.y / bladeHeight
+  quaternion2.slerp(quaternion0, frac)
+  vertex.applyQuaternion(quaternion2)
+  grassBaseGeometry.attributes.position.array[v] = vertex.x
+  grassBaseGeometry.attributes.position.array[v + 1] = vertex.y
+  grassBaseGeometry.attributes.position.array[v + 2] = vertex.z
 }
 
-grassBaseGeometry.computeFaceNormals();
-grassBaseGeometry.computeVertexNormals();
-var baseMaterial = new THREE.MeshNormalMaterial({side: THREE.DoubleSide});
+grassBaseGeometry.computeFaceNormals()
+grassBaseGeometry.computeVertexNormals()
+var baseMaterial = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide })
 
 // var baseBlade = new THREE.Mesh(grassBaseGeometry, baseMaterial);
 //Show grass base geometry
 // scene.add(baseBlade);
 
-var instancedGeometry = new THREE.InstancedBufferGeometry();
+var instancedGeometry = new THREE.InstancedBufferGeometry()
 
-instancedGeometry.index = grassBaseGeometry.index;
-instancedGeometry.attributes.position = grassBaseGeometry.attributes.position;
-instancedGeometry.attributes.uv = grassBaseGeometry.attributes.uv;
-instancedGeometry.attributes.normal = grassBaseGeometry.attributes.normal;
+instancedGeometry.index = grassBaseGeometry.index
+instancedGeometry.attributes.position = grassBaseGeometry.attributes.position
+instancedGeometry.attributes.uv = grassBaseGeometry.attributes.uv
+instancedGeometry.attributes.normal = grassBaseGeometry.attributes.normal
 
 // Each instance has its own data for position, orientation and scale
-var indices = [];
-var offsets = [];
-var scales = [];
-var halfRootAngles = [];
+var indices = []
+var offsets = []
+var scales = []
+var halfRootAngles = []
 
 //For each instance of the grass blade
-for (let i = 0; i < instances; i++){
-	
-	indices.push(i/instances);
-	
-  //Offset of the roots
-  x = Math.random() * width - width/2;
-  z = Math.random() * width - width/2;
-  y = 0; 
-  offsets.push(x, y, z);
+for (let i = 0; i < instances; i++) {
+  indices.push(i / instances)
 
-	//Random orientation
-  let angle = Math.PI - Math.random() * (2 * Math.PI);
-  halfRootAngles.push(Math.sin(0.5*angle), Math.cos(0.5*angle));
+  //Offset of the roots
+  x = Math.random() * width - width / 2
+  z = Math.random() * width - width / 2
+  y = 0
+  offsets.push(x, y, z)
+
+  //Random orientation
+  let angle = Math.PI - Math.random() * (2 * Math.PI)
+  halfRootAngles.push(Math.sin(0.5 * angle), Math.cos(0.5 * angle))
 
   //Define variety in height
-  if(i % 3 != 0){
-  	scales.push(2.0+Math.random() * 1.25);
-  }else{
-    scales.push(2.0+Math.random()); 
+  if (i % 3 != 0) {
+    scales.push(2.0 + Math.random() * 1.25)
+  } else {
+    scales.push(2.0 + Math.random())
   }
 }
 
-var offsetAttribute = new THREE.InstancedBufferAttribute(new Float32Array(offsets), 3);
-var scaleAttribute = new THREE.InstancedBufferAttribute(new Float32Array(scales), 1);
-var halfRootAngleAttribute = new THREE.InstancedBufferAttribute(new Float32Array(halfRootAngles), 2);
-var indexAttribute = new THREE.InstancedBufferAttribute(new Float32Array(indices), 1);
+var offsetAttribute = new THREE.InstancedBufferAttribute(new Float32Array(offsets), 3)
+var scaleAttribute = new THREE.InstancedBufferAttribute(new Float32Array(scales), 1)
+var halfRootAngleAttribute = new THREE.InstancedBufferAttribute(new Float32Array(halfRootAngles), 2)
+var indexAttribute = new THREE.InstancedBufferAttribute(new Float32Array(indices), 1)
 
-instancedGeometry.setAttribute( 'offset', offsetAttribute);
-instancedGeometry.setAttribute( 'scale', scaleAttribute);
-instancedGeometry.setAttribute( 'halfRootAngle', halfRootAngleAttribute);
-instancedGeometry.setAttribute( 'index', indexAttribute);
+instancedGeometry.setAttribute('offset', offsetAttribute)
+instancedGeometry.setAttribute('scale', scaleAttribute)
+instancedGeometry.setAttribute('halfRootAngle', halfRootAngleAttribute)
+instancedGeometry.setAttribute('index', indexAttribute)
 
 //Define the material, specifying attributes, uniforms, shaders etc.
 const fogParams = {
-  fogColor: { type: "c", value: new THREE.Color(0,0,1) },
-  fogNear: { type: "f", value: 20 },
-  fogFar: { type: "f", value: 10 }
+  fogColor: { type: 'c', value: new THREE.Color(0, 0, 1) },
+  fogNear: { type: 'f', value: 20 },
+  fogFar: { type: 'f', value: 10 },
 }
 
-var grassMaterial = new THREE.RawShaderMaterial( {
+var grassMaterial = new THREE.RawShaderMaterial({
   fog: true,
   uniforms: {
-    time: {type: 'float', value: 0},
-    delta: {type: 'float', value: delta },
-    posX: {type: 'float', value: pos.x },
-    posZ: {type: 'float', value: pos.y },
-    radius: {type: 'float', value: radius },
-    width: {type: 'float', value: width },
-    map: { value: grassTexture},
-    alphaMap: { value: alphaMap},
-    noiseTexture: { value: noiseTexture},
-    sunDirection: {type: 'vec3', value: new THREE.Vector3(Math.sin(azimuth), Math.sin(elevation), -Math.cos(azimuth))},
-    sunPosition: {type: 'vec3', value: new THREE.Vector3(0, 10, 0)},
-    ambientStrength: {type: 'float', value: ambientStrength},
-    translucencyStrength: {type: 'float', value: translucencyStrength},
-    diffuseStrength: {type: 'float', value: diffuseStrength},
-    specularStrength: {type: 'float', value: specularStrength},
-    shininess: {type: 'float', value: shininess},
-    lightColour: {type: 'vec3', value: sunColour},
-    grassBottomColour: { type: 'vec3', value: new THREE.Color(0x885f89)},
-    specularColour: {type: 'vec3', value: specularColour},
-    ...fogParams
+    time: { type: 'float', value: 0 },
+    delta: { type: 'float', value: delta },
+    posX: { type: 'float', value: pos.x },
+    posZ: { type: 'float', value: pos.y },
+    radius: { type: 'float', value: radius },
+    width: { type: 'float', value: width },
+    map: { value: grassTexture },
+    alphaMap: { value: alphaMap },
+    noiseTexture: { value: noiseTexture },
+    sunDirection: {
+      type: 'vec3',
+      value: new THREE.Vector3(Math.sin(azimuth), Math.sin(elevation), -Math.cos(azimuth)),
+    },
+    sunPosition: { type: 'vec3', value: new THREE.Vector3(0, 10, 0) },
+    ambientStrength: { type: 'float', value: ambientStrength },
+    translucencyStrength: { type: 'float', value: translucencyStrength },
+    diffuseStrength: { type: 'float', value: diffuseStrength },
+    specularStrength: { type: 'float', value: specularStrength },
+    shininess: { type: 'float', value: shininess },
+    lightColour: { type: 'vec3', value: sunColour },
+    grassBottomColour: { type: 'vec3', value: new THREE.Color(0x885f89) },
+    specularColour: { type: 'vec3', value: specularColour },
+    ...fogParams,
   },
   vertexShader: grassVertexSource,
   fragmentShader: grassFragmentSource,
-  side: THREE.DoubleSide
-} );
+  side: THREE.DoubleSide,
+})
 
-const grass = new THREE.Mesh(instancedGeometry, grassMaterial);
+const grass = new THREE.Mesh(instancedGeometry, grassMaterial)
 
 console.log(new THREE.Vector3(Math.sin(azimuth), Math.sin(elevation), -Math.cos(azimuth)))
 
-export {
-  grass,
-  ground
-}
+export { grass, ground }
