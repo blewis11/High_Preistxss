@@ -1,4 +1,4 @@
-import React, { Suspense, useRef, useEffect, useState, useMemo } from 'react'
+import React, { Suspense, useRef, useEffect, useState } from 'react'
 import { Canvas, useFrame, useThree } from 'react-three-fiber'
 import { OrbitControls, useFBXLoader, useTextureLoader, Stats } from 'drei'
 import DatGui, { DatNumber, DatColor } from 'react-dat-gui'
@@ -11,7 +11,6 @@ import { Flower } from './Landscape/Flower'
 import * as THREE from 'three'
 
 import { Lensflare, LensflareElement } from 'three/examples/jsm/objects/Lensflare'
-import { ObjectLoader } from 'three'
 
 const HeaderGrass = () => {
   return (
@@ -138,7 +137,7 @@ const FirstScene = () => {
               state={{
                 color: 0xf9cc6b,
                 position: [-7, 7, -32],
-                intensity: 1.6,
+                intensity: 5,
                 distance: 25,
               }}
             />
@@ -160,7 +159,7 @@ const FirstScene = () => {
               state={{
                 color: 0xb22121,
                 position: [-39, 5, -9],
-                intensity: 1.3,
+                intensity: 2,
                 distance: 25,
               }}
             />
@@ -193,7 +192,7 @@ const FirstScene = () => {
 
             {/* fourth flower */}
             <PointLight
-              state={{ color: 'red', position: [-54, 2, 8], intensity: 2, distance: 25 }}
+              state={{ color: 'red', position: [-54, 2, 8], intensity: 5, distance: 25 }}
             />
             <Flower
               state={{
@@ -213,7 +212,7 @@ const FirstScene = () => {
               state={{
                 color: 0xb22121,
                 position: [9, 11, 27],
-                intensity: 1.8,
+                intensity: 5,
                 distance: 25,
               }}
             />
@@ -243,7 +242,7 @@ const FirstScene = () => {
               state={{
                 color: 'red',
                 position: [-23, 2, 27],
-                intensity: 2,
+                intensity: 5,
                 distance: 25,
               }}
             />

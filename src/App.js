@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 
 import { toggleLight } from './redux/Counter/actions'
 import { FirstScene, HeaderGrass } from './components/FirstScene'
-import { LandscapeExample, HeaderLandscape } from './components/LandscapeTest'
 import './App.scss'
 
 const App = props => {
@@ -12,9 +11,9 @@ const App = props => {
       <HeaderGrass />
       <div className="main">
         {/* <div id="hueOverlay" /> */}
-          <Suspense fallback={null}>
-            <FirstScene />
-          </Suspense>
+        <Suspense fallback={null}>
+          <FirstScene />
+        </Suspense>
       </div>
     </>
   )
