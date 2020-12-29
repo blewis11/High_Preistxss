@@ -10,7 +10,6 @@ const Flower = ({ state, newFlower }) => {
   const flowerRef = useRef()
 
   useEffect(() => {
-    console.log({ flower: flowerRef.current })
     window.flower = flowerRef.current
     newFlower.scale.set(state.scale, state.scale, state.scale)
     newFlower.rotation.y = state.rotationY

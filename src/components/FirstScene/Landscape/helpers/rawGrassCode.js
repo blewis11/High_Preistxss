@@ -152,8 +152,6 @@ groundMaterial.onBeforeCompile = function(shader) {
 var ground = new THREE.Mesh(groundGeometry, groundMaterial)
 ground.geometry.computeVertexNormals()
 
-console.log({ ground })
-
 // scene.add(ground);
 
 //************** Grass **************
@@ -529,7 +527,5 @@ var grassMaterial = new THREE.RawShaderMaterial({
 })
 
 const grass = new THREE.Mesh(instancedGeometry, grassMaterial)
-
-console.log(new THREE.Vector3(Math.sin(azimuth), Math.sin(elevation), -Math.cos(azimuth)))
 
 export { grass, ground }

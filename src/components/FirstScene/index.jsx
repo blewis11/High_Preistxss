@@ -74,9 +74,11 @@ const SkyBox = () => {
 
   for (var i = 0; i < 6; i++)
     materialArray.push(
-      new THREE.MeshBasicMaterial({
-        map: THREE.ImageUtils.loadTexture('scene1_backgroundv2/' + directions[i]),
+      new THREE.MeshLambertMaterial({
+        map: THREE.ImageUtils.loadTexture('scene1_backgroundv3/' + directions[i]),
         side: THREE.BackSide,
+        combine: THREE.MixOperation,
+        reflectivity: .5
       }),
     )
 
@@ -85,7 +87,7 @@ const SkyBox = () => {
 
   return (
     <>
-      <primitive object={skyBox} rotation={[0, 3.1, 0]} position={[0, -5, 0]} />
+      <primitive object={skyBox} rotation={[0, 3.1, 0]} position={[0, -30, 0]} />
     </>
   )
 }
@@ -107,7 +109,6 @@ const FirstScene = () => {
   })
 
   const handleUpdate = newData => {
-    console.log({ newData })
     setState({ ...state.data, ...newData })
   }
 
@@ -118,7 +119,6 @@ const FirstScene = () => {
         colorManagement
         shadowMap
         camera={{ position: [-65, -1, -0.2], fov: 35 }}
-        onClick={() => console.log('click')}
       >
         <color attach="background" args={['grey']} />
 
@@ -126,7 +126,8 @@ const FirstScene = () => {
         {/* <axisHelper args={25} /> */}
         <Stats />
         {/* <hemisphereLight intensity={0.5} skyColor={0x9a6c9b} groundColor={'pink'} /> */}
-        <ambientLight intensity={1} />
+        {/* <ambientLight intensity={0.1} /> */}
+        <hemisphereLight intensity={0.8} skyColor={"blue"} groundColor={0xf9cc6b} />
         <Suspense fallback={null}>
           <SkyBox />
         </Suspense>
@@ -192,7 +193,7 @@ const FirstScene = () => {
 
             {/* fourth flower */}
             <PointLight
-              state={{ color: 'red', position: [-54, 2, 8], intensity: 5, distance: 25 }}
+              state={{ color: 'red', position: [-54, 2, 8], intensity: 1, distance: 25 }}
             />
             <Flower
               state={{
