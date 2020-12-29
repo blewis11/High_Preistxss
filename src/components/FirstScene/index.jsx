@@ -94,17 +94,17 @@ const SkyBox = () => {
 const PointLight = ({ state }) => {
   const sphere = new THREE.SphereBufferGeometry(0.1, 16, 8)
   const light = new THREE.PointLight(state.color, state.intensity, state.distance)
-  light.add(new THREE.Mesh(sphere, new THREE.MeshBasicMaterial({ color: light.color })))
+  // light.add(new THREE.Mesh(sphere, new THREE.MeshBasicMaterial({ color: light.color })))
   light.decay = 2
   return <primitive object={light} position={state.position} />
 }
 
 const FirstScene = () => {
   const [state, setState] = useState({
-    intensity: 1.3,
-    positionX: -39,
-    positionY: 5,
-    positionZ: -9,
+    intensity: 1.8,
+    positionX: -7,
+    positionY: 7,
+    positionZ: -32,
   })
 
   const handleUpdate = newData => {
@@ -115,6 +115,7 @@ const FirstScene = () => {
   return (
     <>
       <Canvas
+        // gl={{ antialias: false }}
         colorManagement
         shadowMap
         camera={{ position: [-65, -1, -0.2], fov: 35 }}
@@ -132,27 +133,12 @@ const FirstScene = () => {
         </Suspense>
         <group position={[10, -5, 0]}>
           <Suspense fallback={null}>
-            {/* <FlowerTemp state={state} /> */}
-            <PointLight
-              state={{ color: 'red', position: [-54, 2, 8], intensity: 1.5, distance: 25 }}
-            />
-            <Flower
-              state={{
-                positionX: -30,
-                positionY: 60,
-                positionZ: 62,
-                rotationX: -4,
-                rotationY: 1.2,
-                rotationZ: -2.5,
-                scale: 0.15,
-              }}
-              newFlower={useFBXLoader('flowers/Flower0.fbx')}
-            />
+            {/* first flower */}
             <PointLight
               state={{
-                color: 0xb22121,
-                position: [-39, 5, -9],
-                intensity: 1.3,
+                color: 0xf9cc6b,
+                position: [-7, 7, -32],
+                intensity: 1.6,
                 distance: 25,
               }}
             />
@@ -168,21 +154,46 @@ const FirstScene = () => {
               }}
               newFlower={useFBXLoader('flowers/Flower2.fbx')}
             />
+
+            {/* second flower */}
+            <PointLight
+              state={{
+                color: 0xb22121,
+                position: [-39, 5, -9],
+                intensity: 1.3,
+                distance: 25,
+              }}
+            />
             <Flower
               state={{
-                positionX: 19,
-                positionY: 86,
-                positionZ: 52,
-                rotationX: -4.3,
-                rotationY: 0.8,
-                rotationZ: -2.8,
+                positionX: -30,
+                positionY: 60,
+                positionZ: 62,
+                rotationX: -4,
+                rotationY: 1.2,
+                rotationZ: -2.5,
                 scale: 0.15,
               }}
-              newFlower={useFBXLoader('flowers/Flower3.fbx')}
+              newFlower={useFBXLoader('flowers/Flower0.fbx')}
             />
 
+            {/* third flower */}
+            <Flower
+              state={{
+                positionX: 25,
+                positionY: 36,
+                positionZ: 40,
+                rotationX: -4.4,
+                rotationY: 0.6,
+                rotationZ: -2.1,
+                scale: 0.101,
+              }}
+              newFlower={useFBXLoader('flowers/Flower6.fbx')}
+            />
+
+            {/* fourth flower */}
             <PointLight
-              state={{ color: 'red', position: [-54, 2, 8], intensity: 1.5, distance: 25 }}
+              state={{ color: 'red', position: [-54, 2, 8], intensity: 2, distance: 25 }}
             />
             <Flower
               state={{
@@ -196,6 +207,16 @@ const FirstScene = () => {
               }}
               newFlower={useFBXLoader('flowers/Flower4.fbx')}
             />
+
+            {/* fifth flower */}
+            <PointLight
+              state={{
+                color: 0xb22121,
+                position: [9, 11, 27],
+                intensity: 1.8,
+                distance: 25,
+              }}
+            />
             <Flower
               state={{
                 positionX: 25,
@@ -208,17 +229,35 @@ const FirstScene = () => {
               }}
               newFlower={useFBXLoader('flowers/Flower5.fbx')}
             />
+
+            {/* sixth flower */}
+            <PointLight
+              state={{
+                color: 'yellow',
+                position: [-23, 7, 27],
+                intensity: 1.8,
+                distance: 25,
+              }}
+            />
+            <PointLight
+              state={{
+                color: 'red',
+                position: [-23, 2, 27],
+                intensity: 2,
+                distance: 25,
+              }}
+            />
             <Flower
               state={{
-                positionX: 25,
-                positionY: 36,
-                positionZ: 40,
-                rotationX: -4.4,
-                rotationY: 0.6,
-                rotationZ: -2.1,
-                scale: 0.101,
+                positionX: 19,
+                positionY: 86,
+                positionZ: 52,
+                rotationX: -4.3,
+                rotationY: 0.8,
+                rotationZ: -2.8,
+                scale: 0.15,
               }}
-              newFlower={useFBXLoader('flowers/Flower6.fbx')}
+              newFlower={useFBXLoader('flowers/Flower3.fbx')}
             />
           </Suspense>
 
