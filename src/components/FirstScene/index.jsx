@@ -1,5 +1,5 @@
 import React, { Suspense, useRef, useEffect, useState, useMemo } from 'react'
-import { Canvas, useFrame } from 'react-three-fiber'
+import { Canvas, useFrame, useThree } from 'react-three-fiber'
 import { OrbitControls, useFBXLoader, useTextureLoader, Stats } from 'drei'
 import DatGui, { DatNumber, DatColor } from 'react-dat-gui'
 
@@ -67,6 +67,8 @@ const FlowerTemp = ({ state }) => {
 }
 
 const SkyBox = () => {
+  const { gl } = useThree()
+  window.gl = gl
   var directions = ['px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'pz.jpg', 'nz.jpg']
   var skyGeometry = new THREE.CubeGeometry(150, 150, 150)
   var materialArray = []
@@ -112,14 +114,19 @@ const FirstScene = () => {
 
   return (
     <>
-      <Canvas colorManagement shadowMap camera={{ position: [-65, -1, -0.2], fov: 35 }}>
+      <Canvas
+        colorManagement
+        shadowMap
+        camera={{ position: [-65, -1, -0.2], fov: 35 }}
+        onClick={() => console.log('click')}
+      >
         <color attach="background" args={['grey']} />
 
         {/* debugging helpers */}
         {/* <axisHelper args={25} /> */}
-        {/* <Stats /> */}
+        <Stats />
         {/* <hemisphereLight intensity={0.5} skyColor={0x9a6c9b} groundColor={'pink'} /> */}
-        <ambientLight intensity={0.5} />
+        <ambientLight intensity={1} />
         <Suspense fallback={null}>
           <SkyBox />
         </Suspense>
@@ -227,12 +234,12 @@ const FirstScene = () => {
         </group>
         <Effects />
       </Canvas>
-      <DatGui data={state} onUpdate={handleUpdate} className={'header-major'}>
+      {/* <DatGui data={state} onUpdate={handleUpdate} className={'header-major'}>
         <DatNumber path="positionX" label="positionX" min={-500} max={500} step={1} />
         <DatNumber path="positionY" label="positionY" min={-500} max={500} step={1} />
         <DatNumber path="positionZ" label="positionZ" min={-500} max={500} step={1} />
         <DatNumber path="intensity" label="intensity" min={0} max={5} step={0.1} />
-      </DatGui>
+      </DatGui> */}
     </>
   )
 }
