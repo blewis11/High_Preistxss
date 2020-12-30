@@ -9,12 +9,12 @@ const App = props => {
   return (
     <>
       <HeaderGrass />
-      <div className="main">
-        {/* <div id="hueOverlay" /> */}
-        <Suspense fallback={null}>
+      <Suspense fallback={null}>
+        <div className="main">
+          <div id="hueOverlay" />
           <FirstScene />
-        </Suspense>
-      </div>
+        </div>
+      </Suspense>
     </>
   )
 }

@@ -1,8 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react'
 
-import { detect } from 'detect-browser'
-import MobileDetect from 'mobile-detect'
-
 import { WebGLMultisampleRenderTarget, RGBAFormat, sRGBEncoding } from 'three'
 import { extend, useThree, useFrame } from 'react-three-fiber'
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
@@ -53,25 +50,9 @@ const Effects = React.forwardRef(
     shader.uniforms['powRGB'].value.set(0.85, 1, 0.85)
     shader.uniforms['mulRGB'].value.set(0.9, 0.9, 1)
 
-    const browser = detect()
-
-    let effectsEnabled
-
-    switch (browser.name) {
-      case 'safari':
-        effectsEnabled = false
-        break
-      default:
-        effectsEnabled = true
-    }
-
-    let isMobile = new MobileDetect(window.navigator.userAgent).mobile() !== null
-    console.log({ isMobile })
-
     return (
       <effectComposer ref={mergeRefs([ref, composer])} args={[gl, target]} {...props}>
         <renderPass attachArray="passes" args={[scene, camera]} />
-        {effectsEnabled && !isMobile && <shaderPass attachArray="passes" args={[shader]} />}
       </effectComposer>
     )
   },

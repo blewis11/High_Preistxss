@@ -66,10 +66,8 @@ const FlowerTemp = ({ state }) => {
 }
 
 const SkyBox = () => {
-  const { gl } = useThree()
-  window.gl = gl
   var directions = ['px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'pz.jpg', 'nz.jpg']
-  var skyGeometry = new THREE.CubeGeometry(150, 150, 150)
+  var skyGeometry = new THREE.CubeGeometry(170, 170, 170)
   var materialArray = []
 
   for (var i = 0; i < 6; i++)
@@ -78,7 +76,7 @@ const SkyBox = () => {
         map: THREE.ImageUtils.loadTexture('scene1_backgroundv3/' + directions[i]),
         side: THREE.BackSide,
         combine: THREE.MixOperation,
-        reflectivity: .5
+        reflectivity: 0.5,
       }),
     )
 
@@ -112,27 +110,33 @@ const FirstScene = () => {
     setState({ ...state.data, ...newData })
   }
 
+  const getFOV = () => {
+    let fov
+
+    if (window.innerWidth <= 532) {
+      fov = 65
+    } else {
+      fov = 35
+    }
+
+    return fov
+  }
+
   return (
     <>
-      <Canvas
-        // gl={{ antialias: false }}
-        colorManagement
-        shadowMap
-        camera={{ position: [-65, -1, -0.2], fov: 35 }}
-      >
+      <Canvas colorManagement shadowMap camera={{ position: [-65, -1, -0.2], fov: getFOV() }}>
         <color attach="background" args={['grey']} />
 
         {/* debugging helpers */}
         {/* <axisHelper args={25} /> */}
         <Stats />
-        {/* <hemisphereLight intensity={0.5} skyColor={0x9a6c9b} groundColor={'pink'} /> */}
-        {/* <ambientLight intensity={0.1} /> */}
-        <hemisphereLight intensity={0.8} skyColor={"blue"} groundColor={0xf9cc6b} />
+
+        <hemisphereLight intensity={0.8} skyColor={'blue'} groundColor={0xf9cc6b} />
+
         <Suspense fallback={null}>
           <SkyBox />
-        </Suspense>
-        <group position={[10, -5, 0]}>
-          <Suspense fallback={null}>
+
+          <group position={[10, -5, 0]}>
             {/* first flower */}
             <PointLight
               state={{
@@ -259,9 +263,7 @@ const FirstScene = () => {
               }}
               newFlower={useFBXLoader('flowers/Flower3.fbx')}
             />
-          </Suspense>
 
-          <Suspense fallback={null}>
             {/* foreground grassy hills */}
             <group rotation={[0, -2.7, 0]} scale={[0.5, 0.5, 0.5]} position={[-50, 0, 0]}>
               <GrassHill position={[1, -7, 1]} rotation={[0.1, -0.3, 0]} />
@@ -269,8 +271,8 @@ const FirstScene = () => {
               <GrassHill position={[-90, -5, -100]} rotation={[0.1, -4, 0]} />
             </group>
             <OrbitControls />
-          </Suspense>
-        </group>
+          </group>
+        </Suspense>
         <Effects />
       </Canvas>
       {/* <DatGui data={state} onUpdate={handleUpdate} className={'header-major'}>

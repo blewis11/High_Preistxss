@@ -42,7 +42,7 @@ body {
 }
 
 div.header-major {
-  z-index: 2;
+  z-index: 3;
   font-family: 'Josefin Sans', sans-serif;
   font-weight: 500;
   position: absolute;
@@ -52,4 +52,21 @@ div.header-major {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+}
+
+#hueOverlay{
+  z-index: 2;
+  font-family: 'Josefin Sans', sans-serif;
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border: solid 1px red;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  background: purple;
+  opacity: 0.17;
+  pointer-events: none;
 }
