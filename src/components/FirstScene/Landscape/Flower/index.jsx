@@ -6,8 +6,12 @@ import { Lensflare, LensflareElement } from 'three/examples/jsm/objects/Lensflar
 
 import * as THREE from 'three'
 
-const Flower = ({ state, newFlower }) => {
+const Flower = ({ state, newFlower, debug }) => {
   const flowerRef = useRef()
+
+  if (debug) {
+    console.log({newFlower})
+  }
 
   useEffect(() => {
     window.flower = flowerRef.current

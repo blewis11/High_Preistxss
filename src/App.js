@@ -8,7 +8,7 @@ import './App.scss'
 const App = props => {
   return (
     <>
-      <HeaderGrass />
+      {/* <HeaderGrass /> */}
       <Suspense fallback={null}>
         <div className="main">
           <div id="hueOverlay" />

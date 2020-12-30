@@ -100,13 +100,17 @@ const PointLight = ({ state }) => {
 
 const FirstScene = () => {
   const [state, setState] = useState({
-    intensity: 1.8,
-    positionX: -7,
-    positionY: 7,
-    positionZ: -32,
+    positionX: -14,
+    positionY: 2,
+    positionZ: -29,
+    rotationX: -5.7,
+    rotationY: 1.5,
+    rotationZ: -1.7,
+    scale: 0.15,
   })
 
   const handleUpdate = newData => {
+    console.log({ state })
     setState({ ...state.data, ...newData })
   }
 
@@ -131,8 +135,8 @@ const FirstScene = () => {
         {/* <axisHelper args={25} /> */}
         <Stats />
 
-        <hemisphereLight intensity={0.8} skyColor={'blue'} groundColor={0xf9cc6b} />
-
+        <hemisphereLight intensity={0.7} skyColor={'blue'} groundColor={0xf9cc6b} />
+        {/* <ambientLight intensity={0.5} /> */}
         <Suspense fallback={null}>
           <SkyBox />
 
@@ -148,15 +152,15 @@ const FirstScene = () => {
             />
             <Flower
               state={{
-                positionX: 15,
-                positionY: 74,
-                positionZ: 26,
-                rotationX: -5,
-                rotationY: 0.6,
+                positionX: -14,
+                positionY: 2,
+                positionZ: -29,
+                rotationX: 1.5,
+                rotationY: 1.5,
                 rotationZ: -1.7,
                 scale: 0.15,
               }}
-              newFlower={useFBXLoader('flowers/Flower2.fbx')}
+              newFlower={useFBXLoader('flowers/FlowerMatte2.fbx')}
             />
 
             {/* second flower */}
@@ -169,30 +173,31 @@ const FirstScene = () => {
               }}
             />
             <Flower
+              debug={true}
               state={{
-                positionX: -30,
-                positionY: 60,
-                positionZ: 62,
-                rotationX: -4,
-                rotationY: 1.2,
-                rotationZ: -2.5,
+                positionX: -42,
+                positionY: 3,
+                positionZ: -10,
+                rotationX: -5,
+                rotationY: 1,
+                rotationZ: -1.5,
                 scale: 0.15,
               }}
-              newFlower={useFBXLoader('flowers/Flower0.fbx')}
+              newFlower={useFBXLoader('flowers/FlowerMatte0.fbx')}
             />
 
             {/* third flower */}
             <Flower
               state={{
-                positionX: 25,
-                positionY: 36,
-                positionZ: 40,
-                rotationX: -4.4,
-                rotationY: 0.6,
-                rotationZ: -2.1,
+                positionX: -14,
+                positionY: 4,
+                positionZ: -9,
+                rotationX: -5.7,
+                rotationY: 1,
+                rotationZ: -0.5,
                 scale: 0.101,
               }}
-              newFlower={useFBXLoader('flowers/Flower6.fbx')}
+              newFlower={useFBXLoader('flowers/FlowerMatte6.fbx')}
             />
 
             {/* fourth flower */}
@@ -201,15 +206,15 @@ const FirstScene = () => {
             />
             <Flower
               state={{
-                positionX: -17,
-                positionY: 96,
-                positionZ: 26,
-                rotationX: -5.5,
-                rotationY: 0.6,
+                positionX: -45,
+                positionY: 4,
+                positionZ: 8,
+                rotationX: -4.8,
+                rotationY: 1.6,
                 rotationZ: -1.7,
-                scale: 0.15,
+                scale: 0.12,
               }}
-              newFlower={useFBXLoader('flowers/Flower4.fbx')}
+              newFlower={useFBXLoader('flowers/FlowerMatte4.fbx')}
             />
 
             {/* fifth flower */}
@@ -223,15 +228,15 @@ const FirstScene = () => {
             />
             <Flower
               state={{
-                positionX: 25,
-                positionY: 66,
-                positionZ: 40,
-                rotationX: -5.5,
-                rotationY: 0.6,
+                positionX: -1,
+                positionY: 1,
+                positionZ: 21,
+                rotationX: -4.9,
+                rotationY: 1.2,
                 rotationZ: -1.7,
                 scale: 0.101,
               }}
-              newFlower={useFBXLoader('flowers/Flower5.fbx')}
+              newFlower={useFBXLoader('flowers/FlowerMatte5.fbx')}
             />
 
             {/* sixth flower */}
@@ -253,15 +258,15 @@ const FirstScene = () => {
             />
             <Flower
               state={{
-                positionX: 19,
-                positionY: 86,
-                positionZ: 52,
-                rotationX: -4.3,
-                rotationY: 0.8,
-                rotationZ: -2.8,
+                positionX: -28,
+                positionY: 2,
+                positionZ: 24,
+                rotationX: -5,
+                rotationY: 1.3,
+                rotationZ: -1.7,
                 scale: 0.15,
               }}
-              newFlower={useFBXLoader('flowers/Flower3.fbx')}
+              newFlower={useFBXLoader('flowers/FlowerMatte3.fbx')}
             />
 
             {/* foreground grassy hills */}
@@ -279,7 +284,9 @@ const FirstScene = () => {
         <DatNumber path="positionX" label="positionX" min={-500} max={500} step={1} />
         <DatNumber path="positionY" label="positionY" min={-500} max={500} step={1} />
         <DatNumber path="positionZ" label="positionZ" min={-500} max={500} step={1} />
-        <DatNumber path="intensity" label="intensity" min={0} max={5} step={0.1} />
+        <DatNumber path="rotationX" label="rotationX" min={-6} max={6} step={0.1} />
+        <DatNumber path="rotationY" label="rotationY" min={-6} max={6} step={0.1} />
+        <DatNumber path="rotationZ" label="rotationZ" min={-6} max={6} step={0.1} />
       </DatGui> */}
     </>
   )
