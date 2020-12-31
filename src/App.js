@@ -2,7 +2,9 @@ import React, { Suspense } from 'react'
 import { connect } from 'react-redux'
 
 import { toggleLight } from './redux/Counter/actions'
-import { FirstScene, HeaderGrass } from './components/FirstScene'
+import { FirstScene as FirstSceneThree } from './components/Three/FirstScene'
+import { FirstScene as FirstSceneReact } from './components/React/FirstScene'
+
 import './App.scss'
 
 const App = props => {
@@ -11,8 +13,9 @@ const App = props => {
       {/* <HeaderGrass /> */}
       <Suspense fallback={null}>
         <div className="main">
+          <FirstSceneReact />
           <div id="hueOverlay" />
-          <FirstScene />
+          <FirstSceneThree />
         </div>
       </Suspense>
     </>

@@ -133,7 +133,7 @@ const FirstScene = () => {
 
         {/* debugging helpers */}
         {/* <axisHelper args={25} /> */}
-        <Stats />
+        {/* <Stats /> */}
 
         <hemisphereLight intensity={0.8} skyColor={'blue'} groundColor={0xf9cc6b} />
         <ambientLight intensity={0.3} color={"purple"} />
