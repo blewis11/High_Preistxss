@@ -2,6 +2,8 @@ import React, { Fragment } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Drawer from '@material-ui/core/Drawer'
 
+import { TopNavButtons } from '../index.jsx'
+
 const useStyles = makeStyles({
   innerDrawer: {
     width: '30vw',
@@ -11,18 +13,40 @@ const useStyles = makeStyles({
   },
 })
 
-const SideNav = ({ open, setOpen }) => {
+const SideNav = ({ open, setOpen, selectedIndex, setSelectedIndex }) => {
   const classes = useStyles()
+
+  const informationHandler = () => {
+    setSelectedIndex(1)
+  }
+
+  const subscriptionHandler = () => {
+    setSelectedIndex(2)
+  }
+
+  const onClose = () => {
+    setSelectedIndex(0)
+    setOpen(false)
+  }
 
   return (
     <Fragment>
       <Drawer
         open={open}
-        onClose={() => setOpen(!open)}
+        onClose={onClose}
         BackdropProps={{ invisible: true }}
         classes={{ paper: classes.paper }}
       >
-        <div className={classes.innerDrawer}></div>
+        <div className={classes.innerDrawer}>
+          <TopNavButtons
+            buttonColor={'black'}
+            showClose
+            closeButtonHandler={onClose}
+            informationButtonHandler={informationHandler}
+            subscriptionButtonHandler={subscriptionHandler}
+            selectedIndex={selectedIndex}
+          />
+        </div>
       </Drawer>
     </Fragment>
   )
