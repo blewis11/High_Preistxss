@@ -16,9 +16,6 @@ const SideNav = ({ open, setOpen }) => {
 
   return (
     <Fragment>
-      <button style={{ height: '20px' }} onClick={() => setOpen(!open)}>
-        open
-      </button>
       <Drawer
         open={open}
         onClose={() => setOpen(!open)}
