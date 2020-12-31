@@ -93,7 +93,7 @@ const SkyBox = () => {
 const PointLight = ({ state }) => {
   const sphere = new THREE.SphereBufferGeometry(0.1, 16, 8)
   const light = new THREE.PointLight(state.color, state.intensity, state.distance)
-  // light.add(new THREE.Mesh(sphere, new THREE.MeshBasicMaterial({ color: light.color })))
+  light.add(new THREE.Mesh(sphere, new THREE.MeshBasicMaterial({ color: light.color })))
   light.decay = 2
   return <primitive object={light} position={state.position} />
 }
@@ -135,8 +135,9 @@ const FirstScene = () => {
         {/* <axisHelper args={25} /> */}
         <Stats />
 
-        <hemisphereLight intensity={0.7} skyColor={'blue'} groundColor={0xf9cc6b} />
-        {/* <ambientLight intensity={0.5} /> */}
+        <hemisphereLight intensity={0.8} skyColor={'blue'} groundColor={0xf9cc6b} />
+        <ambientLight intensity={0.3} color={"purple"} />
+
         <Suspense fallback={null}>
           <SkyBox />
 
@@ -160,7 +161,7 @@ const FirstScene = () => {
                 rotationZ: -1.7,
                 scale: 0.15,
               }}
-              newFlower={useFBXLoader('flowers/FlowerMatte2.fbx')}
+              newFlower={useFBXLoader('flowers/Flower(WithRig)2.fbx')}
             />
 
             {/* second flower */}
@@ -168,7 +169,7 @@ const FirstScene = () => {
               state={{
                 color: 0xb22121,
                 position: [-39, 5, -9],
-                intensity: 2,
+                intensity: 5,
                 distance: 25,
               }}
             />
@@ -183,7 +184,7 @@ const FirstScene = () => {
                 rotationZ: -1.5,
                 scale: 0.15,
               }}
-              newFlower={useFBXLoader('flowers/FlowerMatte0.fbx')}
+              newFlower={useFBXLoader('flowers/Flower(WithRig)0.fbx')}
             />
 
             {/* third flower */}
@@ -197,7 +198,7 @@ const FirstScene = () => {
                 rotationZ: -0.5,
                 scale: 0.101,
               }}
-              newFlower={useFBXLoader('flowers/FlowerMatte6.fbx')}
+              newFlower={useFBXLoader('flowers/Flower(WithRig)6.fbx')}
             />
 
             {/* fourth flower */}
@@ -214,7 +215,7 @@ const FirstScene = () => {
                 rotationZ: -1.7,
                 scale: 0.12,
               }}
-              newFlower={useFBXLoader('flowers/FlowerMatte4.fbx')}
+              newFlower={useFBXLoader('flowers/Flower(WithRig)1.fbx')}
             />
 
             {/* fifth flower */}
@@ -236,7 +237,7 @@ const FirstScene = () => {
                 rotationZ: -1.7,
                 scale: 0.101,
               }}
-              newFlower={useFBXLoader('flowers/FlowerMatte5.fbx')}
+              newFlower={useFBXLoader('flowers/Flower(WithRig)5.fbx')}
             />
 
             {/* sixth flower */}
@@ -266,7 +267,7 @@ const FirstScene = () => {
                 rotationZ: -1.7,
                 scale: 0.15,
               }}
-              newFlower={useFBXLoader('flowers/FlowerMatte3.fbx')}
+              newFlower={useFBXLoader('flowers/Flower(WithRig)3.fbx')}
             />
 
             {/* foreground grassy hills */}

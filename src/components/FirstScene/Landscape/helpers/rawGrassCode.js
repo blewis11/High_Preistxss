@@ -62,6 +62,7 @@ groundGeometry.lookAt(new THREE.Vector3(0, 1, 0))
 groundGeometry.verticesNeedUpdate = true
 var groundMaterial = new THREE.MeshPhongMaterial()
 groundMaterial.color = new THREE.Color("black")
+groundMaterial.emissive = 0xffffff
 
 var sharedPrefix = `
 uniform sampler2D noiseTexture;

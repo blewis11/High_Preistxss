@@ -6,14 +6,18 @@ import { Lensflare, LensflareElement } from 'three/examples/jsm/objects/Lensflar
 
 import * as THREE from 'three'
 
-const Flower = ({ state, newFlower, debug }) => {
+const Flower = ({ state, newFlower }) => {
   const flowerRef = useRef()
 
-  if (debug) {
-    console.log({newFlower})
-  }
+  const petalsTexture = useTextureLoader('Petals_ColorMap.jpg')
+  const specularMap = useTextureLoader('Petals_GlossMap.jpg')
 
   useEffect(() => {
+    // newFlower.children[0].material[4].map = petalsTexture
+    newFlower.children[0].material[4].specular = new THREE.Color('orange')
+    newFlower.children[0].material[4].shininess = 50
+    // newFlower.children[0].material[4].specularMap = specularMap
+
     window.flower = flowerRef.current
     newFlower.scale.set(state.scale, state.scale, state.scale)
     newFlower.rotation.y = state.rotationY
