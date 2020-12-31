@@ -98,12 +98,14 @@ const FirstScene = () => {
 
   return (
     <div className="sidebarContainer">
-      <TopNavButtons
-        selectedIndex={selectedIndex}
-        buttonColor={'white'}
-        informationButtonHandler={informationHandler}
-        subscriptionButtonHandler={subscriptionHandler}
-      />
+      {!open && (
+        <TopNavButtons
+          selectedIndex={selectedIndex}
+          buttonColor={'white'}
+          informationButtonHandler={informationHandler}
+          subscriptionButtonHandler={subscriptionHandler}
+        />
+      )}
       <SideNav
         open={open}
         setOpen={setOpen}

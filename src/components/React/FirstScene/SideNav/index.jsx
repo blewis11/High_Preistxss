@@ -3,10 +3,13 @@ import { makeStyles } from '@material-ui/core/styles'
 import Drawer from '@material-ui/core/Drawer'
 
 import { TopNavButtons } from '../index.jsx'
+import NavContents from './NavContents'
 
 const useStyles = makeStyles({
   innerDrawer: {
     width: '30vw',
+    minWidth: '370px',
+    maxWidth: '500px',
   },
   paper: {
     backgroundColor: '#9489DE',
@@ -46,6 +49,7 @@ const SideNav = ({ open, setOpen, selectedIndex, setSelectedIndex }) => {
             subscriptionButtonHandler={subscriptionHandler}
             selectedIndex={selectedIndex}
           />
+          <NavContents selectedIndex={selectedIndex} />
         </div>
       </Drawer>
     </Fragment>

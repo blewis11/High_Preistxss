@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
 
-import lightReducer from '../Counter/reducer'
+import textReducer from '../Text/reducer'
 
 const rootReducer = combineReducers({
-  light: lightReducer,
+  text: textReducer,
 })
 
-export default rootReducer  
+export default rootReducer
