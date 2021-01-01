@@ -84,7 +84,7 @@ const TopNavButtons = ({
 }
 
 const FirstScene = () => {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(true)
   const [selectedIndex, setSelectedIndex] = useState(0)
 
   const informationHandler = () => {

@@ -17,6 +17,7 @@
     "react": "^16.13.1",
     "react-dat-gui": "^4.0.3",
     "react-dom": "^16.13.1",
+    "react-mailchimp-subscribe": "^2.1.0",
     "react-redux": "^7.2.2",
     "react-scripts": "3.4.1",
     "react-spring": "^8.0.27",

@@ -1,8 +1,8 @@
 import { SET_SUBSCRIPTION_TEXT, SET_INFO_TEXT } from './types'
 
 const INITIAL_STATE = {
-  informationText: 'info text',
-  subscriptionText: 'subscription text',
+  informationText: '',
+  subscriptionText: '',
 }
 
 const reducer = (state = INITIAL_STATE, action) => {
