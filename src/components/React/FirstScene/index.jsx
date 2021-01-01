@@ -13,6 +13,14 @@ const TopNavButtons = ({
   closeButtonHandler,
   selectedIndex,
 }) => {
+  const rootButtonStyles = {
+    color: buttonColor,
+    borderRadius: 15,
+    border: `0.5px solid ${buttonColor}`,
+    fontSize: '11px',
+    fontWeight: 'bold',
+  }
+
   const useStyles = makeStyles(theme => ({
     buttonsContainer: {
       display: 'flex',
@@ -27,11 +35,7 @@ const TopNavButtons = ({
       right: '15px',
     },
     root: {
-      color: buttonColor,
-      borderRadius: 15,
-      border: `0.5px solid ${buttonColor}`,
-      fontSize: '11px',
-      fontWeight: 'bold',
+      ...rootButtonStyles
     },
     rootSelected: {
       borderRadius: 15,
@@ -44,6 +48,13 @@ const TopNavButtons = ({
         backgroundColor: 'black',
       },
     },
+    closeButton: {
+      ...rootButtonStyles,
+      '&:hover': {
+        backgroundColor: 'black',
+        color: '#9489DE'
+      },
+    }
   }))
 
   const classes = useStyles()
@@ -71,7 +82,7 @@ const TopNavButtons = ({
           <div className={classes.closeButtonContainer}>
             <Button
               onClick={closeButtonHandler}
-              classes={{ root: classes.root }}
+              classes={{ root: classes.closeButton }}
               variant="outlined"
             >
               CLOSE

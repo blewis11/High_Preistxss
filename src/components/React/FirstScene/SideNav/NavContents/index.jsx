@@ -33,7 +33,7 @@ const useStyles = makeStyles({
     borderRadius: '15px',
     color: 'red',
     fontWeight: 'bold',
-    width: '80%',
+    width: '90%',
     textTransform: 'uppercase',
     fontSize: '12px'
   },
