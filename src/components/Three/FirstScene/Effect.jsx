@@ -16,10 +16,8 @@ const isWebGL2Available = () => {
   try {
     let canvas = document.createElement('canvas')
     let isAvailable = !!(window.WebGL2RenderingContext && canvas.getContext('webgl2'))
-    console.log(`is available: ${isAvailable}`)
     return isAvailable
   } catch (e) {
-    console.log(`is not available`)
     return false
   }
 }

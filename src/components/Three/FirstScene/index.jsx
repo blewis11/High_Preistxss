@@ -110,7 +110,6 @@ const FirstScene = () => {
   })
 
   const handleUpdate = newData => {
-    console.log({ state })
     setState({ ...state.data, ...newData })
   }
 
@@ -136,7 +135,7 @@ const FirstScene = () => {
         {/* <Stats /> */}
 
         <hemisphereLight intensity={0.8} skyColor={'blue'} groundColor={0xf9cc6b} />
-        <ambientLight intensity={0.3} color={"purple"} />
+        <ambientLight intensity={0.3} color={'purple'} />
 
         <Suspense fallback={null}>
           <SkyBox />

@@ -2,6 +2,7 @@ import React, { useState, Fragment } from 'react'
 import Button from '@material-ui/core/Button'
 import { makeStyles } from '@material-ui/core/styles'
 
+import WithSidebarText from '../../../hooks/WithSidebarText'
 import { SideNav } from './SideNav'
 
 const TopNavButtons = ({
@@ -98,6 +99,7 @@ const FirstScene = () => {
 
   return (
     <div className="sidebarContainer">
+      <WithSidebarText />
       {!open && (
         <TopNavButtons
           selectedIndex={selectedIndex}
