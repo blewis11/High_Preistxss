@@ -14,7 +14,7 @@ const GrassHill = ({ position, rotation }) => {
   let thisFrame
 
   useEffect(() => {
-    ref.current.traverse(object => {
+    grass.traverse(object => {
       object.frustumCulled = false
     })
   })

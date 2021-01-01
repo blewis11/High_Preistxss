@@ -12,6 +12,18 @@ import * as THREE from 'three'
 
 import { Lensflare, LensflareElement } from 'three/examples/jsm/objects/Lensflare'
 
+const getFOV = () => {
+  let fov
+
+  if (window.innerWidth <= 532) {
+    fov = 65
+  } else {
+    fov = 35
+  }
+
+  return fov
+}
+
 const HeaderGrass = () => {
   return (
     <div className="header-major">
@@ -21,73 +33,35 @@ const HeaderGrass = () => {
   )
 }
 
-const FlowerTemp = ({ state }) => {
-  const newFlower = useFBXLoader('flowers/Flower1.fbx')
-  const flowerRef = useRef()
+const SkyBox = props => {
+  const fov = getFOV()
 
-  useEffect(() => {
-    newFlower.scale.set(state.scale, state.scale, state.scale)
-    newFlower.rotation.y = state.rotationY
-    newFlower.rotation.x = state.rotationX
-    newFlower.rotation.z = state.rotationZ
-  })
+  let skyboxSize
 
-  const [mixer] = useState(() => new THREE.AnimationMixer())
-  useEffect(() => void mixer.clipAction(newFlower.animations[0], flowerRef.current).play(), [])
-  useFrame(() => {
-    mixer.update(0.002)
-  })
+  switch (fov) {
+    case 35:
+      skyboxSize = 170
+      break
 
-  const light = new THREE.PointLight(0xff0040, 1, 30)
+    default:
+      skyboxSize = 360
+  }
 
-  const textureFlare0 = useTextureLoader('lensflare0.png')
-  const lensflare = new Lensflare()
-  lensflare.addElement(new LensflareElement(textureFlare0, 50, 0, light.color))
-  light.add(lensflare)
+  let directions = ['px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'pz.jpg', 'nz.jpg']
+  let skyGeometry = new THREE.CubeGeometry(skyboxSize, skyboxSize, skyboxSize)
+  let materialArray = []
 
-  useFrame(() => {
-    const time = Date.now() * 0.0005
-
-    light.position.x = 5 - Math.sin(time * 0.7)
-    light.position.y = Math.cos(time * 0.5)
-    light.position.z = Math.cos(time * 0.3) - 14
-  })
-
-  return (
-    <>
-      {/* <primitive object={light} /> */}
-      <primitive
-        object={newFlower}
-        ref={flowerRef}
-        position={[state.positionX, state.positionY, state.positionZ]}
-      />
-    </>
-  )
-}
-
-const SkyBox = () => {
-  var directions = ['px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'pz.jpg', 'nz.jpg']
-  var skyGeometry = new THREE.CubeGeometry(170, 170, 170)
-  var materialArray = []
-
-  for (var i = 0; i < 6; i++)
+  for (let i = 0; i < 6; i++)
     materialArray.push(
       new THREE.MeshLambertMaterial({
         map: THREE.ImageUtils.loadTexture('scene1_backgroundv3/' + directions[i]),
         side: THREE.BackSide,
-        combine: THREE.MixOperation,
-        reflectivity: 0.5,
       }),
     )
 
-  var skyMaterial = new THREE.MeshFaceMaterial(materialArray)
-  var skyBox = new THREE.Mesh(skyGeometry, skyMaterial)
+  let skyBox = new THREE.Mesh(skyGeometry, materialArray)
 
-  return (
-    <>
-      <primitive object={skyBox} rotation={[0, 3.1, 0]} position={[0, -30, 0]} />
-    </>
-  )
+  return <primitive object={skyBox} rotation={[0, 3.1, 0]} position={[0, -30, 0]} />
 }
 
 const PointLight = ({ state }) => {
@@ -113,18 +87,6 @@ const FirstScene = () => {
     setState({ ...state.data, ...newData })
   }
 
-  const getFOV = () => {
-    let fov
-
-    if (window.innerWidth <= 532) {
-      fov = 65
-    } else {
-      fov = 35
-    }
-
-    return fov
-  }
-
   return (
     <>
       <Canvas colorManagement shadowMap camera={{ position: [-65, -1, -0.2], fov: getFOV() }}>
@@ -137,9 +99,9 @@ const FirstScene = () => {
         <hemisphereLight intensity={0.8} skyColor={'blue'} groundColor={0xf9cc6b} />
         <ambientLight intensity={0.3} color={'purple'} />
 
-        <Suspense fallback={null}>
-          <SkyBox />
+        <SkyBox />
 
+        <Suspense fallback={null}>
           <group position={[10, -5, 0]}>
             {/* first flower */}
             <PointLight
