@@ -30,7 +30,7 @@ const getSkyboxSize = fov => {
       break
 
     default:
-      skyboxSize = 400
+      skyboxSize = 500
   }
 
   return skyboxSize
@@ -62,14 +62,14 @@ const SkyBox = ({ skyboxHeight }) => {
   for (let i = 0; i < 6; i++)
     materialArray.push(
       new THREE.MeshLambertMaterial({
-        map: THREE.ImageUtils.loadTexture('scene1_backgroundv3/' + directions[i]),
+        map: THREE.ImageUtils.loadTexture('scene1_backgroundv2/' + directions[i]),
         side: THREE.BackSide,
       }),
     )
 
   let skyBox = new THREE.Mesh(skyGeometry, materialArray)
 
-  return <primitive object={skyBox} rotation={[0, 3.1, 0]} position={[0, -30, 0]} />
+  return <primitive object={skyBox} rotation={[0, 3.1, 0]} position={[0, -10, 0]} />
 }
 
 const PointLight = ({ state }) => {
