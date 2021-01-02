@@ -2,8 +2,6 @@ import React, { useRef, useEffect, useState } from 'react'
 import { useFrame } from 'react-three-fiber'
 import { useFBXLoader, useTextureLoader } from 'drei'
 
-import { Lensflare, LensflareElement } from 'three/examples/jsm/objects/Lensflare'
-
 import * as THREE from 'three'
 
 const Flower = ({ state, newFlower }) => {
@@ -28,21 +26,8 @@ const Flower = ({ state, newFlower }) => {
   const [mixer] = useState(() => new THREE.AnimationMixer())
   useEffect(() => void mixer.clipAction(newFlower.animations[0], flowerRef.current).play(), [])
   useFrame(() => {
-    mixer.update(0.002)
+    mixer.update(0.005)
   })
-
-  // const textureFlare0 = useTextureLoader('lensflare0.png')
-  // const lensflare = new Lensflare()
-  // lensflare.addElement(new LensflareElement(textureFlare0, 50, 0, light.color))
-  // light.add(lensflare)
-
-  // useFrame(() => {
-  //   const time = Date.now() * 0.0005
-
-  //   light.position.x = 5 - Math.sin(time * 0.7)
-  //   light.position.y = Math.cos(time * 0.5)
-  //   light.position.z = Math.cos(time * 0.3) - 14
-  // })
 
   return (
     <>
@@ -55,4 +40,40 @@ const Flower = ({ state, newFlower }) => {
   )
 }
 
-export { Flower }
+const FlowerGLTF = ({ state, newFlower }) => {
+  const flowerRef = useRef()
+
+  const petalsTexture = useTextureLoader('Petals_ColorMap.jpg')
+  const specularMap = useTextureLoader('Petals_GlossMap.jpg')
+
+  useEffect(() => {
+    // newFlower.materials['defaultMat'].map = petalsTexture
+    newFlower.materials['defaultMat'].specular = new THREE.Color('orange')
+    newFlower.materials['defaultMat'].shininess = 50
+    // newFlower.materials['defaultMat'].specularMap = specularMap
+
+    window.flower = flowerRef.current
+    newFlower.scene.scale.set(state.scale, state.scale, state.scale)
+    newFlower.scene.rotation.y = state.rotationY
+    newFlower.scene.rotation.x = state.rotationX
+    newFlower.scene.rotation.z = state.rotationZ
+  })
+
+  const [mixer] = useState(() => new THREE.AnimationMixer())
+  useEffect(() => void mixer.clipAction(newFlower.animations[0], flowerRef.current).play(), [])
+  useFrame(() => {
+    mixer.update(0.003)
+  })
+
+  return (
+    <>
+      <primitive
+        object={newFlower.scene}
+        ref={flowerRef}
+        position={[state.positionX, state.positionY, state.positionZ]}
+      />
+    </>
+  )
+}
+
+export { Flower, FlowerGLTF }

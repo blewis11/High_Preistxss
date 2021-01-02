@@ -9,7 +9,7 @@ import marked from 'marked'
 const useStyles = makeStyles({
   customFormContainer: {
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   container: {
     padding: '15px',
@@ -35,7 +35,7 @@ const useStyles = makeStyles({
     fontWeight: 'bold',
     width: '90%',
     textTransform: 'uppercase',
-    fontSize: '12px'
+    fontSize: '12px',
   },
   buttonContainer: {
     display: 'flex',
@@ -72,7 +72,7 @@ const useStyles = makeStyles({
     position: 'relative',
     fontSize: '11px',
     fontWeight: 'bold',
-    textAlign: 'center'
+    textAlign: 'center',
   },
 })
 
@@ -116,7 +116,12 @@ const SubscribeForm = props => {
             {status === 'error' && (
               <div style={{ color: 'red' }} dangerouslySetInnerHTML={{ __html: message }} />
             )}
-            {status === 'success' && <div style={{ color: 'red' }}>Subscribed !</div>}
+            {status === 'success' && (
+              <div style={{ color: 'red' }}>
+                Almost finished...we need to confirm your email address. Please check the link we
+                just sent you
+              </div>
+            )}
           </div>
         </div>
       )}

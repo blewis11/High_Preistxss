@@ -26,6 +26,7 @@ const Effects = React.forwardRef(
   ({ children, multisamping = 8, renderIndex = 1, ...props }, ref) => {
     const composer = useRef()
     const { scene, camera, gl, size } = useThree()
+
     const [target] = useState(() => {
       if (isWebGL2Available() && multisamping > 0) {
         const t = new WebGLMultisampleRenderTarget(size.width, size.height, {
@@ -42,7 +43,9 @@ const Effects = React.forwardRef(
       composer.current.setPixelRatio(gl.getPixelRatio())
     }, [gl, size])
 
-    useFrame(() => composer.current.render(), renderIndex)
+    useFrame(() => {
+      composer.current.render()
+    }, renderIndex)
 
     const shader = ColorCorrectionShader
     shader.uniforms['powRGB'].value.set(0.85, 1, 0.85)

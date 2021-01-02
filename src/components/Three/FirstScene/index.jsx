@@ -1,19 +1,16 @@
-import React, { Suspense, useRef, useEffect, useState } from 'react'
-import { Canvas, useFrame, useThree } from 'react-three-fiber'
-import { OrbitControls, useFBXLoader, useTextureLoader, Stats } from 'drei'
-import DatGui, { DatNumber, DatColor } from 'react-dat-gui'
+import React, { Suspense, useState, useEffect } from 'react'
+import { Canvas, useThree } from 'react-three-fiber'
+import { OrbitControls, useFBXLoader, useGLTFLoader } from 'drei'
 
 import Effects from './Effect.jsx'
 
 import { GrassHill } from './Landscape/Grass'
-import { Flower } from './Landscape/Flower'
+import { Flower, FlowerGLTF } from './Landscape/Flower'
 
 import * as THREE from 'three'
 
-import { Lensflare, LensflareElement } from 'three/examples/jsm/objects/Lensflare'
-
 const getFOV = () => {
-  let fov
+  let fov = 35
 
   if (window.innerWidth <= 532) {
     fov = 65
@@ -24,18 +21,7 @@ const getFOV = () => {
   return fov
 }
 
-const HeaderGrass = () => {
-  return (
-    <div className="header-major">
-      <span style={{ color: 'white', padding: '15px', fontSize: '20px' }}>Test Grass Render</span>
-      <br />
-    </div>
-  )
-}
-
-const SkyBox = props => {
-  const fov = getFOV()
-
+const getSkyboxSize = fov => {
   let skyboxSize
 
   switch (fov) {
@@ -44,11 +30,33 @@ const SkyBox = props => {
       break
 
     default:
-      skyboxSize = 360
+      skyboxSize = 400
   }
 
+  return skyboxSize
+}
+
+const WithResizeDetect = ({ setSkyboxHeight }) => {
+  const { camera } = useThree()
+
+  useEffect(() => {
+    const handleResize = () => {
+      const fov = getFOV()
+      if (camera.fov !== fov) {
+        camera.fov = fov
+        camera.updateProjectionMatrix()
+        setSkyboxHeight(getSkyboxSize(camera.fov))
+      }
+    }
+
+    window.addEventListener('resize', handleResize)
+  })
+  return null
+}
+
+const SkyBox = ({ skyboxHeight }) => {
   let directions = ['px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'pz.jpg', 'nz.jpg']
-  let skyGeometry = new THREE.CubeGeometry(skyboxSize, skyboxSize, skyboxSize)
+  let skyGeometry = new THREE.CubeGeometry(skyboxHeight, skyboxHeight, skyboxHeight)
   let materialArray = []
 
   for (let i = 0; i < 6; i++)
@@ -67,191 +75,171 @@ const SkyBox = props => {
 const PointLight = ({ state }) => {
   const sphere = new THREE.SphereBufferGeometry(0.1, 16, 8)
   const light = new THREE.PointLight(state.color, state.intensity, state.distance)
-  light.add(new THREE.Mesh(sphere, new THREE.MeshBasicMaterial({ color: light.color })))
   light.decay = 2
   return <primitive object={light} position={state.position} />
 }
 
-const FirstScene = () => {
-  const [state, setState] = useState({
-    positionX: -14,
-    positionY: 2,
-    positionZ: -29,
-    rotationX: -5.7,
-    rotationY: 1.5,
-    rotationZ: -1.7,
-    scale: 0.15,
-  })
+const FlowersAndHills = () => {
+  const test = useGLTFLoader('flowers/1230FlowerTestGltf.gltf')
 
-  const handleUpdate = newData => {
-    setState({ ...state.data, ...newData })
-  }
+  return (
+    <group position={[10, -5, 0]} scale={[1, 1, 1]}>
+      {/* first flower */}
+      <PointLight
+        state={{
+          color: 0xf9cc6b,
+          position: [-7, 7, -32],
+          intensity: 5,
+          distance: 25,
+        }}
+      />
+      <Flower
+        state={{
+          positionX: -14,
+          positionY: 2,
+          positionZ: -29,
+          rotationX: 1.5,
+          rotationY: 1.5,
+          rotationZ: -1.7,
+          scale: 0.15,
+        }}
+        newFlower={useFBXLoader('flowers/1230FlowerTestFBX.fbx')}
+      />
+
+      {/* second flower */}
+      <PointLight
+        state={{
+          color: 0xb22121,
+          position: [-39, 5, -9],
+          intensity: 5,
+          distance: 25,
+        }}
+      />
+      <Flower
+        debug={true}
+        state={{
+          positionX: -42,
+          positionY: 3,
+          positionZ: -10,
+          rotationX: -5,
+          rotationY: 1.6,
+          rotationZ: -1.5,
+          scale: 0.15,
+        }}
+        newFlower={useFBXLoader('flowers/1230FlowerTestFBX1.fbx')}
+      />
+
+      {/* third flower */}
+      <Flower
+        state={{
+          positionX: -14,
+          positionY: 4,
+          positionZ: -9,
+          rotationX: -5.7,
+          rotationY: 1,
+          rotationZ: -0.7,
+          scale: 0.101,
+        }}
+        newFlower={useFBXLoader('flowers/1230FlowerTestFBX2.fbx')}
+      />
+
+      {/* fourth flower */}
+      <PointLight state={{ color: 'red', position: [-54, 2, 8], intensity: 1, distance: 25 }} />
+      <FlowerGLTF
+        state={{
+          positionX: -45,
+          positionY: 4,
+          positionZ: 8,
+          rotationX: -4.8,
+          rotationY: 1.6,
+          rotationZ: -1.7,
+          scale: 0.12,
+        }}
+        newFlower={test}
+      />
+
+      {/* fifth flower */}
+      <PointLight
+        state={{
+          color: 0xb22121,
+          position: [9, 11, 27],
+          intensity: 5,
+          distance: 25,
+        }}
+      />
+      <Flower
+        state={{
+          positionX: -1,
+          positionY: 1,
+          positionZ: 21,
+          rotationX: -4.9,
+          rotationY: 1.2,
+          rotationZ: -1.3,
+          scale: 0.101,
+        }}
+        newFlower={useFBXLoader('flowers/1230FlowerTestFBX3.fbx')}
+      />
+
+      {/* sixth flower */}
+      <PointLight
+        state={{
+          color: 'yellow',
+          position: [-23, 7, 27],
+          intensity: 1.8,
+          distance: 25,
+        }}
+      />
+      <PointLight
+        state={{
+          color: 'red',
+          position: [-23, 2, 27],
+          intensity: 5,
+          distance: 25,
+        }}
+      />
+      <Flower
+        state={{
+          positionX: -28,
+          positionY: 2,
+          positionZ: 24,
+          rotationX: -5,
+          rotationY: 1.7,
+          rotationZ: -1.7,
+          scale: 0.15,
+        }}
+        newFlower={useFBXLoader('flowers/1230FlowerTestFBX4.fbx')}
+      />
+
+      {/* foreground grassy hills */}
+      <group rotation={[0, -2.7, 0]} scale={[0.5, 0.5, 0.5]} position={[-50, 0, 0]}>
+        <GrassHill position={[1, -7, 1]} rotation={[0.1, -0.3, 0]} />
+        <GrassHill position={[-90, -5, 1]} rotation={[0.1, -0.3, 0]} />
+        <GrassHill position={[-90, -5, -100]} rotation={[0.1, -4, 0]} />
+      </group>
+      <OrbitControls />
+    </group>
+  )
+}
+
+const FirstScene = () => {
+  const [skyboxHeight, setSkyboxHeight] = useState(getSkyboxSize(getFOV()))
 
   return (
     <>
       <Canvas colorManagement shadowMap camera={{ position: [-65, -1, -0.2], fov: getFOV() }}>
+        <WithResizeDetect setSkyboxHeight={setSkyboxHeight} />
         <color attach="background" args={['grey']} />
-
-        {/* debugging helpers */}
-        {/* <axisHelper args={25} /> */}
-        {/* <Stats /> */}
 
         <hemisphereLight intensity={0.8} skyColor={'blue'} groundColor={0xf9cc6b} />
         <ambientLight intensity={0.3} color={'purple'} />
-
-        <SkyBox />
-
         <Suspense fallback={null}>
-          <group position={[10, -5, 0]}>
-            {/* first flower */}
-            <PointLight
-              state={{
-                color: 0xf9cc6b,
-                position: [-7, 7, -32],
-                intensity: 5,
-                distance: 25,
-              }}
-            />
-            <Flower
-              state={{
-                positionX: -14,
-                positionY: 2,
-                positionZ: -29,
-                rotationX: 1.5,
-                rotationY: 1.5,
-                rotationZ: -1.7,
-                scale: 0.15,
-              }}
-              newFlower={useFBXLoader('flowers/Flower(WithRig)2.fbx')}
-            />
-
-            {/* second flower */}
-            <PointLight
-              state={{
-                color: 0xb22121,
-                position: [-39, 5, -9],
-                intensity: 5,
-                distance: 25,
-              }}
-            />
-            <Flower
-              debug={true}
-              state={{
-                positionX: -42,
-                positionY: 3,
-                positionZ: -10,
-                rotationX: -5,
-                rotationY: 1,
-                rotationZ: -1.5,
-                scale: 0.15,
-              }}
-              newFlower={useFBXLoader('flowers/Flower(WithRig)0.fbx')}
-            />
-
-            {/* third flower */}
-            <Flower
-              state={{
-                positionX: -14,
-                positionY: 4,
-                positionZ: -9,
-                rotationX: -5.7,
-                rotationY: 1,
-                rotationZ: -0.5,
-                scale: 0.101,
-              }}
-              newFlower={useFBXLoader('flowers/Flower(WithRig)6.fbx')}
-            />
-
-            {/* fourth flower */}
-            <PointLight
-              state={{ color: 'red', position: [-54, 2, 8], intensity: 1, distance: 25 }}
-            />
-            <Flower
-              state={{
-                positionX: -45,
-                positionY: 4,
-                positionZ: 8,
-                rotationX: -4.8,
-                rotationY: 1.6,
-                rotationZ: -1.7,
-                scale: 0.12,
-              }}
-              newFlower={useFBXLoader('flowers/Flower(WithRig)1.fbx')}
-            />
-
-            {/* fifth flower */}
-            <PointLight
-              state={{
-                color: 0xb22121,
-                position: [9, 11, 27],
-                intensity: 5,
-                distance: 25,
-              }}
-            />
-            <Flower
-              state={{
-                positionX: -1,
-                positionY: 1,
-                positionZ: 21,
-                rotationX: -4.9,
-                rotationY: 1.2,
-                rotationZ: -1.7,
-                scale: 0.101,
-              }}
-              newFlower={useFBXLoader('flowers/Flower(WithRig)5.fbx')}
-            />
-
-            {/* sixth flower */}
-            <PointLight
-              state={{
-                color: 'yellow',
-                position: [-23, 7, 27],
-                intensity: 1.8,
-                distance: 25,
-              }}
-            />
-            <PointLight
-              state={{
-                color: 'red',
-                position: [-23, 2, 27],
-                intensity: 5,
-                distance: 25,
-              }}
-            />
-            <Flower
-              state={{
-                positionX: -28,
-                positionY: 2,
-                positionZ: 24,
-                rotationX: -5,
-                rotationY: 1.3,
-                rotationZ: -1.7,
-                scale: 0.15,
-              }}
-              newFlower={useFBXLoader('flowers/Flower(WithRig)3.fbx')}
-            />
-
-            {/* foreground grassy hills */}
-            <group rotation={[0, -2.7, 0]} scale={[0.5, 0.5, 0.5]} position={[-50, 0, 0]}>
-              <GrassHill position={[1, -7, 1]} rotation={[0.1, -0.3, 0]} />
-              <GrassHill position={[-90, -5, 1]} rotation={[0.1, -0.3, 0]} />
-              <GrassHill position={[-90, -5, -100]} rotation={[0.1, -4, 0]} />
-            </group>
-            <OrbitControls />
-          </group>
+          <FlowersAndHills />
         </Suspense>
+        <SkyBox skyboxHeight={skyboxHeight} />
         <Effects />
       </Canvas>
-      {/* <DatGui data={state} onUpdate={handleUpdate} className={'header-major'}>
-        <DatNumber path="positionX" label="positionX" min={-500} max={500} step={1} />
-        <DatNumber path="positionY" label="positionY" min={-500} max={500} step={1} />
-        <DatNumber path="positionZ" label="positionZ" min={-500} max={500} step={1} />
-        <DatNumber path="rotationX" label="rotationX" min={-6} max={6} step={0.1} />
-        <DatNumber path="rotationY" label="rotationY" min={-6} max={6} step={0.1} />
-        <DatNumber path="rotationZ" label="rotationZ" min={-6} max={6} step={0.1} />
-      </DatGui> */}
     </>
   )
 }
 
-export { FirstScene, HeaderGrass }
+export { FirstScene }
