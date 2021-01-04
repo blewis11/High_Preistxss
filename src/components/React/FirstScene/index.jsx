@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 
 import WithSidebarText from '../../../hooks/WithSidebarText'
 import { SideNav } from './SideNav'
+import { Logo } from './Logo'
 
 const TopNavButtons = ({
   buttonColor,
@@ -141,6 +142,7 @@ const FirstScene = () => {
         selectedIndex={selectedIndex}
         setSelectedIndex={setSelectedIndex}
       />
+      <Logo />
     </div>
   )
 }
