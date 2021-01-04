@@ -1,6 +1,6 @@
 import React, { Suspense, useState, useEffect } from 'react'
 import { Canvas, useThree } from 'react-three-fiber'
-import { OrbitControls, useFBXLoader, useGLTFLoader } from 'drei'
+import { OrbitControls, useFBXLoader } from 'drei'
 
 import Effects from './Effect.jsx'
 
@@ -80,7 +80,6 @@ const PointLight = ({ state }) => {
 }
 
 const FlowersAndHills = () => {
-  const test = useGLTFLoader('1421FlowerTest(BlenderGLTF).gltf')
   return (
     <group position={[10, -5, 0]} scale={[1, 1, 1]}>
       {/* first flower */}
@@ -155,7 +154,7 @@ const FlowersAndHills = () => {
           rotationZ: -1.7,
           scale: 0.12,
         }}
-        newFlower={useFBXLoader('1421Flowertest(BlenderFBX).fbx')}
+        newFlower={useFBXLoader('flowers/1230FlowerTestFBX6.fbx')}
       />
 
       {/* fifth flower */}
