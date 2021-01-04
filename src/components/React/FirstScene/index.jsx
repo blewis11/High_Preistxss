@@ -13,12 +13,28 @@ const TopNavButtons = ({
   closeButtonHandler,
   selectedIndex,
 }) => {
+  const onHover = showClose
+    ? {
+        '&:hover': {
+          backgroundColor: 'black',
+          color: '#9489DE',
+        },
+      }
+    : {
+        '&:hover': {
+          backgroundColor: 'white',
+          color: 'black',
+        },
+      }
+
   const rootButtonStyles = {
     color: buttonColor,
     borderRadius: 15,
     border: `0.5px solid ${buttonColor}`,
     fontSize: '11px',
     fontWeight: 'bold',
+    filter: showClose ? 'none' : 'drop-shadow(0 0 2px #F4FBFF)',
+    ...onHover,
   }
 
   const useStyles = makeStyles(theme => ({
@@ -35,7 +51,7 @@ const TopNavButtons = ({
       right: '15px',
     },
     root: {
-      ...rootButtonStyles
+      ...rootButtonStyles,
     },
     rootSelected: {
       borderRadius: 15,
@@ -52,9 +68,9 @@ const TopNavButtons = ({
       ...rootButtonStyles,
       '&:hover': {
         backgroundColor: 'black',
-        color: '#9489DE'
+        color: '#9489DE',
       },
-    }
+    },
   }))
 
   const classes = useStyles()

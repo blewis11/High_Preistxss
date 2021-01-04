@@ -13,7 +13,7 @@ const useStyles = makeStyles({
   },
   container: {
     padding: '15px',
-    lineHeight: '2',
+    lineHeight: '1.875',
   },
   inputContainer: {
     position: 'absolute',
@@ -43,8 +43,8 @@ const useStyles = makeStyles({
   button: {
     background: 'red',
     color: 'black',
-    fontSize: '11px',
-    borderRadius: '12px',
+    fontSize: '10px',
+    borderRadius: '20px',
     fontWeight: 'bold',
     padding: '5px',
   },
@@ -53,7 +53,7 @@ const useStyles = makeStyles({
   },
   signUpButton: {
     position: 'absolute',
-    borderRadius: '15px',
+    borderRadius: '20px',
     width: '90%',
     border: '1px solid black',
     display: 'flex',

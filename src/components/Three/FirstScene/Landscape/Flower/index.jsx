@@ -1,11 +1,15 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { useFrame } from 'react-three-fiber'
-import { useFBXLoader, useTextureLoader } from 'drei'
+import { useTextureLoader } from 'drei'
 
 import * as THREE from 'three'
 
-const Flower = ({ state, newFlower }) => {
+const Flower = ({ state, newFlower, debug }) => {
   const flowerRef = useRef()
+
+  if (debug === 'debug') {
+    console.log({ newFlower })
+  }
 
   const petalsTexture = useTextureLoader('Petals_ColorMap.jpg')
   const specularMap = useTextureLoader('Petals_GlossMap.jpg')
@@ -40,40 +44,4 @@ const Flower = ({ state, newFlower }) => {
   )
 }
 
-const FlowerGLTF = ({ state, newFlower }) => {
-  const flowerRef = useRef()
-
-  const petalsTexture = useTextureLoader('Petals_ColorMap.jpg')
-  const specularMap = useTextureLoader('Petals_GlossMap.jpg')
-
-  useEffect(() => {
-    // newFlower.materials['defaultMat'].map = petalsTexture
-    newFlower.materials['defaultMat'].specular = new THREE.Color('orange')
-    newFlower.materials['defaultMat'].shininess = 50
-    // newFlower.materials['defaultMat'].specularMap = specularMap
-
-    window.flower = flowerRef.current
-    newFlower.scene.scale.set(state.scale, state.scale, state.scale)
-    newFlower.scene.rotation.y = state.rotationY
-    newFlower.scene.rotation.x = state.rotationX
-    newFlower.scene.rotation.z = state.rotationZ
-  })
-
-  const [mixer] = useState(() => new THREE.AnimationMixer())
-  useEffect(() => void mixer.clipAction(newFlower.animations[0], flowerRef.current).play(), [])
-  useFrame(() => {
-    mixer.update(0.003)
-  })
-
-  return (
-    <>
-      <primitive
-        object={newFlower.scene}
-        ref={flowerRef}
-        position={[state.positionX, state.positionY, state.positionZ]}
-      />
-    </>
-  )
-}
-
-export { Flower, FlowerGLTF }
+export { Flower }

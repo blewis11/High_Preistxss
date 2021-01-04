@@ -13,6 +13,7 @@ const useStyles = makeStyles({
   },
   paper: {
     backgroundColor: '#9489DE',
+    boxShadow: 'none',
   },
 })
 

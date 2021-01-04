@@ -1,11 +1,11 @@
 import React, { Suspense, useState, useEffect } from 'react'
 import { Canvas, useThree } from 'react-three-fiber'
-import { OrbitControls, useFBXLoader, useGLTFLoader } from 'drei'
+import { OrbitControls, useFBXLoader } from 'drei'
 
 import Effects from './Effect.jsx'
 
 import { GrassHill } from './Landscape/Grass'
-import { Flower, FlowerGLTF } from './Landscape/Flower'
+import { Flower } from './Landscape/Flower'
 
 import * as THREE from 'three'
 
@@ -80,8 +80,6 @@ const PointLight = ({ state }) => {
 }
 
 const FlowersAndHills = () => {
-  const test = useGLTFLoader('flowers/1230FlowerTestGltf.gltf')
-
   return (
     <group position={[10, -5, 0]} scale={[1, 1, 1]}>
       {/* first flower */}
@@ -101,7 +99,7 @@ const FlowersAndHills = () => {
           rotationX: 1.5,
           rotationY: 1.5,
           rotationZ: -1.7,
-          scale: 0.15,
+          // scale: 0.15,
         }}
         newFlower={useFBXLoader('flowers/1230FlowerTestFBX.fbx')}
       />
@@ -145,17 +143,18 @@ const FlowersAndHills = () => {
 
       {/* fourth flower */}
       <PointLight state={{ color: 'red', position: [-54, 2, 8], intensity: 1, distance: 25 }} />
-      <FlowerGLTF
+      <Flower
+        debug={'debug'}
         state={{
           positionX: -45,
-          positionY: 4,
+          positionY: -1,
           positionZ: 8,
           rotationX: -4.8,
           rotationY: 1.6,
           rotationZ: -1.7,
           scale: 0.12,
         }}
-        newFlower={test}
+        newFlower={useFBXLoader('flowers/1321FlowerTestPBRMaterials.fbx')}
       />
 
       {/* fifth flower */}
