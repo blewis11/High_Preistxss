@@ -1,13 +1,35 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
+import { makeStyles } from '@material-ui/core/styles'
+import Fade from '@material-ui/core/Fade'
 
 import WithSidebarText from '../hooks/WithSidebarText.jsx'
 import { TopNavButtons } from './TopNavButtons'
 import { SideNav } from './SideNav'
 import { Logo } from './Logo'
 
-const Loader = () => {
-  return <div>Loading...</div>
+const useStyles = makeStyles({
+  loaderContainer: {
+    zIndex: 1,
+    position: 'absolute',
+    height: '100vh',
+    width: '100vw',
+    backgroundColor: 'black',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+})
+
+const Loader = ({ showLoader }) => {
+  const classes = useStyles()
+
+  return (
+    <Fade in={showLoader} timeout={{ enter: 0, exit: 2000 }}>
+      <div className={classes.loaderContainer}>Loading...</div>
+    </Fade>
+  )
 }
 
 const FirstScene = ({ isLoading }) => {
@@ -24,13 +46,10 @@ const FirstScene = ({ isLoading }) => {
     setOpen(true)
   }
 
-  useEffect(() => {
-    console.log(`is loading set to ${isLoading}`)
-  }, [isLoading])
-
   return (
     <div className="sidebarContainer">
       <WithSidebarText />
+      <Loader showLoader={isLoading} />
       {!open && (
         <TopNavButtons
           selectedIndex={selectedIndex}
@@ -46,8 +65,6 @@ const FirstScene = ({ isLoading }) => {
         setSelectedIndex={setSelectedIndex}
       />
       <Logo />
-
-      {isLoading && <Loader />}
     </div>
   )
 }

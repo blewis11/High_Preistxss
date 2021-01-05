@@ -20,7 +20,7 @@ const Logo = () => {
 
   return (
     <div className={classes.logoContainer}>
-      <img className={classes.image} src={'logo.svg'} height={82} />
+      <img alt={'High Priestxss'} className={classes.image} src={'logo.svg'} height={82} />
     </div>
   )
 }

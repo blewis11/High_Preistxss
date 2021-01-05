@@ -3,7 +3,6 @@ import { grass } from '../helpers/rawGrassCode'
 import { useFrame } from 'react-three-fiber'
 
 import { Hill } from '../Hill'
-import { Flower } from '../Flower'
 
 const GrassHill = ({ position, rotation }) => {
   const ref = useRef()
