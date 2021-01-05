@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react'
 
 import { FirstScene as FirstSceneThree } from './components/Three/FirstScene'
-import { FirstScene as FirstSceneReact } from './components/React/FirstScene'
+import FirstSceneReact from './components/React/FirstScene'
 
 import './App.scss'
 
@@ -14,7 +14,7 @@ const App = props => {
           <FirstSceneReact />
           <div id="hueOverlay" />
           <div className="loader-noise" />
-          <FirstSceneThree />
+          <FirstSceneThree store={props.store} />
         </div>
       </Suspense>
     </>

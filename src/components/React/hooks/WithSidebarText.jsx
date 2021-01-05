@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { setSubscriptionText, setInformationText } from '../redux/Text/actions'
+import { setSubscriptionText, setInformationText } from '../../../redux/Text/actions'
 
 const WithSidebarText = props => {
   const { setSubscriptionText, setInformationText } = props

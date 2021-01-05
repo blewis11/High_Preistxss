@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Drawer from '@material-ui/core/Drawer'
 
-import { TopNavButtons } from '../index.jsx'
+import { TopNavButtons } from '../TopNavButtons'
 import NavContents from './NavContents'
 
 const useStyles = makeStyles({

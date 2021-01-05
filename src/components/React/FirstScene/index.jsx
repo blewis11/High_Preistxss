@@ -1,117 +1,16 @@
-import React, { useState, Fragment } from 'react'
-import Button from '@material-ui/core/Button'
-import { makeStyles } from '@material-ui/core/styles'
+import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
 
-import WithSidebarText from '../../../hooks/WithSidebarText'
+import WithSidebarText from '../hooks/WithSidebarText.jsx'
+import { TopNavButtons } from './TopNavButtons'
 import { SideNav } from './SideNav'
 import { Logo } from './Logo'
 
-const TopNavButtons = ({
-  buttonColor,
-  informationButtonHandler,
-  subscriptionButtonHandler,
-  showClose,
-  closeButtonHandler,
-  selectedIndex,
-}) => {
-  const onHover = showClose
-    ? {
-        '&:hover': {
-          backgroundColor: 'black',
-          color: '#9489DE',
-        },
-      }
-    : {
-        '&:hover': {
-          backgroundColor: 'white',
-          color: 'black',
-        },
-      }
-
-  const rootButtonStyles = {
-    color: buttonColor,
-    borderRadius: 15,
-    border: `0.5px solid ${buttonColor}`,
-    fontSize: '11px',
-    fontWeight: 'bold',
-    filter: showClose ? 'none' : 'drop-shadow(0 0 2px #F4FBFF)',
-    ...onHover,
-  }
-
-  const useStyles = makeStyles(theme => ({
-    buttonsContainer: {
-      display: 'flex',
-      flexDirection: 'row',
-      padding: '15px',
-    },
-    informationButtonContainer: {
-      paddingRight: '10px',
-    },
-    closeButtonContainer: {
-      position: 'absolute',
-      right: '15px',
-    },
-    root: {
-      ...rootButtonStyles,
-    },
-    rootSelected: {
-      borderRadius: 15,
-      color: '#9489DE',
-      backgroundColor: 'black',
-      border: `0.5px solid black`,
-      fontSize: '11px',
-      fontWeight: 'bold',
-      '&:hover': {
-        backgroundColor: 'black',
-      },
-    },
-    closeButton: {
-      ...rootButtonStyles,
-      '&:hover': {
-        backgroundColor: 'black',
-        color: '#9489DE',
-      },
-    },
-  }))
-
-  const classes = useStyles()
-
-  return (
-    <Fragment>
-      <div className={classes.buttonsContainer}>
-        <div className={classes.informationButtonContainer}>
-          <Button
-            onClick={informationButtonHandler}
-            classes={{ root: selectedIndex === 1 ? classes.rootSelected : classes.root }}
-            variant="outlined"
-          >
-            INFORMATION
-          </Button>
-        </div>
-        <Button
-          onClick={subscriptionButtonHandler}
-          classes={{ root: selectedIndex === 2 ? classes.rootSelected : classes.root }}
-          variant="outlined"
-        >
-          SUBSCRIPTION
-        </Button>
-        {showClose && (
-          <div className={classes.closeButtonContainer}>
-            <Button
-              onClick={closeButtonHandler}
-              classes={{ root: classes.closeButton }}
-              variant="outlined"
-            >
-              CLOSE
-            </Button>
-          </div>
-        )}
-      </div>
-    </Fragment>
-  )
+const Loader = () => {
+  return <div>Loading...</div>
 }
 
-const FirstScene = () => {
+const FirstScene = ({ isLoading }) => {
   const [open, setOpen] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(0)
 
@@ -124,6 +23,10 @@ const FirstScene = () => {
     setSelectedIndex(2)
     setOpen(true)
   }
+
+  useEffect(() => {
+    console.log(`is loading set to ${isLoading}`)
+  }, [isLoading])
 
   return (
     <div className="sidebarContainer">
@@ -143,8 +46,16 @@ const FirstScene = () => {
         setSelectedIndex={setSelectedIndex}
       />
       <Logo />
+
+      {isLoading && <Loader />}
     </div>
   )
 }
 
-export { FirstScene, TopNavButtons }
+const mapStateToProps = state => {
+  return {
+    isLoading: state.state.isLoading,
+  }
+}
+
+export default connect(mapStateToProps)(FirstScene)

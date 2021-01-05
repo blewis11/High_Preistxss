@@ -1,8 +1,11 @@
 import React, { Suspense, useState, useEffect } from 'react'
 import { Canvas, useThree } from 'react-three-fiber'
 import { OrbitControls, useFBXLoader } from 'drei'
+import { Provider } from 'react-redux'
 
 import Effects from './Effect.jsx'
+
+import Loader from './helpers/Loader'
 
 import { GrassHill } from './Landscape/Grass'
 import { Flower } from './Landscape/Flower'
@@ -220,22 +223,24 @@ const FlowersAndHills = () => {
   )
 }
 
-const FirstScene = () => {
+const FirstScene = ({ store }) => {
   const [skyboxHeight, setSkyboxHeight] = useState(getSkyboxSize(getFOV()))
 
   return (
     <>
       <Canvas colorManagement shadowMap camera={{ position: [-65, -1, -0.2], fov: getFOV() }}>
-        <WithResizeDetect setSkyboxHeight={setSkyboxHeight} />
-        <color attach="background" args={['grey']} />
+        <Provider store={store}>
+          <WithResizeDetect setSkyboxHeight={setSkyboxHeight} />
+          <color attach="background" args={['grey']} />
 
-        <hemisphereLight intensity={0.8} skyColor={'blue'} groundColor={0xf9cc6b} />
-        <ambientLight intensity={0.3} color={'purple'} />
-        <Suspense fallback={null}>
-          <FlowersAndHills />
-        </Suspense>
-        <SkyBox skyboxHeight={skyboxHeight} />
-        <Effects />
+          <hemisphereLight intensity={0.8} skyColor={'blue'} groundColor={0xf9cc6b} />
+          <ambientLight intensity={0.3} color={'purple'} />
+          <Suspense fallback={<Loader />}>
+            <FlowersAndHills />
+          </Suspense>
+          <SkyBox skyboxHeight={skyboxHeight} />
+          <Effects />
+        </Provider>
       </Canvas>
     </>
   )
