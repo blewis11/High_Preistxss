@@ -36,6 +36,9 @@ const useStyles = makeStyles({
     width: '90%',
     textTransform: 'uppercase',
     fontSize: '12px',
+    fontFamily: 'Helvetica Neue LT W05_75 Bold',
+    letterSpacing: '0.06em',
+    lineHeight: 1,
   },
   buttonContainer: {
     display: 'flex',
@@ -73,6 +76,12 @@ const useStyles = makeStyles({
     fontSize: '11px',
     fontWeight: 'bold',
     textAlign: 'center',
+  },
+  text: {
+    fontFamily: 'Helvetica Neue LT W05_55 Roman',
+    letterSpacing: '0.02em',
+    lineHeight: 1.85,
+    fontSize: '14px',
   },
 })
 
@@ -138,7 +147,7 @@ const SubscriptionSection = props => {
 
   return (
     <Fragment>
-      <div dangerouslySetInnerHTML={getMarkdownText(subscriptionText)} />
+      <div className={classes.text} dangerouslySetInnerHTML={getMarkdownText(subscriptionText)} />
       {showTextInput ? (
         <SubscribeForm classes={classes} />
       ) : (
@@ -153,7 +162,9 @@ const SubscriptionSection = props => {
 const InformationSection = props => {
   const { informationText } = props
 
-  return <div dangerouslySetInnerHTML={getMarkdownText(informationText)} />
+  const classes = useStyles()
+
+  return <div className={classes.text} dangerouslySetInnerHTML={getMarkdownText(informationText)} />
 }
 
 const NavContents = props => {

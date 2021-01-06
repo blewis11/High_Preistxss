@@ -25,10 +25,12 @@ const TopNavButtons = ({
       }
 
   const rootButtonStyles = {
+    fontFamily: 'Helvetica Neue LT W05_75 Bold',
     color: buttonColor,
     borderRadius: 15,
     border: `0.5px solid ${buttonColor}`,
-    fontSize: '11px',
+    fontSize: '10px',
+    letterSpacing: '0.06em',
     fontWeight: 'bold',
     filter: showClose ? 'none' : 'drop-shadow(0 0 2px #F4FBFF)',
     ...onHover,
@@ -51,11 +53,12 @@ const TopNavButtons = ({
       ...rootButtonStyles,
     },
     rootSelected: {
+      ...rootButtonStyles,
       borderRadius: 15,
       color: '#9489DE',
       backgroundColor: 'black',
       border: `0.5px solid black`,
-      fontSize: '11px',
+      fontSize: '10px',
       fontWeight: 'bold',
       '&:hover': {
         backgroundColor: 'black',

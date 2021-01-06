@@ -1,11 +1,11 @@
 import React, { Suspense, useState, useEffect } from 'react'
 import { Canvas, useThree } from 'react-three-fiber'
-import { OrbitControls, useFBXLoader } from 'drei'
+import { useFBXLoader } from 'drei'
 import { Provider } from 'react-redux'
 
 import Effects from './Effect.jsx'
-
 import Loader from './helpers/Loader'
+import { WithCameraPan } from './helpers/WithCameraPan.jsx'
 
 import { GrassHill } from './Landscape/Grass'
 import { Flower } from './Landscape/Flower'
@@ -72,7 +72,7 @@ const SkyBox = ({ skyboxHeight }) => {
 
   let skyBox = new THREE.Mesh(skyGeometry, materialArray)
 
-  return <primitive object={skyBox} rotation={[0, 3.1, 0]} position={[0, -10, 0]} />
+  return <primitive object={skyBox} rotation={[0, -1.6, 0]} position={[0, -10, 0]} />
 }
 
 const PointLight = ({ state }) => {
@@ -83,7 +83,7 @@ const PointLight = ({ state }) => {
 
 const FlowersAndHills = () => {
   return (
-    <group position={[10, -5, 0]} scale={[1, 1, 1]}>
+    <group position={[0, -5, 0]} scale={[1, 1, 1]} rotation={[0, 1.5, 0]}>
       {/* first flower */}
       <PointLight
         state={{
@@ -217,7 +217,6 @@ const FlowersAndHills = () => {
         <GrassHill position={[-90, -5, 1]} rotation={[0.1, -0.3, 0]} />
         <GrassHill position={[-90, -5, -100]} rotation={[0.1, -4, 0]} />
       </group>
-      <OrbitControls />
     </group>
   )
 }
@@ -227,9 +226,11 @@ const FirstScene = ({ store }) => {
 
   return (
     <>
-      <Canvas colorManagement shadowMap camera={{ position: [-65, -1, -0.2], fov: getFOV() }}>
+      <Canvas colorManagement shadowMap camera={{ position: [-5, 1.11, 75], fov: getFOV() }}>
         <Provider store={store}>
           <WithResizeDetect setSkyboxHeight={setSkyboxHeight} />
+          {/* <WithCameraPan /> */}
+
           <color attach="background" args={['grey']} />
 
           <hemisphereLight intensity={0.8} skyColor={'blue'} groundColor={0xf9cc6b} />

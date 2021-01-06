@@ -1,36 +1,62 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Drawer from '@material-ui/core/Drawer'
 
 import { TopNavButtons } from '../TopNavButtons'
 import NavContents from './NavContents'
-
-const useStyles = makeStyles({
-  innerDrawer: {
-    width: '30vw',
-    minWidth: '370px',
-    maxWidth: '500px',
-  },
-  paper: {
-    backgroundColor: '#9489DE',
-    boxShadow: 'none',
-  },
-})
+import { Credits } from './Credits'
 
 const SideNav = ({ open, setOpen, selectedIndex, setSelectedIndex }) => {
+  const [showCredits, setShowCredits] = useState(false)
+
+  const useStyles = makeStyles({
+    innerDrawer: {
+      width: '30vw',
+      minWidth: '370px',
+      maxWidth: '500px',
+    },
+    paper: {
+      backgroundColor: '#9489DE',
+      boxShadow: 'none',
+    },
+    credits: {
+      textDecoration: showCredits ? 'underline' : 'none',
+      padding: '15px',
+      fontSize: '10px',
+      textTransform: 'uppercase',
+      fontFamily: 'Helvetica Neue LT W05_75 Bold',
+      letterSpacing: '0.06em',
+      lineHeight: 1,
+      position: 'absolute',
+      bottom: '5px',
+      cursor: 'pointer',
+      '&:hover': {
+        textDecoration: 'underline',
+      },
+    },
+  })
+
   const classes = useStyles()
 
   const informationHandler = () => {
+    setShowCredits(false)
     setSelectedIndex(1)
   }
 
   const subscriptionHandler = () => {
+    setShowCredits(false)
     setSelectedIndex(2)
   }
 
   const onClose = () => {
     setSelectedIndex(0)
+    setShowCredits(false)
     setOpen(false)
+  }
+
+  const onClickCredits = () => {
+    setShowCredits(true)
+    setSelectedIndex(0)
   }
 
   return (
@@ -50,7 +76,16 @@ const SideNav = ({ open, setOpen, selectedIndex, setSelectedIndex }) => {
             subscriptionButtonHandler={subscriptionHandler}
             selectedIndex={selectedIndex}
           />
-          <NavContents selectedIndex={selectedIndex} />
+          {showCredits ? (
+            <Credits />
+          ) : (
+            <>
+              <NavContents selectedIndex={selectedIndex} />
+            </>
+          )}
+        </div>
+        <div className={classes.credits} onClick={onClickCredits}>
+          CREDITS
         </div>
       </Drawer>
     </Fragment>
