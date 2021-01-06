@@ -1,6 +1,6 @@
 import React, { Suspense, useState, useEffect } from 'react'
 import { Canvas, useThree } from 'react-three-fiber'
-import { useFBXLoader } from 'drei'
+import { useFBXLoader, OrbitControls } from 'drei'
 import { Provider } from 'react-redux'
 
 import Effects from './Effect.jsx'
@@ -8,7 +8,7 @@ import Loader from './helpers/Loader'
 import { WithCameraPan } from './helpers/WithCameraPan.jsx'
 
 import { GrassHill } from './Landscape/Grass'
-import { Flower } from './Landscape/Flower'
+import { Flower, FlowerTest } from './Landscape/Flower'
 
 import * as THREE from 'three'
 
@@ -145,18 +145,18 @@ const FlowersAndHills = () => {
 
       {/* fourth flower */}
       <PointLight state={{ color: 'red', position: [-54, 2, 8], intensity: 1, distance: 25 }} />
-      <Flower
+      <FlowerTest
         debug={'debug'}
         state={{
           positionX: -45,
-          positionY: 3,
+          positionY: -3,
           positionZ: 8,
           rotationX: -4.8,
-          rotationY: 1.6,
+          rotationY: 2,
           rotationZ: -1.7,
-          scale: 0.12,
+          scale: 0.17,
         }}
-        newFlower={useFBXLoader('flowers/1230FlowerTestFBX6.fbx')}
+        newFlower={useFBXLoader('flowers/1521Flower.fbx')}
       />
 
       {/* fifth flower */}
@@ -240,6 +240,7 @@ const FirstScene = ({ store }) => {
           </Suspense>
           <SkyBox skyboxHeight={skyboxHeight} />
           <Effects />
+          <OrbitControls />
         </Provider>
       </Canvas>
     </>

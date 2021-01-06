@@ -48,12 +48,15 @@ const TopNavButtons = ({
         width: '100vw',
         [theme.breakpoints.down('sm')]: {
           flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
         },
       },
       buttonContainer: {
         paddingRight: '10px',
         [theme.breakpoints.down('sm')]: {
-          paddingBottom: '10px',
+          padding: '10px',
+          width: '100vw',
         },
       },
       root: {
@@ -81,8 +84,9 @@ const TopNavButtons = ({
         right: '15px',
 
         [theme.breakpoints.down('sm')]: {
-          position: 'relative',
-          paddingRight: '10px',
+          position: 'static',
+          width: '100vw',
+          padding: '0 10px 0 10px',
         },
       },
       closeButton: {
@@ -147,11 +151,7 @@ const TopNavButtons = ({
         </div>
         <div className={clsx(classes.buttonContainer, classes.instagramButton)}>
           {/* TODO implementation of this button, only show in mobile or? */}
-          <Button
-            onClick={subscriptionButtonHandler}
-            classes={{ root: classes.root }}
-            variant="outlined"
-          >
+          <Button classes={{ root: classes.root }} variant="outlined">
             INSTAGRAM
           </Button>
         </div>

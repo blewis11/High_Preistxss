@@ -16,6 +16,8 @@ const SideNav = ({ open, setOpen, selectedIndex, setSelectedIndex }) => {
       maxWidth: '600px',
       [theme.breakpoints.down('sm')]: {
         width: '100vw',
+        minWidth: '100vw',
+        maxWidth: '100vw',
       },
     },
     paper: {
