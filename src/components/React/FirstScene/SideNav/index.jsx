@@ -9,18 +9,21 @@ import { Credits } from './Credits'
 const SideNav = ({ open, setOpen, selectedIndex, setSelectedIndex }) => {
   const [showCredits, setShowCredits] = useState(false)
 
-  const useStyles = makeStyles({
+  const useStyles = makeStyles(theme => ({
     innerDrawer: {
-      width: '30vw',
-      minWidth: '370px',
-      maxWidth: '500px',
+      width: '31.25vw',
+      minWidth: '400px',
+      maxWidth: '600px',
+      [theme.breakpoints.down('sm')]: {
+        width: '100vw',
+      },
     },
     paper: {
       backgroundColor: '#9489DE',
       boxShadow: 'none',
     },
     credits: {
-      textDecoration: showCredits ? 'underline' : 'none',
+      textDecoration: showCredits ? 'underline' : 'underline solid transparent',
       padding: '15px',
       fontSize: '10px',
       textTransform: 'uppercase',
@@ -30,11 +33,12 @@ const SideNav = ({ open, setOpen, selectedIndex, setSelectedIndex }) => {
       position: 'absolute',
       bottom: '5px',
       cursor: 'pointer',
+      transition: 'text-decoration 0.3s ease',
       '&:hover': {
         textDecoration: 'underline',
       },
     },
-  })
+  }))
 
   const classes = useStyles()
 
