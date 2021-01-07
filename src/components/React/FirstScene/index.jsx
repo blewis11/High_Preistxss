@@ -14,11 +14,28 @@ const useStyles = makeStyles({
     position: 'absolute',
     height: '100vh',
     width: '100vw',
-    backgroundColor: 'black',
+    backgroundColor: '#121212',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  credits: {
+    filter: 'drop-shadow(0 0 2px #F4FBFF)',
+    textDecoration: 'underline solid transparent',
+    padding: '15px',
+    fontSize: '10px',
+    textTransform: 'uppercase',
+    fontFamily: 'Helvetica Neue LT W05_75 Bold',
+    letterSpacing: '0.06em',
+    lineHeight: 1,
+    position: 'fixed',
+    bottom: '5px',
+    cursor: 'pointer',
+    transition: 'text-decoration 0.3s ease',
+    '&:hover': {
+      textDecoration: 'underline',
+    },
   },
 })
 
@@ -39,6 +56,7 @@ const FirstScene = ({ isLoading }) => {
 
   const [open, setOpen] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(0)
+  const [showCredits, setShowCredits] = useState(false)
 
   useEffect(() => {
     if (!isLoading && inSubscribedState) setOpen(true)
@@ -57,6 +75,14 @@ const FirstScene = ({ isLoading }) => {
   const instagramButtonHandler = () => {
     const win = window.open('https://www.instagram.com/thehighpriestxss/', '_blank')
     win.focus()
+  }
+
+  const classes = useStyles()
+
+  const onClickCredits = () => {
+    setShowCredits(true)
+    setSelectedIndex(0)
+    setOpen(true)
   }
 
   return (
@@ -80,7 +106,13 @@ const FirstScene = ({ isLoading }) => {
         setSelectedIndex={setSelectedIndex}
         inSubscribedState={inSubscribedState}
         setSubscribedState={setSubscribedState}
+        showCredits={showCredits}
+        setShowCredits={setShowCredits}
       />
+
+      <div className={classes.credits} onClick={onClickCredits}>
+        CREDITS
+      </div>
       <Logo />
     </div>
   )

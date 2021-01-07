@@ -33,8 +33,10 @@ const SubscribeForm = props => {
   const [status, setStatus] = useState('pending')
 
   const callSubscribe = subscribe => {
-    setStatus('sent')
-    subscribe({ EMAIL: email })
+    if (validEmail) {
+      setStatus('sent')
+      subscribe({ EMAIL: email })
+    }
   }
 
   const onInputFocus = () => setFocused(true)
@@ -52,6 +54,12 @@ const SubscribeForm = props => {
   }
 
   const useStyles = makeStyles({
+    text: {
+      fontFamily: 'Helvetica Neue LT W05_55 Roman',
+      letterSpacing: '0.02em',
+      lineHeight: 1.85,
+      fontSize: '14px',
+    },
     customFormContainer: {
       display: 'flex',
       flexDirection: 'column',
@@ -80,7 +88,11 @@ const SubscribeForm = props => {
       },
     },
     newsletterEmail: {
+      fontSize: '12px',
+      fontFamily: 'Helvetica Neue LT W05_75 Bold',
       transition: 'all 0.3s ease',
+      letterSpacing: '0.06em',
+      lineHeight: 1,
       padding: '10px',
       textTransform: 'uppercase',
       borderRadius: '15px',
@@ -98,6 +110,7 @@ const SubscribeForm = props => {
       position: 'absolute',
       '&::placeholder': {
         color: '#121212 !important',
+        opacity: 0.6,
       },
       '&:focus': {
         outline: 'none',
@@ -161,6 +174,9 @@ const SubscribeForm = props => {
               className={classes.newsletterEmail}
               onFocus={onInputFocus}
               onBlur={onInputBlur}
+              onKeyDown={e => {
+                if (e.key === 'Enter') callSubscribe(subscribe)
+              }}
               placeholder="mail@domain.com"
             />
             <Zoom in={validEmail}>
@@ -175,10 +191,10 @@ const SubscribeForm = props => {
           </div>
           <div className={classes.statusContainer}>
             {status === 'error' && (
-              <div style={{ color: 'red' }} dangerouslySetInnerHTML={{ __html: message }} />
+              <div className={classes.text} dangerouslySetInnerHTML={{ __html: message }} />
             )}
             {status === 'success' && (
-              <div style={{ color: 'black' }}>
+              <div className={classes.text} style={{ fontWeight: 'bold' }}>
                 To join the community we need to confirm your email address. Please check the link
                 we just sent you.
               </div>
@@ -191,14 +207,13 @@ const SubscribeForm = props => {
 }
 
 const SubscribedSection = () => {
-  return <div>Successfully Subscribed!</div>
+  const classes = useStyles()
+
+  return <div className={classes.text}>Successfully Subscribed!</div>
 }
 
 const SubscriptionSection = props => {
   const { subscriptionText } = props
-
-  const [showTextInput, setShowTextInput] = useState(false)
-
   const classes = useStyles()
 
   return (

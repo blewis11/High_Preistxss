@@ -13,8 +13,9 @@ const SideNav = ({
   setSelectedIndex,
   inSubscribedState,
   setSubscribedState,
+  showCredits,
+  setShowCredits
 }) => {
-  const [showCredits, setShowCredits] = useState(false)
 
   const useStyles = makeStyles(theme => ({
     innerDrawer: {
@@ -90,7 +91,7 @@ const SideNav = ({
       >
         <div className={classes.innerDrawer}>
           <TopNavButtons
-            buttonColor={'black'}
+            buttonColor={'#121212'}
             showClose
             closeButtonHandler={onClose}
             informationButtonHandler={informationHandler}

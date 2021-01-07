@@ -12,7 +12,7 @@ const useStyles = makeStyles({
   },
   link: {
     fontWeight: 'bold',
-    color: 'black',
+    color: '#121212',
     fontSize: '14px',
     fontFamily: 'Helvetica Neue LT W05_55 Roman',
     letterSpacing: '0.02em',

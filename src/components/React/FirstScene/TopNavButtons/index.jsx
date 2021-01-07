@@ -17,14 +17,14 @@ const TopNavButtons = ({
     const onHover = showClose
       ? {
           '&:hover': {
-            backgroundColor: 'black',
+            backgroundColor: '#121212',
             color: '#9489DE',
           },
         }
       : {
           '&:hover': {
             backgroundColor: 'white',
-            color: 'black',
+            color: '#121212',
           },
         }
 
@@ -68,10 +68,10 @@ const TopNavButtons = ({
       rootSelected: {
         ...rootButtonStyles,
         color: showClose ? '#9489DE' : rootButtonStyles.color,
-        backgroundColor: showClose ? 'black' : rootButtonStyles.backgroundColor,
-        border: showClose ? `0.5px solid black` : rootButtonStyles.border,
+        backgroundColor: showClose ? '#121212' : rootButtonStyles.backgroundColor,
+        border: showClose ? `0.5px solid #121212` : rootButtonStyles.border,
         '&:hover': {
-          backgroundColor: 'black',
+          backgroundColor: '#121212',
         },
       },
       closeButtonContainer: {
@@ -87,7 +87,7 @@ const TopNavButtons = ({
       closeButton: {
         ...rootButtonStyles,
         '&:hover': {
-          backgroundColor: 'black',
+          backgroundColor: '#121212',
           color: '#9489DE',
         },
       },
