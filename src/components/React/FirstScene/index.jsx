@@ -74,7 +74,9 @@ const FirstScene = ({ isLoading }) => {
 
   const instagramButtonHandler = () => {
     const win = window.open('https://www.instagram.com/thehighpriestxss/', '_blank')
-    win.focus()
+    if (win) {
+      win.focus()
+    }
   }
 
   const classes = useStyles()

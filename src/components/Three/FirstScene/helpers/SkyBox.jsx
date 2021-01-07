@@ -14,7 +14,7 @@ const SkyBox = () => {
     )
   // var skyMaterial = new THREE.MeshFaceMaterial(materialArray)
   var skyBox = new THREE.Mesh(skyGeometry, materialArray)
-  return <primitive object={skyBox} rotation={[0, 3.1, 0]} />
+  return <primitive object={skyBox} rotation={[0, 3, 0]} />
 }
 
 export { SkyBox }
