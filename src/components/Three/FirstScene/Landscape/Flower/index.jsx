@@ -38,13 +38,9 @@ const Flower = ({ state, newFlower, debug }) => {
 const FlowerTest = ({ state, newFlower, debug }) => {
   const flowerRef = useRef()
 
-  console.log({ newFlower })
-  const texture = useTextureLoader('flowers/NewPetals_ColorMap.jpg')
-
   useEffect(() => {
     newFlower.children[1].material[3].specular = new THREE.Color('orange')
-    newFlower.children[1].material[3].map = texture
-    // newFlower.children[0].material[4].shininess = 50
+    newFlower.children[1].material[3].shininess = 50
 
     window.flower = flowerRef.current
     newFlower.scale.set(state.scale, state.scale, state.scale)

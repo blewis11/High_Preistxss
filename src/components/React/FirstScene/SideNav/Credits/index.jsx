@@ -10,7 +10,6 @@ const useStyles = makeStyles({
     letterSpacing: '0.02em',
     lineHeight: 1.85,
   },
-  title: {},
   link: {
     fontWeight: 'bold',
     color: 'black',

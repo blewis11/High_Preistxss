@@ -46,18 +46,24 @@ const FirstScene = ({ isLoading }) => {
     setOpen(true)
   }
 
+  const instagramButtonHandler = () => {
+    const win = window.open('https://www.instagram.com/thehighpriestxss/', '_blank')
+    win.focus()
+  }
+
   return (
     <div className="sidebarContainer">
       <WithSidebarText />
       <Loader showLoader={isLoading} />
-      {!open && (
-        <TopNavButtons
-          selectedIndex={selectedIndex}
-          buttonColor={'white'}
-          informationButtonHandler={informationHandler}
-          subscriptionButtonHandler={subscriptionHandler}
-        />
-      )}
+
+      <TopNavButtons
+        selectedIndex={selectedIndex}
+        buttonColor={'white'}
+        informationButtonHandler={informationHandler}
+        subscriptionButtonHandler={subscriptionHandler}
+        instagramButtonHandler={instagramButtonHandler}
+      />
+
       <SideNav
         open={open}
         setOpen={setOpen}

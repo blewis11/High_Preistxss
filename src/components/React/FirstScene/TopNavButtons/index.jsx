@@ -7,6 +7,7 @@ const TopNavButtons = ({
   buttonColor,
   informationButtonHandler,
   subscriptionButtonHandler,
+  instagramButtonHandler,
   showClose,
   closeButtonHandler,
   selectedIndex,
@@ -46,7 +47,7 @@ const TopNavButtons = ({
         flexDirection: 'row',
         padding: '15px',
         width: '100vw',
-        [theme.breakpoints.down('sm')]: {
+        [theme.breakpoints.down('xs')]: {
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
@@ -54,8 +55,8 @@ const TopNavButtons = ({
       },
       buttonContainer: {
         paddingRight: '10px',
-        [theme.breakpoints.down('sm')]: {
-          padding: '10px',
+        [theme.breakpoints.down('xs')]: {
+          padding: '5px 15px 5px 15px',
           width: '100vw',
         },
       },
@@ -64,29 +65,21 @@ const TopNavButtons = ({
       },
       rootSelected: {
         ...rootButtonStyles,
-        borderRadius: 15,
-        color: '#9489DE',
-        backgroundColor: 'black',
-        border: `0.5px solid black`,
-        fontSize: '10px',
-        fontWeight: 'bold',
+        color: showClose ? '#9489DE' : rootButtonStyles.color,
+        backgroundColor: showClose ? 'black' : rootButtonStyles.backgroundColor,
+        border: showClose ? `0.5px solid black` : rootButtonStyles.border,
         '&:hover': {
           backgroundColor: 'black',
-        },
-      },
-      hideIfNotSelected: {
-        [theme.breakpoints.down('sm')]: {
-          visibility: 'hidden',
         },
       },
       closeButtonContainer: {
         position: 'absolute',
         right: '15px',
 
-        [theme.breakpoints.down('sm')]: {
+        [theme.breakpoints.down('xs')]: {
           position: 'static',
           width: '100vw',
-          padding: '0 10px 0 10px',
+          padding: '5px 15px 5px 15px',
         },
       },
       closeButton: {
@@ -97,13 +90,16 @@ const TopNavButtons = ({
         },
       },
       instagramButton: {
-        display: 'none',
-        [theme.breakpoints.down('sm')]: {
-          display: showClose ? 'none' : 'block',
+        position: 'absolute',
+        right: '5px',
+        display: showClose ? 'none' : 'block',
+        [theme.breakpoints.down('xs')]: {
+          position: 'relative',
+          right: 'auto',
         },
       },
       notSelected: {
-        [theme.breakpoints.down('sm')]: {
+        [theme.breakpoints.down('xs')]: {
           display: showClose ? 'none' : 'block',
         },
       },
@@ -151,7 +147,11 @@ const TopNavButtons = ({
         </div>
         <div className={clsx(classes.buttonContainer, classes.instagramButton)}>
           {/* TODO implementation of this button, only show in mobile or? */}
-          <Button classes={{ root: classes.root }} variant="outlined">
+          <Button
+            onClick={instagramButtonHandler}
+            classes={{ root: classes.root }}
+            variant="outlined"
+          >
             INSTAGRAM
           </Button>
         </div>

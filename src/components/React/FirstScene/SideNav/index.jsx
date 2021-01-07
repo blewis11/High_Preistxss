@@ -14,7 +14,9 @@ const SideNav = ({ open, setOpen, selectedIndex, setSelectedIndex }) => {
       width: '31.25vw',
       minWidth: '400px',
       maxWidth: '600px',
-      [theme.breakpoints.down('sm')]: {
+      overflowX: 'hidden',
+      height: '100%',
+      [theme.breakpoints.down('xs')]: {
         width: '100vw',
         minWidth: '100vw',
         maxWidth: '100vw',
@@ -55,9 +57,11 @@ const SideNav = ({ open, setOpen, selectedIndex, setSelectedIndex }) => {
   }
 
   const onClose = () => {
-    setSelectedIndex(0)
     setShowCredits(false)
     setOpen(false)
+    setTimeout(() => {
+      setSelectedIndex(0)
+    }, 300) // kinda hacky..but progress hook seems to stop at 95% and then wait a few moments
   }
 
   const onClickCredits = () => {

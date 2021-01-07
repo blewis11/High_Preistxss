@@ -156,7 +156,7 @@ const FlowersAndHills = () => {
           rotationZ: -1.7,
           scale: 0.17,
         }}
-        newFlower={useFBXLoader('flowers/1521Flower.fbx')}
+        newFlower={useFBXLoader('flowers/1621FlowerTest(Blender).fbx')}
       />
 
       {/* fifth flower */}

@@ -1,0 +1,126 @@
+#newsletter-box {
+  width: 90%;
+  height: 35px;
+  min-height: 20px;
+  max-height: 10vh;
+  position: absolute;
+  border-radius: 15px;
+}
+
+.newsletter {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.newsletter input {
+  transition: color 0.25s ease 0s, background-color 0.25s ease 0s, border-color 0.25s ease 0s,
+    filter 0.25s ease 0s;
+  font-family: 'Helvetica Neue LT W01_93 BlkEx';
+  text-transform: uppercase;
+  font-size: 12px;
+  padding: 15px;
+  border-radius: 20px;
+}
+.newsletter-email {
+  padding: 10px;
+  text-transform: uppercase;
+  border-radius: 15px;
+  background-color: transparent;
+  border: 1px solid #121212;
+  color: #121212;
+  height: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  top: 0; /* Important for positioning in Center */
+  left: 0; /* Important for positioning in Center */
+  box-sizing: border-box;
+  position: absolute;
+}
+
+/* Placeholder color */
+
+.newsletter-email::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: #121212 !important;
+}
+.newsletter-email::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #121212 !important;
+}
+.newsletter-email:-ms-input-placeholder {
+  /* IE 10+ */
+  color: #121212 !important;
+}
+.newsletter-email:-moz-placeholder {
+  /* Firefox 18- */
+  color: #121212 !important;
+}
+
+.newsletter-emai:focusl::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: #9489dd !important;
+}
+.newsletter-email:focus::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #9489dd !important;
+}
+.newsletter-email:focus:-ms-input-placeholder {
+  /* IE 10+ */
+  color: #9489dd !important;
+}
+.newsletter-email:focus:-moz-placeholder {
+  /* Firefox 18- */
+  color: #9489dd !important;
+}
+
+.newsletter-email:hover {
+  background-color: transparent;
+  filter: drop-shadow(0 0 2px #121212);
+}
+.newsletter-email:focus {
+  outline: none;
+  background-color: #121212;
+  border-color: #121212;
+  border-width: 1px;
+  border-style: solid;
+  color: #9489dd;
+  filter: drop-shadow(0 0 2px #121212);
+}
+
+input.newsletter-submit {
+  outline: none;
+  text-transform: uppercase;
+  background-color: #9489dd;
+  color: #121212;
+  font-weight: 700;
+  margin: 5px;
+  height: calc(100% - 10px);
+  padding: 0 4%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  border: 0;
+  transform-origin: center;
+  box-sizing: border-box;
+  border-radius: 50px;
+}
+
+.newsletter-submit:hover,
+.newsletter-submit:focus {
+  background-color: #ff4440;
+  cursor: pointer;
+}
+
+.newsletter-email:not(:focus) + input.newsletter-submit {
+  background-color: #121212;
+  color: #9489dd;
+}
+
+.newsletter-email:not(:focus) + .newsletter-submit:hover {
+  background-color: #ff4440;
+  color: #121212;
+  cursor: pointer;
+}
