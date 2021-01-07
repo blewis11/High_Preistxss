@@ -17,10 +17,15 @@ const useStyles = makeStyles({
     fontFamily: 'Helvetica Neue LT W05_55 Roman',
     letterSpacing: '0.02em',
     lineHeight: 1.85,
-    // -webkit-text-decoration: #121212 solid underline,
     textDecoration: '#121212 solid underline',
-    // -webkit-text-decoration-skip: ink,
     textDecorationSkip: 'ink',
+    textShadow: '0 0 0px #121212',
+    borderColor: '#121212',
+    transition: 'color 0.25s ease 0s, border-color 0.25s ease 0s, text-shadow 0.25s ease 0s',
+    '&:hover': {
+      textShadow: '0 0 2px #121212',
+      borderColor: 'transparent',
+    },
   },
 })
 
