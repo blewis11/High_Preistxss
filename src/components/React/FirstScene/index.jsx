@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 import Fade from '@material-ui/core/Fade'
@@ -10,7 +10,7 @@ import { Logo } from './Logo'
 
 const useStyles = makeStyles({
   loaderContainer: {
-    zIndex: 1,
+    zIndex: '2000 !important',
     position: 'absolute',
     height: '100vh',
     width: '100vw',
@@ -33,8 +33,16 @@ const Loader = ({ showLoader }) => {
 }
 
 const FirstScene = ({ isLoading }) => {
+  const [inSubscribedState, setSubscribedState] = useState(
+    window.location.pathname === '/subscribed',
+  )
+
   const [open, setOpen] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(0)
+
+  useEffect(() => {
+    if (!isLoading && inSubscribedState) setOpen(true)
+  }, [isLoading])
 
   const informationHandler = () => {
     setSelectedIndex(1)
@@ -62,6 +70,7 @@ const FirstScene = ({ isLoading }) => {
         informationButtonHandler={informationHandler}
         subscriptionButtonHandler={subscriptionHandler}
         instagramButtonHandler={instagramButtonHandler}
+        inSubscribedState={false}
       />
 
       <SideNav
@@ -69,6 +78,8 @@ const FirstScene = ({ isLoading }) => {
         setOpen={setOpen}
         selectedIndex={selectedIndex}
         setSelectedIndex={setSelectedIndex}
+        inSubscribedState={inSubscribedState}
+        setSubscribedState={setSubscribedState}
       />
       <Logo />
     </div>

@@ -11,6 +11,7 @@ const TopNavButtons = ({
   showClose,
   closeButtonHandler,
   selectedIndex,
+  inSubscribedState,
 }) => {
   const useStyles = makeStyles(theme => {
     const onHover = showClose
@@ -28,6 +29,7 @@ const TopNavButtons = ({
         }
 
     const rootButtonStyles = {
+      zIndex: '1 !important',
       width: '100%',
       transition: 'all 0.3s ease',
       fontFamily: 'Helvetica Neue LT W05_75 Bold',
@@ -108,66 +110,109 @@ const TopNavButtons = ({
 
   const classes = useStyles()
 
+  console.log({ inSubscribedState })
   return (
     <Fragment>
       <div className={classes.buttonsContainer}>
-        <div
-          className={
-            selectedIndex === 1
-              ? classes.buttonContainer
-              : clsx(classes.notSelected, classes.buttonContainer)
-          }
-        >
-          <Button
-            onClick={informationButtonHandler}
-            classes={{
-              root: selectedIndex === 1 ? classes.rootSelected : classes.root,
-            }}
-            variant="outlined"
-          >
-            INFORMATION
-          </Button>
-        </div>
-        <div
-          className={
-            selectedIndex === 2
-              ? classes.buttonContainer
-              : clsx(classes.notSelected, classes.buttonContainer)
-          }
-        >
-          <Button
-            onClick={subscriptionButtonHandler}
-            classes={{
-              root: selectedIndex === 2 ? classes.rootSelected : classes.root,
-            }}
-            variant="outlined"
-          >
-            SUBSCRIBE
-          </Button>
-        </div>
-        <div className={clsx(classes.buttonContainer, classes.instagramButton)}>
-          {/* TODO implementation of this button, only show in mobile or? */}
-          <Button
-            onClick={instagramButtonHandler}
-            classes={{ root: classes.root }}
-            variant="outlined"
-          >
-            INSTAGRAM
-          </Button>
-        </div>
-        {showClose && (
-          <div className={classes.closeButtonContainer}>
-            <Button
-              onClick={closeButtonHandler}
-              classes={{ root: classes.closeButton }}
-              variant="outlined"
-            >
-              CLOSE
-            </Button>
-          </div>
+        {!inSubscribedState ? (
+          <AllButtons
+            classes={classes}
+            selectedIndex={selectedIndex}
+            informationButtonHandler={informationButtonHandler}
+            subscriptionButtonHandler={subscriptionButtonHandler}
+            instagramButtonHandler={instagramButtonHandler}
+            closeButtonHandler={closeButtonHandler}
+            showClose={showClose}
+          />
+        ) : (
+          <OnlyCloseButton classes={classes} closeButtonHandler={closeButtonHandler} />
         )}
       </div>
     </Fragment>
+  )
+}
+
+const AllButtons = ({
+  classes,
+  selectedIndex,
+  informationButtonHandler,
+  subscriptionButtonHandler,
+  instagramButtonHandler,
+  closeButtonHandler,
+  showClose,
+}) => {
+  return (
+    <Fragment>
+      <div
+        className={
+          selectedIndex === 1
+            ? classes.buttonContainer
+            : clsx(classes.notSelected, classes.buttonContainer)
+        }
+      >
+        <Button
+          onClick={informationButtonHandler}
+          classes={{
+            root: selectedIndex === 1 ? classes.rootSelected : classes.root,
+          }}
+          variant="outlined"
+        >
+          INFORMATION
+        </Button>
+      </div>
+      <div
+        className={
+          selectedIndex === 2
+            ? classes.buttonContainer
+            : clsx(classes.notSelected, classes.buttonContainer)
+        }
+      >
+        <Button
+          onClick={subscriptionButtonHandler}
+          classes={{
+            root: selectedIndex === 2 ? classes.rootSelected : classes.root,
+          }}
+          variant="outlined"
+        >
+          SUBSCRIBE
+        </Button>
+      </div>
+      <div className={clsx(classes.buttonContainer, classes.instagramButton)}>
+        {/* TODO implementation of this button, only show in mobile or? */}
+        <Button
+          onClick={instagramButtonHandler}
+          classes={{ root: classes.root }}
+          variant="outlined"
+        >
+          INSTAGRAM
+        </Button>
+      </div>
+      {showClose && (
+        <div className={classes.closeButtonContainer}>
+          <Button
+            onClick={closeButtonHandler}
+            classes={{ root: classes.closeButton }}
+            variant="outlined"
+          >
+            CLOSE
+          </Button>
+        </div>
+      )}
+    </Fragment>
+  )
+}
+
+const OnlyCloseButton = ({ classes, closeButtonHandler }) => {
+  return (
+    <div className={classes.closeButtonContainer}>
+      <Button
+        onClick={closeButtonHandler}
+        classes={{ root: classes.closeButton }}
+        variant="outlined"
+      >
+        CLOSE
+      </Button>
+    </div>
   )
 }
 

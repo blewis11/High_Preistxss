@@ -6,7 +6,14 @@ import { TopNavButtons } from '../TopNavButtons'
 import NavContents from './NavContents'
 import { Credits } from './Credits'
 
-const SideNav = ({ open, setOpen, selectedIndex, setSelectedIndex }) => {
+const SideNav = ({
+  open,
+  setOpen,
+  selectedIndex,
+  setSelectedIndex,
+  inSubscribedState,
+  setSubscribedState,
+}) => {
   const [showCredits, setShowCredits] = useState(false)
 
   const useStyles = makeStyles(theme => ({
@@ -57,9 +64,13 @@ const SideNav = ({ open, setOpen, selectedIndex, setSelectedIndex }) => {
   }
 
   const onClose = () => {
+    if (inSubscribedState) {
+      window.history.pushState(null, null, '/')
+    }
     setShowCredits(false)
     setOpen(false)
     setTimeout(() => {
+      setSubscribedState(false)
       setSelectedIndex(0)
     }, 300) // kinda hacky..but progress hook seems to stop at 95% and then wait a few moments
   }
@@ -85,12 +96,13 @@ const SideNav = ({ open, setOpen, selectedIndex, setSelectedIndex }) => {
             informationButtonHandler={informationHandler}
             subscriptionButtonHandler={subscriptionHandler}
             selectedIndex={selectedIndex}
+            inSubscribedState={inSubscribedState}
           />
           {showCredits ? (
             <Credits />
           ) : (
             <>
-              <NavContents selectedIndex={selectedIndex} />
+              <NavContents selectedIndex={selectedIndex} inSubscribedState={inSubscribedState} />
             </>
           )}
         </div>

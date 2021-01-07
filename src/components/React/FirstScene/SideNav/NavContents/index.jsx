@@ -190,6 +190,10 @@ const SubscribeForm = props => {
   )
 }
 
+const SubscribedSection = () => {
+  return <div>Successfully Subscribed!</div>
+}
+
 const SubscriptionSection = props => {
   const { subscriptionText } = props
 
@@ -213,14 +217,14 @@ const InformationSection = props => {
   return <div className={classes.text} dangerouslySetInnerHTML={getMarkdownText(informationText)} />
 }
 
-const NavContents = props => {
-  const { informationText, subscriptionText, selectedIndex } = props
+const NavContents = ({ informationText, subscriptionText, selectedIndex, inSubscribedState }) => {
   const classes = useStyles()
 
   return (
     <div className={classes.container}>
       {selectedIndex === 1 && <InformationSection informationText={informationText} />}
       {selectedIndex === 2 && <SubscriptionSection subscriptionText={subscriptionText} />}
+      {inSubscribedState && <SubscribedSection />}
     </div>
   )
 }
