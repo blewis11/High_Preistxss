@@ -11,10 +11,9 @@ const useStyles = makeStyles({
     lineHeight: 1.85,
   },
   link: {
-    fontWeight: 'bold',
     color: '#121212',
     fontSize: '14px',
-    fontFamily: 'Helvetica Neue LT W05_55 Roman',
+    fontFamily: 'Helvetica Neue LT W05_65 Medium',
     letterSpacing: '0.02em',
     lineHeight: 1.85,
     textDecoration: '#121212 solid underline',
@@ -23,8 +22,11 @@ const useStyles = makeStyles({
     borderColor: '#121212',
     transition: 'color 0.25s ease 0s, border-color 0.25s ease 0s, text-shadow 0.25s ease 0s',
     '&:hover': {
-      textShadow: '0 0 2px #121212',
+      textShadow: '0 0 7px #121212',
       borderColor: 'transparent',
+      textDecoration: 'none',
+      borderStyle: 'solid',
+      borderWidth: '0 0 1px 0',
     },
   },
 })

@@ -1,20 +1,22 @@
 import React from 'react'
 import * as THREE from 'three'
 
-const SkyBox = () => {
-  var directions = ['px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'pz.jpg', 'nz.jpg']
-  var skyGeometry = new THREE.CubeGeometry(150, 150, 150)
-  var materialArray = []
-  for (var i = 0; i < 6; i++)
+const SkyBox = ({ skyboxHeight }) => {
+  let directions = ['px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'pz.jpg', 'nz.jpg']
+  let skyGeometry = new THREE.CubeGeometry(skyboxHeight, skyboxHeight, skyboxHeight)
+  let materialArray = []
+
+  for (let i = 0; i < 6; i++)
     materialArray.push(
       new THREE.MeshLambertMaterial({
-        map: THREE.ImageUtils.loadTexture('scene1_backgroundv2/' + directions[i]),
+        map: THREE.ImageUtils.loadTexture('scene1_backgroundv3/' + directions[i]),
         side: THREE.BackSide,
       }),
     )
-  // var skyMaterial = new THREE.MeshFaceMaterial(materialArray)
-  var skyBox = new THREE.Mesh(skyGeometry, materialArray)
-  return <primitive object={skyBox} rotation={[0, 3, 0]} />
+
+  let skyBox = new THREE.Mesh(skyGeometry, materialArray)
+
+  return <primitive object={skyBox} rotation={[0, 3.05, 0]} position={[0, -6, 0]} />
 }
 
 export { SkyBox }

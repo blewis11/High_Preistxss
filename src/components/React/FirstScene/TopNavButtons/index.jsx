@@ -24,7 +24,7 @@ const TopNavButtons = ({
       : {
           '&:hover': {
             backgroundColor: 'white',
-            color: '#121212',
+            color: '#9489dd',
           },
         }
 
@@ -38,7 +38,6 @@ const TopNavButtons = ({
       border: `0.5px solid ${buttonColor}`,
       fontSize: '10px',
       letterSpacing: '0.06em',
-      fontWeight: 'bold',
       filter: showClose ? 'none' : 'drop-shadow(0 0 2px #F4FBFF)',
       ...onHover,
     }

@@ -1,5 +1,5 @@
 import React, { Suspense, useState, useEffect, useRef } from 'react'
-import { Canvas, useThree, extend, useFrame } from 'react-three-fiber'
+import { Canvas, useThree } from 'react-three-fiber'
 import { useFBXLoader } from 'drei'
 import { Provider } from 'react-redux'
 
@@ -9,8 +9,7 @@ import { PointLight } from './helpers/PointLight.jsx'
 
 import { GrassHill } from './Landscape/Grass'
 import { Flower } from './Landscape/Flower'
-
-import * as THREE from 'three'
+import { SkyBox } from './helpers/SkyBox.jsx'
 
 const getFOV = () => {
   let fov = 35
@@ -33,7 +32,7 @@ const getSkyboxSize = fov => {
 
   switch (fov) {
     case 35:
-      skyboxSize = 170
+      skyboxSize = 130
       break
 
     default:
@@ -59,24 +58,6 @@ const WithResizeDetect = ({ setSkyboxHeight }) => {
     window.addEventListener('resize', handleResize)
   })
   return null
-}
-
-const SkyBox = ({ skyboxHeight }) => {
-  let directions = ['px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'pz.jpg', 'nz.jpg']
-  let skyGeometry = new THREE.CubeGeometry(skyboxHeight, skyboxHeight, skyboxHeight)
-  let materialArray = []
-
-  for (let i = 0; i < 6; i++)
-    materialArray.push(
-      new THREE.MeshLambertMaterial({
-        map: THREE.ImageUtils.loadTexture('scene1_backgroundv2/' + directions[i]),
-        side: THREE.BackSide,
-      }),
-    )
-
-  let skyBox = new THREE.Mesh(skyGeometry, materialArray)
-
-  return <primitive object={skyBox} rotation={[0, -1.65, 0]} position={[0, -10, 0]} />
 }
 
 const FlowersAndHills = () => {
@@ -248,7 +229,7 @@ const FirstScene = ({ store }) => {
           </Suspense>
           <SkyBox skyboxHeight={skyboxHeight} />
           <Effects />
-          {/* <OrbitControls maxPolarAngle={1.7} /> */}
+          {/* <OrbitControls /> */}
         </Provider>
       </Canvas>
     </>

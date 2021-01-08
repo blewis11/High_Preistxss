@@ -21,6 +21,7 @@ const useStyles = makeStyles({
     alignItems: 'center',
   },
   credits: {
+    color: '#fff8de',
     filter: 'drop-shadow(0 0 2px #F4FBFF)',
     textDecoration: 'underline solid transparent',
     padding: '15px',
