@@ -10,6 +10,7 @@ import { PointLight } from './helpers/PointLight.jsx'
 import { GrassHill } from './Landscape/Grass'
 import { Flower } from './Landscape/Flower'
 import { SkyBox } from './helpers/SkyBox.jsx'
+import { WithCameraPan } from './helpers/WithCameraPan.jsx'
 
 const getFOV = () => {
   let fov = 35
@@ -63,7 +64,7 @@ const WithResizeDetect = ({ setSkyboxHeight }) => {
 const FlowersAndHills = () => {
   return (
     <>
-      <group position={[0, -5, 0]} scale={[1, 1, 1]} rotation={[0, 1.5, 0]}>
+      <group position={[0, -5, 0]} scale={[1, 1, 1]} rotation={[0, 1.6, 0]}>
         {/* first flower */}
         <PointLight
           state={{
@@ -229,7 +230,7 @@ const FirstScene = ({ store }) => {
           </Suspense>
           <SkyBox skyboxHeight={skyboxHeight} />
           <Effects />
-          {/* <OrbitControls /> */}
+          <WithCameraPan />
         </Provider>
       </Canvas>
     </>

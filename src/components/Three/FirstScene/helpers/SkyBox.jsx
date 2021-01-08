@@ -16,7 +16,7 @@ const SkyBox = ({ skyboxHeight }) => {
 
   let skyBox = new THREE.Mesh(skyGeometry, materialArray)
 
-  return <primitive object={skyBox} rotation={[0, 3.05, 0]} position={[0, -6, 0]} />
+  return <primitive object={skyBox} rotation={[0, 3.1, 0]} position={[0, -6, 0]} />
 }
 
 export { SkyBox }

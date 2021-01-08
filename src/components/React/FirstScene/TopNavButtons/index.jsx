@@ -109,23 +109,18 @@ const TopNavButtons = ({
 
   const classes = useStyles()
 
-  console.log({ inSubscribedState })
   return (
     <Fragment>
       <div className={classes.buttonsContainer}>
-        {!inSubscribedState ? (
-          <AllButtons
-            classes={classes}
-            selectedIndex={selectedIndex}
-            informationButtonHandler={informationButtonHandler}
-            subscriptionButtonHandler={subscriptionButtonHandler}
-            instagramButtonHandler={instagramButtonHandler}
-            closeButtonHandler={closeButtonHandler}
-            showClose={showClose}
-          />
-        ) : (
-          <OnlyCloseButton classes={classes} closeButtonHandler={closeButtonHandler} />
-        )}
+        <AllButtons
+          classes={classes}
+          selectedIndex={selectedIndex}
+          informationButtonHandler={informationButtonHandler}
+          subscriptionButtonHandler={subscriptionButtonHandler}
+          instagramButtonHandler={instagramButtonHandler}
+          closeButtonHandler={closeButtonHandler}
+          showClose={showClose}
+        />
       </div>
     </Fragment>
   )
@@ -198,20 +193,6 @@ const AllButtons = ({
         </div>
       )}
     </Fragment>
-  )
-}
-
-const OnlyCloseButton = ({ classes, closeButtonHandler }) => {
-  return (
-    <div className={classes.closeButtonContainer}>
-      <Button
-        onClick={closeButtonHandler}
-        classes={{ root: classes.closeButton }}
-        variant="outlined"
-      >
-        CLOSE
-      </Button>
-    </div>
   )
 }
 

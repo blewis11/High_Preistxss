@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Drawer from '@material-ui/core/Drawer'
 
@@ -14,9 +14,8 @@ const SideNav = ({
   inSubscribedState,
   setSubscribedState,
   showCredits,
-  setShowCredits
+  setShowCredits,
 }) => {
-
   const useStyles = makeStyles(theme => ({
     innerDrawer: {
       width: '31.25vw',
@@ -54,12 +53,21 @@ const SideNav = ({
 
   const classes = useStyles()
 
+  const removeSubscribedState = () => {
+    if (inSubscribedState) {
+      window.history.pushState(null, null, '/')
+      setSubscribedState(false)
+    }
+  }
+
   const informationHandler = () => {
+    removeSubscribedState()
     setShowCredits(false)
     setSelectedIndex(1)
   }
 
   const subscriptionHandler = () => {
+    removeSubscribedState()
     setShowCredits(false)
     setSelectedIndex(2)
   }

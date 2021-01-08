@@ -9,7 +9,7 @@ const Flower = ({ state, newFlower, debug }) => {
 
   useEffect(() => {
     newFlower.children[1].material[3].specular = new THREE.Color('orange')
-    newFlower.children[1].material[3].shininess = 100
+    newFlower.children[1].material[3].shininess = 50
 
     window.flower = flowerRef.current
     newFlower.scale.set(state.scale, state.scale, state.scale)

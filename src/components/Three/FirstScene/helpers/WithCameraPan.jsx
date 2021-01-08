@@ -7,7 +7,7 @@ import * as THREE from 'three'
 const WithCameraPan = () => {
   const orbitRef = useRef()
 
-  const { camera } = useThree()
+  const { camera, scene } = useThree()
 
   let [mouse, setMouse] = useState(new THREE.Vector2())
   let [target, setTarget] = useState(new THREE.Vector2())
@@ -17,29 +17,17 @@ const WithCameraPan = () => {
   )
 
   useFrame(() => {
-    setTarget(new THREE.Vector2((1 - mouse.x) * 0.002, (1 - mouse.y) * 0.002))
+    setTarget(new THREE.Vector2(0.005 * mouse.x, 0.005 * mouse.y))
 
+    camera.position.x += 0.03 * (target.x - camera.position.x)
+    camera.position.y += 0.03 * (target.y - camera.position.y)
 
-    if (camera.rotation.x > -0.09 && camera.rotation.x < 0.09) {
-      camera.rotation.x += 0.02 * (target.y - camera.rotation.x)
-    }
-
-    if (camera.rotation.x > -0.09) {
-
-    }
-
-    // camera is below threshold but we're moving up
-    if (camera.rotation.x < -0.09 && 0.02 * (target.y - camera.rotation.x) > camera.rotation.x) {
-      console.log(`check 2`)
-      camera.rotation.x += 0.02 * (target.y - camera.rotation.x)
-    }
-
-    camera.rotation.y += 0.02 * (target.x - camera.rotation.y)
+    camera.lookAt(scene.position) //added to keep view in center. feel free to try with and without
   })
 
   useEffect(() => {
     const onMouseMove = event => {
-      setMouse(new THREE.Vector2(event.clientX - windowHalf.x, event.clientY - windowHalf.x))
+      setMouse(new THREE.Vector2(windowHalf.x - event.clientX, windowHalf.y - event.clientY))
     }
 
     const onResize = event => {
