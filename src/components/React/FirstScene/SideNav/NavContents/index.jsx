@@ -60,6 +60,7 @@ const SubscribeForm = props => {
       overflow: 'hidden',
       whiteSpace: 'nowrap',
       width: '95%',
+      fontSize: '10px',
     }
 
     return {

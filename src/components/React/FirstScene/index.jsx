@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 import Fade from '@material-ui/core/Fade'
 
+import { Loader } from './Loader/index.jsx'
 import WithSidebarText from '../hooks/WithSidebarText.jsx'
 import { TopNavButtons } from './TopNavButtons'
 import { SideNav } from './SideNav'
@@ -40,14 +41,20 @@ const useStyles = makeStyles({
   },
 })
 
-const Loader = ({ showLoader }) => {
+const LoaderContainer = ({ showLoader }) => {
   const classes = useStyles()
+  const [hideLoader, setHideLoader] = useState(false)
 
-  return (
-    <Fade in={showLoader} timeout={{ enter: 0, exit: 2000 }}>
-      <div className={classes.loaderContainer}>Loading...</div>
-    </Fade>
-  )
+  // TODO: figure out graceful solution, for some reason even when showLoader is false - this renders buttons unclickable (overlay somehow stays present)
+  useEffect(() => {
+    if (!showLoader) {
+      setTimeout(() => {
+        setHideLoader(true)
+      }, 1500)
+    }
+  }, [showLoader])
+
+  return hideLoader ? <div /> : <Loader isLoaded={!showLoader} />
 }
 
 const FirstScene = ({ isLoading }) => {
@@ -91,7 +98,7 @@ const FirstScene = ({ isLoading }) => {
   return (
     <div className="sidebarContainer">
       <WithSidebarText />
-      <Loader showLoader={isLoading} />
+      <LoaderContainer showLoader={isLoading} />
 
       <TopNavButtons
         selectedIndex={selectedIndex}

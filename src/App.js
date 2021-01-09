@@ -8,7 +8,6 @@ import './App.scss'
 const App = props => {
   return (
     <>
-      {/* <HeaderGrass /> */}
       <Suspense fallback={null}>
         <div className="main">
           <FirstSceneReact />

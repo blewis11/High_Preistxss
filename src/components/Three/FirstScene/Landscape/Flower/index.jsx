@@ -1,11 +1,12 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { useFrame } from 'react-three-fiber'
-import { useTextureLoader } from 'drei'
 
 import * as THREE from 'three'
 
-const Flower = ({ state, newFlower, debug }) => {
+const Flower = ({ state, newFlower, speed }) => {
   const flowerRef = useRef()
+
+  const animationSpeed = speed ? speed : 0.005
 
   useEffect(() => {
     newFlower.children[1].material[3].specular = new THREE.Color('orange')
@@ -21,7 +22,7 @@ const Flower = ({ state, newFlower, debug }) => {
   const [mixer] = useState(() => new THREE.AnimationMixer())
   useEffect(() => void mixer.clipAction(newFlower.animations[0], flowerRef.current).play(), [])
   useFrame(() => {
-    mixer.update(0.005)
+    mixer.update(animationSpeed)
   })
 
   return (

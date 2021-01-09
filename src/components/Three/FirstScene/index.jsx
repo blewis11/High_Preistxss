@@ -61,7 +61,7 @@ const WithResizeDetect = ({ setSkyboxHeight }) => {
   return null
 }
 
-const FlowersAndHills = () => {
+const FlowersAndHills = ({ data }) => {
   return (
     <>
       <group position={[0, -5, 0]} scale={[1, 1, 1]} rotation={[0, 1.6, 0]}>
@@ -133,26 +133,10 @@ const FlowersAndHills = () => {
         />
 
         {/* fourth flower */}
-        <PointLight state={{ color: 'red', position: [-54, 2, 8], intensity: 1, distance: 25 }} />
-        <Flower
-          debug={'debug'}
-          state={{
-            positionX: -45,
-            positionY: -3,
-            positionZ: 8,
-            rotationX: -6.5,
-            rotationY: -0.3,
-            rotationZ: 0.3,
-            scale: 0.17,
-          }}
-          newFlower={useFBXLoader('flowers/1621FlowerTest(Blender).fbx')}
-        />
-
-        {/* fifth flower */}
         <PointLight
           state={{
             color: 0xb22121,
-            position: [0, 11, 27],
+            position: [0, 11, 25],
             intensity: 5,
             distance: 25,
           }}
@@ -167,7 +151,24 @@ const FlowersAndHills = () => {
             rotationZ: -1.3,
             scale: 0.15,
           }}
+          speed={0.003}
           newFlower={useFBXLoader('flowers/1621FlowerTest(Blender)4.fbx')}
+        />
+
+        {/* fifth flower */}
+        <PointLight state={{ color: 'red', position: [-54, 2, 8], intensity: 1, distance: 25 }} />
+        <Flower
+          debug={'debug'}
+          state={{
+            positionX: -45,
+            positionY: -3,
+            positionZ: 8,
+            rotationX: -6,
+            rotationY: 2.9,
+            rotationZ: -0.2,
+            scale: 0.17,
+          }}
+          newFlower={useFBXLoader('flowers/1621FlowerTest(Blender).fbx')}
         />
 
         {/* sixth flower */}
@@ -219,7 +220,6 @@ const FirstScene = ({ store }) => {
       <Canvas colorManagement shadowMap camera={{ position: [-5, 1.11, 75], fov: getFOV() }}>
         <Provider store={store}>
           <WithResizeDetect setSkyboxHeight={setSkyboxHeight} />
-          {/* <WithCameraPan /> */}
 
           <color attach="background" args={['grey']} />
 
