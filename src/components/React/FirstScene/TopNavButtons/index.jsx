@@ -11,7 +11,6 @@ const TopNavButtons = ({
   showClose,
   closeButtonHandler,
   selectedIndex,
-  inSubscribedState,
 }) => {
   const useStyles = makeStyles(theme => {
     const onHover = showClose
