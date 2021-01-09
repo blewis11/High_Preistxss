@@ -8,36 +8,47 @@ import TopNavButtons from './TopNavButtons'
 import { SideNav } from './SideNav'
 import { Logo } from './Logo'
 
-const useStyles = makeStyles({
-  loaderContainer: {
-    zIndex: '2000 !important',
-    position: 'absolute',
-    height: '100vh',
-    width: '100vw',
-    backgroundColor: '#121212',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  credits: {
-    color: '#ffffff',
-    filter: 'drop-shadow(0 0 2px #F4FBFF)',
-    textDecoration: 'underline solid transparent',
-    padding: '15px',
-    fontSize: '10px',
-    textTransform: 'uppercase',
-    fontFamily: 'Helvetica Neue LT W05_75 Bold',
-    letterSpacing: '0.06em',
-    lineHeight: 1,
-    position: 'fixed',
-    bottom: '5px',
-    cursor: 'pointer',
-    transition: 'text-decoration 0.3s ease',
-    '&:hover': {
-      textDecoration: 'underline',
+const useStyles = makeStyles(theme => {
+  return {
+    loaderContainer: {
+      zIndex: '2000 !important',
+      position: 'absolute',
+      height: '100vh',
+      width: '100vw',
+      backgroundColor: '#121212',
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
     },
-  },
+    credits: {
+      color: '#ffffff',
+      filter: 'drop-shadow(0 0 2px #F4FBFF)',
+      textDecoration: 'underline solid transparent',
+      padding: '15px',
+      fontSize: '10px',
+      textTransform: 'uppercase',
+      fontFamily: 'Helvetica Neue LT W05_75 Bold',
+      letterSpacing: '0.06em',
+      lineHeight: 1,
+      position: 'fixed',
+      bottom: '5px',
+      cursor: 'pointer',
+      transition: 'text-decoration 0.3s ease',
+      '&:hover': {
+        textDecoration: 'underline',
+      },
+    },
+    topNavButtonsContainer: {
+      // paddingTop: '15px',
+      // paddingLeft: '15px',
+      // [theme.breakpoints.down('xs')]: {
+      //   // paddingLeft: 'auto',
+      //   paddingTop: 'none',
+      //   paddingLeft: 'none',
+      // },
+    },
+  }
 })
 
 const LoaderContainer = ({ showLoader }) => {
@@ -100,14 +111,16 @@ const FirstScene = ({ isLoading }) => {
       <WithSidebarText />
       <LoaderContainer showLoader={isLoading} />
 
-      <TopNavButtons
-        selectedIndex={selectedIndex}
-        buttonColor={'white'}
-        informationButtonHandler={informationHandler}
-        subscriptionButtonHandler={subscriptionHandler}
-        instagramButtonHandler={instagramButtonHandler}
-        inSubscribedState={false}
-      />
+      <div className={classes.topNavButtonsContainer}>
+        <TopNavButtons
+          selectedIndex={selectedIndex}
+          buttonColor={'white'}
+          informationButtonHandler={informationHandler}
+          subscriptionButtonHandler={subscriptionHandler}
+          instagramButtonHandler={instagramButtonHandler}
+          inSubscribedState={false}
+        />
+      </div>
 
       <SideNav
         open={open}

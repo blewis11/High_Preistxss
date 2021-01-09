@@ -9,7 +9,6 @@ import marked from 'marked'
 
 const useStyles = makeStyles({
   container: {
-    padding: '15px',
     lineHeight: '1.875',
   },
   text: {

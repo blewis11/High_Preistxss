@@ -47,7 +47,6 @@ const TopNavButtons = ({
       buttonsContainer: {
         display: 'flex',
         flexDirection: 'row',
-        padding: '15px',
         width: showClose ? '100%' : '100vw',
         [theme.breakpoints.down('xs')]: {
           flexDirection: 'column',
