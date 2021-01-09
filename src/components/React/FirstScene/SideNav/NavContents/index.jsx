@@ -59,9 +59,10 @@ const SubscribeForm = props => {
       textOverflow: 'ellipsis',
       overflow: 'hidden',
       whiteSpace: 'nowrap',
-      width: '95%',
+      width: '100%',
       fontSize: '10px',
       margin: 'auto',
+      textAlign: 'center',
     }
 
     return {
@@ -86,14 +87,12 @@ const SubscribeForm = props => {
         margin: '5px',
         height: 'calc(100% - 10px)',
         width: status === 'sent' ? 'calc(100% - 10px)' : '73px',
-        padding: '0 4%',
         position: 'absolute',
         right: 0,
         top: 0,
         border: 0,
         boxSizing: 'border-box',
         borderRadius: '50px',
-        textAlign: 'center',
         '&:hover': {
           backgroundColor: '#ff4440',
           color: '#121212',
@@ -163,7 +162,6 @@ const SubscribeForm = props => {
       pending: {
         opacity: status === 'pending' ? 1 : 0,
         ...rootStatusStyles,
-        width: 'auto',
       },
       sending: {
         opacity: 1,

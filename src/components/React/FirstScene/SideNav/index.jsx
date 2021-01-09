@@ -39,7 +39,7 @@ const SideNav = ({
       width: '100%',
       backgroundColor: '#9489DE',
       textDecoration: showCredits ? 'underline' : 'underline solid transparent',
-      padding: '15px',
+      padding: '0 15px 15px 15px',
       fontSize: '10px',
       textTransform: 'uppercase',
       fontFamily: 'Helvetica Neue LT W05_75 Bold',
