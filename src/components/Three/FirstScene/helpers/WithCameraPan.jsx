@@ -27,10 +27,6 @@ const WithCameraPan = () => {
       setMouse(new THREE.Vector2(windowHalf.x - event.clientX, windowHalf.y - event.clientY))
     }
 
-    const onTouchMove = event => {
-      setMouse(new THREE.Vector2(windowHalf.x - event.clientX, windowHalf.y - event.clientY))
-    }
-
     const onResize = event => {
       const width = window.innerWidth
       const height = window.innerHeight
@@ -38,7 +34,6 @@ const WithCameraPan = () => {
     }
 
     document.addEventListener('mousemove', onMouseMove, false)
-    document.addEventListener('touchmove', onTouchMove, false)
     window.addEventListener('resize', onResize, false)
   }, [])
 
