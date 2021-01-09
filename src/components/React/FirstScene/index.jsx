@@ -60,8 +60,8 @@ const FirstScene = ({ isLoading }) => {
     window.location.pathname === '/subscribed',
   )
 
-  const [open, setOpen] = useState(false)
-  const [selectedIndex, setSelectedIndex] = useState(0)
+  const [open, setOpen] = useState(true)
+  const [selectedIndex, setSelectedIndex] = useState(2)
   const [showCredits, setShowCredits] = useState(false)
 
   useEffect(() => {

@@ -1,5 +1,6 @@
 import React, { useState, Fragment } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
+import classnames from 'classnames'
 import Zoom from '@material-ui/core/Zoom'
 import { connect } from 'react-redux'
 import MailchimpSubscribe from 'react-mailchimp-subscribe'
@@ -55,12 +56,14 @@ const SubscribeForm = props => {
 
   const useStyles = makeStyles(theme => {
     const rootStatusStyles = {
+      top: '1px',
       position: 'absolute',
       textOverflow: 'ellipsis',
       overflow: 'hidden',
       whiteSpace: 'nowrap',
       width: '95%',
       fontSize: '10px',
+      margin: 'auto',
     }
 
     return {
@@ -84,7 +87,7 @@ const SubscribeForm = props => {
         fontWeight: 700,
         margin: '5px',
         height: 'calc(100% - 10px)',
-        width: status === 'sent' ? 'calc(100% - 10px)' : '25%',
+        width: status === 'sent' ? 'calc(100% - 10px)' : '73px',
         padding: '0 4%',
         position: 'absolute',
         right: 0,
@@ -162,18 +165,37 @@ const SubscribeForm = props => {
       pending: {
         opacity: status === 'pending' ? 1 : 0,
         ...rootStatusStyles,
+        width: 'auto',
       },
-      sent: {
-        opacity: 0,
+      sending: {
+        opacity: 1,
+        transform: 'translateY(0)',
+        transition: 'opacity 0.3s ease, transform 0.3s ease',
         ...rootStatusStyles,
+      },
+      sendingDone: {
+        opacity: '0 !important',
+        transform: 'translateY(-10px) !important',
       },
       success: {
         opacity: 0,
+        transform: 'translateY(10px)',
+        transition: 'opacity 0.3s ease, transform 0.3s ease',
         ...rootStatusStyles,
+      },
+      successDone: {
+        opacity: '1 !important',
+        transform: 'translateY(0) !important',
       },
       error: {
         opacity: 0,
+        transform: 'translateY(10px)',
+        transition: 'opacity 0.3s ease, transform 0.3s ease',
         ...rootStatusStyles,
+      },
+      errorDone: {
+        opacity: '1 !important',
+        transform: 'translateY(0) !important',
       },
     }
   })
@@ -191,6 +213,8 @@ const SubscribeForm = props => {
       return 'Something went wrong..'
     }
   }
+
+  const timeout = { appear: 300, enter: 1000, exit: 0 }
 
   return (
     <MailchimpSubscribe
@@ -218,10 +242,36 @@ const SubscribeForm = props => {
                 name="subscribe"
                 className={classes.newsletterSubmit}
               >
-                <div className={classes.pending}>{getButtonText(null)}</div>
-                <div className={classes.sent}>{getButtonText('sending')}</div>
-                <div className={classes.success}>{getButtonText('success')}</div>
-                <div className={classes.error}>{getButtonText('error')}</div>
+                {status === null ? (
+                  <div className={classes.pending}>{getButtonText(null)}</div>
+                ) : (
+                  <Fragment>
+                    <div
+                      className={classnames({
+                        [classes.sending]: true,
+                        [classes.sendingDone]: status !== 'sending',
+                      })}
+                    >
+                      {getButtonText('sending')}
+                    </div>
+                    <div
+                      className={classnames({
+                        [classes.success]: true,
+                        [classes.successDone]: status === 'success',
+                      })}
+                    >
+                      {getButtonText('success')}
+                    </div>
+                    <div
+                      className={classnames({
+                        [classes.error]: true,
+                        [classes.errorDone]: status === 'error',
+                      })}
+                    >
+                      {getButtonText('error')}
+                    </div>
+                  </Fragment>
+                )}
               </div>
             </Zoom>
           </div>
