@@ -22,7 +22,6 @@ const SideNav = ({
       minWidth: '400px',
       maxWidth: '600px',
       overflowX: 'hidden',
-      height: '100%',
       display: 'flex',
       flexDirection: 'column',
       [theme.breakpoints.down('xs')]: {
