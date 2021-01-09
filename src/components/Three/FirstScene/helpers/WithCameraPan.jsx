@@ -1,12 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 
 import { useThree, useFrame } from 'react-three-fiber'
-import { OrbitControls } from 'drei'
 import * as THREE from 'three'
 
 const WithCameraPan = () => {
-  const orbitRef = useRef()
-
   const { camera, scene } = useThree()
 
   let [mouse, setMouse] = useState(new THREE.Vector2())
@@ -30,6 +27,10 @@ const WithCameraPan = () => {
       setMouse(new THREE.Vector2(windowHalf.x - event.clientX, windowHalf.y - event.clientY))
     }
 
+    const onTouchMove = event => {
+      setMouse(new THREE.Vector2(windowHalf.x - event.clientX, windowHalf.y - event.clientY))
+    }
+
     const onResize = event => {
       const width = window.innerWidth
       const height = window.innerHeight
@@ -37,6 +38,7 @@ const WithCameraPan = () => {
     }
 
     document.addEventListener('mousemove', onMouseMove, false)
+    document.addEventListener('touchmove', onTouchMove, false)
     window.addEventListener('resize', onResize, false)
   }, [])
 

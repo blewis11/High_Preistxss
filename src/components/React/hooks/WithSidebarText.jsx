@@ -7,7 +7,7 @@ const WithSidebarText = props => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(`http://46.101.9.88/api/texts`)
+      const response = await fetch(`http://138.68.65.237/api/texts`)
       const data = await response.json()
 
       const subscriptionText = data.filter(text => text.name === 'SubscriptionInfo')

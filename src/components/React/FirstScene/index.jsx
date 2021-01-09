@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
-import Fade from '@material-ui/core/Fade'
 
 import { Loader } from './Loader/index.jsx'
 import WithSidebarText from '../hooks/WithSidebarText.jsx'
@@ -22,7 +21,7 @@ const useStyles = makeStyles({
     alignItems: 'center',
   },
   credits: {
-    color: '#fff8de',
+    color: '#ffffff',
     filter: 'drop-shadow(0 0 2px #F4FBFF)',
     textDecoration: 'underline solid transparent',
     padding: '15px',
@@ -42,7 +41,6 @@ const useStyles = makeStyles({
 })
 
 const LoaderContainer = ({ showLoader }) => {
-  const classes = useStyles()
   const [hideLoader, setHideLoader] = useState(false)
 
   // TODO: figure out graceful solution, for some reason even when showLoader is false - this renders buttons unclickable (overlay somehow stays present)
