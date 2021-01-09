@@ -23,6 +23,8 @@ const SideNav = ({
       maxWidth: '600px',
       overflowX: 'hidden',
       height: '100%',
+      display: 'flex',
+      flexDirection: 'column',
       [theme.breakpoints.down('xs')]: {
         width: '100vw',
         minWidth: '100vw',
@@ -34,6 +36,8 @@ const SideNav = ({
       boxShadow: 'none',
     },
     credits: {
+      width: '100%',
+      backgroundColor: '#9489DE',
       textDecoration: showCredits ? 'underline' : 'underline solid transparent',
       padding: '15px',
       fontSize: '10px',
@@ -41,8 +45,7 @@ const SideNav = ({
       fontFamily: 'Helvetica Neue LT W05_75 Bold',
       letterSpacing: '0.06em',
       lineHeight: 1,
-      position: 'absolute',
-      bottom: '5px',
+      marginTop: 'auto',
       cursor: 'pointer',
       transition: 'text-decoration 0.3s ease',
       '&:hover': {
@@ -114,9 +117,9 @@ const SideNav = ({
               <NavContents selectedIndex={selectedIndex} inSubscribedState={inSubscribedState} />
             </>
           )}
-        </div>
-        <div className={classes.credits} onClick={onClickCredits}>
-          CREDITS
+          <div className={classes.credits} onClick={onClickCredits}>
+            CREDITS
+          </div>
         </div>
       </Drawer>
     </Fragment>
