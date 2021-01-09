@@ -117,9 +117,9 @@ const SideNav = ({
               <NavContents selectedIndex={selectedIndex} inSubscribedState={inSubscribedState} />
             </>
           )}
-          <div className={classes.credits} onClick={onClickCredits}>
+          {/* <div className={classes.credits} onClick={onClickCredits}>
             CREDITS
-          </div>
+          </div> */}
         </div>
       </Drawer>
     </Fragment>
