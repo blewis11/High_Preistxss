@@ -1,5 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
+import { connect } from 'react-redux'
 
 const useStyles = makeStyles({
   container: {
@@ -30,18 +31,18 @@ const useStyles = makeStyles({
   },
 })
 
-const Credits = () => {
+const Credits = ({ credits }) => {
   const classes = useStyles()
 
   return (
     <div className={classes.container}>
       <div>Founders</div>
       <div>
-        <a className={classes.link} href="#">
+        <a className={classes.link} href={credits['claire']} target="_blank">
           Claire Yurika Davis
         </a>{' '}
         <b>&</b>{' '}
-        <a className={classes.link} href="#">
+        <a className={classes.link} href={credits['portia']} target="_blank">
           Portia Williams
         </a>
       </div>
@@ -49,7 +50,7 @@ const Credits = () => {
 
       <div>Creative and Art Direction</div>
       <div>
-        <a className={classes.link} href="#">
+        <a className={classes.link} href={credits['chau']} target="_blank">
           Chau Luong
         </a>
       </div>
@@ -57,7 +58,7 @@ const Credits = () => {
 
       <div>Art Direction & Graphic Design</div>
       <div>
-        <a className={classes.link} href="#">
+        <a className={classes.link} href={credits['sven']} target="_blank">
           Sven Herkt
         </a>
       </div>
@@ -65,7 +66,7 @@ const Credits = () => {
 
       <div>3D Artist</div>
       <div>
-        <a className={classes.link} href="#">
+        <a className={classes.link} href={credits['sarah']} target="_blank">
           Sarah Ann Banks
         </a>
       </div>
@@ -73,7 +74,7 @@ const Credits = () => {
 
       <div>Development</div>
       <div>
-        <a className={classes.link} href="#">
+        <a className={classes.link} href={credits['bejal']} target="_blank">
           Bejal Lewis
         </a>
       </div>
@@ -81,4 +82,10 @@ const Credits = () => {
   )
 }
 
-export { Credits }
+const mapStateToProps = state => {
+  return {
+    credits: state.text.credits,
+  }
+}
+
+export default connect(mapStateToProps)(Credits)

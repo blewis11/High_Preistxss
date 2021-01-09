@@ -4,7 +4,7 @@ import Drawer from '@material-ui/core/Drawer'
 
 import { TopNavButtons } from '../TopNavButtons'
 import NavContents from './NavContents'
-import { Credits } from './Credits'
+import Credits from './Credits'
 
 const SideNav = ({
   open,

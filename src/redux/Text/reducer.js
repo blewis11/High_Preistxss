@@ -1,10 +1,22 @@
-import { SET_SUBSCRIPTION_TEXT, SET_INFO_TEXT } from './types'
+import {
+  SET_SUBSCRIPTION_TEXT,
+  SET_INFO_TEXT,
+  SET_SUBSCRIBE_SUCCESS_TEXT,
+  SET_CREDIT_LINKS,
+} from './types'
 
 const INITIAL_STATE = {
   informationText: '',
   subscriptionText: '',
-  chauCreditLink: '',
-  
+  successfullySubscribed: '',
+  credits: {
+    chau: '',
+    sven: '',
+    bejal: '',
+    sarah: '',
+    claire: '',
+    portia: '',
+  },
 }
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -19,7 +31,19 @@ const reducer = (state = INITIAL_STATE, action) => {
         ...state,
         subscriptionText: action.payload,
       }
-
+    case SET_SUBSCRIBE_SUCCESS_TEXT:
+      return {
+        ...state,
+        successfullySubscribed: action.payload,
+      }
+    case SET_CREDIT_LINKS:
+      return {
+        ...state,
+        credits: {
+          ...state.credits,
+          ...action.payload,
+        },
+      }
     default:
       return state
   }

@@ -292,10 +292,10 @@ const SubscribeForm = props => {
   )
 }
 
-const SubscribedSection = () => {
+const SubscribedSection = ({ successfullySubscribedText }) => {
   const classes = useStyles()
 
-  return <div className={classes.text}>Successfully Subscribed!</div>
+  return <div className={classes.text}>{successfullySubscribedText}</div>
 }
 
 const SubscriptionSection = props => {
@@ -318,14 +318,22 @@ const InformationSection = props => {
   return <div className={classes.text} dangerouslySetInnerHTML={getMarkdownText(informationText)} />
 }
 
-const NavContents = ({ informationText, subscriptionText, selectedIndex, inSubscribedState }) => {
+const NavContents = ({
+  informationText,
+  subscriptionText,
+  selectedIndex,
+  inSubscribedState,
+  successfullySubscribedText,
+}) => {
   const classes = useStyles()
 
   return (
     <div className={classes.container}>
       {selectedIndex === 1 && <InformationSection informationText={informationText} />}
       {selectedIndex === 2 && <SubscriptionSection subscriptionText={subscriptionText} />}
-      {inSubscribedState && <SubscribedSection />}
+      {inSubscribedState && (
+        <SubscribedSection successfullySubscribedText={successfullySubscribedText} />
+      )}
     </div>
   )
 }
@@ -334,6 +342,7 @@ const mapStateToProps = state => {
   return {
     informationText: state.text.informationText,
     subscriptionText: state.text.subscriptionText,
+    successfullySubscribedText: state.text.successfullySubscribed,
   }
 }
 
