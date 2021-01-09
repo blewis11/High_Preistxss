@@ -9,7 +9,7 @@ const SkyBox = ({ skyboxHeight }) => {
   for (let i = 0; i < 6; i++)
     materialArray.push(
       new THREE.MeshLambertMaterial({
-        map: THREE.ImageUtils.loadTexture('scene1_backgroundv3/' + directions[i]),
+        map: THREE.ImageUtils.loadTexture('scene1_backgroundv4/' + directions[i]),
         side: THREE.BackSide,
       }),
     )
