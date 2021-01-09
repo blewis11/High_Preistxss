@@ -43,12 +43,12 @@ const Credits = ({ credits }) => {
         </a>{' '}
         <b>&</b>{' '}
         <a className={classes.link} href={credits['portia']} target="_blank">
-          Portia Williams
+          Portia Ferrari
         </a>
       </div>
       <br />
 
-      <div>Creative and Art Direction</div>
+      <div>Creative & Art Direction</div>
       <div>
         <a className={classes.link} href={credits['chau']} target="_blank">
           Chau Luong

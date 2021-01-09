@@ -3,6 +3,7 @@ import {
   SET_SUBSCRIPTION_TEXT,
   SET_SUBSCRIBE_SUCCESS_TEXT,
   SET_CREDIT_LINKS,
+  SET_BUTTONS_TEXT,
 } from './types'
 
 export const setInformationText = payload => {
@@ -29,6 +30,13 @@ export const setSuccessfullySubscribedText = payload => {
 export const setCreditLinks = payload => {
   return {
     type: SET_CREDIT_LINKS,
+    payload,
+  }
+}
+
+export const setButtonsText = payload => {
+  return {
+    type: SET_BUTTONS_TEXT,
     payload,
   }
 }

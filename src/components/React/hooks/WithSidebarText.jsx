@@ -5,6 +5,7 @@ import {
   setInformationText,
   setSuccessfullySubscribedText,
   setCreditLinks,
+  setButtonsText,
 } from '../../../redux/Text/actions'
 
 const WithSidebarText = props => {
@@ -13,12 +14,36 @@ const WithSidebarText = props => {
     setInformationText,
     setSuccessfullySubscribedText,
     setCreditLinks,
+    setButtonsText,
   } = props
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(`http://46.101.9.88/api/texts`)
+      const responseButtons = await fetch(`http://46.101.9.88/api/buttons`)
       const data = await response.json()
+      const buttons = await responseButtons.json()
+      
+      const buttonsText = {}
+
+      const subscribeButtonText = buttons.filter(button => button.name === 'Subscribe')
+      const instagramButtonText = buttons.filter(button => button.name === 'Instagram')
+      const informationButtonText = buttons.filter(button => button.name === 'Information')
+
+      if (subscribeButtonText.length) {
+        buttonsText['subscribe'] = subscribeButtonText[0].value
+      }
+
+      if (instagramButtonText.length) {
+        buttonsText['instagram'] = instagramButtonText[0].value
+      }
+
+      if (informationButtonText.length) {
+        buttonsText['information'] = informationButtonText[0].value
+      }
+
+      console.log({ buttonsText })
+      setButtonsText(buttonsText)
 
       const subscriptionText = data.filter(text => text.name === 'SubscriptionInfo')
       const informationText = data.filter(text => text.name === 'Information')
@@ -78,6 +103,9 @@ const mapDispatchToProps = dispatch => ({
   },
   setCreditLinks: credits => {
     dispatch(setCreditLinks(credits))
+  },
+  setButtonsText: buttons => {
+    dispatch(setButtonsText(buttons))
   },
 })
 

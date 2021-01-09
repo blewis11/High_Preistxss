@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import clsx from 'clsx'
 import { makeStyles } from '@material-ui/core/styles'
@@ -11,6 +12,7 @@ const TopNavButtons = ({
   showClose,
   closeButtonHandler,
   selectedIndex,
+  buttons,
 }) => {
   const useStyles = makeStyles(theme => {
     const onHover = showClose
@@ -46,7 +48,7 @@ const TopNavButtons = ({
         display: 'flex',
         flexDirection: 'row',
         padding: '15px',
-        width: '100vw',
+        width: showClose ? '100%' : '100vw',
         [theme.breakpoints.down('xs')]: {
           flexDirection: 'column',
           justifyContent: 'center',
@@ -73,13 +75,13 @@ const TopNavButtons = ({
         },
       },
       closeButtonContainer: {
-        position: 'absolute',
+        marginLeft: 'auto',
         right: '15px',
 
         [theme.breakpoints.down('xs')]: {
           position: 'static',
-          width: '100vw',
-          padding: '5px 15px 5px 15px',
+          width: '100%',
+          paddingTop: '5px',
         },
       },
       closeButton: {
@@ -119,6 +121,7 @@ const TopNavButtons = ({
           instagramButtonHandler={instagramButtonHandler}
           closeButtonHandler={closeButtonHandler}
           showClose={showClose}
+          buttons={buttons}
         />
       </div>
     </Fragment>
@@ -133,6 +136,7 @@ const AllButtons = ({
   instagramButtonHandler,
   closeButtonHandler,
   showClose,
+  buttons,
 }) => {
   return (
     <Fragment>
@@ -150,7 +154,7 @@ const AllButtons = ({
           }}
           variant="outlined"
         >
-          INFORMATION
+          {buttons.information}
         </Button>
       </div>
       <div
@@ -167,7 +171,7 @@ const AllButtons = ({
           }}
           variant="outlined"
         >
-          SUBSCRIBE
+          {buttons.subscribe}
         </Button>
       </div>
       <div className={clsx(classes.buttonContainer, classes.instagramButton)}>
@@ -177,7 +181,7 @@ const AllButtons = ({
           classes={{ root: classes.root }}
           variant="outlined"
         >
-          INSTAGRAM
+          {buttons.instagram}
         </Button>
       </div>
       {showClose && (
@@ -195,4 +199,10 @@ const AllButtons = ({
   )
 }
 
-export { TopNavButtons }
+const mapStateToProps = state => {
+  return {
+    buttons: state.text.buttons,
+  }
+}
+
+export default connect(mapStateToProps)(TopNavButtons)

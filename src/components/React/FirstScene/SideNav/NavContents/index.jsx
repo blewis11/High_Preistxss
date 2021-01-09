@@ -11,8 +11,6 @@ const useStyles = makeStyles({
   container: {
     padding: '15px',
     lineHeight: '1.875',
-    display: 'flex',
-    flexDirection: 'column',
   },
   text: {
     fontFamily: 'Helvetica Neue LT W05_55 Roman',

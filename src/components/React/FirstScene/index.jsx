@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 
 import { Loader } from './Loader/index.jsx'
 import WithSidebarText from '../hooks/WithSidebarText.jsx'
-import { TopNavButtons } from './TopNavButtons'
+import TopNavButtons from './TopNavButtons'
 import { SideNav } from './SideNav'
 import { Logo } from './Logo'
 

@@ -3,6 +3,7 @@ import {
   SET_INFO_TEXT,
   SET_SUBSCRIBE_SUCCESS_TEXT,
   SET_CREDIT_LINKS,
+  SET_BUTTONS_TEXT,
 } from './types'
 
 const INITIAL_STATE = {
@@ -16,6 +17,11 @@ const INITIAL_STATE = {
     sarah: '',
     claire: '',
     portia: '',
+  },
+  buttons: {
+    subscribe: '',
+    information: '',
+    instagram: '',
   },
 }
 
@@ -35,6 +41,14 @@ const reducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         successfullySubscribed: action.payload,
+      }
+    case SET_BUTTONS_TEXT:
+      return {
+        ...state,
+        buttons: {
+          ...state.buttons,
+          ...action.payload,
+        },
       }
     case SET_CREDIT_LINKS:
       return {
