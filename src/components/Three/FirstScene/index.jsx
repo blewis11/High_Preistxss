@@ -133,6 +133,23 @@ const FlowersAndHills = ({ data }) => {
         />
 
         {/* fourth flower */}
+        <PointLight state={{ color: 'red', position: [-54, 2, 8], intensity: 1, distance: 25 }} />
+        <Flower
+          debug={'debug'}
+          state={{
+            positionX: -45,
+            positionY: -4,
+            positionZ: 4,
+            rotationX: -6,
+            rotationY: 2.3,
+            rotationZ: -0.2,
+            scale: 0.17,
+          }}
+          speed={0.007}
+          newFlower={useFBXLoader('flowers/1621FlowerTest(Blender).fbx')}
+        />
+
+        {/* fifth flower */}
         <PointLight
           state={{
             color: 0xb22121,
@@ -153,22 +170,6 @@ const FlowersAndHills = ({ data }) => {
           }}
           speed={0.003}
           newFlower={useFBXLoader('flowers/1621FlowerTest(Blender)4.fbx')}
-        />
-
-        {/* fifth flower */}
-        <PointLight state={{ color: 'red', position: [-54, 2, 8], intensity: 1, distance: 25 }} />
-        <Flower
-          debug={'debug'}
-          state={{
-            positionX: -45,
-            positionY: -3,
-            positionZ: 8,
-            rotationX: -6,
-            rotationY: 2.9,
-            rotationZ: -0.2,
-            scale: 0.17,
-          }}
-          newFlower={useFBXLoader('flowers/1621FlowerTest(Blender).fbx')}
         />
 
         {/* sixth flower */}
