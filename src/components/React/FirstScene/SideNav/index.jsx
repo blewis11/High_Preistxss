@@ -25,7 +25,6 @@ const SideNav = ({
       height: '100%',
       display: 'flex',
       flexDirection: 'column',
-      padding: '15px',
       [theme.breakpoints.down('xs')]: {
         width: '100vw',
         minWidth: '100vw',
@@ -40,6 +39,7 @@ const SideNav = ({
       width: '100%',
       backgroundColor: '#9489DE',
       textDecoration: showCredits ? 'underline' : 'underline solid transparent',
+      padding: '0 15px 15px 15px',
       fontSize: '10px',
       textTransform: 'uppercase',
       fontFamily: 'Helvetica Neue LT W05_75 Bold',
