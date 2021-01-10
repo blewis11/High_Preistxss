@@ -17,7 +17,9 @@ const SideNav = ({
   setShowCredits,
 }) => {
   const useStyles = makeStyles(theme => ({
-    innerDrawer: {
+    paper: {
+      backgroundColor: '#9489DE',
+      boxShadow: 'none',
       width: '31.25vw',
       minWidth: '400px',
       maxWidth: '600px',
@@ -30,10 +32,6 @@ const SideNav = ({
         minWidth: '100vw',
         maxWidth: '100vw',
       },
-    },
-    paper: {
-      backgroundColor: '#9489DE',
-      boxShadow: 'none',
     },
     credits: {
       width: '100%',
@@ -100,26 +98,24 @@ const SideNav = ({
         BackdropProps={{ invisible: true }}
         classes={{ paper: classes.paper }}
       >
-        <div className={classes.innerDrawer}>
-          <TopNavButtons
-            buttonColor={'#121212'}
-            showClose
-            closeButtonHandler={onClose}
-            informationButtonHandler={informationHandler}
-            subscriptionButtonHandler={subscriptionHandler}
-            selectedIndex={selectedIndex}
-            inSubscribedState={inSubscribedState}
-          />
-          {showCredits ? (
-            <Credits />
-          ) : (
-            <>
-              <NavContents selectedIndex={selectedIndex} inSubscribedState={inSubscribedState} />
-            </>
-          )}
-          <div className={classes.credits} onClick={onClickCredits}>
-            CREDITS
-          </div>
+        <TopNavButtons
+          buttonColor={'#121212'}
+          showClose
+          closeButtonHandler={onClose}
+          informationButtonHandler={informationHandler}
+          subscriptionButtonHandler={subscriptionHandler}
+          selectedIndex={selectedIndex}
+          inSubscribedState={inSubscribedState}
+        />
+        {showCredits ? (
+          <Credits />
+        ) : (
+          <>
+            <NavContents selectedIndex={selectedIndex} inSubscribedState={inSubscribedState} />
+          </>
+        )}
+        <div className={classes.credits} onClick={onClickCredits}>
+          CREDITS
         </div>
       </Drawer>
     </Fragment>
