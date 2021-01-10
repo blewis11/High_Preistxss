@@ -25,6 +25,7 @@ const SideNav = ({
       height: '100%',
       display: 'flex',
       flexDirection: 'column',
+      justifyContent: 'flex-start',
       [theme.breakpoints.down('xs')]: {
         width: '100vw',
         minWidth: '100vw',

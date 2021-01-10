@@ -118,7 +118,7 @@ const SubscribeForm = props => {
         textOverflow: 'ellipsis',
         whiteSpace: 'nowrap',
         width: '100%',
-        top: 0 /* Important for positioning in Center */,
+        top: '25px' /* Important for positioning in Center */,
         left: 0 /* Important for positioning in Center */,
         boxSizing: 'border-box',
         position: 'absolute',
