@@ -22,7 +22,9 @@ const SideNav = ({
       minWidth: '400px',
       maxWidth: '600px',
       overflowX: 'hidden',
-      overflowY: 'scroll',
+      height: '100%',
+      display: 'flex',
+      flexDirection: 'column',
       [theme.breakpoints.down('xs')]: {
         width: '100vw',
         minWidth: '100vw',
@@ -115,9 +117,9 @@ const SideNav = ({
               <NavContents selectedIndex={selectedIndex} inSubscribedState={inSubscribedState} />
             </>
           )}
-          <div className={classes.credits} onClick={onClickCredits}>
+          {/* <div className={classes.credits} onClick={onClickCredits}>
             CREDITS
-          </div>
+          </div> */}
         </div>
       </Drawer>
     </Fragment>

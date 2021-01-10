@@ -229,7 +229,7 @@ const SubscribeForm = props => {
               onKeyDown={e => {
                 if (e.key === 'Enter') callSubscribe(subscribe)
               }}
-              placeholder="SIGN UP TO GET ACCESS"
+              placeholder="mail@domain.com"
             />
             <Zoom in={validEmail}>
               <div
