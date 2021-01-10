@@ -51,8 +51,7 @@ const TopNavButtons = ({
         width: showClose ? '100%' : '100vw',
         [theme.breakpoints.down('xs')]: {
           flexDirection: 'column',
-          // justifyContent: 'flex-start',
-          justifyContent: 'center',
+          justifyContent: 'flex-start',
           alignItems: 'center',
         },
       },
