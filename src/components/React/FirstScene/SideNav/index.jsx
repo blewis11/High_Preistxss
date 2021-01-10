@@ -110,13 +110,15 @@ const SideNav = ({
             selectedIndex={selectedIndex}
             inSubscribedState={inSubscribedState}
           />
-          {showCredits ? (
-            <Credits />
-          ) : (
-            <>
-              <NavContents selectedIndex={selectedIndex} inSubscribedState={inSubscribedState} />
-            </>
-          )}
+          <div>
+            {showCredits ? (
+              <Credits />
+            ) : (
+              <>
+                <NavContents selectedIndex={selectedIndex} inSubscribedState={inSubscribedState} />
+              </>
+            )}
+          </div>
           <div className={classes.credits} onClick={onClickCredits}>
             CREDITS
           </div>
