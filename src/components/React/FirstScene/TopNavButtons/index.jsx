@@ -45,7 +45,6 @@ const TopNavButtons = ({
 
     return {
       buttonsContainer: {
-        marginTop: 'auto',
         display: 'flex',
         flexDirection: 'row',
         padding: '15px',
