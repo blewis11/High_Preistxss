@@ -12,7 +12,6 @@ const App = props => {
         <div className="main">
           <FirstSceneReact />
           <div id="hueOverlay" />
-          <div className="loader-noise" />
           <FirstSceneThree store={props.store} />
         </div>
       </Suspense>

@@ -7,6 +7,7 @@ import WithSidebarText from '../hooks/WithSidebarText.jsx'
 import TopNavButtons from './TopNavButtons'
 import { SideNav } from './SideNav'
 import { Logo } from './Logo'
+import { WithNoise } from './Noise/index.jsx'
 
 const useStyles = makeStyles({
   loaderContainer: {
@@ -52,7 +53,7 @@ const LoaderContainer = ({ showLoader }) => {
     }
   }, [showLoader])
 
-  return hideLoader ? <div /> : <Loader isLoaded={!showLoader} />
+  return hideLoader ? <div /> : <Loader isLoaded={!true} />
 }
 
 const FirstScene = ({ isLoading }) => {
@@ -97,6 +98,7 @@ const FirstScene = ({ isLoading }) => {
 
   return (
     <div className="sidebarContainer">
+      <WithNoise />
       <WithSidebarText />
       <LoaderContainer showLoader={isLoading} />
 
