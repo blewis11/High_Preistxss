@@ -11,7 +11,7 @@ const useStyles = makeStyles({
   container: {
     padding: '15px',
     lineHeight: '1.875',
-    display: 'flex',
+    flex: '1 0 auto',
     flexDirection: 'column',
   },
   text: {
@@ -216,7 +216,7 @@ const SubscribeForm = props => {
 
   return (
     <MailchimpSubscribe
-      url="https://hotmail.us7.list-manage.com/subscribe/post?u=64d719b099a1f7d2780a263f4&amp;id=86753ee802"
+      url="https://thehighpriestxss.us7.list-manage.com/subscribe/post?u=55503faf011da24b14c76cbea&amp;id=2dee189105"
       render={({ subscribe, status, message }) => (
         <Fragment>
           <div className={classes.newsletterBox}>
@@ -231,7 +231,7 @@ const SubscribeForm = props => {
               onKeyDown={e => {
                 if (e.key === 'Enter') callSubscribe(subscribe)
               }}
-              placeholder="mail@domain.com"
+              placeholder="SIGN UP TO GET ACCESS"
             />
             <Zoom in={validEmail}>
               <div
