@@ -1,4 +1,5 @@
 /* LOADER */
+
 #loader-wrapper {
   position: fixed;
   top: 0;
@@ -25,139 +26,106 @@
 @-webkit-keyframes focusBlur {
   0% {
     filter: blur(5px);
-    transform: scale(1.1);
   }
   15% {
     filter: blur(3px);
-    transform: scale(1);
   }
   20% {
     filter: blur(5px);
-    transform: scale(1.1);
   }
   30% {
     filter: blur(1px);
-    transform: scale(0.8);
   }
   35% {
     filter: blur(3px);
-    transform: scale(1);
   }
   50% {
     filter: blur(5px);
-    transform: scale(1.1);
   }
   65% {
     filter: blur(4px);
-    transform: scale(1.05);
   }
   70% {
     filter: blur(5px);
-    transform: scale(1.1);
   }
   80% {
     filter: blur(1px);
-    transform: scale(0.8);
   }
   85% {
     filter: blur(3px);
-    transform: scale(1);
   }
   100% {
     filter: blur(5px);
-    transform: scale(1.1);
   }
 }
 @-moz-keyframes focusBlur {
   0% {
     filter: blur(5px);
-    transform: scale(1.1);
   }
   15% {
     filter: blur(3px);
-    transform: scale(1);
   }
   20% {
     filter: blur(5px);
-    transform: scale(1.1);
   }
   30% {
     filter: blur(1px);
-    transform: scale(0.8);
   }
   35% {
     filter: blur(3px);
-    transform: scale(1);
   }
   50% {
     filter: blur(5px);
-    transform: scale(1.1);
   }
   65% {
     filter: blur(4px);
-    transform: scale(1.05);
   }
   70% {
     filter: blur(5px);
-    transform: scale(1.1);
   }
   80% {
     filter: blur(1px);
-    transform: scale(0.8);
   }
   85% {
     filter: blur(3px);
-    transform: scale(1);
   }
   100% {
     filter: blur(5px);
-    transform: scale(1.1);
   }
 }
 @keyframes focusBlur {
   0% {
     filter: blur(5px);
-    transform: scale(1.1);
   }
   15% {
     filter: blur(3px);
-    transform: scale(1);
   }
   20% {
     filter: blur(5px);
-    transform: scale(1.1);
   }
   30% {
     filter: blur(1px);
-    transform: scale(0.8);
   }
   35% {
     filter: blur(3px);
-    transform: scale(1);
   }
   50% {
     filter: blur(5px);
-    transform: scale(1.1);
   }
   65% {
     filter: blur(4px);
-    transform: scale(1.05);
   }
   70% {
     filter: blur(5px);
-    transform: scale(1.1);
   }
   80% {
     filter: blur(1px);
-    transform: scale(0.8);
   }
   85% {
     filter: blur(3px);
-    transform: scale(1);
   }
   100% {
     filter: blur(5px);
-    transform: scale(1.1);
   }
 }
 
@@ -187,7 +155,10 @@
 }
 
 #THP_Logo {
-  fill: #9489dd;
+  fill: #ffffff;
+  stroke: #6953ff;
+  stroke-width: 0.5px;
+  filter: drop-shadow(0 0 4px #6953ff);
 }
 
 /* LOADED ANIMATION */
@@ -334,139 +305,106 @@
   @-webkit-keyframes focusBlur {
     0% {
       filter: blur(5px);
-      transform: scale(1.001);
     }
     15% {
       filter: blur(3px);
-      transform: scale(1);
     }
     20% {
       filter: blur(5px);
-      transform: scale(1.001);
     }
     30% {
       filter: blur(1px);
-      transform: scale(0.998);
     }
     35% {
       filter: blur(3px);
-      transform: scale(1);
     }
     50% {
       filter: blur(5px);
-      transform: scale(1.001);
     }
     65% {
       filter: blur(4px);
-      transform: scale(1.0005);
     }
     70% {
       filter: blur(5px);
-      transform: scale(1.001);
     }
     80% {
       filter: blur(1px);
-      transform: scale(0.998);
     }
     85% {
       filter: blur(3px);
-      transform: scale(1);
     }
     100% {
       filter: blur(5px);
-      transform: scale(1.001);
     }
   }
   @-moz-keyframes focusBlur {
     0% {
       filter: blur(5px);
-      transform: scale(1.001);
     }
     15% {
       filter: blur(3px);
-      transform: scale(1);
     }
     20% {
       filter: blur(5px);
-      transform: scale(1.001);
     }
     30% {
       filter: blur(1px);
-      transform: scale(0.998);
     }
     35% {
       filter: blur(3px);
-      transform: scale(1);
     }
     50% {
       filter: blur(5px);
-      transform: scale(1.001);
     }
     65% {
       filter: blur(4px);
-      transform: scale(1.0005);
     }
     70% {
       filter: blur(5px);
-      transform: scale(1.001);
     }
     80% {
       filter: blur(1px);
-      transform: scale(0.998);
     }
     85% {
       filter: blur(3px);
-      transform: scale(1);
     }
     100% {
       filter: blur(5px);
-      transform: scale(1.001);
     }
   }
   @keyframes focusBlur {
     0% {
       filter: blur(5px);
-      transform: scale(1.001);
     }
     15% {
       filter: blur(3px);
-      transform: scale(1);
     }
     20% {
       filter: blur(5px);
-      transform: scale(1.001);
     }
     30% {
       filter: blur(1px);
-      transform: scale(0.998);
     }
     35% {
       filter: blur(3px);
-      transform: scale(1);
     }
     50% {
       filter: blur(5px);
-      transform: scale(1.001);
     }
     65% {
       filter: blur(4px);
-      transform: scale(1.0005);
     }
     70% {
       filter: blur(5px);
-      transform: scale(1.001);
     }
     80% {
       filter: blur(1px);
-      transform: scale(0.998);
     }
     85% {
       filter: blur(3px);
-      transform: scale(1);
     }
     100% {
       filter: blur(5px);
-      transform: scale(1.001);
     }
   }
 }

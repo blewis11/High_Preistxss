@@ -53,7 +53,7 @@ const LoaderContainer = ({ showLoader }) => {
     }
   }, [showLoader])
 
-  return hideLoader ? <div /> : <Loader isLoaded={!true} />
+  return hideLoader ? <div /> : <Loader isLoaded={!showLoader} />
 }
 
 const FirstScene = ({ isLoading }) => {
