@@ -49,9 +49,11 @@ const TopNavButtons = ({
         flexDirection: 'row',
         padding: '15px',
         width: showClose ? '100%' : '100vw',
+        flexShrink: 0,
+        flexBasis: 'auto',
         [theme.breakpoints.down('xs')]: {
           flexDirection: 'column',
-          justifyContent: 'flex-start',
+          // justifyContent: 'center',
           alignItems: 'center',
         },
       },
