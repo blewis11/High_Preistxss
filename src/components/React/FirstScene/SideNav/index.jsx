@@ -17,19 +17,23 @@ const SideNav = ({
   setShowCredits,
 }) => {
   const useStyles = makeStyles(theme => ({
-    paper: {
-      backgroundColor: '#9489DE',
-      boxShadow: 'none',
+    innerDrawer: {
       width: '31.25vw',
       minWidth: '400px',
       maxWidth: '600px',
       overflowX: 'hidden',
       height: '100%',
+      display: 'flex',
+      flexDirection: 'column',
       [theme.breakpoints.down('xs')]: {
         width: '100vw',
         minWidth: '100vw',
         maxWidth: '100vw',
       },
+    },
+    paper: {
+      backgroundColor: '#9489DE',
+      boxShadow: 'none',
     },
     credits: {
       width: '100%',
@@ -96,24 +100,26 @@ const SideNav = ({
         BackdropProps={{ invisible: true }}
         classes={{ paper: classes.paper }}
       >
-        <TopNavButtons
-          buttonColor={'#121212'}
-          showClose
-          closeButtonHandler={onClose}
-          informationButtonHandler={informationHandler}
-          subscriptionButtonHandler={subscriptionHandler}
-          selectedIndex={selectedIndex}
-          inSubscribedState={inSubscribedState}
-        />
-        {showCredits ? (
-          <Credits />
-        ) : (
-          <>
-            <NavContents selectedIndex={selectedIndex} inSubscribedState={inSubscribedState} />
-          </>
-        )}
-        <div className={classes.credits} onClick={onClickCredits}>
-          CREDITS
+        <div className={classes.innerDrawer}>
+          <TopNavButtons
+            buttonColor={'#121212'}
+            showClose
+            closeButtonHandler={onClose}
+            informationButtonHandler={informationHandler}
+            subscriptionButtonHandler={subscriptionHandler}
+            selectedIndex={selectedIndex}
+            inSubscribedState={inSubscribedState}
+          />
+          {showCredits ? (
+            <Credits />
+          ) : (
+            <>
+              <NavContents selectedIndex={selectedIndex} inSubscribedState={inSubscribedState} />
+            </>
+          )}
+          <div className={classes.credits} onClick={onClickCredits}>
+            CREDITS
+          </div>
         </div>
       </Drawer>
     </Fragment>

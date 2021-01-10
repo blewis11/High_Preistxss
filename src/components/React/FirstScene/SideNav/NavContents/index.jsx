@@ -11,6 +11,8 @@ const useStyles = makeStyles({
   container: {
     padding: '15px',
     lineHeight: '1.875',
+    display: 'flex',
+    flexDirection: 'column',
   },
   text: {
     fontFamily: 'Helvetica Neue LT W05_55 Roman',
@@ -143,11 +145,11 @@ const SubscribeForm = props => {
         },
       },
       newsletterBox: {
-        width: '93%',
+        width: '100%',
         height: '32px',
         minHeight: '20px',
         maxHeight: '10vh',
-        position: 'absolute',
+        position: 'relative',
         borderRadius: '15px',
         [theme.breakpoints.down('xs')]: {
           width: 'calc(100vw - 30px)',
@@ -216,7 +218,7 @@ const SubscribeForm = props => {
     <MailchimpSubscribe
       url="https://hotmail.us7.list-manage.com/subscribe/post?u=64d719b099a1f7d2780a263f4&amp;id=86753ee802"
       render={({ subscribe, status, message }) => (
-        <div className={classes.customFormContainer}>
+        <Fragment>
           <div className={classes.newsletterBox}>
             <input
               onChange={onChange}
@@ -282,7 +284,7 @@ const SubscribeForm = props => {
               </div>
             )}
           </div>
-        </div>
+        </Fragment>
       )}
     />
   )
