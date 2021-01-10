@@ -91,7 +91,7 @@ const SubscribeForm = props => {
         width: status === 'sent' ? 'calc(100% - 10px)' : '73px',
         position: 'absolute',
         right: 0,
-        top: 0,
+        top: '25px',
         border: 0,
         boxSizing: 'border-box',
         borderRadius: '50px',
