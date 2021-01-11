@@ -39,7 +39,7 @@ const Credits = ({ credits }) => {
       <div>Founders</div>
       <div>
         <a className={classes.link} href={credits['claire']} target="_blank">
-          Claire Yurika Davis
+          Claire Yurika
         </a>{' '}
         <b>&</b>{' '}
         <a className={classes.link} href={credits['portia']} target="_blank">
