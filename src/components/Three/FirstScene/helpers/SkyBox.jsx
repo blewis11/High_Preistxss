@@ -6,13 +6,13 @@ const SkyBox = ({ skyboxHeight }) => {
   let skyGeometry = new THREE.CubeGeometry(skyboxHeight, skyboxHeight, skyboxHeight)
   let materialArray = []
 
-  for (let i = 0; i < 6; i++)
-    materialArray.push(
-      new THREE.MeshLambertMaterial({
-        map: THREE.ImageUtils.loadTexture('scene1_background/' + directions[i]),
-        side: THREE.BackSide,
-      }),
-    )
+  // for (let i = 0; i < 6; i++)
+  //   materialArray.push(
+  //     new THREE.MeshLambertMaterial({
+  //       map: THREE.ImageUtils.loadTexture('scene1_background/' + directions[i]),
+  //       side: THREE.BackSide,
+  //     }),
+  //   )
 
   let skyBox = new THREE.Mesh(skyGeometry, materialArray)
 

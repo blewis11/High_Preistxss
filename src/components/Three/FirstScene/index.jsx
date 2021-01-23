@@ -1,9 +1,13 @@
-import React, { Suspense, useState, useEffect, useRef } from 'react'
-import { Canvas, useThree } from 'react-three-fiber'
-import { useFBXLoader } from 'drei'
+import * as THREE from 'three'
+import React, { useRef, useState, useMemo, useEffect, Suspense } from 'react'
+import { Canvas, extend, useThree, useFrame, useResource } from 'react-three-fiber'
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
+import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass'
 import { Provider } from 'react-redux'
 
-import Effects from './Effect.jsx'
+import { useFBXLoader, OrbitControls } from 'drei'
+
 import Loader from './helpers/Loader'
 import { PointLight } from './helpers/PointLight.jsx'
 
@@ -11,6 +15,8 @@ import { GrassHill } from './Landscape/Grass'
 import { Flower } from './Landscape/Flower'
 import { SkyBox } from './helpers/SkyBox.jsx'
 import { WithCameraPan } from './helpers/WithCameraPan.jsx'
+
+extend({ EffectComposer, RenderPass, UnrealBloomPass })
 
 const getFOV = () => {
   let fov = 35
@@ -213,29 +219,82 @@ const FlowersAndHills = ({ data }) => {
   )
 }
 
+function Sphere({ geometry, x, y, z, s }) {
+  const ref = useRef()
+  useFrame(state => {
+    ref.current.position.x = x + Math.sin((state.clock.getElapsedTime() * s) / 2)
+    ref.current.position.y = y + Math.sin((state.clock.getElapsedTime() * s) / 2)
+    ref.current.position.z = z + Math.sin((state.clock.getElapsedTime() * s) / 2)
+  })
+  return (
+    <mesh ref={ref} position={[x, y, z]} scale={[s, s, s]} geometry={geometry}>
+      <meshStandardMaterial attach="material" color="hotpink" roughness={1} />
+    </mesh>
+  )
+}
+
+function RandomSpheres() {
+  const [geometry] = useState(() => new THREE.IcosahedronBufferGeometry(1, 4), [])
+  const data = useMemo(() => {
+    return new Array(15).fill().map((_, i) => ({
+      x: Math.random() * 100 - 50,
+      y: Math.random() * 100 - 50,
+      z: Math.random() * 100 - 50,
+      s: Math.random() + 10,
+    }))
+  }, [])
+  return data.map((props, i) => <Sphere key={i} {...props} geometry={geometry} />)
+}
+
+function Bloom({ children }) {
+  const { gl, camera, size } = useThree()
+  const ref = useResource()
+  const composer = useRef()
+  const aspect = useMemo(() => new THREE.Vector2(size.width, size.height), [size])
+  useEffect(() => void ref.current && composer.current.setSize(size.width, size.height), [size])
+  useFrame(() => ref.current && composer.current.render(), 1)
+  return (
+    <>
+      <scene ref={ref}>{children}</scene>
+      <effectComposer ref={composer} args={[gl]}>
+        <renderPass attachArray="passes" scene={ref.current} camera={camera} />
+        <unrealBloomPass attachArray="passes" args={[aspect, 1.5, 1, 0]} />
+      </effectComposer>
+    </>
+  )
+}
+
+function Main({ children }) {
+  const scene = useRef()
+  const { gl, camera } = useThree()
+  useFrame(
+    () => void ((gl.autoClear = false), gl.clearDepth(), gl.render(scene.current, camera)),
+    2,
+  )
+  return <scene ref={scene}>{children}</scene>
+}
+
 const FirstScene = ({ store }) => {
   const [skyboxHeight, setSkyboxHeight] = useState(getSkyboxSize(getFOV()))
 
   return (
-    <>
-      <Canvas colorManagement shadowMap camera={{ position: [-5, 1.11, 75], fov: getFOV() }}>
-        <Provider store={store}>
-          <WithResizeDetect setSkyboxHeight={setSkyboxHeight} />
-
-          <color attach="background" args={['grey']} />
-
+    <Canvas colorManagement shadowMap camera={{ position: [-5, 1.11, 75], fov: getFOV() }}>
+      <OrbitControls />
+      <Provider store={store}>
+        <Main>
+          <SkyBox skyboxHeight={skyboxHeight} />
           <hemisphereLight intensity={0.8} skyColor={'blue'} groundColor={0xf9cc6b} />
           <ambientLight intensity={0.3} color={'purple'} />
           <Suspense fallback={<Loader />}>
             <FlowersAndHills />
           </Suspense>
-          <SkyBox skyboxHeight={skyboxHeight} />
-          <Effects />
-          <WithCameraPan />
-        </Provider>
-      </Canvas>
-    </>
+        </Main>
+        <Bloom>
+          <ambientLight />
+          <RandomSpheres />
+        </Bloom>
+      </Provider>
+    </Canvas>
   )
 }
-
 export { FirstScene }

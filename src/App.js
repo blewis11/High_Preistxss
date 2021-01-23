@@ -10,7 +10,7 @@ const App = props => {
     <>
       <Suspense fallback={null}>
         <div className="main">
-          <FirstSceneReact />
+          {/* <FirstSceneReact /> */}
           <div id="hueOverlay" />
           <FirstSceneThree store={props.store} />
         </div>
