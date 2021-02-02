@@ -1,11 +1,12 @@
 import React, { Suspense, useState, useEffect, useRef } from 'react'
 import { Canvas, useThree } from 'react-three-fiber'
-import { useFBXLoader } from 'drei'
+import { useFBXLoader, OrbitControls } from 'drei'
 import { Provider } from 'react-redux'
 
 import Effects from './Effect.jsx'
 import Loader from './helpers/Loader'
 import { PointLight } from './helpers/PointLight.jsx'
+import { Portal } from './Portal'
 
 import { GrassHill } from './Landscape/Grass'
 import { Flower } from './Landscape/Flower'
@@ -97,11 +98,10 @@ const FlowersAndHills = ({ data }) => {
           }}
         />
         <Flower
-          debug={true}
           state={{
             positionX: -45,
             positionY: -4,
-            positionZ: -7,
+            positionZ: -11,
             rotationX: -5,
             rotationY: 2,
             rotationZ: -1.5,
@@ -224,14 +224,16 @@ const FirstScene = ({ store }) => {
 
           <color attach="background" args={['grey']} />
 
-          <hemisphereLight intensity={0.8} skyColor={'blue'} groundColor={0xf9cc6b} />
-          <ambientLight intensity={0.3} color={'purple'} />
+          <hemisphereLight intensity={0.8} skyColor={'blue'} groundColor={'0xf9cc6b'} />
+          {/* <ambientLight intensity={0.3} color={'purple'} /> */}
           <Suspense fallback={<Loader />}>
+            <Portal />
             <FlowersAndHills />
           </Suspense>
           <SkyBox skyboxHeight={skyboxHeight} />
           <Effects />
-          <WithCameraPan />
+          {/* <WithCameraPan /> */}
+          <OrbitControls />
         </Provider>
       </Canvas>
     </>
