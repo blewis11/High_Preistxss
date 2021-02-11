@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react'
 import { useFBXLoader } from 'drei'
-import { useFrame } from 'react-three-fiber'
+
 import * as THREE from 'three'
 
 const Portal = () => {
@@ -24,10 +24,6 @@ const Portal = () => {
     }
 
     portal.scale.set(0.4, 0.4, 0.4)
-  })
-
-  useFrame(() => {
-    portal.rotation.y += 20
   })
 
   return (
