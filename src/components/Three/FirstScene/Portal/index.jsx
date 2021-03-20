@@ -6,7 +6,7 @@ import * as THREE from 'three'
 const Portal = () => {
   const ref = useRef()
   const lightRef = useRef()
-  const portal = useFBXLoader('Portal2FBX.fbx')
+  const portal = useFBXLoader('portal_Transition.fbx')
 
   const targetObject = new THREE.Object3D()
   targetObject.position.set(0, 10, 0)
@@ -19,8 +19,8 @@ const Portal = () => {
     window.material = portal.children[1].material
 
     for (let i = 0; i < portal.children.length; i++) {
-      portal.children[i].material.reflectivity = 0.5
-      portal.children[i].material.shininess = 500
+      // portal.children[i].material.reflectivity = 0.5
+      // portal.children[i].material.shininess = 500
     }
 
     portal.scale.set(0.4, 0.4, 0.4)
@@ -28,9 +28,10 @@ const Portal = () => {
 
   return (
     <>
+      <axesHelper args={25} />
       <primitive object={light.target} />
       <primitive ref={lightRef} object={light} />
-      <primitive ref={ref} object={portal} position={[0, 12, -15]} rotation={[Math.PI, 0, 0]} />
+      <primitive ref={ref} object={portal} position={[0, 12, -15]} rotation={[0, Math.PI, 0]} />
     </>
   )
 }
