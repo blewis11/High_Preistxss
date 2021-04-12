@@ -66,7 +66,6 @@ const FadeOutOverlay = ({ startFade, mouseOverPortal }) => {
       backgroundColor: 'black',
       opacity: startFade ? 1 : 0,
       transition: 'opacity 0.5s',
-      cursor: mouseOverPortal ? 'pointer' : 'default',
     },
   })
 
@@ -83,6 +82,13 @@ const FirstScene = ({ isLoading, fadeToBlack, mouseOverPortal }) => {
   const [open, setOpen] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [showCredits, setShowCredits] = useState(false)
+  const [startFade, setStartFade] = useState(false)
+
+  useEffect(() => {
+    if (fadeToBlack) {
+      setTimeout(() => setStartFade(true), 500)
+    }
+  }, [fadeToBlack])
 
   useEffect(() => {
     if (!isLoading && inSubscribedState) {
@@ -120,7 +126,8 @@ const FirstScene = ({ isLoading, fadeToBlack, mouseOverPortal }) => {
       <WithNoise />
       <WithSidebarText />
       <LoaderContainer showLoader={isLoading} />
-      <FadeOutOverlay startFade={fadeToBlack} mouseOverPortal={mouseOverPortal} />
+
+      {fadeToBlack && <FadeOutOverlay startFade={startFade} mouseOverPortal={mouseOverPortal} />}
 
       <TopNavButtons
         selectedIndex={selectedIndex}

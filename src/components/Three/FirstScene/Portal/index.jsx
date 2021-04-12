@@ -50,9 +50,7 @@ const Portal = ({
 
         if (matchingIntersects.length > 0) {
           setEnlargePortal(true)
-          setTimeout(() => {
-            setFadeToBlack()
-          }, 500)
+          setFadeToBlack()
         }
       }
     }
