@@ -25,7 +25,8 @@
     "react-three-fiber": "^4.2.8",
     "redux": "^4.0.5",
     "sass": "^1.26.8",
-    "three": "^0.123.0"
+    "three": "^0.123.0",
+    "threex-domevents": "^1.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

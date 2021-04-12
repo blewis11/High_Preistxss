@@ -6,12 +6,14 @@ import { Provider } from 'react-redux'
 import Effects from './Effect.jsx'
 import Loader from './helpers/Loader'
 import { PointLight } from './helpers/PointLight.jsx'
-import { Portal } from './Portal'
 
 import { GrassHill } from './Landscape/Grass'
 import { Flower } from './Landscape/Flower'
 import { SkyBox } from './helpers/SkyBox.jsx'
 import { WithCameraPan } from './helpers/WithCameraPan.jsx'
+import Portal from './Portal/index.jsx'
+
+import * as THREE from 'three'
 
 const getFOV = () => {
   let fov = 35
@@ -216,6 +218,10 @@ const FlowersAndHills = ({ data }) => {
 const FirstScene = ({ store }) => {
   const [skyboxHeight, setSkyboxHeight] = useState(getSkyboxSize(getFOV()))
 
+  let loader = new THREE.CubeTextureLoader()
+  loader.setPath('scene1_background/')
+  let textureCube = loader.load(['px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'pz.jpg', 'nz.jpg'])
+
   return (
     <>
       <Canvas colorManagement shadowMap camera={{ position: [-5, 1.11, 75], fov: getFOV() }}>
@@ -225,14 +231,14 @@ const FirstScene = ({ store }) => {
           <color attach="background" args={['grey']} />
 
           <hemisphereLight intensity={0.8} skyColor={'blue'} groundColor={'0xf9cc6b'} />
-          {/* <ambientLight intensity={0.3} color={'purple'} /> */}
+          <ambientLight intensity={0.3} color={'purple'} />
           <Suspense fallback={<Loader />}>
-            <Portal />
+            <Portal textureCube={textureCube} />
             <FlowersAndHills />
           </Suspense>
           <SkyBox skyboxHeight={skyboxHeight} />
           <Effects />
-          {/* <WithCameraPan /> */}
+          <WithCameraPan />
           <OrbitControls />
         </Provider>
       </Canvas>

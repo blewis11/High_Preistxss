@@ -1,1 +1,4 @@
 export const SET_LOADING = 'SET_LOADING'
+export const MOUSE_OVER_PORTAL = 'MOUSE_OVER_PORTAL'
+export const ENLARGE_PORTAL = 'ENLARGE_PORTAL'
+export const FADE_TO_BLACK = 'FADE_TO_BLACK'

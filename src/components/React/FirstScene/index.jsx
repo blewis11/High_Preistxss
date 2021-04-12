@@ -56,7 +56,26 @@ const LoaderContainer = ({ showLoader }) => {
   return hideLoader ? <div /> : <Loader isLoaded={!showLoader} />
 }
 
-const FirstScene = ({ isLoading }) => {
+const FadeOutOverlay = ({ startFade, mouseOverPortal }) => {
+  const useStyles = makeStyles({
+    container: {
+      width: '100vw',
+      height: '100vh',
+      position: 'absolute',
+      zIndex: 5000,
+      backgroundColor: 'black',
+      opacity: startFade ? 1 : 0,
+      transition: 'opacity 0.5s',
+      cursor: mouseOverPortal ? 'pointer' : 'default',
+    },
+  })
+
+  const classes = useStyles()
+
+  return <div className={classes.container} />
+}
+
+const FirstScene = ({ isLoading, fadeToBlack, mouseOverPortal }) => {
   const [inSubscribedState, setSubscribedState] = useState(
     window.location.pathname === '/subscribed',
   )
@@ -101,6 +120,7 @@ const FirstScene = ({ isLoading }) => {
       <WithNoise />
       <WithSidebarText />
       <LoaderContainer showLoader={isLoading} />
+      <FadeOutOverlay startFade={fadeToBlack} mouseOverPortal={mouseOverPortal} />
 
       <TopNavButtons
         selectedIndex={selectedIndex}
@@ -133,6 +153,8 @@ const FirstScene = ({ isLoading }) => {
 const mapStateToProps = state => {
   return {
     isLoading: state.state.isLoading,
+    fadeToBlack: state.state.fadeToBlack,
+    mouseOverPortal: state.state.mouseOverPortal,
   }
 }
 

@@ -23,7 +23,7 @@ const WithSidebarText = props => {
       const responseButtons = await fetch(`http://46.101.9.88/api/buttons`)
       const data = await response.json()
       const buttons = await responseButtons.json()
-      
+
       const buttonsText = {}
 
       const subscribeButtonText = buttons.filter(button => button.name === 'Subscribe')

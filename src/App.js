@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, useState } from 'react'
 
 import { FirstScene as FirstSceneThree } from './components/Three/FirstScene'
 import FirstSceneReact from './components/React/FirstScene'
