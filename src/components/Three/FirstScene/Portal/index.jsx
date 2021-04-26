@@ -22,6 +22,16 @@ const Portal = ({
   const { camera, scene } = useThree()
 
   useEffect(() => {
+    if (ref.current) {
+      const portal = ref.current
+      createjs.Tween.get(portal.position, { loop: true })
+        .to({ y: 0.8 }, 1000, createjs.Ease.sineInOut)
+        .wait(0)
+        .to({ y: 0.5 }, 1000, createjs.Ease.sineInOut)
+    }
+  })
+
+  useEffect(() => {
     if (mouseOverPortal) {
       const portal = ref.current
       createjs.Tween.get(portal.scale).to(
