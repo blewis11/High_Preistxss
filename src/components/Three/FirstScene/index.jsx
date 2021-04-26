@@ -220,7 +220,7 @@ const FirstScene = ({ store }) => {
 
   let loader = new THREE.CubeTextureLoader()
   loader.setPath('scene1_background/')
-  let textureCube = loader.load(['px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'pz.jpg', 'nz.jpg'])
+  let textureCube = loader.load(['px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'nz.jpg', 'pz.jpg'])
 
   return (
     <>

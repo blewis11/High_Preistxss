@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import { useThree, useFrame } from 'react-three-fiber'
 import { Sphere } from 'drei'
 import * as THREE from 'three'
@@ -8,6 +8,7 @@ import {
   setEnlargePortal,
   setFadeToBlack,
 } from '../../../../redux/State/actions'
+import * as createjs from 'createjs-module'
 
 const Portal = ({
   setEnlargePortal,
@@ -20,19 +21,29 @@ const Portal = ({
   var ref = useRef()
   const { camera, scene } = useThree()
 
-  console.log({ mouseOverPortal })
-  useFrame(() => {
+  useEffect(() => {
+    if (mouseOverPortal) {
+      const portal = ref.current
+      createjs.Tween.get(portal.scale).to(
+        { x: 1.05, y: 1.05, z: 1.05 },
+        200,
+        createjs.Ease.cubicInOut,
+      )
+    }
+
+    if (!mouseOverPortal) {
+      const portal = ref.current
+      createjs.Tween.get(portal.scale).to({ x: 1, y: 1, z: 1 }, 200, createjs.Ease.cubicInOut)
+    }
+
     if (enlargePortal) {
       window.setTimeout(() => {
         const portal = ref.current
-        var radius = portal.geometry.parameters.radius
-        var scale = radius * 0.1 // adjust the multiplier to whatever
-        portal.scale.x += scale
-        portal.scale.y += scale
-        portal.scale.z += scale
+        createjs.Tween.get(portal.scale).to({ x: 15, y: 15, z: 15 }, 2000, createjs.Ease.cubicInOut)
       }, 100)
     }
   })
+
   useEffect(() => {
     const onClick = event => {
       var mouse = new THREE.Vector2()
@@ -84,7 +95,7 @@ const Portal = ({
   }, [])
 
   return (
-    <Sphere args={[5, 50, 50]} ref={ref}>
+    <Sphere args={[6, 50, 50]} ref={ref} position={[0, 0.5, 0]}>
       <meshPhysicalMaterial
         envMap={textureCube}
         attach="material"

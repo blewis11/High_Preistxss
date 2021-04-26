@@ -8,6 +8,8 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "classnames": "^2.2.6",
+    "createjs": "github:ryosuzuki/createjs",
+    "createjs-module": "^0.8.3",
     "detect-browser": "^5.2.0",
     "drei": "^1.5.7",
     "marked": "^1.2.7",
@@ -26,7 +28,8 @@
     "redux": "^4.0.5",
     "sass": "^1.26.8",
     "three": "^0.123.0",
-    "threex-domevents": "^1.0.0"
+    "threex-domevents": "^1.0.0",
+    "tweenjs": "^1.0.2"
   },
   "scripts": {
     "start": "react-scripts start",

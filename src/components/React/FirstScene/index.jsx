@@ -59,13 +59,17 @@ const LoaderContainer = ({ showLoader }) => {
 const FadeOutOverlay = ({ startFade, mouseOverPortal }) => {
   const useStyles = makeStyles({
     container: {
-      width: '100vw',
-      height: '100vh',
+      width: startFade ? '100vw' : '50vw',
+      height: startFade ? '100vh' : '50vw',
       position: 'absolute',
+      top: startFade ? '0' : '20vh',
+      left: startFade ? '0' : '30vw',
+      margin: 'auto',
       zIndex: 5000,
-      backgroundColor: 'black',
+      backgroundColor: '#3416DC',
       opacity: startFade ? 1 : 0,
       transition: 'opacity 0.5s',
+      cursor: mouseOverPortal ? 'pointer' : 'default',
     },
   })
 
@@ -86,7 +90,7 @@ const FirstScene = ({ isLoading, fadeToBlack, mouseOverPortal }) => {
 
   useEffect(() => {
     if (fadeToBlack) {
-      setTimeout(() => setStartFade(true), 500)
+      setTimeout(() => setStartFade(true), 900)
     }
   }, [fadeToBlack])
 
@@ -127,7 +131,7 @@ const FirstScene = ({ isLoading, fadeToBlack, mouseOverPortal }) => {
       <WithSidebarText />
       <LoaderContainer showLoader={isLoading} />
 
-      {fadeToBlack && <FadeOutOverlay startFade={startFade} mouseOverPortal={mouseOverPortal} />}
+      <FadeOutOverlay startFade={startFade} mouseOverPortal={mouseOverPortal} />
 
       <TopNavButtons
         selectedIndex={selectedIndex}
