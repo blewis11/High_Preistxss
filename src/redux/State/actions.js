@@ -1,4 +1,4 @@
-import { SET_LOADING, FADE_TO_BLACK, MOUSE_OVER_PORTAL, ENLARGE_PORTAL } from './types'
+import { SET_LOADING, FADE_TO_BLACK, MOUSE_OVER_PORTAL, ENLARGE_PORTAL, SET_SCENE_NUMBER } from './types'
 
 export const setLoading = payload => {
   return {
@@ -23,6 +23,13 @@ export const setMouseOverPortal = payload => {
 export const setEnlargePortal = payload => {
   return {
     type: ENLARGE_PORTAL,
+    payload
+  }
+}
+
+export const setSceneNumber = payload => {
+  return {
+    type: SET_SCENE_NUMBER,
     payload
   }
 }
