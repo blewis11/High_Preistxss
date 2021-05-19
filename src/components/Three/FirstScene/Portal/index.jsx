@@ -7,6 +7,7 @@ import {
   setMouseOverPortal,
   setEnlargePortal,
   setFadeToBlack,
+  setSceneNumber
 } from '../../../../redux/State/actions'
 import * as createjs from 'createjs-module'
 
@@ -17,6 +18,7 @@ const Portal = ({
   setMouseOverPortal,
   mouseOverPortal,
   setFadeToBlack,
+  gotoSecondScene
 }) => {
   var ref = useRef()
   const { camera, scene } = useThree()
@@ -50,6 +52,11 @@ const Portal = ({
       window.setTimeout(() => {
         const portal = ref.current
         createjs.Tween.get(portal.scale).to({ x: 15, y: 15, z: 15 }, 2000, createjs.Ease.cubicInOut)
+          .call(
+            window.setTimeout(() => {
+              gotoSecondScene()
+            }, 2000)
+          )
       }, 100)
     }
   })
@@ -135,6 +142,9 @@ const mapDispatchToProps = dispatch => ({
   setFadeToBlack: () => {
     dispatch(setFadeToBlack())
   },
+  gotoSecondScene: () => {
+    dispatch(setSceneNumber(2))
+  }
 })
 
 export default connect(
