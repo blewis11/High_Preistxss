@@ -67,7 +67,7 @@ const Sphere = ({ position }) => {
 
 const RectLight = ({ state }) => {
     RectAreaLightUniformsLib.init()
-    const rectLight1 = new THREE.RectAreaLight(0xfdf3c6, 0.8, 120, 120);
+    const rectLight1 = new THREE.RectAreaLight(0xfdf3c6, 0.6, 120, 120);
     const helper = new RectAreaLightHelper(rectLight1)
 
     return (
