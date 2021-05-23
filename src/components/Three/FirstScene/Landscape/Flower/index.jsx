@@ -9,6 +9,7 @@ const Flower = ({ state, newFlower, speed }) => {
   const animationSpeed = speed ? speed : 0.005
 
   useEffect(() => {
+    console.log(flowerRef.current)
     newFlower.children[1].material[3].specular = new THREE.Color('orange')
     newFlower.children[1].material[3].shininess = 50
 

@@ -1,11 +1,17 @@
-import { SET_LOADING, MOUSE_OVER_PORTAL, FADE_TO_BLACK, ENLARGE_PORTAL, SET_SCENE_NUMBER } from './types'
+import {
+  SET_LOADING,
+  MOUSE_OVER_PORTAL,
+  FADE_TO_BLACK,
+  ENLARGE_PORTAL,
+  SET_SCENE_NUMBER,
+} from './types'
 
 const INITIAL_STATE = {
   isLoading: true,
   mouseOverPortal: false,
   fadeToBlack: false,
   enlargePortal: false,
-  sceneNumber: 2
+  sceneNumber: 2,
 }
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -37,7 +43,7 @@ const reducer = (state = INITIAL_STATE, action) => {
     case SET_SCENE_NUMBER:
       return {
         ...state,
-        sceneNumber: action.payload
+        sceneNumber: action.payload,
       }
 
     default:
