@@ -40,7 +40,5 @@ const params = {
 }
 
 const SelectiveBloom = () => {
-  
-
   return null
 }
