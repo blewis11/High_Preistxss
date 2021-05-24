@@ -14,10 +14,12 @@ const App = ({ state, setState }) => {
 
   return (
     <DatGui data={state.data} onUpdate={handleUpdate}>
-      <DatNumber path="positionX" label="positionX" min={-200} max={200} step={0.1} />
+      <DatNumber path="positionX" label="positionX" min={-1000} max={1000} step={1} />
       <DatNumber path="positionY" label="positionY" min={-200} max={200} step={0.1} />
-      <DatNumber path="positionZ" label="positionZ" min={-200} max={200} step={0.1} />
+      <DatNumber path="positionZ" label="positionZ" min={-1000} max={1000} step={1} />
       <DatNumber path="rotation" label="rotation" min={-5} max={5} step={0.01} />
+      <DatNumber path="width" label="width" min={-500} max={500} step={1} />
+      <DatNumber path="height" label="height" min={-500} max={500} step={1} />
     </DatGui>
   )
 }
@@ -26,10 +28,12 @@ const Floor = ({ wisdomAvatarRef }) => {
   const planeRef = useRef()
   const [state, setState] = useState({
     data: {
-      positionX: 29.8,
-      positionY: 2.5,
-      positionZ: -4.1,
-      rotation: 0.94,
+      height: 47,
+      positionX: 24,
+      positionY: -1.2,
+      positionZ: -70,
+      rotation: 0.04,
+      width: 173,
     },
   })
 
@@ -37,7 +41,7 @@ const Floor = ({ wisdomAvatarRef }) => {
 
   if (floorTexture) {
     floorTexture.wrapS = floorTexture.wrapT = THREE.MirroredRepeatWrapping
-    floorTexture.repeat.set(15, 15)
+    floorTexture.repeat.set(20, 20)
     floorTexture.anisotropy = 16
   }
 
@@ -55,32 +59,32 @@ const Floor = ({ wisdomAvatarRef }) => {
       <group position={[0, 7, 26]}>
         {/* bottom  */}
         <mesh position={[0, -11, -25]} ref={planeRef} rotation={[-Math.PI / 2, 0, 0]}>
-          <circleGeometry attach="geometry" args={[45, 5]} />
+          <circleGeometry attach="geometry" args={[145.5, 5]} />
           <meshStandardMaterial attach="material" map={floorTexture} side={THREE.DoubleSide} />
         </mesh>
         {/* back right */}
-        <mesh position={[-10, 1.5, -59]} ref={planeRef} rotation={[0, 0.3, 0]}>
-          <planeGeometry attach="geometry" args={[52, 25, 100, 32]} />
+        <mesh position={[-35, 12.7, -136]} ref={planeRef} rotation={[0, 0.3, 0]}>
+          <planeGeometry attach="geometry" args={[174, 47, 100, 32]} />
           <meshStandardMaterial attach="material" map={wallTexture} side={THREE.DoubleSide} />
         </mesh>
         {/* back left */}
-        <mesh position={[-34, 1.5, -24]} ref={planeRef} rotation={[0, 1.6, 0]}>
-          <planeGeometry attach="geometry" args={[55, 25, 100, 32]} />
+        <mesh position={[-117, 12.6, -25]} ref={planeRef} rotation={[0, 1.57, 0]}>
+          <planeGeometry attach="geometry" args={[171, 47, 100, 32]} />
           <meshStandardMaterial attach="material" map={wallTexture} side={THREE.DoubleSide} />
         </mesh>
         {/* back right */}
-        <mesh position={[30, 2.4, -45.8]} ref={planeRef} rotation={[0, -0.95, 0]}>
-          <planeGeometry attach="geometry" args={[52, 27, 100, 32]} />
+        <mesh position={[96, 12.8, -93]} ref={planeRef} rotation={[0, -0.94, 0]}>
+          <planeGeometry attach="geometry" args={[168, 47, 100, 32]} />
           <meshStandardMaterial attach="material" map={wallTexture} side={THREE.DoubleSide} />
         </mesh>
         {/* front left */}
-        <mesh position={[-10.4, 2.5, 9.9]} ref={planeRef} rotation={[0, 2.83, 0]}>
-          <planeGeometry attach="geometry" args={[50, 27, 100, 32]} />
+        <mesh position={[-37, 12.6, 86]} ref={planeRef} rotation={[0, 2.83, 0]}>
+          <planeGeometry attach="geometry" args={[172, 47, 100, 32]} />
           <meshStandardMaterial attach="material" map={wallTexture} side={THREE.DoubleSide} />
         </mesh>
         {/* front right */}
-        <mesh position={[29.8, 2.5, -4.1]} ref={planeRef} rotation={[0, 0.94, 0]}>
-          <planeGeometry attach="geometry" args={[55, 27, 100, 32]} />
+        <mesh position={[94, 12.8, 44]} ref={planeRef} rotation={[0, 0.94, 0]}>
+          <planeGeometry attach="geometry" args={[173, 47, 100, 32]} />
           <meshStandardMaterial attach="material" map={wallTexture} side={THREE.DoubleSide} />
         </mesh>
 

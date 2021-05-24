@@ -28,8 +28,8 @@ const AvatarWisdom = ({ state, wisdomAvatarRef }) => {
       <primitive
         object={avatar}
         ref={wisdomAvatarRef}
-        position={[5.5, -1.3, -16.6]}
-        scale={[0.02, 0.02, 0.02]}
+        position={[24, -1.2, -70]}
+        scale={[0.04, 0.04, 0.04]}
         rotation={[0, -0.33, 0]}
       />
     </>

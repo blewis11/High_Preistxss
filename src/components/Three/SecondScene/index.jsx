@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 import { Floor } from './Floor.jsx'
 import { CameraController, EPS } from './CameraControls.jsx'
 import { Suspense } from 'react'
+import { OrbitControls } from 'drei'
 
 const SecondScene = ({ store }) => {
   const wisdomAvatarRef = useRef()
@@ -17,6 +18,7 @@ const SecondScene = ({ store }) => {
           <Suspense fallback={null}>
             <Floor wisdomAvatarRef={wisdomAvatarRef} />
           </Suspense>
+          {/* <OrbitControls /> */}
           <CameraController wisdomAvatarRef={wisdomAvatarRef} />
         </Provider>
       </Canvas>

@@ -5,12 +5,12 @@ import { RectAreaLightUniformsLib } from 'three/examples/jsm/lights/RectAreaLigh
 
 const RectLight = ({ state }) => {
   RectAreaLightUniformsLib.init()
-  const rectLight1 = new THREE.RectAreaLight(0xfdf3c6, 0.6, 120, 120)
+  const rectLight1 = new THREE.RectAreaLight(0xfdf3c6, 0.3, 300, 300)
   const helper = new RectAreaLightHelper(rectLight1)
 
   return (
     <>
-      <group position={[0, 14, -25]} rotation={[-Math.PI / 2, 0, 0]}>
+      <group position={[0, 34, -25]} rotation={[-Math.PI / 2, 0, 0]}>
         <primitive object={rectLight1} />
         <primitive object={helper} />
       </group>
