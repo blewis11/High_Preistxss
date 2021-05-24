@@ -8,6 +8,7 @@ import { AvatarWisdom } from './AvatarWidsom.jsx'
 const App = ({ state, setState }) => {
   const handleUpdate = newData =>
     setState(prevState => {
+      console.log({ newData })
       return { data: { ...prevState.data, ...newData } }
     })
 
@@ -25,10 +26,10 @@ const Floor = ({ wisdomAvatarRef }) => {
   const planeRef = useRef()
   const [state, setState] = useState({
     data: {
-      positionX: 5.5,
-      positionY: -1.3,
-      positionZ: -16.6,
-      rotation: 0.02,
+      positionX: 29.8,
+      positionY: 2.5,
+      positionZ: -4.1,
+      rotation: 0.94,
     },
   })
 
@@ -68,21 +69,21 @@ const Floor = ({ wisdomAvatarRef }) => {
           <meshStandardMaterial attach="material" map={wallTexture} side={THREE.DoubleSide} />
         </mesh>
         {/* back right */}
-        <mesh position={[32, 2.2, -48]} ref={planeRef} rotation={[0, -0.95, 0]}>
-          <planeGeometry attach="geometry" args={[55, 27, 100, 32]} />
-          <meshStandardMaterial attach="material" map={wallTexture} side={THREE.DoubleSide} />
-        </mesh>
-        {/* front left */}
-        <mesh position={[-10, 2.2, 12]} ref={planeRef} rotation={[0, 2.8, 0]}>
+        <mesh position={[30, 2.4, -45.8]} ref={planeRef} rotation={[0, -0.95, 0]}>
           <planeGeometry attach="geometry" args={[52, 27, 100, 32]} />
           <meshStandardMaterial attach="material" map={wallTexture} side={THREE.DoubleSide} />
         </mesh>
-        {/* front right */}
-        <mesh position={[31, 2.3, -4]} ref={planeRef} rotation={[0, 0.9, 0]}>
-          <planeGeometry attach="geometry" args={[57, 27, 100, 32]} />
+        {/* front left */}
+        <mesh position={[-10.4, 2.5, 9.9]} ref={planeRef} rotation={[0, 2.83, 0]}>
+          <planeGeometry attach="geometry" args={[50, 27, 100, 32]} />
           <meshStandardMaterial attach="material" map={wallTexture} side={THREE.DoubleSide} />
         </mesh>
-        {/* top  */}
+        {/* front right */}
+        <mesh position={[29.8, 2.5, -4.1]} ref={planeRef} rotation={[0, 0.94, 0]}>
+          <planeGeometry attach="geometry" args={[55, 27, 100, 32]} />
+          <meshStandardMaterial attach="material" map={wallTexture} side={THREE.DoubleSide} />
+        </mesh>
+
         <RectLight />
       </group>
     </>
