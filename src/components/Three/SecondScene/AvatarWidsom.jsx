@@ -1,24 +1,40 @@
 import React, { useState, useEffect } from 'react'
-import { useFrame } from 'react-three-fiber'
+import { useFrame, useThree } from 'react-three-fiber'
 import * as THREE from 'three'
 import { useFBXLoader } from 'drei'
 
 const AvatarWisdom = ({ state, wisdomAvatarRef }) => {
-  const avatar = useFBXLoader('avatars/WisdomFloat.fbx')
-
+  const avatar = useFBXLoader('WisdomAnimation.fbx')
+  const { camera, scene } = useThree()
   const [mixer] = useState(() => new THREE.AnimationMixer())
 
   useEffect(() => {
-    wisdomAvatarRef.current.children[1].material[1].shininess = 500
-    wisdomAvatarRef.current.children[1].material[1].reflectivity = 500
-    wisdomAvatarRef.current.children[1].material[1].specular = new THREE.Color('orange')
-  })
+    const onMouseMove = event => {
+      var mouse = new THREE.Vector2()
 
-  useEffect(
-    () =>
-      void mixer.clipAction(wisdomAvatarRef.current.animations[0], wisdomAvatarRef.current).play(),
-    [],
-  )
+      mouse.x = (event.clientX / window.innerWidth) * 2 - 1
+      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1
+
+      const raycaster = new THREE.Raycaster()
+      raycaster.setFromCamera(mouse, camera)
+
+      let intersects = raycaster.intersectObjects(scene.children, true)
+      if (intersects.length > 0 && wisdomAvatarRef.current) {
+        let matchingIntersects = intersects.filter(
+          item => item.object.parent.uuid === wisdomAvatarRef.current.uuid,
+        )
+
+        if (matchingIntersects.length > 0) {
+          mixer.clipAction(wisdomAvatarRef.current.animations[0], wisdomAvatarRef.current).play()
+        } else {
+          mixer.stopAllAction()
+        }
+      }
+    }
+
+    document.addEventListener('mousemove', onMouseMove, false)
+  }, [])
+
   useFrame(() => {
     mixer.update(0.03)
   })
@@ -28,7 +44,7 @@ const AvatarWisdom = ({ state, wisdomAvatarRef }) => {
       <primitive
         object={avatar}
         ref={wisdomAvatarRef}
-        position={[24, -1.2, -70]}
+        position={[24, 5, -70]}
         scale={[0.04, 0.04, 0.04]}
         rotation={[0, -0.33, 0]}
       />

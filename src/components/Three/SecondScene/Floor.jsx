@@ -1,9 +1,10 @@
 import React, { useRef, useState } from 'react'
 import * as THREE from 'three'
 import { Html, useTextureLoader } from 'drei'
-import DatGui, { DatNumber } from 'react-dat-gui'
+import DatGui, { DatColor } from 'react-dat-gui'
 import { RectLight } from './RectLight.jsx'
 import { AvatarWisdom } from './AvatarWidsom.jsx'
+import { Plinth } from './Plinth.jsx'
 
 const App = ({ state, setState }) => {
   const handleUpdate = newData =>
@@ -13,12 +14,8 @@ const App = ({ state, setState }) => {
 
   return (
     <DatGui data={state.data} onUpdate={handleUpdate}>
-      <DatNumber path="positionX" label="positionX" min={-1000} max={1000} step={1} />
-      <DatNumber path="positionY" label="positionY" min={-200} max={200} step={0.1} />
-      <DatNumber path="positionZ" label="positionZ" min={-1000} max={1000} step={1} />
-      <DatNumber path="rotation" label="rotation" min={-5} max={5} step={0.01} />
-      <DatNumber path="width" label="width" min={-500} max={500} step={1} />
-      <DatNumber path="height" label="height" min={-500} max={500} step={1} />
+      <DatColor path="lightColor" label="lightColor" />
+      <DatColor path="skyColor" label="skyColor" />
     </DatGui>
   )
 }
@@ -27,12 +24,8 @@ const Floor = ({ wisdomAvatarRef }) => {
   const planeRef = useRef()
   const [state, setState] = useState({
     data: {
-      height: 47,
-      positionX: 24,
-      positionY: -1.2,
-      positionZ: -70,
-      rotation: 0.04,
-      width: 173,
+      lightColor: 0xebddff,
+      skyColor: 0x000000,
     },
   })
 
@@ -55,6 +48,7 @@ const Floor = ({ wisdomAvatarRef }) => {
         </div>
       </Html> */}
       <AvatarWisdom state={state} wisdomAvatarRef={wisdomAvatarRef} />
+      <Plinth />
       <group position={[0, 7, 26]}>
         {/* bottom  */}
         <mesh position={[0, -11, -25]} ref={planeRef} rotation={[-Math.PI / 2, 0, 0]}>
