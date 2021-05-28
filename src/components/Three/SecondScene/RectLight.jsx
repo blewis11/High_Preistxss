@@ -10,7 +10,7 @@ const RectLight = ({ state }) => {
 
   return (
     <>
-      <group position={[0, 37, -25]} rotation={[-Math.PI / 2, 0, 0]}>
+      <group position={[0, 57, -25]} rotation={[-Math.PI / 2, 0, 0]}>
         <primitive object={rectLight1} />
         <primitive object={helper} />
       </group>

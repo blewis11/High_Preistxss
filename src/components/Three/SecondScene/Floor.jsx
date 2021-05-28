@@ -56,27 +56,27 @@ const Floor = ({ wisdomAvatarRef }) => {
           <meshStandardMaterial attach="material" map={floorTexture} side={THREE.DoubleSide} />
         </mesh>
         {/* back right */}
-        <mesh position={[-35, 27.7, -136]} ref={planeRef} rotation={[0, 0.3, 0]}>
+        <mesh position={[-35, 27.5, -136]} ref={planeRef} rotation={[0, 0.3, 0]}>
           <planeGeometry attach="geometry" args={[174, 77, 100, 32]} />
           <meshStandardMaterial attach="material" map={wallTexture} side={THREE.DoubleSide} />
         </mesh>
         {/* back left */}
-        <mesh position={[-117, 27.7, -25]} ref={planeRef} rotation={[0, 1.57, 0]}>
+        <mesh position={[-117, 27.5, -25]} ref={planeRef} rotation={[0, 1.57, 0]}>
           <planeGeometry attach="geometry" args={[171, 77, 100, 32]} />
           <meshStandardMaterial attach="material" map={wallTexture} side={THREE.DoubleSide} />
         </mesh>
         {/* back right */}
-        <mesh position={[96, 27.7, -93]} ref={planeRef} rotation={[0, -0.94, 0]}>
+        <mesh position={[96, 27.5, -93]} ref={planeRef} rotation={[0, -0.94, 0]}>
           <planeGeometry attach="geometry" args={[168, 77, 100, 32]} />
           <meshStandardMaterial attach="material" map={wallTexture} side={THREE.DoubleSide} />
         </mesh>
         {/* front left */}
-        <mesh position={[-37, 27.7, 86]} ref={planeRef} rotation={[0, 2.83, 0]}>
+        <mesh position={[-37, 27.5, 86]} ref={planeRef} rotation={[0, 2.83, 0]}>
           <planeGeometry attach="geometry" args={[172, 77, 100, 32]} />
           <meshStandardMaterial attach="material" map={wallTexture} side={THREE.DoubleSide} />
         </mesh>
         {/* front right */}
-        <mesh position={[94, 27.7, 44]} ref={planeRef} rotation={[0, 0.94, 0]}>
+        <mesh position={[94, 27.5, 44]} ref={planeRef} rotation={[0, 0.94, 0]}>
           <planeGeometry attach="geometry" args={[173, 77, 100, 32]} />
           <meshStandardMaterial attach="material" map={wallTexture} side={THREE.DoubleSide} />
         </mesh>

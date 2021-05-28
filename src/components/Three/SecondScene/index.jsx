@@ -8,14 +8,14 @@ import { OrbitControls } from 'drei'
 import * as THREE from 'three'
 
 const Lights = () => {
-  const light = new THREE.DirectionalLight(0xffffff)
+  const light = new THREE.DirectionalLight(0xe3b6e1)
   light.target.position.set(500, 0, 500)
   light.intensity = 0.2
   light.castShadow = true
 
   return (
     <>
-      <hemisphereLight args={['blue', 'red', 0.1]} />
+      <hemisphereLight args={['blue', '0xf9cc6b', 0.1]} />
       <directionalLight position={[20, 20, 5]} intensity={0.01} />
       <primitive object={light} position={[47, 10, 40]} />
     </>
