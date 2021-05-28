@@ -5,7 +5,7 @@ import { RectAreaLightUniformsLib } from 'three/examples/jsm/lights/RectAreaLigh
 
 const RectLight = ({ state }) => {
   RectAreaLightUniformsLib.init()
-  const rectLight1 = new THREE.RectAreaLight(0xfdf3c6, 20, 17, 17)
+  const rectLight1 = new THREE.RectAreaLight('red', 20, 25, 25)
   const helper = new RectAreaLightHelper(rectLight1)
 
   return (
