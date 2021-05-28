@@ -15,8 +15,8 @@ const Lights = () => {
 
   return (
     <>
-      <hemisphereLight args={['blue', '0xf9cc6b', 0.1]} />
-      <directionalLight position={[20, 20, 5]} intensity={0.01} />
+      <hemisphereLight args={['blue', '0xf9cc6b', 0.3]} />
+      <directionalLight position={[20, 20, 5]} intensity={0.5} args={[0xe3b6e1]} />
       <primitive object={light} position={[47, 10, 40]} />
     </>
   )

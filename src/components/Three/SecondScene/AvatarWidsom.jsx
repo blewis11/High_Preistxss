@@ -5,8 +5,16 @@ import { useFBXLoader } from 'drei'
 
 const AvatarWisdom = ({ state, wisdomAvatarRef }) => {
   const avatar = useFBXLoader('WisdomAnimation.fbx')
+
   const { camera, scene } = useThree()
   const [mixer] = useState(() => new THREE.AnimationMixer())
+
+  let loader = new THREE.CubeTextureLoader()
+  loader.setPath('scene1_background/')
+  let textureCube = loader.load(['px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'nz.jpg', 'pz.jpg'])
+
+  avatar.children[0].material[1].envMap = textureCube
+  avatar.children[0].shininess = 500
 
   useEffect(() => {
     const onMouseMove = event => {
@@ -47,6 +55,7 @@ const AvatarWisdom = ({ state, wisdomAvatarRef }) => {
         position={[24, 5, -70]}
         scale={[0.04, 0.04, 0.04]}
         rotation={[0, -0.33, 0]}
+        envMap={textureCube}
       />
     </>
   )

@@ -37,7 +37,7 @@ const Floor = ({ wisdomAvatarRef }) => {
     floorTexture.anisotropy = 16
   }
 
-  const wallTexture = useTextureLoader('wallpaper.jpg')
+  const wallTexture = useTextureLoader('wallpapersketch3blaustichig.jpg')
 
   return (
     <>

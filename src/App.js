@@ -10,31 +10,29 @@ import './App.scss'
 const App = props => {
   return (
     <>
-      {
-        props.sceneNumber === 1 ?
-          <Suspense fallback={null}>
-            <div className="main">
-              <FirstSceneReact />
-              <div id="hueOverlay" />
-              <FirstSceneThree store={props.store} />
-            </div>
-          </Suspense> :
-          <Suspense fallback={null}>
-            <div className="main">
-              <SecondSceneReact />
-              <div id="hueOverlay" />
-              <SecondSceneThree store={props.store} />
-            </div>
-          </Suspense>
-      }
-
+      {props.sceneNumber === 1 ? (
+        <Suspense fallback={null}>
+          <div className="main">
+            <FirstSceneReact />
+            <div id="hueOverlay" />
+            <FirstSceneThree store={props.store} />
+          </div>
+        </Suspense>
+      ) : (
+        <Suspense fallback={null}>
+          <div className="main">
+            <SecondSceneReact />
+            <SecondSceneThree store={props.store} />
+          </div>
+        </Suspense>
+      )}
     </>
   )
 }
 
 const mapStateToProps = state => {
   return {
-    sceneNumber: state.state.sceneNumber
+    sceneNumber: state.state.sceneNumber,
   }
 }
 
