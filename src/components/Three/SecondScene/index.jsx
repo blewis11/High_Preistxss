@@ -4,7 +4,6 @@ import { Provider } from 'react-redux'
 import { Floor } from './Floor.jsx'
 import { CameraController, EPS } from './CameraControls.jsx'
 import { Suspense } from 'react'
-import { OrbitControls } from 'drei'
 import * as THREE from 'three'
 
 const Lights = () => {
