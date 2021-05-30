@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react'
 import * as THREE from 'three'
+import { Reflector } from 'three/examples/jsm/objects/Reflector'
 import { Html, useTextureLoader } from 'drei'
 import DatGui, { DatColor } from 'react-dat-gui'
 import { RectLight } from './RectLight.jsx'
@@ -17,6 +18,24 @@ const App = ({ state, setState }) => {
       <DatColor path="lightColor" label="lightColor" />
       <DatColor path="skyColor" label="skyColor" />
     </DatGui>
+  )
+}
+
+const Mirror = () => {
+  const geometry = new THREE.CircleGeometry(160, 64)
+  const groundMirror = new Reflector(geometry, {
+    clipBias: 0.003,
+    textureWidth: window.innerWidth * window.devicePixelRatio,
+    textureHeight: window.innerHeight * window.devicePixelRatio,
+    color: 0x777777,
+  })
+  // groundMirror.position.y = -6
+  groundMirror.rotateX(-Math.PI / 2)
+
+  return (
+    <group position={[0, -11.1, 0]}>
+      <primitive object={groundMirror} />
+    </group>
   )
 }
 
@@ -53,7 +72,13 @@ const Floor = ({ wisdomAvatarRef }) => {
         {/* bottom  */}
         <mesh position={[0, -11, -25]} ref={planeRef} rotation={[-Math.PI / 2, 0, 0]}>
           <circleGeometry attach="geometry" args={[145.5, 5]} />
-          <meshStandardMaterial attach="material" map={floorTexture} side={THREE.DoubleSide} />
+          <meshStandardMaterial
+            attach="material"
+            map={floorTexture}
+            side={THREE.DoubleSide}
+            transparent
+            opacity={0.5}
+          />
         </mesh>
         {/* back right */}
         <mesh position={[-35, 27.5, -136]} ref={planeRef} rotation={[0, 0.3, 0]}>
@@ -82,6 +107,7 @@ const Floor = ({ wisdomAvatarRef }) => {
         </mesh>
 
         <RectLight />
+        <Mirror />
       </group>
     </>
   )
