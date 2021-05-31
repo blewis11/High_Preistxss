@@ -55,14 +55,8 @@ const Floor = ({ wisdomAvatarRef }) => {
     },
   })
 
-  const floorTexture = useTextureLoader('fliesedunkel3.jpg')
-
-  floorTexture.wrapS = floorTexture.wrapT = THREE.MirroredRepeatWrapping
-  floorTexture.repeat.set(40, 40)
-  floorTexture.anisotropy = 16
-
   const wallTexture = useTextureLoader('wallpapersketch3blaustichig.jpg')
-  const ceilingTexture = useTextureLoader('desaturated.jpg')
+  const ceilingTexture = useTextureLoader('ceiling2.jpg')
   return (
     <>
       <axesHelper />
@@ -79,7 +73,7 @@ const Floor = ({ wisdomAvatarRef }) => {
           <circleGeometry attach="geometry" args={[145.5, 5]} />
           <meshPhysicalMaterial
             attach="material"
-            color="blue"
+            color={0x1c183e}
             metalness={0.0}
             roughness={0.1}
             clearcoat={1.0}
