@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { useFrame, useThree } from 'react-three-fiber'
 import * as THREE from 'three'
 import { useFBXLoader } from 'drei'
+import * as createjs from 'createjs-module'
 
 const AvatarWisdom = ({ state, wisdomAvatarRef }) => {
-  const avatar = useFBXLoader('WisdomAnimation.fbx')
+  const avatar = useFBXLoader('avatars/WisdomAnimation.fbx')
 
   const { camera, scene } = useThree()
   const [mixer] = useState(() => new THREE.AnimationMixer())
@@ -17,6 +18,11 @@ const AvatarWisdom = ({ state, wisdomAvatarRef }) => {
   avatar.children[0].shininess = 500
 
   useEffect(() => {
+    createjs.Tween.get(wisdomAvatarRef.current.position, { loop: true })
+      .to({ y: 5.5 }, 1000, createjs.Ease.sineInOut)
+      .wait(0.5)
+      .to({ y: 5 }, 1000, createjs.Ease.sineInOut)
+
     const onMouseMove = event => {
       var mouse = new THREE.Vector2()
 
