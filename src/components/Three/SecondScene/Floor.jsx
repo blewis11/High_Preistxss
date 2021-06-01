@@ -53,9 +53,9 @@ const Floor = ({
 }) => {
   const [state, setState] = useState({
     data: {
-      positionX: -46,
+      positionX: -48,
       positionY: 11,
-      positionZ: 34,
+      positionZ: 36,
       rotation: -4.05,
       scale: 0.11,
     },
@@ -64,6 +64,20 @@ const Floor = ({
   const wallTexture = useTextureLoader('wallpapersketch3blaustichig.jpg')
   const ceilingTexture = useTextureLoader('ceiling2.jpg')
 
+  let loader = new THREE.CubeTextureLoader()
+  loader.setPath('scene1_background/')
+  let textureCube = loader.load(['px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'nz.jpg', 'pz.jpg'])
+
+  const wisdom = useFBXLoader('avatars/Wisdom.fbx')
+
+  wisdom.children[0].material[0].envMap = textureCube
+
+  const growth = useFBXLoader('avatars/Growth.fbx')
+  const health = useFBXLoader('avatars/Health.fbx')
+  const joy = useFBXLoader('avatars/Joy.fbx')
+  const exchange = useFBXLoader('avatars/Exchange.fbx')
+
+  console.log({ exchange })
   return (
     <>
       <axesHelper />
@@ -75,7 +89,7 @@ const Floor = ({
       <Avatar
         state={state}
         avatarRef={wisdomAvatarRef}
-        avatar={useFBXLoader('avatars/Wisdom.fbx')}
+        avatar={wisdom}
         position={[24, 5, -70]}
         rotation={-0.33}
         scale={0.04}
@@ -89,7 +103,7 @@ const Floor = ({
       <Avatar
         state={state}
         avatarRef={growthAvatarRef}
-        avatar={useFBXLoader('avatars/Growth.fbx')}
+        avatar={growth}
         position={[-52, 8, -36]}
         rotation={-3.95}
         scale={4.85}
@@ -103,7 +117,7 @@ const Floor = ({
       <Avatar
         state={state}
         avatarRef={healthAvatarRef}
-        avatar={useFBXLoader('avatars/Health.fbx')}
+        avatar={health}
         position={[66, 6, 0]}
         rotation={-1.4}
         scale={0.11}
@@ -118,7 +132,7 @@ const Floor = ({
       <Avatar
         state={state}
         avatarRef={joyAvatarRef}
-        avatar={useFBXLoader('avatars/Joy.fbx')}
+        avatar={joy}
         position={[22, 12, 68]}
         rotation={-1.4}
         scale={0.015}
@@ -132,7 +146,7 @@ const Floor = ({
       <Avatar
         state={state}
         avatarRef={exchangeAvatarRef}
-        avatar={useFBXLoader('avatars/Exchange.fbx')}
+        avatar={exchange}
         position={[state.data.positionX, state.data.positionY, state.data.positionZ]}
         rotation={state.data.rotation}
         scale={state.data.scale}

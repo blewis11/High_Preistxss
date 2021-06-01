@@ -9,13 +9,6 @@ const Avatar = ({ state, avatarRef, avatar, position, rotation, scale }) => {
   const { camera, scene } = useThree()
   const [mixer] = useState(() => new THREE.AnimationMixer())
 
-  let loader = new THREE.CubeTextureLoader()
-  loader.setPath('scene1_background/')
-  let textureCube = loader.load(['px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'nz.jpg', 'pz.jpg'])
-
-  // avatar.children[0].material[0].envMap = textureCube
-  // avatar.children[0].shininess = 500
-
   useEffect(() => {
     createjs.Tween.get(avatarRef.current.position, { loop: true })
       .to({ y: position[1] + 0.5 }, 1000, createjs.Ease.sineInOut)
