@@ -5,6 +5,7 @@ import { Floor } from './Floor.jsx'
 import { CameraController, EPS } from './CameraControls.jsx'
 import { Suspense } from 'react'
 import * as THREE from 'three'
+import { OrbitControls } from 'drei'
 
 const Lights = () => {
   const light = new THREE.DirectionalLight(0xe3b6e1)
@@ -23,6 +24,10 @@ const Lights = () => {
 
 const SecondScene = ({ store }) => {
   const wisdomAvatarRef = useRef()
+  const growthAvatarRef = useRef()
+  const healthAvatarRef = useRef()
+  const joyAvatarRef = useRef()
+  const exchangeAvatarRef = useRef()
 
   return (
     <>
@@ -31,9 +36,22 @@ const SecondScene = ({ store }) => {
           <Lights />
 
           <Suspense fallback={null}>
-            <Floor wisdomAvatarRef={wisdomAvatarRef} />
+            <Floor
+              wisdomAvatarRef={wisdomAvatarRef}
+              growthAvatarRef={growthAvatarRef}
+              healthAvatarRef={healthAvatarRef}
+              joyAvatarRef={joyAvatarRef}
+              exchangeAvatarRef={exchangeAvatarRef}
+            />
           </Suspense>
-          <CameraController wisdomAvatarRef={wisdomAvatarRef} />
+          <CameraController
+            wisdomAvatarRef={wisdomAvatarRef}
+            growthAvatarRef={growthAvatarRef}
+            healthAvatarRef={healthAvatarRef}
+            joyAvatarRef={joyAvatarRef}
+            exchangeAvatarRef={exchangeAvatarRef}
+          />
+          {/* <OrbitControls enableZoom={true} /> */}
         </Provider>
       </Canvas>
     </>

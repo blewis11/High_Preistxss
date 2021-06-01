@@ -1,16 +1,13 @@
 import React from 'react'
-import { useFBXLoader } from 'drei'
 
-const Plinth = ({ state }) => {
-  const plinth = useFBXLoader('plinth.fbx')
-
+const Plinth = ({ state, position, rotation, plinth }) => {
   return (
     <>
       <primitive
         object={plinth}
-        position={[24, -1.2, -70]}
+        position={position}
         scale={[0.04, 0.04, 0.04]}
-        rotation={[0, -0.33, 0]}
+        rotation={[0, rotation, 0]}
       />
     </>
   )

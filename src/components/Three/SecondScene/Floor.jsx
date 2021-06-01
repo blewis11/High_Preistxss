@@ -4,8 +4,9 @@ import { Reflector } from 'three/examples/jsm/objects/Reflector'
 import { Html, useTextureLoader } from 'drei'
 import DatGui, { DatNumber } from 'react-dat-gui'
 import { RectLight } from './RectLight.jsx'
-import { AvatarWisdom } from './AvatarWidsom.jsx'
+import { Avatar } from './Avatar'
 import { Plinth } from './Plinth.jsx'
+import { useFBXLoader } from 'drei'
 
 const App = ({ state, setState }) => {
   const handleUpdate = newData =>
@@ -17,10 +18,10 @@ const App = ({ state, setState }) => {
   return (
     <DatGui data={state.data} onUpdate={handleUpdate}>
       <DatNumber path="rotation" label="rotation" step={0.05} />
-      <DatNumber path="size" label="size" step={1} />
-      <DatNumber path="positionX" label="positionx" step={1} />
-      <DatNumber path="positionY" label="positiony" step={1} />
-      <DatNumber path="positionZ" label="positionz" step={1} />
+      <DatNumber path="scale" label="scale" step={0.01} />
+      <DatNumber path="positionX" label="positionx" step={2} />
+      <DatNumber path="positionY" label="positiony" step={2} />
+      <DatNumber path="positionZ" label="positionz" step={2} />
     </DatGui>
   )
 }
@@ -43,37 +44,111 @@ const Mirror = () => {
   )
 }
 
-const Floor = ({ wisdomAvatarRef }) => {
-  const planeRef = useRef()
+const Floor = ({
+  wisdomAvatarRef,
+  growthAvatarRef,
+  healthAvatarRef,
+  joyAvatarRef,
+  exchangeAvatarRef,
+}) => {
   const [state, setState] = useState({
     data: {
-      positionX: 6,
-      positionY: 64,
-      positionZ: -37,
-      rotation: -0.3,
-      size: 288,
+      positionX: -46,
+      positionY: 11,
+      positionZ: 34,
+      rotation: -4.05,
+      scale: 0.11,
     },
   })
 
   const wallTexture = useTextureLoader('wallpapersketch3blaustichig.jpg')
   const ceilingTexture = useTextureLoader('ceiling2.jpg')
+
   return (
     <>
       <axesHelper />
-      {/* <Html>
+      <Html>
         <div style={{ width: '500px', background: 'blue' }}>
           <App state={state} setState={setState} />
         </div>
-      </Html> */}
-      <AvatarWisdom state={state} wisdomAvatarRef={wisdomAvatarRef} />
-      <Plinth />
+      </Html>
+      <Avatar
+        state={state}
+        avatarRef={wisdomAvatarRef}
+        avatar={useFBXLoader('avatars/Wisdom.fbx')}
+        position={[24, 5, -70]}
+        rotation={-0.33}
+        scale={0.04}
+      />
+      <Plinth
+        plinth={useFBXLoader('plinth/plinth1.fbx')}
+        position={[24, -1.2, -70]}
+        rotation={-0.33}
+      />
+
+      <Avatar
+        state={state}
+        avatarRef={growthAvatarRef}
+        avatar={useFBXLoader('avatars/Growth.fbx')}
+        position={[-52, 8, -36]}
+        rotation={-3.95}
+        scale={4.85}
+      />
+      <Plinth
+        plinth={useFBXLoader('plinth/plinth2.fbx')}
+        position={[-54, -1.2, -38]}
+        rotation={-0.6}
+      />
+
+      <Avatar
+        state={state}
+        avatarRef={healthAvatarRef}
+        avatar={useFBXLoader('avatars/Health.fbx')}
+        position={[66, 6, 0]}
+        rotation={-1.4}
+        scale={0.11}
+      />
+
+      <Plinth
+        plinth={useFBXLoader('plinth/plinth3.fbx')}
+        position={[66, -1.2, 0]}
+        rotation={0.05}
+      />
+
+      <Avatar
+        state={state}
+        avatarRef={joyAvatarRef}
+        avatar={useFBXLoader('avatars/Joy.fbx')}
+        position={[22, 12, 68]}
+        rotation={-1.4}
+        scale={0.015}
+      />
+      <Plinth
+        plinth={useFBXLoader('plinth/plinth4.fbx')}
+        position={[22, -1.2, 70]}
+        rotation={0.25}
+      />
+
+      <Avatar
+        state={state}
+        avatarRef={exchangeAvatarRef}
+        avatar={useFBXLoader('avatars/Exchange.fbx')}
+        position={[state.data.positionX, state.data.positionY, state.data.positionZ]}
+        rotation={state.data.rotation}
+        scale={state.data.scale}
+      />
+      <Plinth
+        plinth={useFBXLoader('plinth/plinth5.fbx')}
+        position={[-48, -1.2, 36]}
+        rotation={-0.95}
+      />
       <group position={[0, 7, 26]}>
         {/* bottom  */}
         <mesh position={[0, -11, -25]} rotation={[-Math.PI / 2, 0, 0]}>
           <circleGeometry attach="geometry" args={[145.5, 5]} />
           <meshPhysicalMaterial
             attach="material"
-            color={0x1c183e}
+            color={0x0b072c}
             metalness={0.0}
             roughness={0.1}
             clearcoat={1.0}
