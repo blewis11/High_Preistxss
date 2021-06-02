@@ -81,11 +81,11 @@ const Floor = ({
   return (
     <>
       <axesHelper />
-      <Html>
+      {/* <Html>
         <div style={{ width: '500px', background: 'blue' }}>
           <App state={state} setState={setState} />
         </div>
-      </Html>
+      </Html> */}
       <Avatar
         state={state}
         avatarRef={wisdomAvatarRef}
