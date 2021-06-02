@@ -41,7 +41,7 @@ const Fadeout = ({ sceneNumber }) => {
   useEffect(() => {
     window.setTimeout(() => {
       setFadeout(true)
-    }, 500)
+    }, 6000)
   }, [sceneNumber])
 
   const useStyles = makeStyles({
