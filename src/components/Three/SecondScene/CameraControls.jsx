@@ -3,6 +3,7 @@ import CameraControls from 'camera-controls'
 import * as THREE from 'three'
 import { useThree, useFrame } from 'react-three-fiber'
 import { connect } from 'react-redux'
+import { setSelectedAvatar } from '../../../redux/Avatar/actions'
 
 const clock = new THREE.Clock()
 CameraControls.install({ THREE: THREE })
@@ -16,6 +17,7 @@ const CameraController = ({
   joyAvatarRef,
   exchangeAvatarRef,
   selectedAvatar,
+  setSelectedAvatar,
 }) => {
   const { camera, gl, scene } = useThree()
   const cameraControls = new CameraControls(camera, gl.domElement)
@@ -40,22 +42,22 @@ const CameraController = ({
 
     if (selectedAvatar === 'joy') {
       cameraControls.fitToBox(joyAvatarRef.current, true)
-          cameraControls.rotateTo(-3, 1.56, true)
+      cameraControls.rotateTo(-3, 1.56, true)
     }
 
     if (selectedAvatar === 'wisdom') {
       cameraControls.fitToBox(wisdomAvatarRef.current, true)
-          cameraControls.rotateTo(-0.3, 1.56, true)
+      cameraControls.rotateTo(-0.3, 1.56, true)
     }
 
     if (selectedAvatar === 'exchange') {
       cameraControls.fitToBox(exchangeAvatarRef.current, true)
-          cameraControls.rotateTo(2.2, 1.56, true)
+      cameraControls.rotateTo(2.2, 1.56, true)
     }
 
     if (selectedAvatar === 'growth') {
       cameraControls.fitToBox(growthAvatarRef.current, true)
-          cameraControls.rotateTo(1, 1.56, true)
+      cameraControls.rotateTo(1, 1.56, true)
     }
   }, [selectedAvatar])
 
@@ -93,28 +95,23 @@ const CameraController = ({
         )
 
         if (matchingWisdownIntersects.length > 0) {
-          cameraControls.fitToBox(wisdomAvatarRef.current, true)
-          cameraControls.rotateTo(-0.3, 1.56, true)
+          setSelectedAvatar('wisdom')
         }
 
         if (matchingGrowthIntersects.length > 0) {
-          cameraControls.fitToBox(growthAvatarRef.current, true)
-          cameraControls.rotateTo(1, 1.56, true)
+          setSelectedAvatar('growth')
         }
 
         if (matchingHealthIntersects.length > 0) {
-          cameraControls.fitToBox(healthAvatarRef.current, true)
-          cameraControls.rotateTo(-1.5, 1.56, true)
+          setSelectedAvatar('health')
         }
 
         if (matchingJoyIntersects.length > 0) {
-          cameraControls.fitToBox(joyAvatarRef.current, true)
-          cameraControls.rotateTo(-3, 1.56, true)
+          setSelectedAvatar('joy')
         }
 
         if (matchingExchangeIntersects.length > 0) {
-          cameraControls.fitToBox(exchangeAvatarRef.current, true)
-          cameraControls.rotateTo(2.2, 1.56, true)
+          setSelectedAvatar('exchange')
         }
       }
     }
@@ -161,5 +158,14 @@ const mapStateToProps = state => {
   }
 }
 
+const mapDispatchToProps = dispatch => ({
+  setSelectedAvatar: avatar => {
+    dispatch(setSelectedAvatar(avatar))
+  },
+})
+
 export { EPS }
-export default connect(mapStateToProps)(CameraController)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(CameraController)

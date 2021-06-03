@@ -4,8 +4,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import { connect } from 'react-redux'
 import { setSelectedAvatar } from '../../../../redux/Avatar/actions'
 
+
 const BottomNavButtons = ({ setSelectedAvatar, selectedAvatar }) => {
-  console.log({ selectedAvatar })
 
   const useStyles = makeStyles(theme => {
     const rootButtonStyles = {
