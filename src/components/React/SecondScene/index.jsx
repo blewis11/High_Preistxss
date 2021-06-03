@@ -3,8 +3,9 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { SideNav } from './SideNav/index.jsx'
 import { TopNavButtons } from './TopNavButtons/index.jsx'
+import { BottomNavButtons } from './BottomNavButtons/index.jsx'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   loaderContainer: {
     zIndex: '2000 !important',
     position: 'absolute',
@@ -34,7 +35,7 @@ const useStyles = makeStyles({
       textDecoration: 'underline',
     },
   },
-})
+}))
 
 const Fadeout = ({ sceneNumber }) => {
   const [fadeout, setFadeout] = useState(false)
@@ -110,6 +111,7 @@ const SecondScene = ({ sceneNumber }) => {
         setShowCredits={setShowCredits}
       />
 
+      <BottomNavButtons />
       <div className={classes.credits} onClick={onClickCredits}>
         CREDITS
       </div>

@@ -151,7 +151,7 @@ const AllButtons = ({
           }}
           variant="outlined"
         >
-          {'INFORMATION'}
+          INFORMATION
         </Button>
       </div>
       <div
@@ -168,7 +168,7 @@ const AllButtons = ({
           }}
           variant="outlined"
         >
-          LINKS
+          JOIN US
         </Button>
       </div>
       <div className={clsx(classes.buttonContainer, classes.soundButton)}>
