@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import CameraControls from 'camera-controls'
 import * as THREE from 'three'
 import { useThree, useFrame } from 'react-three-fiber'
+import { connect } from 'react-redux'
 
 const clock = new THREE.Clock()
 CameraControls.install({ THREE: THREE })
@@ -14,6 +15,7 @@ const CameraController = ({
   healthAvatarRef,
   joyAvatarRef,
   exchangeAvatarRef,
+  selectedAvatar,
 }) => {
   const { camera, gl, scene } = useThree()
   const cameraControls = new CameraControls(camera, gl.domElement)
@@ -29,6 +31,33 @@ const CameraController = ({
     const delta = clock.getDelta()
     cameraControls.update(delta)
   })
+
+  useEffect(() => {
+    if (selectedAvatar === 'health') {
+      cameraControls.fitToBox(healthAvatarRef.current, true)
+      cameraControls.rotateTo(-1.5, 1.56, true)
+    }
+
+    if (selectedAvatar === 'joy') {
+      cameraControls.fitToBox(joyAvatarRef.current, true)
+          cameraControls.rotateTo(-3, 1.56, true)
+    }
+
+    if (selectedAvatar === 'wisdom') {
+      cameraControls.fitToBox(wisdomAvatarRef.current, true)
+          cameraControls.rotateTo(-0.3, 1.56, true)
+    }
+
+    if (selectedAvatar === 'exchange') {
+      cameraControls.fitToBox(exchangeAvatarRef.current, true)
+          cameraControls.rotateTo(2.2, 1.56, true)
+    }
+
+    if (selectedAvatar === 'growth') {
+      cameraControls.fitToBox(growthAvatarRef.current, true)
+          cameraControls.rotateTo(1, 1.56, true)
+    }
+  }, [selectedAvatar])
 
   useEffect(() => {
     const onClick = event => {
@@ -126,4 +155,11 @@ const CameraController = ({
   return null
 }
 
-export { CameraController, EPS }
+const mapStateToProps = state => {
+  return {
+    selectedAvatar: state.avatar.selectedAvatar,
+  }
+}
+
+export { EPS }
+export default connect(mapStateToProps)(CameraController)

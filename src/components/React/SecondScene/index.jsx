@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { SideNav } from './SideNav/index.jsx'
 import { TopNavButtons } from './TopNavButtons/index.jsx'
-import { BottomNavButtons } from './BottomNavButtons/index.jsx'
+import BottomNavButtons from './BottomNavButtons/index.jsx'
 
 const useStyles = makeStyles(theme => ({
   loaderContainer: {

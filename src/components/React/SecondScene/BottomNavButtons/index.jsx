@@ -1,8 +1,12 @@
 import React, { Fragment } from 'react'
 import Button from '@material-ui/core/Button'
 import { makeStyles } from '@material-ui/core/styles'
+import { connect } from 'react-redux'
+import { setSelectedAvatar } from '../../../../redux/Avatar/actions'
 
-const BottomNavButtons = ({ selectedIndex }) => {
+const BottomNavButtons = ({ setSelectedAvatar, selectedAvatar }) => {
+  console.log({ selectedAvatar })
+
   const useStyles = makeStyles(theme => {
     const rootButtonStyles = {
       zIndex: '1 !important',
@@ -39,8 +43,8 @@ const BottomNavButtons = ({ selectedIndex }) => {
       },
       rootSelected: {
         ...rootButtonStyles,
-        color: rootButtonStyles.color,
-        backgroundColor: rootButtonStyles.backgroundColor,
+        backgroundColor: 'white',
+        color: '#9489dd',
         border: rootButtonStyles.border,
       },
     }
@@ -52,45 +56,45 @@ const BottomNavButtons = ({ selectedIndex }) => {
     <Fragment>
       <div className={classes.bottomButtons}>
         <Button
-          onClick={() => {}}
+          onClick={() => setSelectedAvatar('health')}
           classes={{
-            root: selectedIndex === 1 ? classes.rootSelected : classes.root,
+            root: selectedAvatar === 'health' ? classes.rootSelected : classes.root,
           }}
           variant="outlined"
         >
           HEALTH
         </Button>
         <Button
-          onClick={() => {}}
+          onClick={() => setSelectedAvatar('joy')}
           classes={{
-            root: selectedIndex === 2 ? classes.rootSelected : classes.root,
+            root: selectedAvatar === 'joy' ? classes.rootSelected : classes.root,
           }}
           variant="outlined"
         >
           JOY
         </Button>
         <Button
-          onClick={() => {}}
+          onClick={() => setSelectedAvatar('growth')}
           classes={{
-            root: selectedIndex === 3 ? classes.rootSelected : classes.root,
+            root: selectedAvatar === 'growth' ? classes.rootSelected : classes.root,
           }}
           variant="outlined"
         >
           GROWTH
         </Button>
         <Button
-          onClick={() => {}}
+          onClick={() => setSelectedAvatar('exchange')}
           classes={{
-            root: selectedIndex === 4 ? classes.rootSelected : classes.root,
+            root: selectedAvatar === 'exchange' ? classes.rootSelected : classes.root,
           }}
           variant="outlined"
         >
           EXCHANGE
         </Button>
         <Button
-          onClick={() => {}}
+          onClick={() => setSelectedAvatar('wisdom')}
           classes={{
-            root: selectedIndex === 5 ? classes.rootSelected : classes.root,
+            root: selectedAvatar === 'wisdom' ? classes.rootSelected : classes.root,
           }}
           variant="outlined"
         >
@@ -101,4 +105,19 @@ const BottomNavButtons = ({ selectedIndex }) => {
   )
 }
 
-export { BottomNavButtons }
+const mapStateToProps = state => {
+  return {
+    selectedAvatar: state.avatar.selectedAvatar,
+  }
+}
+
+const mapDispatchToProps = dispatch => ({
+  setSelectedAvatar: avatar => {
+    dispatch(setSelectedAvatar(avatar))
+  },
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(BottomNavButtons)
