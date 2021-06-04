@@ -12,6 +12,8 @@ const SideNav = ({
   setSelectedIndex,
   showCredits,
   setShowCredits,
+  selectedAvatar,
+  setSelectedAvatar
 }) => {
   const useStyles = makeStyles(theme => ({
     innerDrawer: {
@@ -56,6 +58,7 @@ const SideNav = ({
 
   const onClose = () => {
     setOpen(false)
+    // setSelectedAvatar('default')
   }
 
   const informationHandler = () => {
@@ -89,13 +92,14 @@ const SideNav = ({
             linksButtonHandler={linksHandler}
             selectedIndex={selectedIndex}
             buttonColor={'#9489de'}
+            selectedAvatar={selectedAvatar}
           />
 
           {showCredits ? (
             <Credits />
           ) : (
             <>
-              <NavContents selectedIndex={selectedIndex} />
+              <NavContents selectedIndex={selectedIndex} selectedAvatar={selectedAvatar} />
             </>
           )}
 

@@ -1,9 +1,10 @@
 import { makeStyles, Fade } from '@material-ui/core'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { connect } from 'react-redux'
 import { SideNav } from './SideNav/index.jsx'
 import { TopNavButtons } from './TopNavButtons/index.jsx'
 import BottomNavButtons from './BottomNavButtons/index.jsx'
+import { setSelectedAvatar } from '../../../redux/Avatar/actions'
 
 const useStyles = makeStyles(theme => ({
   loaderContainer: {
@@ -66,8 +67,15 @@ const Fadeout = ({ sceneNumber }) => {
   return <div className={classes.container} />
 }
 
-const SecondScene = ({ sceneNumber }) => {
+const SecondScene = ({ sceneNumber, selectedAvatar, setSelectedAvatar }) => {
   const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    const avatarIsSelected = selectedAvatar !== 'none' && selectedAvatar !== 'default'
+    // only do this on desktop
+    window.setTimeout(() => { setOpen(avatarIsSelected) }, 1200)
+  }, [selectedAvatar])
+
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [showCredits, setShowCredits] = useState(false)
 
@@ -91,6 +99,7 @@ const SecondScene = ({ sceneNumber }) => {
     setOpen(true)
   }
 
+
   return (
     <div className="sidebarContainer">
       <Fadeout sceneNumber={sceneNumber} />
@@ -99,7 +108,7 @@ const SecondScene = ({ sceneNumber }) => {
         buttonColor={'white'}
         informationButtonHandler={informationHandler}
         linksButtonHandler={linksHandler}
-        soundButtonHandler={() => {}}
+        soundButtonHandler={() => { }}
         inSubscribedState={false}
       />
       <SideNav
@@ -109,6 +118,8 @@ const SecondScene = ({ sceneNumber }) => {
         setSelectedIndex={setSelectedIndex}
         showCredits={showCredits}
         setShowCredits={setShowCredits}
+        selectedAvatar={selectedAvatar}
+        setSelectedAvatar={setSelectedAvatar}
       />
 
       <BottomNavButtons />
@@ -122,7 +133,15 @@ const SecondScene = ({ sceneNumber }) => {
 const mapStateToProps = state => {
   return {
     sceneNumber: state.state.sceneNumber,
+    selectedAvatar: state.avatar.selectedAvatar
   }
 }
 
-export default connect(mapStateToProps)(SecondScene)
+const mapDispatchToProps = dispatch => ({
+  setSelectedAvatar: avatar => {
+    dispatch(setSelectedAvatar(avatar))
+  },
+})
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(SecondScene)

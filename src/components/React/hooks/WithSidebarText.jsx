@@ -42,7 +42,6 @@ const WithSidebarText = props => {
         buttonsText['information'] = informationButtonText[0].value
       }
 
-      console.log({ buttonsText })
       setButtonsText(buttonsText)
 
       const subscriptionText = data.filter(text => text.name === 'SubscriptionInfo')

@@ -11,7 +11,6 @@ import { useFBXLoader } from 'drei'
 const App = ({ state, setState }) => {
   const handleUpdate = newData =>
     setState(prevState => {
-      console.log({ newData })
       return { data: { ...prevState.data, ...newData } }
     })
 
@@ -77,10 +76,8 @@ const Floor = ({
   const joy = useFBXLoader('avatars/Joy.fbx')
   const exchange = useFBXLoader('avatars/Exchange.fbx')
 
-  console.log({ exchange })
   return (
     <>
-      <axesHelper />
       {/* <Html>
         <div style={{ width: '500px', background: 'blue' }}>
           <App state={state} setState={setState} />

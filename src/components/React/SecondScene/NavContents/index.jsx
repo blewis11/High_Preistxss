@@ -315,7 +315,7 @@ const LinksSection = props => {
       guidance, and resources to help you transform your life!
       <div style={{ paddingTop: '20px', paddingBottom: '10px' }}>
         <Button
-          onClick={() => {}}
+          onClick={() => { }}
           classes={{
             root: classes.button,
           }}
@@ -326,7 +326,7 @@ const LinksSection = props => {
       </div>
       <div className={classes.buttonContainer}>
         <Button
-          onClick={() => {}}
+          onClick={() => { }}
           classes={{
             root: classes.button,
           }}
@@ -337,7 +337,7 @@ const LinksSection = props => {
       </div>
       <div className={classes.buttonContainer}>
         <Button
-          onClick={() => {}}
+          onClick={() => { }}
           classes={{
             root: classes.button,
           }}
@@ -348,7 +348,7 @@ const LinksSection = props => {
       </div>
       <div style={{ paddingTop: '10px' }}>
         <Button
-          onClick={() => {}}
+          onClick={() => { }}
           classes={{
             root: classes.button,
           }}
@@ -380,13 +380,55 @@ const InformationSection = props => {
     </div>
   )
 }
-const NavContents = ({ selectedIndex }) => {
+
+
+const WisdomSection = () => {
+  const classes = useStyles()
+  return <div className={classes.text}>wisdom</div>
+}
+
+const JoySection = () => {
+  const classes = useStyles()
+  return <div className={classes.text}>joy</div>
+}
+
+const ExchangeSection = () => {
+  const classes = useStyles()
+  return <div className={classes.text}>exchange</div>
+}
+
+const GrowthSection = () => {
+  const classes = useStyles()
+  return <div className={classes.text}>growth</div>
+}
+
+const HealthSection = () => {
+  const classes = useStyles()
+  return <div className={classes.text}>health</div>
+}
+
+
+const NavContents = ({ selectedIndex, selectedAvatar }) => {
   const classes = useStyles()
 
   return (
     <div className={classes.container}>
-      {selectedIndex === 1 && <InformationSection />}
-      {selectedIndex === 2 && <LinksSection />}
+      {
+        (selectedAvatar !== 'none' && selectedAvatar !== 'default') ? (
+          <div >
+            {selectedAvatar === 'wisdom' && <WisdomSection />}
+            {selectedAvatar === 'joy' && <JoySection />}
+            {selectedAvatar === 'exchange' && <ExchangeSection />}
+            {selectedAvatar === 'growth' && <GrowthSection />}
+            {selectedAvatar === 'health' && <HealthSection />}
+          </div>) : (
+          <div>
+            { selectedIndex === 1 && <InformationSection />}
+            { selectedIndex === 2 && <LinksSection />}
+          </div>
+        )
+      }
+
     </div>
   )
 }

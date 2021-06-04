@@ -11,21 +11,22 @@ const TopNavButtons = ({
   closeButtonHandler,
   selectedIndex,
   showClose,
+  selectedAvatar = 'none'
 }) => {
   const useStyles = makeStyles(theme => {
     const onHover = showClose
       ? {
-          '&:hover': {
-            backgroundColor: '#9489de',
-            color: '#121212',
-          },
-        }
+        '&:hover': {
+          backgroundColor: '#9489de',
+          color: '#121212',
+        },
+      }
       : {
-          '&:hover': {
-            backgroundColor: 'white',
-            color: '#9489dd',
-          },
-        }
+        '&:hover': {
+          backgroundColor: 'white',
+          color: '#9489dd',
+        },
+      }
 
     const rootButtonStyles = {
       zIndex: '1 !important',
@@ -120,6 +121,7 @@ const TopNavButtons = ({
           closeButtonHandler={closeButtonHandler}
           soundHandler={soundHandler}
           showClose={showClose}
+          selectedAvatar={selectedAvatar}
         />
       </div>
     </Fragment>
@@ -134,6 +136,7 @@ const AllButtons = ({
   soundHandler,
   closeButtonHandler,
   showClose,
+  selectedAvatar
 }) => {
   return (
     <Fragment>
@@ -144,7 +147,7 @@ const AllButtons = ({
             : clsx(classes.notSelected, classes.buttonContainer)
         }
       >
-        <Button
+        {selectedAvatar === 'none' && <Button
           onClick={informationButtonHandler}
           classes={{
             root: selectedIndex === 1 ? classes.rootSelected : classes.root,
@@ -152,7 +155,7 @@ const AllButtons = ({
           variant="outlined"
         >
           INFORMATION
-        </Button>
+        </Button>}
       </div>
       <div
         className={
@@ -161,7 +164,7 @@ const AllButtons = ({
             : clsx(classes.notSelected, classes.buttonContainer)
         }
       >
-        <Button
+        {selectedAvatar === 'none' && <Button
           onClick={linksButtonHandler}
           classes={{
             root: selectedIndex === 2 ? classes.rootSelected : classes.root,
@@ -169,7 +172,7 @@ const AllButtons = ({
           variant="outlined"
         >
           JOIN US
-        </Button>
+        </Button>}
       </div>
       <div className={clsx(classes.buttonContainer, classes.soundButton)}>
         <Button onClick={soundHandler} classes={{ root: classes.root }} variant="outlined">
