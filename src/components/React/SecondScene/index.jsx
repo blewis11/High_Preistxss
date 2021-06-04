@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { SideNav } from './SideNav/index.jsx'
 import { TopNavButtons } from './TopNavButtons/index.jsx'
 import BottomNavButtons from './BottomNavButtons/index.jsx'
-import { setSelectedAvatar } from '../../../redux/Avatar/actions'
+import { setAvatarSelected, setSelectedAvatar } from '../../../redux/Avatar/actions'
 
 const useStyles = makeStyles(theme => ({
   loaderContainer: {
@@ -67,14 +67,19 @@ const Fadeout = ({ sceneNumber }) => {
   return <div className={classes.container} />
 }
 
-const SecondScene = ({ sceneNumber, selectedAvatar, setSelectedAvatar }) => {
+const SecondScene = ({
+  sceneNumber,
+  selectedAvatar,
+  setSelectedAvatar,
+  avatarSelected,
+  setAvatarSelected
+}) => {
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
-    const avatarIsSelected = selectedAvatar !== 'none' && selectedAvatar !== 'default'
     // only do this on desktop
-    window.setTimeout(() => { setOpen(avatarIsSelected) }, 1200)
-  }, [selectedAvatar])
+    window.setTimeout(() => { setOpen(avatarSelected) }, 1200)
+  }, [avatarSelected])
 
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [showCredits, setShowCredits] = useState(false)
@@ -120,6 +125,8 @@ const SecondScene = ({ sceneNumber, selectedAvatar, setSelectedAvatar }) => {
         setShowCredits={setShowCredits}
         selectedAvatar={selectedAvatar}
         setSelectedAvatar={setSelectedAvatar}
+        setAvatarSelected={setAvatarSelected}
+        avatarSelected={avatarSelected}
       />
 
       <BottomNavButtons />
@@ -133,13 +140,17 @@ const SecondScene = ({ sceneNumber, selectedAvatar, setSelectedAvatar }) => {
 const mapStateToProps = state => {
   return {
     sceneNumber: state.state.sceneNumber,
-    selectedAvatar: state.avatar.selectedAvatar
+    selectedAvatar: state.avatar.selectedAvatar,
+    avatarSelected: state.avatar.avatarSelected
   }
 }
 
 const mapDispatchToProps = dispatch => ({
   setSelectedAvatar: avatar => {
     dispatch(setSelectedAvatar(avatar))
+  },
+  setAvatarSelected: avatar => {
+    dispatch(setAvatarSelected(avatar))
   },
 })
 

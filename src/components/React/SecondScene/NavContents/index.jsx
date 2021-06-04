@@ -408,13 +408,13 @@ const HealthSection = () => {
 }
 
 
-const NavContents = ({ selectedIndex, selectedAvatar }) => {
+const NavContents = ({ selectedIndex, selectedAvatar, avatarSelected }) => {
   const classes = useStyles()
 
   return (
     <div className={classes.container}>
       {
-        (selectedAvatar !== 'none' && selectedAvatar !== 'default') ? (
+        (avatarSelected) ? (
           <div >
             {selectedAvatar === 'wisdom' && <WisdomSection />}
             {selectedAvatar === 'joy' && <JoySection />}

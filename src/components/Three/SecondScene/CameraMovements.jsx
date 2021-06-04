@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useThree } from 'react-three-fiber'
 import { connect } from 'react-redux'
-import { setSelectedAvatar } from '../../../redux/Avatar/actions'
+import { setSelectedAvatar, setAvatarSelected } from '../../../redux/Avatar/actions'
 import * as THREE from 'three'
 
 
@@ -13,6 +13,7 @@ const CameraMovements = ({
     joyAvatarRef,
     exchangeAvatarRef,
     setSelectedAvatar,
+    setAvatarSelected,
     cameraRef
 }) => {
     const { camera, scene } = useThree()
@@ -80,22 +81,27 @@ const CameraMovements = ({
 
                 if (matchingWisdownIntersects.length > 0) {
                     setSelectedAvatar('wisdom')
+                    setAvatarSelected(true)
                 }
 
                 if (matchingGrowthIntersects.length > 0) {
                     setSelectedAvatar('growth')
+                    setAvatarSelected(true)
                 }
 
                 if (matchingHealthIntersects.length > 0) {
                     setSelectedAvatar('health')
+                    setAvatarSelected(true)
                 }
 
                 if (matchingJoyIntersects.length > 0) {
                     setSelectedAvatar('joy')
+                    setAvatarSelected(true)
                 }
 
                 if (matchingExchangeIntersects.length > 0) {
                     setSelectedAvatar('exchange')
+                    setAvatarSelected(true)
                 }
             }
         }
@@ -145,6 +151,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
     setSelectedAvatar: avatar => {
         dispatch(setSelectedAvatar(avatar))
+    },
+    setAvatarSelected: avatar => {
+        dispatch(setAvatarSelected(avatar))
     },
 })
 

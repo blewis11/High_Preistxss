@@ -1,4 +1,4 @@
-import { SET_SELECTED_AVATAR } from './types'
+import { SET_SELECTED_AVATAR, AVATAR_SELECTED } from './types'
 
 export const setSelectedAvatar = payload => {
   return {
@@ -6,3 +6,12 @@ export const setSelectedAvatar = payload => {
     payload,
   }
 }
+
+export const setAvatarSelected = payload => {
+  return {
+    type: AVATAR_SELECTED,
+    payload,
+  }
+}
+
+

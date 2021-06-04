@@ -13,7 +13,9 @@ const SideNav = ({
   showCredits,
   setShowCredits,
   selectedAvatar,
-  setSelectedAvatar
+  setSelectedAvatar,
+  setAvatarSelected,
+  avatarSelected
 }) => {
   const useStyles = makeStyles(theme => ({
     innerDrawer: {
@@ -58,7 +60,7 @@ const SideNav = ({
 
   const onClose = () => {
     setOpen(false)
-    // setSelectedAvatar('default')
+    setAvatarSelected(false)
   }
 
   const informationHandler = () => {
@@ -76,6 +78,7 @@ const SideNav = ({
     setSelectedIndex(0)
   }
 
+  console.log(`passing through ${avatarSelected}`)
   return (
     <Fragment>
       <Drawer
@@ -92,14 +95,14 @@ const SideNav = ({
             linksButtonHandler={linksHandler}
             selectedIndex={selectedIndex}
             buttonColor={'#9489de'}
-            selectedAvatar={selectedAvatar}
+            avatarSelected={avatarSelected}
           />
 
           {showCredits ? (
             <Credits />
           ) : (
             <>
-              <NavContents selectedIndex={selectedIndex} selectedAvatar={selectedAvatar} />
+              <NavContents selectedIndex={selectedIndex} selectedAvatar={selectedAvatar} avatarSelected={avatarSelected} />
             </>
           )}
 

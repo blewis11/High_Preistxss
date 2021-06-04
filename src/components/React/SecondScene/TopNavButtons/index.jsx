@@ -11,7 +11,7 @@ const TopNavButtons = ({
   closeButtonHandler,
   selectedIndex,
   showClose,
-  selectedAvatar = 'none'
+  avatarSelected = false
 }) => {
   const useStyles = makeStyles(theme => {
     const onHover = showClose
@@ -121,7 +121,7 @@ const TopNavButtons = ({
           closeButtonHandler={closeButtonHandler}
           soundHandler={soundHandler}
           showClose={showClose}
-          selectedAvatar={selectedAvatar}
+          avatarSelected={avatarSelected}
         />
       </div>
     </Fragment>
@@ -136,8 +136,9 @@ const AllButtons = ({
   soundHandler,
   closeButtonHandler,
   showClose,
-  selectedAvatar
+  avatarSelected
 }) => {
+
   return (
     <Fragment>
       <div
@@ -147,7 +148,7 @@ const AllButtons = ({
             : clsx(classes.notSelected, classes.buttonContainer)
         }
       >
-        {selectedAvatar === 'none' && <Button
+        {!avatarSelected && <Button
           onClick={informationButtonHandler}
           classes={{
             root: selectedIndex === 1 ? classes.rootSelected : classes.root,
@@ -164,7 +165,7 @@ const AllButtons = ({
             : clsx(classes.notSelected, classes.buttonContainer)
         }
       >
-        {selectedAvatar === 'none' && <Button
+        {!avatarSelected && <Button
           onClick={linksButtonHandler}
           classes={{
             root: selectedIndex === 2 ? classes.rootSelected : classes.root,
