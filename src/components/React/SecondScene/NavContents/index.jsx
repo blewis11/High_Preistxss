@@ -377,9 +377,11 @@ const AvatarButtonsSection = ({ onClickAvatarButton, setAvatarSelected, setSelec
   })
 
   const onClick = avatar => {
-    console.log(`switching to ${avatar}`)
     onClickAvatarButton()
     setSelectedAvatar(avatar)
+    window.setTimeout(() => {
+      window.history.pushState(null, null, '/')
+    }, 200)
   }
 
   return (
@@ -397,7 +399,7 @@ const AvatarButtonsSection = ({ onClickAvatarButton, setAvatarSelected, setSelec
       </div>
       <div className={classes.buttonContainer}>
         <Button
-          onClick={() => onClick('joy')}
+          onClick={e => onClick('joy')}
           classes={{
             root: classes.button,
           }}

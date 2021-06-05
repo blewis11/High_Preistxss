@@ -114,6 +114,7 @@ const SecondScene = ({
     setSelectedIndex(0)
     setShowAvatarButtons(true)
     setOpen(true)
+    window.history.pushState(null, null, '/explore')
   }
 
   const onClickAvatarButton = () => {

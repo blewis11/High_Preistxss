@@ -109,23 +109,23 @@ const CameraMovements = ({
           item => item.object.parent.uuid === exchangePlinthRef.current.uuid,
         )
 
-        if (matchingWisdownIntersectsPlinth.length > 0) {
+        if (matchingWisdownIntersectsPlinth.length > 0 && window.location.pathname !== '/explore') {
           setSelectedAvatar('wisdom')
         }
 
-        if (matchingGrowthIntersectsPlinth.length > 0) {
+        if (matchingGrowthIntersectsPlinth.length > 0 && window.location.pathname !== '/explore') {
           setSelectedAvatar('growth')
         }
 
-        if (matchingHealthIntersectsPlinth.length > 0) {
+        if (matchingHealthIntersectsPlinth.length > 0 && window.location.pathname !== '/explore') {
           setSelectedAvatar('health')
         }
 
-        if (matchingJoyIntersectsPlinth.length > 0) {
+        if (matchingJoyIntersectsPlinth.length > 0 && window.location.pathname !== '/explore') {
           setSelectedAvatar('joy')
         }
 
-        if (matchingExchangeIntersectsPlinth.length > 0) {
+        if (matchingExchangeIntersectsPlinth.length > 0 && window.location.pathname !== '/explore' ) {
           setSelectedAvatar('exchange')
         }
 

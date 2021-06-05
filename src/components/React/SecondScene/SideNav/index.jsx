@@ -18,7 +18,7 @@ const SideNav = ({
   setShowAvatarButtons,
   showAvatarButtons,
   onClickAvatarButton,
-  setSelectedAvatar
+  setSelectedAvatar,
 }) => {
   const useStyles = makeStyles(theme => ({
     innerDrawer: {
