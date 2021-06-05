@@ -11,22 +11,23 @@ const TopNavButtons = ({
   closeButtonHandler,
   selectedIndex,
   showClose,
-  avatarSelected = false
+  onClickExplore,
+  avatarSelected = false,
 }) => {
   const useStyles = makeStyles(theme => {
     const onHover = showClose
       ? {
-        '&:hover': {
-          backgroundColor: '#9489de',
-          color: '#121212',
-        },
-      }
+          '&:hover': {
+            backgroundColor: '#9489de',
+            color: '#121212',
+          },
+        }
       : {
-        '&:hover': {
-          backgroundColor: 'white',
-          color: '#9489dd',
-        },
-      }
+          '&:hover': {
+            backgroundColor: 'white',
+            color: '#9489dd',
+          },
+        }
 
     const rootButtonStyles = {
       zIndex: '1 !important',
@@ -91,6 +92,20 @@ const TopNavButtons = ({
           color: '#121212',
         },
       },
+      exploreButtonContainer: {
+        marginLeft: 'auto',
+        width: '100%',
+        display: 'none',
+        bottom: 0,
+        position: 'fixed',
+        padding: '15px',
+        [theme.breakpoints.down('xs')]: {
+          display: 'block',
+        },
+      },
+      exploreButton: {
+        ...rootButtonStyles,
+      },
       soundButton: {
         position: 'absolute',
         right: '5px',
@@ -122,6 +137,7 @@ const TopNavButtons = ({
           soundHandler={soundHandler}
           showClose={showClose}
           avatarSelected={avatarSelected}
+          onClickExplore={onClickExplore}
         />
       </div>
     </Fragment>
@@ -136,9 +152,9 @@ const AllButtons = ({
   soundHandler,
   closeButtonHandler,
   showClose,
-  avatarSelected
+  avatarSelected,
+  onClickExplore,
 }) => {
-
   return (
     <Fragment>
       <div
@@ -148,15 +164,17 @@ const AllButtons = ({
             : clsx(classes.notSelected, classes.buttonContainer)
         }
       >
-        {!avatarSelected && <Button
-          onClick={informationButtonHandler}
-          classes={{
-            root: selectedIndex === 1 ? classes.rootSelected : classes.root,
-          }}
-          variant="outlined"
-        >
-          INFORMATION
-        </Button>}
+        {!avatarSelected && (
+          <Button
+            onClick={informationButtonHandler}
+            classes={{
+              root: selectedIndex === 1 ? classes.rootSelected : classes.root,
+            }}
+            variant="outlined"
+          >
+            INFORMATION
+          </Button>
+        )}
       </div>
       <div
         className={
@@ -165,15 +183,17 @@ const AllButtons = ({
             : clsx(classes.notSelected, classes.buttonContainer)
         }
       >
-        {!avatarSelected && <Button
-          onClick={linksButtonHandler}
-          classes={{
-            root: selectedIndex === 2 ? classes.rootSelected : classes.root,
-          }}
-          variant="outlined"
-        >
-          JOIN US
-        </Button>}
+        {!avatarSelected && (
+          <Button
+            onClick={linksButtonHandler}
+            classes={{
+              root: selectedIndex === 2 ? classes.rootSelected : classes.root,
+            }}
+            variant="outlined"
+          >
+            JOIN US
+          </Button>
+        )}
       </div>
       <div className={clsx(classes.buttonContainer, classes.soundButton)}>
         <Button onClick={soundHandler} classes={{ root: classes.root }} variant="outlined">
@@ -188,6 +208,17 @@ const AllButtons = ({
             variant="outlined"
           >
             CLOSE
+          </Button>
+        </div>
+      )}
+      {!showClose && (
+        <div className={classes.exploreButtonContainer}>
+          <Button
+            onClick={() => onClickExplore()}
+            classes={{ root: classes.exploreButton }}
+            variant="outlined"
+          >
+            EXPLORE
           </Button>
         </div>
       )}

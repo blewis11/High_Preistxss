@@ -282,6 +282,12 @@ const useStyles = makeStyles({
     lineHeight: 1.85,
     fontSize: '14px',
   },
+  bottom: {
+    position: 'absolute',
+    width: '92%',
+    bottom: 0,
+    paddingBottom: '15px',
+  },
   button: {
     zIndex: '1 !important',
     width: '100%',
@@ -315,7 +321,7 @@ const LinksSection = props => {
       guidance, and resources to help you transform your life!
       <div style={{ paddingTop: '20px', paddingBottom: '10px' }}>
         <Button
-          onClick={() => { }}
+          onClick={() => {}}
           classes={{
             root: classes.button,
           }}
@@ -326,7 +332,7 @@ const LinksSection = props => {
       </div>
       <div className={classes.buttonContainer}>
         <Button
-          onClick={() => { }}
+          onClick={() => {}}
           classes={{
             root: classes.button,
           }}
@@ -337,7 +343,7 @@ const LinksSection = props => {
       </div>
       <div className={classes.buttonContainer}>
         <Button
-          onClick={() => { }}
+          onClick={() => {}}
           classes={{
             root: classes.button,
           }}
@@ -348,7 +354,7 @@ const LinksSection = props => {
       </div>
       <div style={{ paddingTop: '10px' }}>
         <Button
-          onClick={() => { }}
+          onClick={() => {}}
           classes={{
             root: classes.button,
           }}
@@ -358,6 +364,81 @@ const LinksSection = props => {
         </Button>
       </div>
       <SubscribeForm classes={classes} />
+    </div>
+  )
+}
+
+const AvatarButtonsSection = ({ onClickAvatarButton, setAvatarSelected, setSelectedAvatar }) => {
+  const classes = useStyles()
+
+  var containerStyles = classnames({
+    [classes.text]: true,
+    [classes.bottom]: true,
+  })
+
+  const onClick = avatar => {
+    console.log(`switching to ${avatar}`)
+    onClickAvatarButton()
+    setSelectedAvatar(avatar)
+  }
+
+  return (
+    <div className={containerStyles}>
+      <div style={{ paddingTop: '20px', paddingBottom: '10px' }}>
+        <Button
+          onClick={() => onClick('health')}
+          classes={{
+            root: classes.button,
+          }}
+          variant="outlined"
+        >
+          HEALTH
+        </Button>
+      </div>
+      <div className={classes.buttonContainer}>
+        <Button
+          onClick={() => onClick('joy')}
+          classes={{
+            root: classes.button,
+          }}
+          variant="outlined"
+        >
+          JOY
+        </Button>
+      </div>
+      <div className={classes.buttonContainer}>
+        <Button
+          onClick={() => onClick('growth')}
+          classes={{
+            root: classes.button,
+          }}
+          variant="outlined"
+        >
+          GROWTH
+        </Button>
+      </div>
+      <div className={classes.buttonContainer}>
+        <Button
+          onClick={() => onClick('exchange')}
+          classes={{
+            root: classes.button,
+          }}
+          variant="outlined"
+        >
+          EXCHANGE
+        </Button>
+      </div>
+      <div style={{ paddingTop: '10px' }}>
+        <Button
+          onClick={() => onClick('wisdom')}
+          classes={{
+            root: classes.button,
+          }}
+          variant="outlined"
+        >
+          WISDOM
+        </Button>
+      </div>
     </div>
   )
 }
@@ -380,7 +461,6 @@ const InformationSection = props => {
     </div>
   )
 }
-
 
 const WisdomSection = () => {
   const classes = useStyles()
@@ -407,28 +487,43 @@ const HealthSection = () => {
   return <div className={classes.text}>health</div>
 }
 
-
-const NavContents = ({ selectedIndex, selectedAvatar, avatarSelected }) => {
+const NavContents = ({
+  selectedIndex,
+  selectedAvatar,
+  avatarSelected,
+  showAvatarButtons,
+  onClickAvatarButton,
+  setAvatarSelected,
+  setSelectedAvatar,
+}) => {
   const classes = useStyles()
 
   return (
     <div className={classes.container}>
-      {
-        (avatarSelected) ? (
-          <div >
-            {selectedAvatar === 'wisdom' && <WisdomSection />}
-            {selectedAvatar === 'joy' && <JoySection />}
-            {selectedAvatar === 'exchange' && <ExchangeSection />}
-            {selectedAvatar === 'growth' && <GrowthSection />}
-            {selectedAvatar === 'health' && <HealthSection />}
-          </div>) : (
-          <div>
-            { selectedIndex === 1 && <InformationSection />}
-            { selectedIndex === 2 && <LinksSection />}
-          </div>
-        )
-      }
-
+      {showAvatarButtons ? (
+        <AvatarButtonsSection
+          onClickAvatarButton={onClickAvatarButton}
+          setAvatarSelected={setAvatarSelected}
+          setSelectedAvatar={setSelectedAvatar}
+        />
+      ) : (
+        <Fragment>
+          {avatarSelected ? (
+            <div>
+              {selectedAvatar === 'wisdom' && <WisdomSection />}
+              {selectedAvatar === 'joy' && <JoySection />}
+              {selectedAvatar === 'exchange' && <ExchangeSection />}
+              {selectedAvatar === 'growth' && <GrowthSection />}
+              {selectedAvatar === 'health' && <HealthSection />}
+            </div>
+          ) : (
+            <div>
+              {selectedIndex === 1 && <InformationSection />}
+              {selectedIndex === 2 && <LinksSection />}
+            </div>
+          )}
+        </Fragment>
+      )}
     </div>
   )
 }

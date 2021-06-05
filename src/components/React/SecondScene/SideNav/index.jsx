@@ -13,9 +13,12 @@ const SideNav = ({
   showCredits,
   setShowCredits,
   selectedAvatar,
-  setSelectedAvatar,
   setAvatarSelected,
-  avatarSelected
+  avatarSelected,
+  setShowAvatarButtons,
+  showAvatarButtons,
+  onClickAvatarButton,
+  setSelectedAvatar
 }) => {
   const useStyles = makeStyles(theme => ({
     innerDrawer: {
@@ -60,7 +63,10 @@ const SideNav = ({
 
   const onClose = () => {
     setOpen(false)
-    setAvatarSelected(false)
+    window.setTimeout(() => {
+      setAvatarSelected(false)
+      setShowAvatarButtons(false)
+    }, 200)
   }
 
   const informationHandler = () => {
@@ -78,7 +84,6 @@ const SideNav = ({
     setSelectedIndex(0)
   }
 
-  console.log(`passing through ${avatarSelected}`)
   return (
     <Fragment>
       <Drawer
@@ -102,13 +107,23 @@ const SideNav = ({
             <Credits />
           ) : (
             <>
-              <NavContents selectedIndex={selectedIndex} selectedAvatar={selectedAvatar} avatarSelected={avatarSelected} />
+              <NavContents
+                selectedIndex={selectedIndex}
+                selectedAvatar={selectedAvatar}
+                avatarSelected={avatarSelected}
+                showAvatarButtons={showAvatarButtons}
+                onClickAvatarButton={onClickAvatarButton}
+                setAvatarSelected={setAvatarSelected}
+                setSelectedAvatar={setSelectedAvatar}
+              />
             </>
           )}
 
-          <div className={classes.credits} onClick={onClickCredits}>
-            CREDITS
-          </div>
+          {!showAvatarButtons && (
+            <div className={classes.credits} onClick={onClickCredits}>
+              CREDITS
+            </div>
+          )}
         </div>
       </Drawer>
     </Fragment>

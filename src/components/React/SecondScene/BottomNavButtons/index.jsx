@@ -4,9 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { connect } from 'react-redux'
 import { setSelectedAvatar, setAvatarSelected } from '../../../../redux/Avatar/actions'
 
-
-const BottomNavButtons = ({ setSelectedAvatar, selectedAvatar, avatarSelected, setAvatarSelected }) => {
-
+const BottomNavButtons = ({ setSelectedAvatar, selectedAvatar, avatarSelected }) => {
   const useStyles = makeStyles(theme => {
     const rootButtonStyles = {
       zIndex: '1 !important',
@@ -57,11 +55,11 @@ const BottomNavButtons = ({ setSelectedAvatar, selectedAvatar, avatarSelected, s
       <div className={classes.bottomButtons}>
         <Button
           onClick={() => {
-            setAvatarSelected(true)
             setSelectedAvatar('health')
           }}
           classes={{
-            root: selectedAvatar === 'health' && avatarSelected ? classes.rootSelected : classes.root,
+            root:
+              selectedAvatar === 'health' && avatarSelected ? classes.rootSelected : classes.root,
           }}
           variant="outlined"
         >
@@ -69,7 +67,6 @@ const BottomNavButtons = ({ setSelectedAvatar, selectedAvatar, avatarSelected, s
         </Button>
         <Button
           onClick={() => {
-            setAvatarSelected(true)
             setSelectedAvatar('joy')
           }}
           classes={{
@@ -81,11 +78,11 @@ const BottomNavButtons = ({ setSelectedAvatar, selectedAvatar, avatarSelected, s
         </Button>
         <Button
           onClick={() => {
-            setAvatarSelected(true)
             setSelectedAvatar('growth')
           }}
           classes={{
-            root: selectedAvatar === 'growth' && avatarSelected ? classes.rootSelected : classes.root,
+            root:
+              selectedAvatar === 'growth' && avatarSelected ? classes.rootSelected : classes.root,
           }}
           variant="outlined"
         >
@@ -93,11 +90,11 @@ const BottomNavButtons = ({ setSelectedAvatar, selectedAvatar, avatarSelected, s
         </Button>
         <Button
           onClick={() => {
-            setAvatarSelected(true)
             setSelectedAvatar('exchange')
           }}
           classes={{
-            root: selectedAvatar === 'exchange' && avatarSelected ? classes.rootSelected : classes.root,
+            root:
+              selectedAvatar === 'exchange' && avatarSelected ? classes.rootSelected : classes.root,
           }}
           variant="outlined"
         >
@@ -105,11 +102,11 @@ const BottomNavButtons = ({ setSelectedAvatar, selectedAvatar, avatarSelected, s
         </Button>
         <Button
           onClick={() => {
-            setAvatarSelected(true)
             setSelectedAvatar('wisdom')
           }}
           classes={{
-            root: selectedAvatar === 'wisdom' && avatarSelected ? classes.rootSelected : classes.root,
+            root:
+              selectedAvatar === 'wisdom' && avatarSelected ? classes.rootSelected : classes.root,
           }}
           variant="outlined"
         >
@@ -123,16 +120,13 @@ const BottomNavButtons = ({ setSelectedAvatar, selectedAvatar, avatarSelected, s
 const mapStateToProps = state => {
   return {
     selectedAvatar: state.avatar.selectedAvatar,
-    avatarSelected: state.avatar.avatarSelected
+    avatarSelected: state.avatar.avatarSelected,
   }
 }
 
 const mapDispatchToProps = dispatch => ({
   setSelectedAvatar: avatar => {
     dispatch(setSelectedAvatar(avatar))
-  },
-  setAvatarSelected: avatar => {
-    dispatch(setAvatarSelected(avatar))
   },
 })
 

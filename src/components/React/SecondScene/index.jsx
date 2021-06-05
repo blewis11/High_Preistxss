@@ -32,8 +32,12 @@ const useStyles = makeStyles(theme => ({
     bottom: '5px',
     cursor: 'pointer',
     transition: 'text-decoration 0.3s ease',
+    display: 'block',
     '&:hover': {
       textDecoration: 'underline',
+    },
+    [theme.breakpoints.down('xs')]: {
+      display: 'none',
     },
   },
 }))
@@ -72,21 +76,23 @@ const SecondScene = ({
   selectedAvatar,
   setSelectedAvatar,
   avatarSelected,
-  setAvatarSelected
+  setAvatarSelected,
 }) => {
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
     // only do this on desktop
-    window.setTimeout(() => { setOpen(avatarSelected) }, 1200)
+    setOpen(avatarSelected)
   }, [avatarSelected])
 
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [showCredits, setShowCredits] = useState(false)
+  const [showAvatarButtons, setShowAvatarButtons] = useState(false)
 
   const classes = useStyles()
 
   const informationHandler = () => {
+    setShowAvatarButtons(false)
     setShowCredits(false)
     setSelectedIndex(1)
     setOpen(true)
@@ -104,6 +110,16 @@ const SecondScene = ({
     setOpen(true)
   }
 
+  const onClickExplore = () => {
+    setSelectedIndex(0)
+    setShowAvatarButtons(true)
+    setOpen(true)
+  }
+
+  const onClickAvatarButton = () => {
+    setOpen(false)
+    setShowAvatarButtons(false)
+  }
 
   return (
     <div className="sidebarContainer">
@@ -113,8 +129,9 @@ const SecondScene = ({
         buttonColor={'white'}
         informationButtonHandler={informationHandler}
         linksButtonHandler={linksHandler}
-        soundButtonHandler={() => { }}
+        soundButtonHandler={() => {}}
         inSubscribedState={false}
+        onClickExplore={onClickExplore}
       />
       <SideNav
         open={open}
@@ -127,6 +144,9 @@ const SecondScene = ({
         setSelectedAvatar={setSelectedAvatar}
         setAvatarSelected={setAvatarSelected}
         avatarSelected={avatarSelected}
+        setShowAvatarButtons={setShowAvatarButtons}
+        showAvatarButtons={showAvatarButtons}
+        onClickAvatarButton={onClickAvatarButton}
       />
 
       <BottomNavButtons />
@@ -141,7 +161,7 @@ const mapStateToProps = state => {
   return {
     sceneNumber: state.state.sceneNumber,
     selectedAvatar: state.avatar.selectedAvatar,
-    avatarSelected: state.avatar.avatarSelected
+    avatarSelected: state.avatar.avatarSelected,
   }
 }
 
@@ -154,5 +174,7 @@ const mapDispatchToProps = dispatch => ({
   },
 })
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(SecondScene)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(SecondScene)

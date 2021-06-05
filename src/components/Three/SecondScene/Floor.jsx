@@ -49,6 +49,16 @@ const Floor = ({
   healthAvatarRef,
   joyAvatarRef,
   exchangeAvatarRef,
+  wisdomPlinthRef,
+  growthPlinthRef,
+  healthPlinthRef,
+  joyPlinthRef,
+  exchangePlinthRef,
+  wisdomGroupRef,
+  growthGroupRef,
+  healthGroupRef,
+  joyGroupRef,
+  exchangeGroupRef,
 }) => {
   const [state, setState] = useState({
     data: {
@@ -83,76 +93,92 @@ const Floor = ({
           <App state={state} setState={setState} />
         </div>
       </Html> */}
-      <Avatar
-        state={state}
-        avatarRef={wisdomAvatarRef}
-        avatar={wisdom}
-        position={[24, 5, -70]}
-        rotation={-0.33}
-        scale={0.04}
-      />
-      <Plinth
-        plinth={useFBXLoader('plinth/plinth1.fbx')}
-        position={[24, -1.2, -70]}
-        rotation={-0.33}
-      />
+      <group ref={wisdomGroupRef}>
+        <Avatar
+          state={state}
+          avatarRef={wisdomAvatarRef}
+          avatar={wisdom}
+          position={[24, 5, -70]}
+          rotation={-0.33}
+          scale={0.04}
+        />
+        <Plinth
+          plinth={useFBXLoader('plinth/plinth1.fbx')}
+          position={[24, -1.2, -70]}
+          rotation={-0.33}
+          plinthRef={wisdomPlinthRef}
+        />
+      </group>
 
-      <Avatar
-        state={state}
-        avatarRef={growthAvatarRef}
-        avatar={growth}
-        position={[-52, 8, -36]}
-        rotation={-3.95}
-        scale={4.85}
-      />
-      <Plinth
-        plinth={useFBXLoader('plinth/plinth2.fbx')}
-        position={[-54, -1.2, -38]}
-        rotation={-0.6}
-      />
+      <group ref={growthGroupRef}>
+        <Avatar
+          state={state}
+          avatarRef={growthAvatarRef}
+          avatar={growth}
+          position={[-52, 8, -36]}
+          rotation={-3.95}
+          scale={4.85}
+        />
+        <Plinth
+          plinth={useFBXLoader('plinth/plinth2.fbx')}
+          position={[-54, -1.2, -38]}
+          rotation={-0.6}
+          plinthRef={growthPlinthRef}
+        />
+      </group>
 
-      <Avatar
-        state={state}
-        avatarRef={healthAvatarRef}
-        avatar={health}
-        position={[66, 6, 0]}
-        rotation={-1.4}
-        scale={0.11}
-      />
+      <group ref={healthGroupRef}>
+        <Avatar
+          state={state}
+          avatarRef={healthAvatarRef}
+          avatar={health}
+          position={[66, 6, 0]}
+          rotation={-1.4}
+          scale={0.11}
+        />
 
-      <Plinth
-        plinth={useFBXLoader('plinth/plinth3.fbx')}
-        position={[66, -1.2, 0]}
-        rotation={0.05}
-      />
+        <Plinth
+          plinth={useFBXLoader('plinth/plinth3.fbx')}
+          position={[66, -1.2, 0]}
+          rotation={0.05}
+          plinthRef={healthPlinthRef}
+        />
+      </group>
 
-      <Avatar
-        state={state}
-        avatarRef={joyAvatarRef}
-        avatar={joy}
-        position={[22, 12, 68]}
-        rotation={-1.4}
-        scale={0.015}
-      />
-      <Plinth
-        plinth={useFBXLoader('plinth/plinth4.fbx')}
-        position={[22, -1.2, 70]}
-        rotation={0.25}
-      />
+      <group ref={joyGroupRef}>
+        <Avatar
+          state={state}
+          avatarRef={joyAvatarRef}
+          avatar={joy}
+          position={[22, 12, 68]}
+          rotation={-1.4}
+          scale={0.015}
+        />
+        <Plinth
+          plinth={useFBXLoader('plinth/plinth4.fbx')}
+          position={[22, -1.2, 70]}
+          rotation={0.25}
+          plinthRef={joyPlinthRef}
+        />
+      </group>
 
-      <Avatar
-        state={state}
-        avatarRef={exchangeAvatarRef}
-        avatar={exchange}
-        position={[state.data.positionX, state.data.positionY, state.data.positionZ]}
-        rotation={state.data.rotation}
-        scale={state.data.scale}
-      />
-      <Plinth
-        plinth={useFBXLoader('plinth/plinth5.fbx')}
-        position={[-48, -1.2, 36]}
-        rotation={-0.95}
-      />
+      <group ref={exchangeGroupRef}>
+        <Avatar
+          state={state}
+          avatarRef={exchangeAvatarRef}
+          avatar={exchange}
+          position={[state.data.positionX, state.data.positionY, state.data.positionZ]}
+          rotation={state.data.rotation}
+          scale={state.data.scale}
+        />
+        <Plinth
+          plinth={useFBXLoader('plinth/plinth5.fbx')}
+          position={[-48, -1.2, 36]}
+          rotation={-0.95}
+          plinthRef={exchangePlinthRef}
+        />
+      </group>
+
       <group position={[0, 7, 26]}>
         {/* bottom  */}
         <mesh position={[0, -11, -25]} rotation={[-Math.PI / 2, 0, 0]}>
