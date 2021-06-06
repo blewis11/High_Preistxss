@@ -35,6 +35,11 @@ const WithCameraPan = () => {
 
     document.addEventListener('mousemove', onMouseMove, false)
     window.addEventListener('resize', onResize, false)
+
+    return () => {
+      window.removeEventListener('mousemove', onMouseMove)
+      window.removeEventListener('resize', onResize)
+    }
   }, [])
 
   return null

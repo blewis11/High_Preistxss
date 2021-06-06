@@ -44,6 +44,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const Fadeout = ({ loading }) => {
+  console.log({ loading })
   const useStyles = makeStyles({
     container: {
       width: '100vw',
@@ -83,7 +84,7 @@ const SecondScene = ({
   setSelectedAvatar,
   avatarSelected,
   setAvatarSelected,
-  loading,
+  loadingSecondPage,
 }) => {
   const [open, setOpen] = useState(false)
 
@@ -131,7 +132,7 @@ const SecondScene = ({
 
   return (
     <div className="sidebarContainer">
-      <Fadeout sceneNumber={sceneNumber} loading={loading} />
+      <Fadeout loading={loadingSecondPage} />
       <TopNavButtons
         selectedIndex={selectedIndex}
         buttonColor={'white'}
@@ -170,7 +171,7 @@ const mapStateToProps = state => {
     sceneNumber: state.state.sceneNumber,
     selectedAvatar: state.avatar.selectedAvatar,
     avatarSelected: state.avatar.avatarSelected,
-    loading: state.avatar.loading,
+    loadingSecondPage: state.avatar.loadingSecondPage,
   }
 }
 

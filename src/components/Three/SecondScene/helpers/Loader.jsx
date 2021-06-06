@@ -1,10 +1,11 @@
 import { connect } from 'react-redux'
 import { useProgress } from 'drei'
 
-import { setLoading } from '../../../../redux/Avatar/actions'
+import { setLoadingSecondPage } from '../../../../redux/Avatar/actions'
 
 const WithLoader = ({ setLoading }) => {
   const { progress } = useProgress()
+
   if (progress >= 99) {
     setTimeout(() => {
       setLoading(false)
@@ -16,7 +17,7 @@ const WithLoader = ({ setLoading }) => {
 
 const mapDispatchToProps = dispatch => ({
   setLoading: loading => {
-    dispatch(setLoading(loading))
+    dispatch(setLoadingSecondPage(loading))
   },
 })
 

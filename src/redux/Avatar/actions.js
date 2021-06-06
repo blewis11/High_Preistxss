@@ -1,4 +1,4 @@
-import { SET_SELECTED_AVATAR, AVATAR_SELECTED, SET_LOADING } from './types'
+import { SET_SELECTED_AVATAR, AVATAR_SELECTED, SET_LOADING_SECOND_PAGE } from './types'
 
 export const setSelectedAvatar = payload => {
   return {
@@ -14,9 +14,9 @@ export const setAvatarSelected = payload => {
   }
 }
 
-export const setLoading = payload => {
+export const setLoadingSecondPage = payload => {
   return {
-    type: SET_LOADING,
+    type: SET_LOADING_SECOND_PAGE,
     payload,
   }
 }
