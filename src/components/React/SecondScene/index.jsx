@@ -161,7 +161,7 @@ const SecondScene = ({
     <div className="sidebarContainer">
       <WithSecondSceneText />
       <Fadeout loading={loadingSecondPage} />
-      {/* <IntroText loaded={!loadingSecondPage} /> */}
+      <IntroText loaded={!loadingSecondPage} />
       <TopNavButtons
         selectedIndex={selectedIndex}
         buttonColor={'white'}
@@ -186,7 +186,6 @@ const SecondScene = ({
         showAvatarButtons={showAvatarButtons}
         onClickAvatarButton={onClickAvatarButton}
       />
-      <IntroText />
       <BottomNavButtons />
       <div className={classes.credits} onClick={onClickCredits}>
         CREDITS
