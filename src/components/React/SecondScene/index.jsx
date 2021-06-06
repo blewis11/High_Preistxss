@@ -186,7 +186,7 @@ const SecondScene = ({
         showAvatarButtons={showAvatarButtons}
         onClickAvatarButton={onClickAvatarButton}
       />
-      {/* <IntroText /> */}
+      <IntroText />
       <BottomNavButtons />
       <div className={classes.credits} onClick={onClickCredits}>
         CREDITS
