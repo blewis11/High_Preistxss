@@ -132,22 +132,27 @@ const CameraMovements = ({
         }
 
         if (matchingWisdownIntersects.length > 0) {
+          setSelectedAvatar('wisdom')
           setAvatarSelected(true)
         }
 
         if (matchingGrowthIntersects.length > 0) {
+          setSelectedAvatar('growth')
           setAvatarSelected(true)
         }
 
         if (matchingHealthIntersects.length > 0) {
+          setSelectedAvatar('health')
           setAvatarSelected(true)
         }
 
         if (matchingJoyIntersects.length > 0) {
+          setSelectedAvatar('joy')
           setAvatarSelected(true)
         }
 
         if (matchingExchangeIntersects.length > 0) {
+          setSelectedAvatar('exchange')
           setAvatarSelected(true)
         }
       }
