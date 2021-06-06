@@ -1,0 +1,126 @@
+/* BASICS */
+@font-face {
+  font-family: 'ToYRegular-Web';
+  src: url('fonts/ToYRegular-Web.woff2') format('woff2'),
+    url('fonts/ToYRegular-Web.woff') format('woff');
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body,
+p {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+/* LOADER */
+
+#intro-wrapper {
+  font-family: 'ToYRegular-Web', 'Times New Roman', serif;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-size: 50px;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  text-align: center;
+  text-shadow: 0 0 8px #ffffff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  background: #121212;
+  pointer-events: none;
+}
+
+#introtext {
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1500;
+}
+
+#introtext .line1 {
+  filter: blur(10px);
+  opacity: 0;
+}
+
+#introtext .line2 {
+  filter: blur(10px);
+  opacity: 0;
+}
+
+#introtext .line3 {
+  filter: blur(10px);
+  opacity: 0;
+}
+
+/* LOADED ANIMATION */
+
+@keyframes headline-fade-in {
+  from {
+    filter: blur(10px);
+    opacity: 0;
+  }
+  to {
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+@keyframes headline-fade-out {
+  from {
+    filter: blur(0);
+    opacity: 1;
+  }
+  80% {
+    filter: blur(0);
+    opacity: 1;
+  }
+  to {
+    filter: blur(10px);
+    opacity: 0;
+  }
+}
+
+.loaded #introtext {
+  animation: headline-fade-out 10s linear 1;
+  animation-fill-mode: forwards;
+}
+
+.loaded #introtext .line1 {
+  animation: headline-fade-in 2s linear 1;
+  animation-fill-mode: forwards;
+}
+
+.loaded #introtext .line2 {
+  animation: headline-fade-in 2s linear 1;
+  animation-fill-mode: forwards;
+  animation-delay: 2.5s;
+}
+
+.loaded #introtext .line3 {
+  animation: headline-fade-in 2s linear 1;
+  animation-fill-mode: forwards;
+  animation-delay: 3.1s;
+}
+
+/* MOBILE */
+@media only screen and (max-width: 980px) {
+  #intro-wrapper {
+    height: 100%;
+    font-size: 30px;
+  }
+}
+
+/* LARGE SCREENS */
+@media only screen and (min-width: 1650px) {
+}

@@ -1,8 +1,9 @@
-import { SET_SELECTED_AVATAR, AVATAR_SELECTED } from './types'
+import { SET_SELECTED_AVATAR, AVATAR_SELECTED, SET_LOADING } from './types'
 
 const INITIAL_STATE = {
   selectedAvatar: 'none',
-  avatarSelected: false
+  avatarSelected: false,
+  loading: true,
 }
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -16,7 +17,13 @@ const reducer = (state = INITIAL_STATE, action) => {
     case AVATAR_SELECTED:
       return {
         ...state,
-        avatarSelected: action.payload
+        avatarSelected: action.payload,
+      }
+
+    case SET_LOADING:
+      return {
+        ...state,
+        loading: action.payload,
       }
 
     default:

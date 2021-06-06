@@ -5,6 +5,7 @@ import { SideNav } from './SideNav/index.jsx'
 import { TopNavButtons } from './TopNavButtons/index.jsx'
 import BottomNavButtons from './BottomNavButtons/index.jsx'
 import { setAvatarSelected, setSelectedAvatar } from '../../../redux/Avatar/actions'
+import './styles.css'
 
 const useStyles = makeStyles(theme => ({
   loaderContainer: {
@@ -42,14 +43,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const Fadeout = ({ sceneNumber }) => {
-  const [fadeout, setFadeout] = useState(false)
-  useEffect(() => {
-    window.setTimeout(() => {
-      setFadeout(true)
-    }, 6000)
-  }, [sceneNumber])
-
+const Fadeout = ({ loading }) => {
   const useStyles = makeStyles({
     container: {
       width: '100vw',
@@ -60,7 +54,7 @@ const Fadeout = ({ sceneNumber }) => {
       margin: 'auto',
       zIndex: 5000,
       backgroundColor: '#3416DC',
-      opacity: fadeout ? 0 : 1,
+      opacity: loading ? 1 : 0,
       transition: 'opacity 1s',
       pointerEvents: 'none',
     },
@@ -71,12 +65,25 @@ const Fadeout = ({ sceneNumber }) => {
   return <div className={classes.container} />
 }
 
+const IntroText = () => {
+  return (
+    <div id="intro-wrapper">
+      <div id="introtext">
+        <p class="line1">Take a look around…</p>
+        <p class="line2">drag your screen to look further &mdash;</p>
+        <p class="line3">Tap to explore</p>
+      </div>
+    </div>
+  )
+}
+
 const SecondScene = ({
   sceneNumber,
   selectedAvatar,
   setSelectedAvatar,
   avatarSelected,
   setAvatarSelected,
+  loading,
 }) => {
   const [open, setOpen] = useState(false)
 
@@ -124,7 +131,7 @@ const SecondScene = ({
 
   return (
     <div className="sidebarContainer">
-      <Fadeout sceneNumber={sceneNumber} />
+      <Fadeout sceneNumber={sceneNumber} loading={loading} />
       <TopNavButtons
         selectedIndex={selectedIndex}
         buttonColor={'white'}
@@ -149,7 +156,7 @@ const SecondScene = ({
         showAvatarButtons={showAvatarButtons}
         onClickAvatarButton={onClickAvatarButton}
       />
-
+      {/* <IntroText /> */}
       <BottomNavButtons />
       <div className={classes.credits} onClick={onClickCredits}>
         CREDITS
@@ -163,6 +170,7 @@ const mapStateToProps = state => {
     sceneNumber: state.state.sceneNumber,
     selectedAvatar: state.avatar.selectedAvatar,
     avatarSelected: state.avatar.avatarSelected,
+    loading: state.avatar.loading,
   }
 }
 

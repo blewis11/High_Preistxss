@@ -5,6 +5,7 @@ import { Floor } from './Floor.jsx'
 import CameraController, { EPS } from './CameraControls.jsx'
 import { Suspense } from 'react'
 import CameraMovements from './CameraMovements'
+import WithLoader from './helpers/Loader.jsx'
 
 import * as THREE from 'three'
 const Lights = () => {
@@ -50,7 +51,7 @@ const SecondScene = ({ store }) => {
         <Provider store={store}>
           <Lights />
 
-          <Suspense fallback={null}>
+          <Suspense fallback={<WithLoader />}>
             <Floor
               wisdomAvatarRef={wisdomAvatarRef}
               growthAvatarRef={growthAvatarRef}
