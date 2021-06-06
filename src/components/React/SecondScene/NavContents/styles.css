@@ -1,0 +1,15 @@
+/* BASICS */
+@font-face {
+  font-family: 'ToYRegular-Web';
+  src: url('../fonts/ToYRegular-Web.woff2') format('woff2'),
+    url('../fonts/ToYRegular-Web.woff') format('woff');
+}
+
+.title {
+  font-family: 'ToYRegular-Web', 'Times New Roman', serif;
+  color: #9489dd;
+  text-align: center;
+  width: 100%;
+  padding-bottom: 25px;
+  font-size: 50px;
+}

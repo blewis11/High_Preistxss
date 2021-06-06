@@ -1,9 +1,18 @@
 import React, { useState, Fragment } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import classnames from 'classnames'
+import { connect } from 'react-redux'
 import Zoom from '@material-ui/core/Zoom'
 import Button from '@material-ui/core/Button'
 import MailchimpSubscribe from 'react-mailchimp-subscribe'
+import marked from 'marked'
+
+import './styles.css'
+
+const getMarkdownText = text => {
+  var rawMarkup = marked(text, { sanitize: true })
+  return { __html: rawMarkup }
+}
 
 const SubscribeForm = props => {
   const [email, setEmail] = useState('')
@@ -310,15 +319,12 @@ const useStyles = makeStyles({
   },
 })
 
-const LinksSection = props => {
+const LinksSection = ({ subscriptionText }) => {
   const classes = useStyles()
 
   return (
-    <div className={classes.text}>
-      Visit our online shop to book in-depth readings, personal coaching and buy products like our
-      essential oils. Subscribe to our Patreon to join the community, share knowledge and trade
-      techniques. Sign-up to our newsletter to receive monthly updates of Astrological and Tarot
-      guidance, and resources to help you transform your life!
+    <Fragment>
+      <div className={classes.text} dangerouslySetInnerHTML={getMarkdownText(subscriptionText)} />
       <div style={{ paddingTop: '20px', paddingBottom: '10px' }}>
         <Button
           onClick={() => {}}
@@ -364,7 +370,7 @@ const LinksSection = props => {
         </Button>
       </div>
       <SubscribeForm classes={classes} />
-    </div>
+    </Fragment>
   )
 }
 
@@ -445,48 +451,127 @@ const AvatarButtonsSection = ({ onClickAvatarButton, setAvatarSelected, setSelec
   )
 }
 
-const InformationSection = props => {
+const InformationSection = ({ informationText }) => {
   const classes = useStyles()
 
+  return <div className={classes.text} dangerouslySetInnerHTML={getMarkdownText(informationText)} />
+}
+
+const WisdomSection = ({ contents }) => {
+  const classes = useStyles()
   return (
-    <div className={classes.text}>
-      Bouche is a young Kombucha brewery, created in the joint studios of our artists’ collective in
-      Berlin-Pankow. The project started as a friendly collaboration but soon grew into a small
-      production company. Today we are proud to finally share our passion for the craft of brewing.
-      In the development of our kombucha, we place particular emphasis on developing a unique
-      aromatic diversity by creating distinctive taste profiles. With every sip you can taste the
-      complex interaction between tea, bacterial cultures, and yeasts. Throughout the brewing
-      process, a key focus is on exploring new flavors by experimenting with different yeast and hop
-      varieties in combination with carefully selected ingredients. We do not add industrially
-      produced concentrates to our Kombucha, but develop our own starter cultures and original
-      flavors along with our own innovative brewing techniques.
-    </div>
+    <Fragment>
+      <div class="title">WISDOM</div>
+      <div className={classes.text} dangerouslySetInnerHTML={getMarkdownText(contents.text)} />
+      <div style={{ paddingTop: '30px', paddingBottom: '10px' }}>
+        <Button
+          onClick={() => {}}
+          classes={{
+            root: classes.button,
+          }}
+          variant="outlined"
+        >
+          {contents.buttons.button1}
+        </Button>
+      </div>
+      <div className={classes.buttonContainer}>
+        <Button
+          onClick={() => {}}
+          classes={{
+            root: classes.button,
+          }}
+          variant="outlined"
+        >
+          {contents.buttons.button2}
+        </Button>
+      </div>
+      <div className={classes.buttonContainer}>
+        <Button
+          onClick={() => {}}
+          classes={{
+            root: classes.button,
+          }}
+          variant="outlined"
+        >
+          {contents.buttons.button3}
+        </Button>
+      </div>
+      <SubscribeForm classes={classes} />
+    </Fragment>
   )
 }
 
-const WisdomSection = () => {
+const JoySection = ({ contents }) => {
   const classes = useStyles()
-  return <div className={classes.text}>wisdom</div>
+  return (
+    <Fragment>
+      <div class="title">JOY</div>
+      <div className={classes.text} dangerouslySetInnerHTML={getMarkdownText(contents.text)} />
+      <div style={{ paddingTop: '30px', paddingBottom: '10px' }}>
+        <Button
+          onClick={() => {}}
+          classes={{
+            root: classes.button,
+          }}
+          variant="outlined"
+        >
+          {contents.buttons.button1}
+        </Button>
+      </div>
+    </Fragment>
+  )
 }
 
-const JoySection = () => {
+const ExchangeSection = ({ contents }) => {
   const classes = useStyles()
-  return <div className={classes.text}>joy</div>
+  return (
+    <Fragment>
+      <div class="title">EXCHANGE</div>
+      <div className={classes.text} dangerouslySetInnerHTML={getMarkdownText(contents.text)} />
+      <div style={{ paddingTop: '30px', paddingBottom: '10px' }}>
+        <Button
+          onClick={() => {}}
+          classes={{
+            root: classes.button,
+          }}
+          variant="outlined"
+        >
+          {contents.buttons.button1}
+        </Button>
+      </div>
+    </Fragment>
+  )
 }
 
-const ExchangeSection = () => {
+const GrowthSection = ({ contents }) => {
   const classes = useStyles()
-  return <div className={classes.text}>exchange</div>
+  return (
+    <Fragment>
+      <div class="title">GROWTH</div>
+      <div className={classes.text} dangerouslySetInnerHTML={getMarkdownText(contents.text)} />
+      <div style={{ paddingTop: '30px', paddingBottom: '10px' }}>
+        <Button
+          onClick={() => {}}
+          classes={{
+            root: classes.button,
+          }}
+          variant="outlined"
+        >
+          {contents.buttons.button1}
+        </Button>
+      </div>
+    </Fragment>
+  )
 }
 
-const GrowthSection = () => {
+const HealthSection = ({ contents }) => {
   const classes = useStyles()
-  return <div className={classes.text}>growth</div>
-}
-
-const HealthSection = () => {
-  const classes = useStyles()
-  return <div className={classes.text}>health</div>
+  return (
+    <Fragment>
+      <div class="title">HEALTH</div>
+      <div className={classes.text} dangerouslySetInnerHTML={getMarkdownText(contents.text)} />
+    </Fragment>
+  )
 }
 
 const NavContents = ({
@@ -497,6 +582,13 @@ const NavContents = ({
   onClickAvatarButton,
   setAvatarSelected,
   setSelectedAvatar,
+  wisdom,
+  joy,
+  health,
+  growth,
+  exchange,
+  informationText,
+  subscriptionText,
 }) => {
   const classes = useStyles()
 
@@ -512,16 +604,16 @@ const NavContents = ({
         <Fragment>
           {avatarSelected ? (
             <div>
-              {selectedAvatar === 'wisdom' && <WisdomSection />}
-              {selectedAvatar === 'joy' && <JoySection />}
-              {selectedAvatar === 'exchange' && <ExchangeSection />}
-              {selectedAvatar === 'growth' && <GrowthSection />}
-              {selectedAvatar === 'health' && <HealthSection />}
+              {selectedAvatar === 'wisdom' && <WisdomSection contents={wisdom} />}
+              {selectedAvatar === 'joy' && <JoySection contents={joy} />}
+              {selectedAvatar === 'exchange' && <ExchangeSection contents={exchange} />}
+              {selectedAvatar === 'growth' && <GrowthSection contents={growth} />}
+              {selectedAvatar === 'health' && <HealthSection contents={health} />}
             </div>
           ) : (
             <div>
-              {selectedIndex === 1 && <InformationSection />}
-              {selectedIndex === 2 && <LinksSection />}
+              {selectedIndex === 1 && <InformationSection informationText={informationText} />}
+              {selectedIndex === 2 && <LinksSection subscriptionText={subscriptionText} />}
             </div>
           )}
         </Fragment>
@@ -530,4 +622,16 @@ const NavContents = ({
   )
 }
 
-export { NavContents }
+const mapStateToProps = state => {
+  return {
+    wisdom: state.text.secondScene.wisdom,
+    joy: state.text.secondScene.joy,
+    health: state.text.secondScene.health,
+    growth: state.text.secondScene.growth,
+    exchange: state.text.secondScene.exchange,
+    informationText: state.text.informationText,
+    subscriptionText: state.text.subscriptionText,
+  }
+}
+
+export default connect(mapStateToProps)(NavContents)

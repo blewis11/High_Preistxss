@@ -5,6 +5,8 @@ import classnames from 'classnames'
 import { SideNav } from './SideNav/index.jsx'
 import { TopNavButtons } from './TopNavButtons/index.jsx'
 import BottomNavButtons from './BottomNavButtons/index.jsx'
+import WithSecondSceneText from '../hooks/WithSecondSceneText.jsx'
+import WithSidebarText from '../hooks/WithSidebarText.jsx'
 import { setAvatarSelected, setSelectedAvatar } from '../../../redux/Avatar/actions'
 import './styles.css'
 
@@ -157,8 +159,9 @@ const SecondScene = ({
 
   return (
     <div className="sidebarContainer">
+      <WithSecondSceneText />
       <Fadeout loading={loadingSecondPage} />
-      <IntroText loaded={!loadingSecondPage} />
+      {/* <IntroText loaded={!loadingSecondPage} /> */}
       <TopNavButtons
         selectedIndex={selectedIndex}
         buttonColor={'white'}
