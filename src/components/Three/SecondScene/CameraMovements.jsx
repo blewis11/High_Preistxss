@@ -28,7 +28,6 @@ const CameraMovements = ({
   const { camera, scene } = useThree()
 
   useEffect(() => {
-    console.log({selectedAvatar})
     const cameraControls = cameraRef
     if (selectedAvatar === 'health') {
       cameraControls.current.fitToBox(healthGroupRef.current, true)
@@ -125,7 +124,10 @@ const CameraMovements = ({
           setSelectedAvatar('joy')
         }
 
-        if (matchingExchangeIntersectsPlinth.length > 0 && window.location.pathname !== '/explore' ) {
+        if (
+          matchingExchangeIntersectsPlinth.length > 0 &&
+          window.location.pathname !== '/explore'
+        ) {
           setSelectedAvatar('exchange')
         }
 

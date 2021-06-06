@@ -1,6 +1,7 @@
 import { makeStyles, Fade } from '@material-ui/core'
 import React, { useEffect, useRef, useState } from 'react'
 import { connect } from 'react-redux'
+import classnames from 'classnames'
 import { SideNav } from './SideNav/index.jsx'
 import { TopNavButtons } from './TopNavButtons/index.jsx'
 import BottomNavButtons from './BottomNavButtons/index.jsx'
@@ -44,7 +45,6 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const Fadeout = ({ loading }) => {
-  console.log({ loading })
   const useStyles = makeStyles({
     container: {
       width: '100vw',
@@ -66,9 +66,34 @@ const Fadeout = ({ loading }) => {
   return <div className={classes.container} />
 }
 
-const IntroText = () => {
+const IntroText = ({ loaded }) => {
+  const [startFadeout, setStartFadeout] = useState(false)
+
+  useEffect(() => {
+    if (loaded) {
+      window.setTimeout(() => {
+        setStartFadeout(true)
+      }, 10000)
+    }
+  }, [loaded])
+
+  const useStyles = makeStyles({
+    container: {
+      opacity: startFadeout ? 0 : 1,
+      transition: 'opacity 1s',
+      pointerEvents: 'none',
+    },
+  })
+
+  const classes = useStyles()
+
+  let loadedStyles = classnames({
+    loaded: loaded,
+    [classes.container]: true,
+  })
+
   return (
-    <div id="intro-wrapper">
+    <div id="intro-wrapper" class={loadedStyles}>
       <div id="introtext">
         <p class="line1">Take a look around…</p>
         <p class="line2">drag your screen to look further &mdash;</p>
@@ -133,6 +158,7 @@ const SecondScene = ({
   return (
     <div className="sidebarContainer">
       <Fadeout loading={loadingSecondPage} />
+      <IntroText loaded={!loadingSecondPage} />
       <TopNavButtons
         selectedIndex={selectedIndex}
         buttonColor={'white'}

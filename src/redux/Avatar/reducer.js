@@ -15,14 +15,12 @@ const reducer = (state = INITIAL_STATE, action) => {
       }
 
     case AVATAR_SELECTED:
-      console.log(`set avatar selected to ${action.payload}`)
       return {
         ...state,
         avatarSelected: action.payload,
       }
 
     case SET_LOADING_SECOND_PAGE:
-      console.log(`loading second page to ${action.payload}`)
       return {
         ...state,
         loadingSecondPage: action.payload,
