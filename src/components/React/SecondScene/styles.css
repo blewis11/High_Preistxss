@@ -35,7 +35,7 @@ p {
   width: 100vw;
   height: 100vh;
   z-index: 1000;
-  background: #121212;
+  background: transparent;
   pointer-events: none;
 }
 
