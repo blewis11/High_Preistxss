@@ -239,7 +239,6 @@ const FirstScene = ({ store }) => {
           <SkyBox skyboxHeight={skyboxHeight} />
           <Effects />
           <WithCameraPan />
-          <OrbitControls />
         </Provider>
       </Canvas>
     </>
