@@ -11,6 +11,7 @@ import { useFBXLoader } from 'drei'
 const App = ({ state, setState }) => {
   const handleUpdate = newData =>
     setState(prevState => {
+      console.log({ newData })
       return { data: { ...prevState.data, ...newData } }
     })
 
@@ -18,9 +19,9 @@ const App = ({ state, setState }) => {
     <DatGui data={state.data} onUpdate={handleUpdate}>
       <DatNumber path="rotation" label="rotation" step={0.05} />
       <DatNumber path="scale" label="scale" step={0.01} />
-      <DatNumber path="positionX" label="positionx" step={2} />
-      <DatNumber path="positionY" label="positiony" step={2} />
-      <DatNumber path="positionZ" label="positionz" step={2} />
+      <DatNumber path="positionX" label="positionx" step={0.1} />
+      <DatNumber path="positionY" label="positiony" step={0.1} />
+      <DatNumber path="positionZ" label="positionz" step={0.1} />
     </DatGui>
   )
 }
@@ -63,9 +64,9 @@ const Floor = ({
   const [state, setState] = useState({
     data: {
       positionX: -48,
-      positionY: 11,
+      positionY: 1,
       positionZ: 36,
-      rotation: -4.05,
+      rotation: -0.095,
       scale: 0.11,
     },
   })
@@ -113,9 +114,9 @@ const Floor = ({
           scale={0.04}
         />
         <Plinth
-          plinth={useFBXLoader('plinth/plinth1.fbx')}
-          position={[24, -1.2, -70]}
-          rotation={-0.33}
+          plinth={useFBXLoader('plinth/WisdomPlinth3.fbx')}
+          position={[23, 1, -67.5]}
+          rotation={1.25}
           plinthRef={wisdomPlinthRef}
         />
       </group>
@@ -130,9 +131,9 @@ const Floor = ({
           scale={4.85}
         />
         <Plinth
-          plinth={useFBXLoader('plinth/plinth2.fbx')}
-          position={[-54, -1.2, -38]}
-          rotation={-0.6}
+          plinth={useFBXLoader('plinth/GrowthPlinth3.fbx')}
+          position={[-51.2, 1, -38]}
+          rotation={-3.7}
           plinthRef={growthPlinthRef}
         />
       </group>
@@ -146,10 +147,9 @@ const Floor = ({
           rotation={-1.4}
           scale={0.11}
         />
-
         <Plinth
-          plinth={useFBXLoader('plinth/plinth3.fbx')}
-          position={[66, -1.2, 0]}
+          plinth={useFBXLoader('plinth/HealthPlinth3.fbx')}
+          position={[63.1, 1, 0]}
           rotation={0.05}
           plinthRef={healthPlinthRef}
         />
@@ -165,9 +165,9 @@ const Floor = ({
           scale={0.015}
         />
         <Plinth
-          plinth={useFBXLoader('plinth/plinth4.fbx')}
-          position={[22, -1.2, 70]}
-          rotation={0.25}
+          plinth={useFBXLoader('plinth/JoyPlinth3.fbx')}
+          position={[21.7, 1, 67.3]}
+          rotation={-1.35}
           plinthRef={joyPlinthRef}
         />
       </group>
@@ -177,14 +177,14 @@ const Floor = ({
           state={state}
           avatarRef={exchangeAvatarRef}
           avatar={exchange}
-          position={[state.data.positionX, state.data.positionY, state.data.positionZ]}
-          rotation={state.data.rotation}
+          position={[-48, 11, 36]}
+          rotation={-4.05}
           scale={state.data.scale}
         />
         <Plinth
-          plinth={useFBXLoader('plinth/plinth5.fbx')}
-          position={[-48, -1.2, 36]}
-          rotation={-0.95}
+          plinth={useFBXLoader('plinth/ExchangePlinth3.fbx')}
+          position={[-45.9, 1, 34.2]}
+          rotation={-2.45}
           plinthRef={exchangePlinthRef}
         />
       </group>
