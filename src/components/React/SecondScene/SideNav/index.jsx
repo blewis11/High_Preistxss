@@ -39,24 +39,6 @@ const SideNav = ({
       backgroundColor: '#121212',
       boxShadow: 'none',
     },
-    credits: {
-      width: '100%',
-      backgroundColor: '#121212',
-      color: '#9489de',
-      textDecoration: showCredits ? 'underline' : 'underline solid transparent',
-      padding: '0 15px 15px 15px',
-      fontSize: '10px',
-      textTransform: 'uppercase',
-      fontFamily: 'Helvetica Neue LT W05_75 Bold',
-      letterSpacing: '0.06em',
-      lineHeight: 1,
-      marginTop: 'auto',
-      cursor: 'pointer',
-      transition: 'text-decoration 0.3s ease',
-      '&:hover': {
-        textDecoration: 'underline',
-      },
-    },
   }))
 
   const classes = useStyles()
@@ -117,12 +99,6 @@ const SideNav = ({
                 setSelectedAvatar={setSelectedAvatar}
               />
             </>
-          )}
-
-          {!showAvatarButtons && (
-            <div className={classes.credits} onClick={onClickCredits}>
-              CREDITS
-            </div>
           )}
         </div>
       </Drawer>
