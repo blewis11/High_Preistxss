@@ -10,8 +10,8 @@ import {
   setInformationText,
   setSubscriptionText,
   setButtonsText,
+  setCreditLinks,
 } from '../../../redux/Text/actions'
-import { LessDepth } from 'three'
 
 const WithSecondSceneText = ({
   setLinksSection,
@@ -23,6 +23,7 @@ const WithSecondSceneText = ({
   setInformationText,
   setSubscriptionText,
   setButtonsText,
+  setCreditLinks,
 }) => {
   useEffect(() => {
     const fetchData = async () => {
@@ -128,6 +129,40 @@ const WithSecondSceneText = ({
       const informationText = data.filter(text => text.name === 'Information')[0].content
       const healthMediaLink = data.filter(text => text.name === 'HealthSoundCloudEmbed')[0].content
 
+      const patreonLink = data.filter(text => text.name === 'PatreonLink')[0].content
+      const onlineShopLink = data.filter(text => text.name === 'OnlineShopLink')[0].content
+      const youtubeLink = data.filter(text => text.name === 'YoutubeLink')[0].content
+      const instagramLink = data.filter(text => text.name === 'InstagramLink')[0].content
+
+      const wisdomButton1Link = data.filter(text => text.name === 'WisdomButton1Link')[0].content
+      const wisdomButton2Link = data.filter(text => text.name === 'WisdomButton2Link')[0].content
+      const wisdomButton3Link = data.filter(text => text.name === 'WisdomButton3Link')[0].content
+
+      const joyButton1Link = data.filter(text => text.name === 'JoyButton1Link')[0].content
+
+      const growthButton1Link = data.filter(text => text.name === 'GrowthButton1Link')[0].content
+
+      const exchangeButton1Link = data.filter(text => text.name === 'ExchangeButton1Link')[0]
+        .content
+
+      const bejalCredits = data.filter(text => text.name === 'BejalCredits')[0].content
+      const chauCredits = data.filter(text => text.name === 'ChauCredits')[0].content
+      const svenCredits = data.filter(text => text.name === 'SvenCredits')[0].content
+      const sarahCredits = data.filter(text => text.name === 'SarahCredits')[0].content
+      const portiaCredits = data.filter(text => text.name === 'PortiaCredits')[0].content
+      const claireCredits = data.filter(text => text.name === 'ClaireCredits')[0].content
+      const sebastianCredits = data.filter(text => text.name === 'SebastianCredits')[0].content
+
+      setCreditLinks({
+        chau: chauCredits,
+        sven: svenCredits,
+        bejal: bejalCredits,
+        sarah: sarahCredits,
+        claire: claireCredits,
+        portia: portiaCredits,
+        sebastian: sebastianCredits,
+      })
+
       setLinksSection({
         buttons: {
           instagram: buttonsText['instagram'],
@@ -136,10 +171,10 @@ const WithSecondSceneText = ({
           onlineShop: buttonsText['onlineShop'],
         },
         links: {
-          instagram: '',
-          youtube: '',
-          patreon: '',
-          onlineShop: '',
+          instagram: instagramLink,
+          youtube: youtubeLink,
+          patreon: patreonLink,
+          onlineShop: onlineShopLink,
         },
       })
 
@@ -151,9 +186,9 @@ const WithSecondSceneText = ({
           button3: buttonsText['wisdom3'],
         },
         links: {
-          button1: '',
-          button2: '',
-          button3: '',
+          button1: wisdomButton1Link,
+          button2: wisdomButton2Link,
+          button3: wisdomButton3Link,
         },
       })
 
@@ -163,7 +198,7 @@ const WithSecondSceneText = ({
           button1: buttonsText['joy1'],
         },
         links: {
-          button1: '',
+          button1: joyButton1Link,
         },
       })
 
@@ -180,7 +215,7 @@ const WithSecondSceneText = ({
           button1: buttonsText['growth1'],
         },
         links: {
-          button1: '',
+          button1: growthButton1Link,
         },
       })
 
@@ -190,7 +225,7 @@ const WithSecondSceneText = ({
           button1: buttonsText['exchange1'],
         },
         links: {
-          button1: '',
+          button1: exchangeButton1Link,
         },
       })
 
@@ -239,6 +274,9 @@ const mapDispatchToProps = dispatch => ({
   },
   setButtonsText: buttons => {
     dispatch(setButtonsText(buttons))
+  },
+  setCreditLinks: credits => {
+    dispatch(setCreditLinks(credits))
   },
 })
 

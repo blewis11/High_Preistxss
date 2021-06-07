@@ -23,6 +23,7 @@ const INITIAL_STATE = {
     sarah: '',
     claire: '',
     portia: '',
+    sebastian: '',
   },
   buttons: {
     subscribe: '',
@@ -30,7 +31,7 @@ const INITIAL_STATE = {
     instagram: '',
     explore: '',
     soundOff: '',
-    soundOn: ''
+    soundOn: '',
   },
   links: {
     buttons: {

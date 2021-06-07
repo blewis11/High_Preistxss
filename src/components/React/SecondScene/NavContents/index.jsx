@@ -326,7 +326,12 @@ const LinksSection = ({ subscriptionText, contents }) => {
       <div className={classes.text} dangerouslySetInnerHTML={getMarkdownText(subscriptionText)} />
       <div style={{ paddingTop: '20px', paddingBottom: '10px' }}>
         <Button
-          onClick={() => {}}
+          onClick={() => {
+            const win = window.open(contents.links.instagram, '_blank')
+            if (win) {
+              win.focus()
+            }
+          }}
           classes={{
             root: classes.button,
           }}
@@ -337,7 +342,12 @@ const LinksSection = ({ subscriptionText, contents }) => {
       </div>
       <div className={classes.buttonContainer}>
         <Button
-          onClick={() => {}}
+          onClick={() => {
+            const win = window.open(contents.links.youtube, '_blank')
+            if (win) {
+              win.focus()
+            }
+          }}
           classes={{
             root: classes.button,
           }}
@@ -348,7 +358,12 @@ const LinksSection = ({ subscriptionText, contents }) => {
       </div>
       <div className={classes.buttonContainer}>
         <Button
-          onClick={() => {}}
+          onClick={() => {
+            const win = window.open(contents.links.patreon, '_blank')
+            if (win) {
+              win.focus()
+            }
+          }}
           classes={{
             root: classes.button,
           }}
@@ -359,7 +374,12 @@ const LinksSection = ({ subscriptionText, contents }) => {
       </div>
       <div style={{ paddingTop: '10px' }}>
         <Button
-          onClick={() => {}}
+          onClick={() => {
+            const win = window.open(contents.links.onlineShop, '_blank')
+            if (win) {
+              win.focus()
+            }
+          }}
           classes={{
             root: classes.button,
           }}
@@ -465,7 +485,12 @@ const WisdomSection = ({ contents }) => {
       <div className={classes.text} dangerouslySetInnerHTML={getMarkdownText(contents.text)} />
       <div style={{ paddingTop: '20px', paddingBottom: '10px' }}>
         <Button
-          onClick={() => {}}
+          onClick={() => {
+            const win = window.open(contents.links.button1, '_blank')
+            if (win) {
+              win.focus()
+            }
+          }}
           classes={{
             root: classes.button,
           }}
@@ -476,7 +501,12 @@ const WisdomSection = ({ contents }) => {
       </div>
       <div className={classes.buttonContainer}>
         <Button
-          onClick={() => {}}
+          onClick={() => {
+            const win = window.open(contents.links.button2, '_blank')
+            if (win) {
+              win.focus()
+            }
+          }}
           classes={{
             root: classes.button,
           }}
@@ -487,7 +517,12 @@ const WisdomSection = ({ contents }) => {
       </div>
       <div style={{ paddingTop: '10px' }}>
         <Button
-          onClick={() => {}}
+          onClick={() => {
+            const win = window.open(contents.links.button3, '_blank')
+            if (win) {
+              win.focus()
+            }
+          }}
           classes={{
             root: classes.button,
           }}
@@ -509,7 +544,12 @@ const JoySection = ({ contents }) => {
       <div className={classes.text} dangerouslySetInnerHTML={getMarkdownText(contents.text)} />
       <div style={{ paddingTop: '30px', paddingBottom: '10px' }}>
         <Button
-          onClick={() => {}}
+          onClick={() => {
+            const win = window.open(contents.links.button1, '_blank')
+            if (win) {
+              win.focus()
+            }
+          }}
           classes={{
             root: classes.button,
           }}
@@ -530,7 +570,12 @@ const ExchangeSection = ({ contents }) => {
       <div className={classes.text} dangerouslySetInnerHTML={getMarkdownText(contents.text)} />
       <div style={{ paddingTop: '30px', paddingBottom: '10px' }}>
         <Button
-          onClick={() => {}}
+          onClick={() => {
+            const win = window.open(contents.links.button1, '_blank')
+            if (win) {
+              win.focus()
+            }
+          }}
           classes={{
             root: classes.button,
           }}
@@ -551,7 +596,12 @@ const GrowthSection = ({ contents }) => {
       <div className={classes.text} dangerouslySetInnerHTML={getMarkdownText(contents.text)} />
       <div style={{ paddingTop: '30px', paddingBottom: '10px' }}>
         <Button
-          onClick={() => {}}
+          onClick={() => {
+            const win = window.open(contents.links.button1, '_blank')
+            if (win) {
+              win.focus()
+            }
+          }}
           classes={{
             root: classes.button,
           }}
