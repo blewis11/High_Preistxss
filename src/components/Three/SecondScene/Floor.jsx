@@ -71,7 +71,7 @@ const Floor = ({
   })
 
   const wallTexture = useTextureLoader('wallpapersketch3blaustichig.jpg')
-  const ceilingTexture = useTextureLoader('21-06-07_ceiling4.jpg')
+  const ceilingTexture = useTextureLoader('ceiling2.jpg')
 
   let loader = new THREE.CubeTextureLoader()
   loader.setPath('scene1_background/')
