@@ -9,7 +9,9 @@ import {
   setExchangeSection,
   setInformationText,
   setSubscriptionText,
+  setButtonsText,
 } from '../../../redux/Text/actions'
+import { LessDepth } from 'three'
 
 const WithSecondSceneText = ({
   setLinksSection,
@@ -20,6 +22,7 @@ const WithSecondSceneText = ({
   setExchangeSection,
   setInformationText,
   setSubscriptionText,
+  setButtonsText,
 }) => {
   useEffect(() => {
     const fetchData = async () => {
@@ -29,6 +32,10 @@ const WithSecondSceneText = ({
       const buttons = await responseButtons.json()
 
       const buttonsText = {}
+
+      const informationButtonText = buttons.filter(button => button.name === 'Information')
+
+      const subscribeButtonText = buttons.filter(button => button.name === 'Subscribe')
 
       const onlineShopButtonText = buttons.filter(button => button.name === 'Online Shop')
       const patreonButtonText = buttons.filter(button => button.name === 'Patreon')
@@ -45,6 +52,32 @@ const WithSecondSceneText = ({
       const growthButton1Text = buttons.filter(button => button.name === 'GrowthButton1')
 
       const exchangeButton1Text = buttons.filter(button => button.name === 'ExchangeButton1')
+
+      const exploreButtonText = buttons.filter(button => button.name === 'Explore')
+
+      const soundOffButtonText = buttons.filter(button => button.name === 'Sound Off')
+
+      const soundOnButtonText = buttons.filter(button => button.name === 'Sound On')
+
+      if (soundOffButtonText.length) {
+        buttonsText['soundOff'] = soundOffButtonText[0].value
+      }
+
+      if (soundOnButtonText.length) {
+        buttonsText['soundOn'] = soundOnButtonText[0].value
+      }
+
+      if (exploreButtonText.length) {
+        buttonsText['explore'] = exploreButtonText[0].value
+      }
+
+      if (informationButtonText.length) {
+        buttonsText['information'] = informationButtonText[0].value
+      }
+
+      if (subscribeButtonText.length) {
+        buttonsText['subscribe'] = subscribeButtonText[0].value
+      }
 
       if (instagramButtonText.length) {
         buttonsText['instagram'] = instagramButtonText[0].value
@@ -164,6 +197,14 @@ const WithSecondSceneText = ({
 
       setInformationText(informationText)
       setSubscriptionText(subscriptionText)
+      setButtonsText({
+        subscribe: buttonsText['subscribe'],
+        information: buttonsText['information'],
+        instagram: buttonsText['instagram'],
+        explore: buttonsText['explore'],
+        soundOff: buttonsText['soundOff'],
+        soundOn: buttonsText['soundOn'],
+      })
     }
 
     fetchData()
@@ -194,8 +235,11 @@ const mapDispatchToProps = dispatch => ({
   setInformationText: values => {
     dispatch(setInformationText(values))
   },
-  setSubscriptionText: values => {
-    dispatch(setSubscriptionText(values))
+  setSubscriptionText: text => {
+    dispatch(setSubscriptionText(text))
+  },
+  setButtonsText: buttons => {
+    dispatch(setButtonsText(buttons))
   },
 })
 

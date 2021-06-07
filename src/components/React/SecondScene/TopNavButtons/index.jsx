@@ -4,6 +4,7 @@ import clsx from 'clsx'
 import { makeStyles } from '@material-ui/core/styles'
 import useSound from 'use-sound'
 import theme from './highpriestxss_V06.mp3'
+import { connect } from 'react-redux'
 
 const TopNavButtons = ({
   buttonColor,
@@ -15,6 +16,7 @@ const TopNavButtons = ({
   selectedIndex,
   showClose,
   onClickExplore,
+  buttons,
   avatarSelected = false,
 }) => {
   const useStyles = makeStyles(theme => {
@@ -142,6 +144,7 @@ const TopNavButtons = ({
           showClose={showClose}
           avatarSelected={avatarSelected}
           onClickExplore={onClickExplore}
+          buttons={buttons}
         />
       </div>
     </Fragment>
@@ -159,6 +162,7 @@ const AllButtons = ({
   showClose,
   avatarSelected,
   onClickExplore,
+  buttons,
 }) => {
   const [play, { stop }] = useSound(theme)
 
@@ -185,7 +189,7 @@ const AllButtons = ({
             }}
             variant="outlined"
           >
-            INFORMATION
+            {buttons.information}
           </Button>
         )}
       </div>
@@ -204,13 +208,13 @@ const AllButtons = ({
             }}
             variant="outlined"
           >
-            JOIN US
+            {buttons.subscribe}
           </Button>
         )}
       </div>
       <div className={clsx(classes.buttonContainer, classes.soundButton)}>
         <Button onClick={soundHandler} classes={{ root: classes.root }} variant="outlined">
-          {soundOn ? 'SOUND OFF' : 'SOUND ON'}
+          {soundOn ? buttons.soundOff : buttons.soundOn}
         </Button>
       </div>
       {showClose && (
@@ -231,7 +235,7 @@ const AllButtons = ({
             classes={{ root: classes.exploreButton }}
             variant="outlined"
           >
-            EXPLORE
+            {buttons.explore}
           </Button>
         </div>
       )}
@@ -239,4 +243,10 @@ const AllButtons = ({
   )
 }
 
-export { TopNavButtons }
+const mapStateToProps = state => {
+  return {
+    buttons: state.text.buttons,
+  }
+}
+
+export default connect(mapStateToProps)(TopNavButtons)

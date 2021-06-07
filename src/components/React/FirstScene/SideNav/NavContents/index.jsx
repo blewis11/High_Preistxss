@@ -4,6 +4,7 @@ import classnames from 'classnames'
 import Zoom from '@material-ui/core/Zoom'
 import { connect } from 'react-redux'
 import MailchimpSubscribe from 'react-mailchimp-subscribe'
+import Button from '@material-ui/core/Button'
 
 import marked from 'marked'
 
@@ -19,6 +20,26 @@ const useStyles = makeStyles({
     letterSpacing: '0.02em',
     lineHeight: 1.85,
     fontSize: '14px',
+  },
+  button: {
+    zIndex: '1 !important',
+    width: '100%',
+    transition: 'all 0.3s ease',
+    fontFamily: 'Helvetica Neue LT W05_75 Bold',
+    color: '#121212',
+    borderRadius: 15,
+    border: `0.5px solid #121212`,
+    fontSize: '10px',
+    letterSpacing: '0.06em',
+    filter: 'none',
+    padding: '7px',
+    '&:hover': {
+      backgroundColor: '#121212',
+      color: '#9489de',
+    },
+  },
+  buttonContainer: {
+    padding: '10px 0 10px 0',
   },
 })
 
@@ -297,12 +318,56 @@ const SubscribedSection = ({ successfullySubscribedText }) => {
 }
 
 const SubscriptionSection = props => {
-  const { subscriptionText } = props
+  const { subscriptionText, contents } = props
   const classes = useStyles()
 
   return (
     <Fragment>
       <div className={classes.text} dangerouslySetInnerHTML={getMarkdownText(subscriptionText)} />
+      <div style={{ paddingTop: '20px', paddingBottom: '10px' }}>
+        <Button
+          onClick={() => {}}
+          classes={{
+            root: classes.button,
+          }}
+          variant="outlined"
+        >
+          {contents.buttons.instagram}
+        </Button>
+      </div>
+      <div className={classes.buttonContainer}>
+        <Button
+          onClick={() => {}}
+          classes={{
+            root: classes.button,
+          }}
+          variant="outlined"
+        >
+          {contents.buttons.youtube}
+        </Button>
+      </div>
+      <div className={classes.buttonContainer}>
+        <Button
+          onClick={() => {}}
+          classes={{
+            root: classes.button,
+          }}
+          variant="outlined"
+        >
+          {contents.buttons.patreon}
+        </Button>
+      </div>
+      <div style={{ paddingTop: '10px' }}>
+        <Button
+          onClick={() => {}}
+          classes={{
+            root: classes.button,
+          }}
+          variant="outlined"
+        >
+          {contents.buttons.onlineShop}
+        </Button>
+      </div>
       <SubscribeForm classes={classes} />
     </Fragment>
   )
@@ -322,13 +387,16 @@ const NavContents = ({
   selectedIndex,
   inSubscribedState,
   successfullySubscribedText,
+  links,
 }) => {
   const classes = useStyles()
 
   return (
     <div className={classes.container}>
       {selectedIndex === 1 && <InformationSection informationText={informationText} />}
-      {selectedIndex === 2 && <SubscriptionSection subscriptionText={subscriptionText} />}
+      {selectedIndex === 2 && (
+        <SubscriptionSection subscriptionText={subscriptionText} contents={links} />
+      )}
       {inSubscribedState && (
         <SubscribedSection successfullySubscribedText={successfullySubscribedText} />
       )}
@@ -341,6 +409,7 @@ const mapStateToProps = state => {
     informationText: state.text.informationText,
     subscriptionText: state.text.subscriptionText,
     successfullySubscribedText: state.text.successfullySubscribed,
+    links: state.text.links,
   }
 }
 

@@ -11,7 +11,6 @@ import { useFBXLoader } from 'drei'
 const App = ({ state, setState }) => {
   const handleUpdate = newData =>
     setState(prevState => {
-      console.log({ newData })
       return { data: { ...prevState.data, ...newData } }
     })
 

@@ -1,8 +1,10 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import clsx from 'clsx'
 import { makeStyles } from '@material-ui/core/styles'
+import useSound from 'use-sound'
+import theme from './highpriestxss_V06.mp3'
 
 const TopNavButtons = ({
   buttonColor,
@@ -13,6 +15,8 @@ const TopNavButtons = ({
   closeButtonHandler,
   selectedIndex,
   buttons,
+  soundHandler,
+  soundOn,
 }) => {
   const useStyles = makeStyles(theme => {
     const onHover = showClose
@@ -124,6 +128,8 @@ const TopNavButtons = ({
           closeButtonHandler={closeButtonHandler}
           showClose={showClose}
           buttons={buttons}
+          soundHandler={soundHandler}
+          soundOn={soundOn}
         />
       </div>
     </Fragment>
@@ -135,11 +141,20 @@ const AllButtons = ({
   selectedIndex,
   informationButtonHandler,
   subscriptionButtonHandler,
-  instagramButtonHandler,
   closeButtonHandler,
   showClose,
   buttons,
+  soundHandler,
+  soundOn,
 }) => {
+  const [play, { stop }] = useSound(theme)
+
+  if (soundOn) {
+    play()
+  } else {
+    stop()
+  }
+
   return (
     <Fragment>
       <div
@@ -178,12 +193,8 @@ const AllButtons = ({
       </div>
       <div className={clsx(classes.buttonContainer, classes.instagramButton)}>
         {/* TODO implementation of this button, only show in mobile or? */}
-        <Button
-          onClick={instagramButtonHandler}
-          classes={{ root: classes.root }}
-          variant="outlined"
-        >
-          {buttons.instagram}
+        <Button onClick={soundHandler} classes={{ root: classes.root }} variant="outlined">
+          {soundOn ? buttons.soundOff : buttons.soundOn}
         </Button>
       </div>
       {showClose && (

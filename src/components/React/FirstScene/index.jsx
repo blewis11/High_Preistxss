@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 
 import { Loader } from './Loader/index.jsx'
-import WithSidebarText from '../hooks/WithSidebarText.jsx'
+import WithSecondSceneText from '../hooks/WithSecondSceneText.jsx'
 import TopNavButtons from './TopNavButtons'
 import { SideNav } from './SideNav'
 import { Logo } from './Logo'
@@ -87,9 +87,11 @@ const FirstScene = ({ isLoading, fadeToBlack, mouseOverPortal }) => {
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [showCredits, setShowCredits] = useState(false)
   const [startFade, setStartFade] = useState(false)
+  const [soundOn, setSoundOn] = useState(true)
 
   useEffect(() => {
     if (fadeToBlack) {
+      setSoundOn(false)
       setTimeout(() => setStartFade(true), 900)
     }
   }, [fadeToBlack])
@@ -125,10 +127,14 @@ const FirstScene = ({ isLoading, fadeToBlack, mouseOverPortal }) => {
     setOpen(true)
   }
 
+  const soundHandler = () => {
+    setSoundOn(!soundOn)
+  }
+
   return (
     <div className="sidebarContainer">
       <WithNoise />
-      <WithSidebarText />
+      <WithSecondSceneText />
       <LoaderContainer showLoader={isLoading} />
 
       <FadeOutOverlay startFade={startFade} mouseOverPortal={mouseOverPortal} />
@@ -140,6 +146,8 @@ const FirstScene = ({ isLoading, fadeToBlack, mouseOverPortal }) => {
         subscriptionButtonHandler={subscriptionHandler}
         instagramButtonHandler={instagramButtonHandler}
         inSubscribedState={false}
+        soundHandler={soundHandler}
+        soundOn={soundOn}
       />
 
       <SideNav

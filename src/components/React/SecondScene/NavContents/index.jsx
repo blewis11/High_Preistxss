@@ -321,7 +321,6 @@ const useStyles = makeStyles({
 
 const LinksSection = ({ subscriptionText, contents }) => {
   const classes = useStyles()
-  console.log({ contents })
   return (
     <Fragment>
       <div className={classes.text} dangerouslySetInnerHTML={getMarkdownText(subscriptionText)} />

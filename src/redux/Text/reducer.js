@@ -28,6 +28,9 @@ const INITIAL_STATE = {
     subscribe: '',
     information: '',
     instagram: '',
+    explore: '',
+    soundOff: '',
+    soundOn: ''
   },
   links: {
     buttons: {
