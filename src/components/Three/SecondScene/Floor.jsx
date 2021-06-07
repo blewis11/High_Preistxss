@@ -78,13 +78,23 @@ const Floor = ({
   let textureCube = loader.load(['px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'nz.jpg', 'pz.jpg'])
 
   const wisdom = useFBXLoader('avatars/Wisdom.fbx')
-
-  wisdom.children[0].material[0].envMap = textureCube
+  wisdom.children[0].material.map(m => (m.envMap = textureCube))
 
   const growth = useFBXLoader('avatars/Growth.fbx')
+  growth.children.map(c => (c.material.envMap = textureCube))
+
   const health = useFBXLoader('avatars/Health.fbx')
+  health.children.map(c => (c.material.envMap = textureCube))
+
   const joy = useFBXLoader('avatars/Joy.fbx')
+  joy.children.map(c => {
+    if (c.material) {
+      c.material.envMap = textureCube
+    }
+  })
+
   const exchange = useFBXLoader('avatars/Exchange.fbx')
+  exchange.children.map(c => (c.material.envMap = textureCube))
 
   return (
     <>

@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useFrame, useThree } from 'react-three-fiber'
 import * as THREE from 'three'
-import { useFBXLoader } from 'drei'
 import * as createjs from 'createjs-module'
-import { resolvePtr } from 'dns'
 
 const Avatar = ({ state, avatarRef, avatar, position, rotation, scale }) => {
   const { camera, scene } = useThree()
