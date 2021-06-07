@@ -119,8 +119,6 @@ const WithSecondSceneText = ({
         buttonsText['exchange1'] = exchangeButton1Text[0].value
       }
 
-      const healthAudioLink = data.filter(text => text.name === 'HealthAudioLink')[0].content
-
       const healthText = data.filter(text => text.name === 'HealthText')[0].content
       const joyText = data.filter(text => text.name === 'JoyText')[0].content
       const wisdomText = data.filter(text => text.name === 'WisdomText')[0].content
@@ -128,6 +126,7 @@ const WithSecondSceneText = ({
       const growthText = data.filter(text => text.name === 'GrowthText')[0].content
       const subscriptionText = data.filter(text => text.name === 'SubscriptionInfo')[0].content
       const informationText = data.filter(text => text.name === 'Information')[0].content
+      const healthMediaLink = data.filter(text => text.name === 'HealthSoundCloudEmbed')[0].content
 
       setLinksSection({
         buttons: {
@@ -171,7 +170,7 @@ const WithSecondSceneText = ({
       setHealthSection({
         text: healthText,
         links: {
-          soundcloud: healthAudioLink,
+          soundcloud: healthMediaLink,
         },
       })
 

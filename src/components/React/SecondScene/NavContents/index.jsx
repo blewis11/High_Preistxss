@@ -566,10 +566,15 @@ const GrowthSection = ({ contents }) => {
 
 const HealthSection = ({ contents }) => {
   const classes = useStyles()
+  const html = ` <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1027221937&color=%239489dd&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/are-human-resources" title="Human Resources" target="_blank" style="color: #cccccc; text-decoration: none;">Human Resources</a> · <a href="https://soundcloud.com/are-human-resources/303-is-your-destiny-child" title="303 Is Your Destiny, Child" target="_blank" style="color: #cccccc; text-decoration: none;">303 Is Your Destiny, Child</a></div>`
   return (
     <Fragment>
       <div class="title">HEALTH</div>
       <div className={classes.text} dangerouslySetInnerHTML={getMarkdownText(contents.text)} />
+      <div
+        style={{ paddingTop: '25px' }}
+        dangerouslySetInnerHTML={{ __html: contents.links.soundcloud.trim() }}
+      ></div>
     </Fragment>
   )
 }
