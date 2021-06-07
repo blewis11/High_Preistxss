@@ -458,11 +458,12 @@ const InformationSection = ({ informationText }) => {
 
 const WisdomSection = ({ contents }) => {
   const classes = useStyles()
+
   return (
     <Fragment>
       <div class="title">WISDOM</div>
       <div className={classes.text} dangerouslySetInnerHTML={getMarkdownText(contents.text)} />
-      <div style={{ paddingTop: '30px', paddingBottom: '10px' }}>
+      <div style={{ paddingTop: '20px', paddingBottom: '10px' }}>
         <Button
           onClick={() => {}}
           classes={{
@@ -484,7 +485,7 @@ const WisdomSection = ({ contents }) => {
           {contents.buttons.button2}
         </Button>
       </div>
-      <div className={classes.buttonContainer}>
+      <div style={{ paddingTop: '10px' }}>
         <Button
           onClick={() => {}}
           classes={{
