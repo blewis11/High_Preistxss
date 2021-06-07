@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useMemo, useEffect } from 'react'
 import { Canvas } from 'react-three-fiber'
 import { Provider } from 'react-redux'
 import { Floor } from './Floor.jsx'
@@ -8,7 +8,8 @@ import CameraMovements from './CameraMovements'
 import WithLoader from './helpers/Loader.jsx'
 
 import * as THREE from 'three'
-const Lights = () => {
+const Lights = ({ wisdomGroupRef }) => {
+  const spotLightRef = useRef()
   const light = new THREE.DirectionalLight(0xe3b6e1)
   light.target.position.set(500, 0, 500)
   light.intensity = 0.2
@@ -49,7 +50,13 @@ const SecondScene = ({ store }) => {
     <>
       <Canvas concurrent colorManagement camera={{ position: [0, 0, EPS], fov: 80 }}>
         <Provider store={store}>
-          <Lights />
+          <Lights
+            wisdomGroupRef={wisdomGroupRef}
+            growthGroupRef={growthGroupRef}
+            healthGroupRef={healthGroupRef}
+            joyGroupRef={joyGroupRef}
+            exchangeGroupRef={exchangeGroupRef}
+          />
 
           <Suspense fallback={<WithLoader />}>
             <Floor
