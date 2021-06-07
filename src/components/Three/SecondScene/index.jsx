@@ -9,17 +9,14 @@ import WithLoader from './helpers/Loader.jsx'
 
 import * as THREE from 'three'
 const Lights = ({ wisdomGroupRef }) => {
-  const spotLightRef = useRef()
   const light = new THREE.DirectionalLight(0xe3b6e1)
   light.target.position.set(500, 0, 500)
   light.intensity = 0.2
   light.castShadow = true
-
   return (
     <>
       <hemisphereLight args={['blue', '0xf9cc6b', 0.3]} />
       <directionalLight position={[20, 20, 5]} intensity={0.5} args={[0xe3b6e1]} />
-      <primitive object={light} position={[47, 10, 40]} />
     </>
   )
 }

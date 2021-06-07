@@ -18,9 +18,9 @@ const App = ({ state, setState }) => {
     <DatGui data={state.data} onUpdate={handleUpdate}>
       <DatNumber path="rotation" label="rotation" step={0.05} />
       <DatNumber path="scale" label="scale" step={0.01} />
-      <DatNumber path="positionX" label="positionx" step={0.1} />
-      <DatNumber path="positionY" label="positiony" step={0.1} />
-      <DatNumber path="positionZ" label="positionz" step={0.1} />
+      <DatNumber path="positionX" label="positionx" step={3} />
+      <DatNumber path="positionY" label="positiony" step={3} />
+      <DatNumber path="positionZ" label="positionz" step={3} />
     </DatGui>
   )
 }
@@ -62,16 +62,16 @@ const Floor = ({
 }) => {
   const [state, setState] = useState({
     data: {
-      positionX: -48,
-      positionY: 1,
-      positionZ: 36,
+      positionX: -33,
+      positionY: 0,
+      positionZ: -24,
       rotation: -0.095,
       scale: 0.11,
     },
   })
 
   const wallTexture = useTextureLoader('wallpapersketch3blaustichig.jpg')
-  const ceilingTexture = useTextureLoader('21-06-07_ceiling2.jpg')
+  const ceilingTexture = useTextureLoader('21-06-07_ceiling4.jpg')
 
   let loader = new THREE.CubeTextureLoader()
   loader.setPath('scene1_background/')
@@ -96,14 +96,47 @@ const Floor = ({
   const exchange = useFBXLoader('avatars/Exchange.fbx')
   exchange.children.map(c => (c.material.envMap = textureCube))
 
+  var healthSpotLight = new THREE.SpotLight(0xe3b6e1, 1)
+  healthSpotLight.distance = 100
+  healthSpotLight.angle = 0.52
+  healthSpotLight.position.set(0, 30, -2)
+  healthSpotLight.target.position.set(50, 0, 5)
+
+  var exchangeSpotLight = new THREE.SpotLight(0xe3b6e1, 1)
+  exchangeSpotLight.distance = 100
+  exchangeSpotLight.angle = 0.52
+  exchangeSpotLight.position.set(0, 30, -2)
+  exchangeSpotLight.target.position.set(-53, 0, 26)
+
+  var growthSpotLight = new THREE.SpotLight(0xe3b6e1, 3)
+  growthSpotLight.distance = 100
+  growthSpotLight.angle = 0.3
+  growthSpotLight.position.set(0, 30, -2)
+  growthSpotLight.target.position.set(-24, 15, -24)
+
+  var joySpotLight = new THREE.SpotLight(0xe3b6e1, 1)
+  joySpotLight.distance = 100
+  joySpotLight.angle = 0.52
+  joySpotLight.position.set(0, 30, -2)
+  joySpotLight.target.position.set(0, 0, 39)
+
+  var wisdomSpotLight = new THREE.SpotLight(0xe3b6e1, 3)
+  wisdomSpotLight.distance = 100
+  wisdomSpotLight.angle = 0.2
+  wisdomSpotLight.position.set(0, 30, -2)
+  wisdomSpotLight.target.position.set(12, 0, -66)
+
   return (
     <>
-      {/* <Html>
+      <Html>
         <div style={{ width: '500px', background: 'blue' }}>
           <App state={state} setState={setState} />
         </div>
-      </Html> */}
+      </Html>
+
       <group ref={wisdomGroupRef}>
+        <primitive object={wisdomSpotLight} />
+        <primitive object={wisdomSpotLight.target} />
         <Avatar
           state={state}
           avatarRef={wisdomAvatarRef}
@@ -121,6 +154,8 @@ const Floor = ({
       </group>
 
       <group ref={growthGroupRef}>
+        <primitive object={growthSpotLight} />
+        <primitive object={growthSpotLight.target} />
         <Avatar
           state={state}
           avatarRef={growthAvatarRef}
@@ -138,6 +173,8 @@ const Floor = ({
       </group>
 
       <group ref={healthGroupRef}>
+        <primitive object={healthSpotLight} />
+        <primitive object={healthSpotLight.target} />
         <Avatar
           state={state}
           avatarRef={healthAvatarRef}
@@ -155,6 +192,8 @@ const Floor = ({
       </group>
 
       <group ref={joyGroupRef}>
+        <primitive object={joySpotLight} />
+        <primitive object={joySpotLight.target} />
         <Avatar
           state={state}
           avatarRef={joyAvatarRef}
@@ -172,6 +211,8 @@ const Floor = ({
       </group>
 
       <group ref={exchangeGroupRef}>
+        <primitive object={exchangeSpotLight} />
+        <primitive object={exchangeSpotLight.target} />
         <Avatar
           state={state}
           avatarRef={exchangeAvatarRef}
