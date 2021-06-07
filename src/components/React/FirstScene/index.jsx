@@ -91,8 +91,10 @@ const FirstScene = ({ isLoading, fadeToBlack, mouseOverPortal }) => {
 
   useEffect(() => {
     if (fadeToBlack) {
-      setSoundOn(false)
-      setTimeout(() => setStartFade(true), 900)
+      setTimeout(() => {
+        setSoundOn(false)
+        setStartFade(true)
+      }, 900)
     }
   }, [fadeToBlack])
 
