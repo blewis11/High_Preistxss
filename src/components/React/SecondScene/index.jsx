@@ -6,6 +6,7 @@ import { SideNav } from './SideNav/index.jsx'
 import TopNavButtons from './TopNavButtons/index.jsx'
 import BottomNavButtons from './BottomNavButtons/index.jsx'
 import WithSecondSceneText from '../hooks/WithSecondSceneText.jsx'
+import { Preloader } from './Preloader.jsx'
 import { setAvatarSelected, setSelectedAvatar } from '../../../redux/Avatar/actions'
 import './styles.css'
 
@@ -46,6 +47,16 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const Fadeout = ({ loading }) => {
+  const [fadeout, setFadeout] = useState(false)
+
+  useEffect(() => {
+    if (!loading) {
+      window.setTimeout(() => {
+        setFadeout(true)
+      }, 500)
+    }
+  }, [loading])
+
   const useStyles = makeStyles({
     container: {
       width: '100vw',
@@ -56,7 +67,7 @@ const Fadeout = ({ loading }) => {
       margin: 'auto',
       zIndex: 5000,
       backgroundColor: '#3416DC',
-      opacity: loading ? 1 : 0,
+      opacity: fadeout ? 0 : 1,
       transition: 'opacity 1s',
       pointerEvents: 'none',
     },
@@ -64,7 +75,11 @@ const Fadeout = ({ loading }) => {
 
   const classes = useStyles()
 
-  return <div className={classes.container} />
+  return (
+    <div className={classes.container}>
+      <Preloader isLoaded={!loading} />
+    </div>
+  )
 }
 
 const IntroText = ({ loaded }) => {
