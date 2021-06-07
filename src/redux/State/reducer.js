@@ -11,7 +11,7 @@ const INITIAL_STATE = {
   mouseOverPortal: false,
   fadeToBlack: false,
   enlargePortal: false,
-  sceneNumber: 2,
+  sceneNumber: 1,
 }
 
 const reducer = (state = INITIAL_STATE, action) => {
