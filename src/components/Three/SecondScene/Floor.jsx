@@ -74,7 +74,7 @@ const Floor = ({
   const ceilingTexture = useTextureLoader('21-06-07_ceiling6.jpg')
 
   let loader = new THREE.CubeTextureLoader()
-  loader.setPath('scene1_background/')
+  loader.setPath('envmap2/')
   let textureCube = loader.load(['px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'nz.jpg', 'pz.jpg'])
 
   const wisdom = useFBXLoader('avatars/Wisdom.fbx')
