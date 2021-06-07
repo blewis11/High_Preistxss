@@ -326,7 +326,12 @@ const SubscriptionSection = props => {
       <div className={classes.text} dangerouslySetInnerHTML={getMarkdownText(subscriptionText)} />
       <div style={{ paddingTop: '20px', paddingBottom: '10px' }}>
         <Button
-          onClick={() => {}}
+          onClick={() => {
+            const win = window.open(contents.links.instagram, '_blank')
+            if (win) {
+              win.focus()
+            }
+          }}
           classes={{
             root: classes.button,
           }}
@@ -337,7 +342,12 @@ const SubscriptionSection = props => {
       </div>
       <div className={classes.buttonContainer}>
         <Button
-          onClick={() => {}}
+          onClick={() => {
+            const win = window.open(contents.links.youtube, '_blank')
+            if (win) {
+              win.focus()
+            }
+          }}
           classes={{
             root: classes.button,
           }}
@@ -348,7 +358,12 @@ const SubscriptionSection = props => {
       </div>
       <div className={classes.buttonContainer}>
         <Button
-          onClick={() => {}}
+          onClick={() => {
+            const win = window.open(contents.links.patreon, '_blank')
+            if (win) {
+              win.focus()
+            }
+          }}
           classes={{
             root: classes.button,
           }}
@@ -359,7 +374,12 @@ const SubscriptionSection = props => {
       </div>
       <div style={{ paddingTop: '10px' }}>
         <Button
-          onClick={() => {}}
+          onClick={() => {
+            const win = window.open(contents.links.onlineShop, '_blank')
+            if (win) {
+              win.focus()
+            }
+          }}
           classes={{
             root: classes.button,
           }}

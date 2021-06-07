@@ -114,13 +114,6 @@ const FirstScene = ({ isLoading, fadeToBlack, mouseOverPortal }) => {
     setOpen(true)
   }
 
-  const instagramButtonHandler = () => {
-    const win = window.open('https://www.instagram.com/thehighpriestxss/', '_blank')
-    if (win) {
-      win.focus()
-    }
-  }
-
   const classes = useStyles()
 
   const onClickCredits = () => {
@@ -146,7 +139,6 @@ const FirstScene = ({ isLoading, fadeToBlack, mouseOverPortal }) => {
         buttonColor={'white'}
         informationButtonHandler={informationHandler}
         subscriptionButtonHandler={subscriptionHandler}
-        instagramButtonHandler={instagramButtonHandler}
         inSubscribedState={false}
         soundHandler={soundHandler}
         soundOn={soundOn}
@@ -175,7 +167,7 @@ const mapStateToProps = state => {
   return {
     isLoading: state.state.isLoading,
     fadeToBlack: state.state.fadeToBlack,
-    mouseOverPortal: state.state.mouseOverPortal,
+    mouseOverPortal: state.state.mouseOverPortal
   }
 }
 

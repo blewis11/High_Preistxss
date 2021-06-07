@@ -10,7 +10,6 @@ const TopNavButtons = ({
   buttonColor,
   informationButtonHandler,
   subscriptionButtonHandler,
-  instagramButtonHandler,
   showClose,
   closeButtonHandler,
   selectedIndex,
@@ -124,7 +123,6 @@ const TopNavButtons = ({
           selectedIndex={selectedIndex}
           informationButtonHandler={informationButtonHandler}
           subscriptionButtonHandler={subscriptionButtonHandler}
-          instagramButtonHandler={instagramButtonHandler}
           closeButtonHandler={closeButtonHandler}
           showClose={showClose}
           buttons={buttons}
