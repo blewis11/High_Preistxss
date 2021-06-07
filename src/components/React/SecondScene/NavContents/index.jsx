@@ -70,8 +70,8 @@ const SubscribeForm = props => {
         transition: 'all 0.3s ease !important',
         outline: 'none',
         textTransform: 'uppercase',
-        backgroundColor: status === 'sent' ? '#ff4440' : inputFocused ? '#9489dd' : '#121212',
-        color: inputFocused || status === 'sent' ? '#121212' : '#9489dd',
+        backgroundColor: status === 'sent' ? '#A8D1D9' : inputFocused ? '#121212' : '#9489dd',
+        color: status === 'sent' ? '#121212' : inputFocused ? '#9489dd' : '#121212',
         fontWeight: 700,
         margin: '5px',
         height: 'calc(100% - 10px)',
@@ -83,7 +83,7 @@ const SubscribeForm = props => {
         boxSizing: 'border-box',
         borderRadius: '50px',
         '&:hover': {
-          backgroundColor: '#ff4440',
+          backgroundColor: '#A8D1D9',
           color: '#121212',
           cursor: 'pointer',
         },
@@ -97,9 +97,9 @@ const SubscribeForm = props => {
         padding: '10px',
         textTransform: 'uppercase',
         borderRadius: '50px',
-        backgroundColor: status === 'sent' ? '#121212' : 'transparent',
+        backgroundColor: status === 'sent' ? '#9489dd' : 'transparent',
         border: '1px solid #9489dd',
-        color: '#121212',
+        color: '#9489dd',
         height: '100%',
         overflow: 'hidden',
         textOverflow: 'ellipsis',
@@ -116,7 +116,7 @@ const SubscribeForm = props => {
         '&:focus': {
           outline: 'none',
           backgroundColor: '#121212',
-          borderColor: '#121212',
+          borderColor: '#9489dd',
           borderWidth: '1px',
           borderStyle: 'solid',
           color: '#9489dd',
@@ -127,8 +127,8 @@ const SubscribeForm = props => {
           filter: 'drop-shadow(0 0 2px #121212)',
         },
         '&:hover:focus': {
-          backgroundColor: '#121212',
-          color: '#9489dd',
+          backgroundColor: '#9489dd',
+          color: '#121212',
         },
       },
       newsletterBox: {
@@ -218,7 +218,7 @@ const SubscribeForm = props => {
               onKeyDown={e => {
                 if (e.key === 'Enter') callSubscribe(subscribe)
               }}
-              placeholder="SIGN UP FOR ACCESS"
+              placeholder="NEWSLETTER SIGN-UP"
             />
             <Zoom in={validEmail}>
               <div
