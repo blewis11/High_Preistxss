@@ -37,6 +37,7 @@ const INITIAL_STATE = {
       onlineShop: '',
     },
     links: {
+      instagram: '',
       youtube: '',
       patreon: '',
       onlineShop: '',

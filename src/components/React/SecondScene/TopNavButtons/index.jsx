@@ -1,13 +1,16 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import Button from '@material-ui/core/Button'
 import clsx from 'clsx'
 import { makeStyles } from '@material-ui/core/styles'
+import useSound from 'use-sound'
+import theme from './highpriestxss_V06.mp3'
 
 const TopNavButtons = ({
   buttonColor,
   informationButtonHandler,
   linksButtonHandler,
   soundHandler,
+  soundOn,
   closeButtonHandler,
   selectedIndex,
   showClose,
@@ -135,6 +138,7 @@ const TopNavButtons = ({
           linksButtonHandler={linksButtonHandler}
           closeButtonHandler={closeButtonHandler}
           soundHandler={soundHandler}
+          soundOn={soundOn}
           showClose={showClose}
           avatarSelected={avatarSelected}
           onClickExplore={onClickExplore}
@@ -150,11 +154,20 @@ const AllButtons = ({
   informationButtonHandler,
   linksButtonHandler,
   soundHandler,
+  soundOn,
   closeButtonHandler,
   showClose,
   avatarSelected,
   onClickExplore,
 }) => {
+  const [play, { stop }] = useSound(theme)
+
+  if (soundOn) {
+    play()
+  } else {
+    stop()
+  }
+
   return (
     <Fragment>
       <div
@@ -197,7 +210,7 @@ const AllButtons = ({
       </div>
       <div className={clsx(classes.buttonContainer, classes.soundButton)}>
         <Button onClick={soundHandler} classes={{ root: classes.root }} variant="outlined">
-          SOUND OFF
+          {soundOn ? 'SOUND OFF' : 'SOUND ON'}
         </Button>
       </div>
       {showClose && (

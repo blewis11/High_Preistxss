@@ -38,11 +38,17 @@ const WithSecondSceneText = ({
       const wisdomButton2Text = buttons.filter(button => button.name === 'WisdomButton2')
       const wisdomButton3Text = buttons.filter(button => button.name === 'WisdomButton3')
 
+      const instagramButtonText = buttons.filter(button => button.name === 'Instagram')
+
       const joyButton1Text = buttons.filter(button => button.name === 'JoyButton1')
 
       const growthButton1Text = buttons.filter(button => button.name === 'GrowthButton1')
 
       const exchangeButton1Text = buttons.filter(button => button.name === 'ExchangeButton1')
+
+      if (instagramButtonText.length) {
+        buttonsText['instagram'] = instagramButtonText[0].value
+      }
 
       if (onlineShopButtonText.length) {
         buttonsText['onlineShop'] = onlineShopButtonText[0].value
@@ -91,9 +97,18 @@ const WithSecondSceneText = ({
       const informationText = data.filter(text => text.name === 'Information')[0].content
 
       setLinksSection({
-        youtube: buttonsText['youtube'],
-        patreon: buttonsText['patreon'],
-        onlineShop: buttonsText['onlineShop'],
+        buttons: {
+          instagram: buttonsText['instagram'],
+          youtube: buttonsText['youtube'],
+          patreon: buttonsText['patreon'],
+          onlineShop: buttonsText['onlineShop'],
+        },
+        links: {
+          instagram: '',
+          youtube: '',
+          patreon: '',
+          onlineShop: '',
+        },
       })
 
       setWisdomSection({

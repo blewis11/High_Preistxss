@@ -319,9 +319,9 @@ const useStyles = makeStyles({
   },
 })
 
-const LinksSection = ({ subscriptionText }) => {
+const LinksSection = ({ subscriptionText, contents }) => {
   const classes = useStyles()
-
+  console.log({ contents })
   return (
     <Fragment>
       <div className={classes.text} dangerouslySetInnerHTML={getMarkdownText(subscriptionText)} />
@@ -333,7 +333,7 @@ const LinksSection = ({ subscriptionText }) => {
           }}
           variant="outlined"
         >
-          INSTAGRAM
+          {contents.buttons.instagram}
         </Button>
       </div>
       <div className={classes.buttonContainer}>
@@ -344,7 +344,7 @@ const LinksSection = ({ subscriptionText }) => {
           }}
           variant="outlined"
         >
-          YOUTUBE
+          {contents.buttons.youtube}
         </Button>
       </div>
       <div className={classes.buttonContainer}>
@@ -355,7 +355,7 @@ const LinksSection = ({ subscriptionText }) => {
           }}
           variant="outlined"
         >
-          PATREON
+          {contents.buttons.patreon}
         </Button>
       </div>
       <div style={{ paddingTop: '10px' }}>
@@ -366,7 +366,7 @@ const LinksSection = ({ subscriptionText }) => {
           }}
           variant="outlined"
         >
-          ONLINE SHOP
+          {contents.buttons.onlineShop}
         </Button>
       </div>
       <SubscribeForm classes={classes} />
@@ -589,6 +589,7 @@ const NavContents = ({
   exchange,
   informationText,
   subscriptionText,
+  links,
 }) => {
   const classes = useStyles()
 
@@ -613,7 +614,9 @@ const NavContents = ({
           ) : (
             <div>
               {selectedIndex === 1 && <InformationSection informationText={informationText} />}
-              {selectedIndex === 2 && <LinksSection subscriptionText={subscriptionText} />}
+              {selectedIndex === 2 && (
+                <LinksSection subscriptionText={subscriptionText} contents={links} />
+              )}
             </div>
           )}
         </Fragment>
@@ -631,6 +634,7 @@ const mapStateToProps = state => {
     exchange: state.text.secondScene.exchange,
     informationText: state.text.informationText,
     subscriptionText: state.text.subscriptionText,
+    links: state.text.links,
   }
 }
 

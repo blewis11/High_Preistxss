@@ -6,7 +6,6 @@ import { SideNav } from './SideNav/index.jsx'
 import { TopNavButtons } from './TopNavButtons/index.jsx'
 import BottomNavButtons from './BottomNavButtons/index.jsx'
 import WithSecondSceneText from '../hooks/WithSecondSceneText.jsx'
-import WithSidebarText from '../hooks/WithSidebarText.jsx'
 import { setAvatarSelected, setSelectedAvatar } from '../../../redux/Avatar/actions'
 import './styles.css'
 
@@ -123,6 +122,7 @@ const SecondScene = ({
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [showCredits, setShowCredits] = useState(false)
   const [showAvatarButtons, setShowAvatarButtons] = useState(false)
+  const [soundOn, setSoundOn] = useState(true)
 
   const classes = useStyles()
 
@@ -157,6 +157,10 @@ const SecondScene = ({
     setShowAvatarButtons(false)
   }
 
+  const soundHandler = () => {
+    setSoundOn(!soundOn)
+  }
+
   return (
     <div className="sidebarContainer">
       <WithSecondSceneText />
@@ -170,6 +174,8 @@ const SecondScene = ({
         soundButtonHandler={() => {}}
         inSubscribedState={false}
         onClickExplore={onClickExplore}
+        soundHandler={soundHandler}
+        soundOn={soundOn}
       />
       <SideNav
         open={open}
