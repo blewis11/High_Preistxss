@@ -356,7 +356,7 @@ const SubscriptionSection = props => {
           {contents.buttons.youtube}
         </Button>
       </div>
-      <div className={classes.buttonContainer}>
+      <div style={{ paddingTop: '10px' }}>
         <Button
           onClick={() => {
             const win = window.open(contents.links.patreon, '_blank')
@@ -373,7 +373,7 @@ const SubscriptionSection = props => {
         </Button>
       </div>
       <div style={{ paddingTop: '10px' }}>
-        <Button
+        {/* <Button
           onClick={() => {
             const win = window.open(contents.links.onlineShop, '_blank')
             if (win) {
@@ -386,7 +386,7 @@ const SubscriptionSection = props => {
           variant="outlined"
         >
           {contents.buttons.onlineShop}
-        </Button>
+        </Button> */}
       </div>
       <SubscribeForm classes={classes} />
     </Fragment>

@@ -356,7 +356,7 @@ const LinksSection = ({ subscriptionText, contents }) => {
           {contents.buttons.youtube}
         </Button>
       </div>
-      <div className={classes.buttonContainer}>
+      <div style={{ paddingTop: '10px' }}>
         <Button
           onClick={() => {
             const win = window.open(contents.links.patreon, '_blank')
@@ -372,7 +372,7 @@ const LinksSection = ({ subscriptionText, contents }) => {
           {contents.buttons.patreon}
         </Button>
       </div>
-      <div style={{ paddingTop: '10px' }}>
+      {/* <div style={{ paddingTop: '10px' }}>
         <Button
           onClick={() => {
             const win = window.open(contents.links.onlineShop, '_blank')
@@ -387,7 +387,7 @@ const LinksSection = ({ subscriptionText, contents }) => {
         >
           {contents.buttons.onlineShop}
         </Button>
-      </div>
+      </div> */}
       <SubscribeForm classes={classes} />
     </Fragment>
   )
