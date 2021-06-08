@@ -62,9 +62,9 @@ const Floor = ({
 }) => {
   const [state, setState] = useState({
     data: {
-      positionX: -33,
-      positionY: 0,
-      positionZ: -24,
+      positionX: 24,
+      positionY: 5,
+      positionZ: -70,
       rotation: -0.095,
       scale: 0.11,
     },
@@ -128,11 +128,11 @@ const Floor = ({
 
   return (
     <>
-      {/* <Html>
+      <Html>
         <div style={{ width: '500px', background: 'blue' }}>
           <App state={state} setState={setState} />
         </div>
-      </Html> */}
+      </Html>
 
       <group ref={wisdomGroupRef}>
         <primitive object={wisdomSpotLight} />

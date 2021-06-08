@@ -55,6 +55,42 @@ const BottomNavButtons = ({ setSelectedAvatar, selectedAvatar, avatarSelected })
       <div className={classes.bottomButtons}>
         <Button
           onClick={() => {
+            setSelectedAvatar('exchange')
+          }}
+          classes={{
+            root:
+              selectedAvatar === 'exchange' && avatarSelected ? classes.rootSelected : classes.root,
+          }}
+          variant="outlined"
+        >
+          EXCHANGE
+        </Button>
+        <Button
+          onClick={() => {
+            setSelectedAvatar('growth')
+          }}
+          classes={{
+            root:
+              selectedAvatar === 'growth' && avatarSelected ? classes.rootSelected : classes.root,
+          }}
+          variant="outlined"
+        >
+          GROWTH
+        </Button>
+        <Button
+          onClick={() => {
+            setSelectedAvatar('wisdom')
+          }}
+          classes={{
+            root:
+              selectedAvatar === 'wisdom' && avatarSelected ? classes.rootSelected : classes.root,
+          }}
+          variant="outlined"
+        >
+          WISDOM
+        </Button>
+        <Button
+          onClick={() => {
             setSelectedAvatar('health')
           }}
           classes={{
@@ -75,42 +111,6 @@ const BottomNavButtons = ({ setSelectedAvatar, selectedAvatar, avatarSelected })
           variant="outlined"
         >
           JOY
-        </Button>
-        <Button
-          onClick={() => {
-            setSelectedAvatar('growth')
-          }}
-          classes={{
-            root:
-              selectedAvatar === 'growth' && avatarSelected ? classes.rootSelected : classes.root,
-          }}
-          variant="outlined"
-        >
-          GROWTH
-        </Button>
-        <Button
-          onClick={() => {
-            setSelectedAvatar('exchange')
-          }}
-          classes={{
-            root:
-              selectedAvatar === 'exchange' && avatarSelected ? classes.rootSelected : classes.root,
-          }}
-          variant="outlined"
-        >
-          EXCHANGE
-        </Button>
-        <Button
-          onClick={() => {
-            setSelectedAvatar('wisdom')
-          }}
-          classes={{
-            root:
-              selectedAvatar === 'wisdom' && avatarSelected ? classes.rootSelected : classes.root,
-          }}
-          variant="outlined"
-        >
-          WISDOM
         </Button>
       </div>
     </Fragment>

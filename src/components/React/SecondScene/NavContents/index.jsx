@@ -323,7 +323,7 @@ const LinksSection = ({ subscriptionText, contents }) => {
   const classes = useStyles()
   return (
     <Fragment>
-      <div className={"text"} dangerouslySetInnerHTML={getMarkdownText(subscriptionText)} />
+      <div className={'text'} dangerouslySetInnerHTML={getMarkdownText(subscriptionText)} />
       <div style={{ paddingTop: '20px', paddingBottom: '10px' }}>
         <Button
           onClick={() => {
@@ -413,29 +413,18 @@ const AvatarButtonsSection = ({ onClickAvatarButton, setAvatarSelected, setSelec
     <div className={containerStyles}>
       <div style={{ paddingTop: '20px', paddingBottom: '10px' }}>
         <Button
-          onClick={() => onClick('health')}
+          onClick={() => onClick('exchange')}
           classes={{
             root: classes.button,
           }}
           variant="outlined"
         >
-          HEALTH
+          EXCHANGE
         </Button>
       </div>
       <div className={classes.buttonContainer}>
         <Button
-          onClick={e => onClick('joy')}
-          classes={{
-            root: classes.button,
-          }}
-          variant="outlined"
-        >
-          JOY
-        </Button>
-      </div>
-      <div className={classes.buttonContainer}>
-        <Button
-          onClick={() => onClick('growth')}
+          onClick={e => onClick('growth')}
           classes={{
             root: classes.button,
           }}
@@ -446,17 +435,6 @@ const AvatarButtonsSection = ({ onClickAvatarButton, setAvatarSelected, setSelec
       </div>
       <div className={classes.buttonContainer}>
         <Button
-          onClick={() => onClick('exchange')}
-          classes={{
-            root: classes.button,
-          }}
-          variant="outlined"
-        >
-          EXCHANGE
-        </Button>
-      </div>
-      <div style={{ paddingTop: '10px' }}>
-        <Button
           onClick={() => onClick('wisdom')}
           classes={{
             root: classes.button,
@@ -464,6 +442,28 @@ const AvatarButtonsSection = ({ onClickAvatarButton, setAvatarSelected, setSelec
           variant="outlined"
         >
           WISDOM
+        </Button>
+      </div>
+      <div className={classes.buttonContainer}>
+        <Button
+          onClick={() => onClick('health')}
+          classes={{
+            root: classes.button,
+          }}
+          variant="outlined"
+        >
+          HEALTH
+        </Button>
+      </div>
+      <div style={{ paddingTop: '10px' }}>
+        <Button
+          onClick={() => onClick('joy')}
+          classes={{
+            root: classes.button,
+          }}
+          variant="outlined"
+        >
+          JOY
         </Button>
       </div>
     </div>
@@ -474,7 +474,7 @@ const InformationSection = ({ informationText }) => {
   const classes = useStyles()
   const scene2Markdown = getMarkdownText(informationText)
 
-  return <div className={"text"} dangerouslySetInnerHTML={getMarkdownText(informationText)} />
+  return <div className={'text'} dangerouslySetInnerHTML={getMarkdownText(informationText)} />
 }
 
 const WisdomSection = ({ contents }) => {
@@ -483,7 +483,7 @@ const WisdomSection = ({ contents }) => {
   return (
     <Fragment>
       <div class="title">WISDOM</div>
-      <div className={"text"} dangerouslySetInnerHTML={getMarkdownText(contents.text)} />
+      <div className={'text'} dangerouslySetInnerHTML={getMarkdownText(contents.text)} />
       <div style={{ paddingTop: '20px', paddingBottom: '10px' }}>
         <Button
           onClick={() => {
@@ -542,11 +542,14 @@ const JoySection = ({ contents }) => {
   return (
     <Fragment>
       <div class="title">JOY</div>
-      <div className={"text"} dangerouslySetInnerHTML={getMarkdownText(contents.text)} />
+      <div className={'text'} dangerouslySetInnerHTML={getMarkdownText(contents.text)} />
       <div style={{ paddingTop: '30px', paddingBottom: '10px' }}>
-        {/* <Button
+        <Button
           onClick={() => {
-            const win = window.open(contents.links.button1, '_blank')
+            const win = window.open(
+              'http://thehighpriestxss.com/api' + contents.links.button1,
+              '_blank',
+            )
             if (win) {
               win.focus()
             }
@@ -557,7 +560,7 @@ const JoySection = ({ contents }) => {
           variant="outlined"
         >
           {contents.buttons.button1}
-        </Button> */}
+        </Button>
       </div>
     </Fragment>
   )
@@ -568,7 +571,7 @@ const ExchangeSection = ({ contents }) => {
   return (
     <Fragment>
       <div class="title">EXCHANGE</div>
-      <div className={"text"} dangerouslySetInnerHTML={getMarkdownText(contents.text)} />
+      <div className={'text'} dangerouslySetInnerHTML={getMarkdownText(contents.text)} />
       <div style={{ paddingTop: '30px', paddingBottom: '10px' }}>
         <Button
           onClick={() => {
@@ -594,7 +597,7 @@ const GrowthSection = ({ contents }) => {
   return (
     <Fragment>
       <div class="title">GROWTH</div>
-      <div className={"text"} dangerouslySetInnerHTML={getMarkdownText(contents.text)} />
+      <div className={'text'} dangerouslySetInnerHTML={getMarkdownText(contents.text)} />
       <div style={{ paddingTop: '30px', paddingBottom: '10px' }}>
         <Button
           onClick={() => {
@@ -621,7 +624,7 @@ const HealthSection = ({ contents }) => {
   return (
     <Fragment>
       <div class="title">HEALTH</div>
-      <div className={"text"} dangerouslySetInnerHTML={getMarkdownText(contents.text)} />
+      <div className={'text'} dangerouslySetInnerHTML={getMarkdownText(contents.text)} />
       <div
         style={{ paddingTop: '25px' }}
         dangerouslySetInnerHTML={{ __html: contents.links.soundcloud.trim() }}

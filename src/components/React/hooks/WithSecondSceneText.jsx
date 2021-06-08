@@ -29,10 +29,15 @@ const WithSecondSceneText = ({
     const fetchData = async () => {
       const response = await fetch(`http://46.101.9.88/api/texts`)
       const responseButtons = await fetch(`http://46.101.9.88/api/buttons`)
+      const imagesResponse = await fetch(`http://46.101.9.88/api/images`)
+
       const data = await response.json()
       const buttons = await responseButtons.json()
+      const images = await imagesResponse.json()
 
       const buttonsText = {}
+
+      const joyImageUrl = images.filter(image => image.name === 'JoyImageDownload')[0].media.url
 
       const informationButtonText = buttons.filter(button => button.name === 'Information')
 
@@ -198,7 +203,7 @@ const WithSecondSceneText = ({
           button1: buttonsText['joy1'],
         },
         links: {
-          button1: joyButton1Link,
+          button1: joyImageUrl,
         },
       })
 
