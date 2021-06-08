@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button'
 import clsx from 'clsx'
 import { makeStyles } from '@material-ui/core/styles'
 import useSound from 'use-sound'
-import theme from './highpriestxss_V06.3.mp3'
+import theme from './highpriestxss_V06.mp3'
 
 const TopNavButtons = ({
   buttonColor,
@@ -145,7 +145,9 @@ const AllButtons = ({
   soundHandler,
   soundOn,
 }) => {
-  const [play, { stop }] = useSound(theme)
+  const [play, { stop }] = useSound(theme, {
+    loop: true
+  })
 
   if (soundOn) {
     play()

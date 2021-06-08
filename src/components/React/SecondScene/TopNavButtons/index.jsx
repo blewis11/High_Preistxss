@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button'
 import clsx from 'clsx'
 import { makeStyles } from '@material-ui/core/styles'
 import useSound from 'use-sound'
-import theme from './highpriestxss_V06.mp3'
+import theme from './highpriestxss_V06.3.mp3'
 import { connect } from 'react-redux'
 
 const TopNavButtons = ({
@@ -165,14 +165,9 @@ const AllButtons = ({
   buttons,
 }) => {
 
-  const [play, { stop, sound }] = useSound(theme)
-  useEffect(() => {
-    if (sound) {
-      sound.loop = true
-    }
-  }, [sound])
-
-  console.log({ sound })
+  const [play, { stop }] = useSound(theme, {
+    loop: true
+  })
 
   if (soundOn) {
     play()
