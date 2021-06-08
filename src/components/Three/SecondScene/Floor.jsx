@@ -128,11 +128,11 @@ const Floor = ({
 
   return (
     <>
-      <Html>
+      {/* <Html>
         <div style={{ width: '500px', background: 'blue' }}>
           <App state={state} setState={setState} />
         </div>
-      </Html>
+      </Html> */}
 
       <group ref={wisdomGroupRef}>
         <primitive object={wisdomSpotLight} />
