@@ -598,7 +598,7 @@ const GrowthSection = ({ contents }) => {
     <Fragment>
       <div class="title">GROWTH</div>
       <div className={'text'} dangerouslySetInnerHTML={getMarkdownText(contents.text)} />
-      <div style={{ paddingTop: '30px', paddingBottom: '10px' }}>
+      {/* <div style={{ paddingTop: '30px', paddingBottom: '10px' }}>
         <Button
           onClick={() => {
             const win = window.open(contents.links.button1, '_blank')
@@ -613,7 +613,7 @@ const GrowthSection = ({ contents }) => {
         >
           {contents.buttons.button1}
         </Button>
-      </div>
+      </div> */}
     </Fragment>
   )
 }
