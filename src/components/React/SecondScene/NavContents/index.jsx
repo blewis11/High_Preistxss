@@ -323,7 +323,7 @@ const LinksSection = ({ subscriptionText, contents }) => {
   const classes = useStyles()
   return (
     <Fragment>
-      <div className={classes.text} dangerouslySetInnerHTML={getMarkdownText(subscriptionText)} />
+      <div className={"text"} dangerouslySetInnerHTML={getMarkdownText(subscriptionText)} />
       <div style={{ paddingTop: '20px', paddingBottom: '10px' }}>
         <Button
           onClick={() => {
@@ -472,8 +472,9 @@ const AvatarButtonsSection = ({ onClickAvatarButton, setAvatarSelected, setSelec
 
 const InformationSection = ({ informationText }) => {
   const classes = useStyles()
+  const scene2Markdown = getMarkdownText(informationText)
 
-  return <div className={classes.text} dangerouslySetInnerHTML={getMarkdownText(informationText)} />
+  return <div className={"text"} dangerouslySetInnerHTML={getMarkdownText(informationText)} />
 }
 
 const WisdomSection = ({ contents }) => {
@@ -482,7 +483,7 @@ const WisdomSection = ({ contents }) => {
   return (
     <Fragment>
       <div class="title">WISDOM</div>
-      <div className={classes.text} dangerouslySetInnerHTML={getMarkdownText(contents.text)} />
+      <div className={"text"} dangerouslySetInnerHTML={getMarkdownText(contents.text)} />
       <div style={{ paddingTop: '20px', paddingBottom: '10px' }}>
         <Button
           onClick={() => {
@@ -541,7 +542,7 @@ const JoySection = ({ contents }) => {
   return (
     <Fragment>
       <div class="title">JOY</div>
-      <div className={classes.text} dangerouslySetInnerHTML={getMarkdownText(contents.text)} />
+      <div className={"text"} dangerouslySetInnerHTML={getMarkdownText(contents.text)} />
       <div style={{ paddingTop: '30px', paddingBottom: '10px' }}>
         <Button
           onClick={() => {
@@ -567,7 +568,7 @@ const ExchangeSection = ({ contents }) => {
   return (
     <Fragment>
       <div class="title">EXCHANGE</div>
-      <div className={classes.text} dangerouslySetInnerHTML={getMarkdownText(contents.text)} />
+      <div className={"text"} dangerouslySetInnerHTML={getMarkdownText(contents.text)} />
       <div style={{ paddingTop: '30px', paddingBottom: '10px' }}>
         <Button
           onClick={() => {
@@ -593,7 +594,7 @@ const GrowthSection = ({ contents }) => {
   return (
     <Fragment>
       <div class="title">GROWTH</div>
-      <div className={classes.text} dangerouslySetInnerHTML={getMarkdownText(contents.text)} />
+      <div className={"text"} dangerouslySetInnerHTML={getMarkdownText(contents.text)} />
       <div style={{ paddingTop: '30px', paddingBottom: '10px' }}>
         <Button
           onClick={() => {
@@ -620,7 +621,7 @@ const HealthSection = ({ contents }) => {
   return (
     <Fragment>
       <div class="title">HEALTH</div>
-      <div className={classes.text} dangerouslySetInnerHTML={getMarkdownText(contents.text)} />
+      <div className={"text"} dangerouslySetInnerHTML={getMarkdownText(contents.text)} />
       <div
         style={{ paddingTop: '25px' }}
         dangerouslySetInnerHTML={{ __html: contents.links.soundcloud.trim() }}
@@ -667,12 +668,12 @@ const NavContents = ({
               {selectedAvatar === 'health' && <HealthSection contents={health} />}
             </div>
           ) : (
-            <div>
+            <Fragment>
               {selectedIndex === 1 && <InformationSection informationText={informationText} />}
               {selectedIndex === 2 && (
                 <LinksSection subscriptionText={subscriptionText} contents={links} />
               )}
-            </div>
+            </Fragment>
           )}
         </Fragment>
       )}

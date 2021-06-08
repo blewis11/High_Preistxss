@@ -13,3 +13,14 @@
   padding-bottom: 25px;
   font-size: 50px;
 }
+
+.text {
+  font-family: 'Helvetica Neue LT W05_55 Roman';
+  letter-spacing: '0.02em';
+  line-height: 1.85;
+  font-size: 14px;
+}
+
+.text p {
+  margin: 14px 0;
+}

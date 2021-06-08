@@ -7,7 +7,7 @@ import MailchimpSubscribe from 'react-mailchimp-subscribe'
 import Button from '@material-ui/core/Button'
 
 import marked from 'marked'
-
+import "./styles.css"
 const useStyles = makeStyles({
   container: {
     padding: '15px',
@@ -314,7 +314,7 @@ const SubscribeForm = props => {
 const SubscribedSection = ({ successfullySubscribedText }) => {
   const classes = useStyles()
 
-  return <div className={classes.text}>{successfullySubscribedText}</div>
+  return <div className={"text"}>{successfullySubscribedText}</div>
 }
 
 const SubscriptionSection = props => {
@@ -323,7 +323,7 @@ const SubscriptionSection = props => {
 
   return (
     <Fragment>
-      <div className={classes.text} dangerouslySetInnerHTML={getMarkdownText(subscriptionText)} />
+      <div className={"text"} dangerouslySetInnerHTML={getMarkdownText(subscriptionText)} />
       <div style={{ paddingTop: '20px', paddingBottom: '10px' }}>
         <Button
           onClick={() => {
@@ -397,8 +397,9 @@ const InformationSection = props => {
   const { informationText } = props
 
   const classes = useStyles()
-
-  return <div className={classes.text} dangerouslySetInnerHTML={getMarkdownText(informationText)} />
+  const scene1Markdown = getMarkdownText(informationText)
+  console.log({ scene1Markdown })
+  return <div className={"text"} dangerouslySetInnerHTML={getMarkdownText(informationText)} />
 }
 
 const NavContents = ({

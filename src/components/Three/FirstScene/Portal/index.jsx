@@ -48,7 +48,7 @@ const Portal = ({
       createjs.Tween.get(portal.scale).to({ x: 1, y: 1, z: 1 }, 200, createjs.Ease.cubicInOut)
     }
 
-    if (enlargePortal) {
+    if (enlargePortal && ref.current) {
       window.setTimeout(() => {
         const portal = ref.current
         createjs.Tween.get(portal.scale).to({ x: 15, y: 15, z: 15 }, 2000, createjs.Ease.cubicInOut)
