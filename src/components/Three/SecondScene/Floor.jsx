@@ -18,9 +18,9 @@ const App = ({ state, setState }) => {
     <DatGui data={state.data} onUpdate={handleUpdate}>
       <DatNumber path="rotation" label="rotation" step={0.05} />
       <DatNumber path="scale" label="scale" step={0.01} />
-      <DatNumber path="positionX" label="positionx" step={3} />
-      <DatNumber path="positionY" label="positiony" step={3} />
-      <DatNumber path="positionZ" label="positionz" step={3} />
+      <DatNumber path="positionX" label="positionx" step={1} />
+      <DatNumber path="positionY" label="positiony" step={1} />
+      <DatNumber path="positionZ" label="positionz" step={1} />
     </DatGui>
   )
 }
@@ -62,9 +62,9 @@ const Floor = ({
 }) => {
   const [state, setState] = useState({
     data: {
-      positionX: 24,
-      positionY: 5,
-      positionZ: -70,
+      positionX: -48,
+      positionY: -1,
+      positionZ: 36,
       rotation: -0.095,
       scale: 0.11,
     },
@@ -147,12 +147,13 @@ const Floor = ({
         />
         <Plinth
           plinth={useFBXLoader('plinth/WisdomPlinth4.fbx')}
-          position={[23, -1, -67.5]}
+          position={[24, -1, -70]}
           rotation={1.25}
           plinthRef={wisdomPlinthRef}
         />
       </group>
 
+      {/* position={[state.data.positionX, state.data.positionY, state.data.positionZ]} */}
       <group ref={growthGroupRef}>
         <primitive object={growthSpotLight} />
         <primitive object={growthSpotLight.target} />
@@ -166,7 +167,7 @@ const Floor = ({
         />
         <Plinth
           plinth={useFBXLoader('plinth/GrowthPlinth4.fbx')}
-          position={[-51.2, -1, -38]}
+          position={[-52, -1, -38]}
           rotation={-3.7}
           plinthRef={growthPlinthRef}
         />
@@ -185,7 +186,7 @@ const Floor = ({
         />
         <Plinth
           plinth={useFBXLoader('plinth/HealthPlinth4.fbx')}
-          position={[63.1, -1, 0]}
+          position={[66, -1, 0]}
           rotation={0.05}
           plinthRef={healthPlinthRef}
         />
@@ -204,7 +205,7 @@ const Floor = ({
         />
         <Plinth
           plinth={useFBXLoader('plinth/JoyPlinth4.fbx')}
-          position={[21.7, -1, 67.3]}
+          position={[22, -1, 69]}
           rotation={-1.35}
           plinthRef={joyPlinthRef}
         />
@@ -223,7 +224,7 @@ const Floor = ({
         />
         <Plinth
           plinth={useFBXLoader('plinth/ExchangePlinth4.fbx')}
-          position={[-45.9, -1, 34.2]}
+          position={[-48, -1, 36]}
           rotation={-2.45}
           plinthRef={exchangePlinthRef}
         />
