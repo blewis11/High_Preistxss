@@ -398,7 +398,6 @@ const InformationSection = props => {
 
   const classes = useStyles()
   const scene1Markdown = getMarkdownText(informationText)
-  console.log({ scene1Markdown })
   return <div className={"text"} dangerouslySetInnerHTML={getMarkdownText(informationText)} />
 }
 

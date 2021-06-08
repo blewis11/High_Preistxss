@@ -22,17 +22,17 @@ const TopNavButtons = ({
   const useStyles = makeStyles(theme => {
     const onHover = showClose
       ? {
-          '&:hover': {
-            backgroundColor: '#9489de',
-            color: '#121212',
-          },
-        }
+        '&:hover': {
+          backgroundColor: '#9489de',
+          color: '#121212',
+        },
+      }
       : {
-          '&:hover': {
-            backgroundColor: 'white',
-            color: '#9489dd',
-          },
-        }
+        '&:hover': {
+          backgroundColor: 'white',
+          color: '#9489dd',
+        },
+      }
 
     const rootButtonStyles = {
       zIndex: '1 !important',
@@ -164,7 +164,15 @@ const AllButtons = ({
   onClickExplore,
   buttons,
 }) => {
-  const [play, { stop }] = useSound(theme)
+
+  const [play, { stop, sound }] = useSound(theme)
+  useEffect(() => {
+    if (sound) {
+      sound.loop = true
+    }
+  }, [sound])
+
+  console.log({ sound })
 
   if (soundOn) {
     play()

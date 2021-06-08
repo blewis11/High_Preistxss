@@ -544,7 +544,7 @@ const JoySection = ({ contents }) => {
       <div class="title">JOY</div>
       <div className={"text"} dangerouslySetInnerHTML={getMarkdownText(contents.text)} />
       <div style={{ paddingTop: '30px', paddingBottom: '10px' }}>
-        <Button
+        {/* <Button
           onClick={() => {
             const win = window.open(contents.links.button1, '_blank')
             if (win) {
@@ -557,7 +557,7 @@ const JoySection = ({ contents }) => {
           variant="outlined"
         >
           {contents.buttons.button1}
-        </Button>
+        </Button> */}
       </div>
     </Fragment>
   )

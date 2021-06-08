@@ -89,23 +89,23 @@ const CameraMovements = ({
         )
 
         let matchingWisdownIntersectsPlinth = intersects.filter(
-          item => item.object.parent.uuid === wisdomPlinthRef.current.uuid,
+          item => item.object.parent.parent.uuid === wisdomPlinthRef.current.uuid,
         )
 
         let matchingGrowthIntersectsPlinth = intersects.filter(
-          item => item.object.parent.uuid === growthPlinthRef.current.uuid,
+          item => item.object.parent.parent.uuid === growthPlinthRef.current.uuid,
         )
 
         let matchingHealthIntersectsPlinth = intersects.filter(
-          item => item.object.parent.uuid === healthPlinthRef.current.uuid,
+          item => item.object.parent.parent.uuid === healthPlinthRef.current.uuid,
         )
 
         let matchingJoyIntersectsPlinth = intersects.filter(
-          item => item.object.parent.uuid === joyPlinthRef.current.uuid,
+          item => item.object.parent.parent.uuid === joyPlinthRef.current.uuid,
         )
 
         let matchingExchangeIntersectsPlinth = intersects.filter(
-          item => item.object.parent.uuid === exchangePlinthRef.current.uuid,
+          item => item.object.parent.parent.uuid === exchangePlinthRef.current.uuid,
         )
 
         if (matchingWisdownIntersectsPlinth.length > 0 && window.location.pathname !== '/explore') {
@@ -177,11 +177,11 @@ const CameraMovements = ({
             item.object.parent.uuid === healthAvatarRef.current.uuid ||
             item.object.parent.uuid === joyAvatarRef.current.uuid ||
             item.object.parent.uuid === exchangeAvatarRef.current.uuid ||
-            item.object.parent.uuid === wisdomPlinthRef.current.uuid ||
-            item.object.parent.uuid === growthPlinthRef.current.uuid ||
-            item.object.parent.uuid === healthPlinthRef.current.uuid ||
-            item.object.parent.uuid === joyPlinthRef.current.uuid ||
-            item.object.parent.uuid === exchangePlinthRef.current.uuid,
+            item.object.parent.parent.uuid === wisdomPlinthRef.current.uuid ||
+            item.object.parent.parent.uuid === growthPlinthRef.current.uuid ||
+            item.object.parent.parent.uuid === healthPlinthRef.current.uuid ||
+            item.object.parent.parent.uuid === joyPlinthRef.current.uuid ||
+            item.object.parent.parent.uuid === exchangePlinthRef.current.uuid,
         )
 
         if (matchingIntersects.length > 0) {

@@ -74,7 +74,7 @@ const Floor = ({
   const ceilingTexture = useTextureLoader('21-06-07_ceiling6.jpg')
 
   let loader = new THREE.CubeTextureLoader()
-  loader.setPath('envmap2/')
+  loader.setPath('envmap3/')
   let textureCube = loader.load(['px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'nz.jpg', 'pz.jpg'])
 
   const wisdom = useFBXLoader('avatars/Wisdom.fbx')
@@ -146,8 +146,8 @@ const Floor = ({
           scale={0.04}
         />
         <Plinth
-          plinth={useFBXLoader('plinth/WisdomPlinth3.fbx')}
-          position={[23, 1, -67.5]}
+          plinth={useFBXLoader('plinth/WisdomPlinth4.fbx')}
+          position={[23, -1, -67.5]}
           rotation={1.25}
           plinthRef={wisdomPlinthRef}
         />
@@ -165,8 +165,8 @@ const Floor = ({
           scale={4.85}
         />
         <Plinth
-          plinth={useFBXLoader('plinth/GrowthPlinth3.fbx')}
-          position={[-51.2, 1, -38]}
+          plinth={useFBXLoader('plinth/GrowthPlinth4.fbx')}
+          position={[-51.2, -1, -38]}
           rotation={-3.7}
           plinthRef={growthPlinthRef}
         />
@@ -184,8 +184,8 @@ const Floor = ({
           scale={0.11}
         />
         <Plinth
-          plinth={useFBXLoader('plinth/HealthPlinth3.fbx')}
-          position={[63.1, 1, 0]}
+          plinth={useFBXLoader('plinth/HealthPlinth4.fbx')}
+          position={[63.1, -1, 0]}
           rotation={0.05}
           plinthRef={healthPlinthRef}
         />
@@ -203,8 +203,8 @@ const Floor = ({
           scale={0.015}
         />
         <Plinth
-          plinth={useFBXLoader('plinth/JoyPlinth3.fbx')}
-          position={[21.7, 1, 67.3]}
+          plinth={useFBXLoader('plinth/JoyPlinth4.fbx')}
+          position={[21.7, -1, 67.3]}
           rotation={-1.35}
           plinthRef={joyPlinthRef}
         />
@@ -222,8 +222,8 @@ const Floor = ({
           scale={state.data.scale}
         />
         <Plinth
-          plinth={useFBXLoader('plinth/ExchangePlinth3.fbx')}
-          position={[-45.9, 1, 34.2]}
+          plinth={useFBXLoader('plinth/ExchangePlinth4.fbx')}
+          position={[-45.9, -1, 34.2]}
           rotation={-2.45}
           plinthRef={exchangePlinthRef}
         />
