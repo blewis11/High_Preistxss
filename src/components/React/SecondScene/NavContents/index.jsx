@@ -315,7 +315,7 @@ const useStyles = makeStyles({
     },
   },
   buttonContainer: {
-    padding: '10px 0 10px 0',
+    padding: '15px 0 10px 0',
   },
 })
 
@@ -356,7 +356,7 @@ const LinksSection = ({ subscriptionText, contents }) => {
           {contents.buttons.youtube}
         </Button>
       </div>
-      <div style={{ paddingTop: '10px' }}>
+      <div style={{ paddingTop: '15px' }}>
         <Button
           onClick={() => {
             const win = window.open(contents.links.patreon, '_blank')

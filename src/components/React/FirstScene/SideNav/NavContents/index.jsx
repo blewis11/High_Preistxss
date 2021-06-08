@@ -7,7 +7,7 @@ import MailchimpSubscribe from 'react-mailchimp-subscribe'
 import Button from '@material-ui/core/Button'
 
 import marked from 'marked'
-import "./styles.css"
+import './styles.css'
 const useStyles = makeStyles({
   container: {
     padding: '15px',
@@ -39,7 +39,7 @@ const useStyles = makeStyles({
     },
   },
   buttonContainer: {
-    padding: '10px 0 10px 0',
+    padding: '15px 0 10px 0',
   },
 })
 
@@ -314,7 +314,7 @@ const SubscribeForm = props => {
 const SubscribedSection = ({ successfullySubscribedText }) => {
   const classes = useStyles()
 
-  return <div className={"text"}>{successfullySubscribedText}</div>
+  return <div className={'text'}>{successfullySubscribedText}</div>
 }
 
 const SubscriptionSection = props => {
@@ -323,7 +323,7 @@ const SubscriptionSection = props => {
 
   return (
     <Fragment>
-      <div className={"text"} dangerouslySetInnerHTML={getMarkdownText(subscriptionText)} />
+      <div className={'text'} dangerouslySetInnerHTML={getMarkdownText(subscriptionText)} />
       <div style={{ paddingTop: '20px', paddingBottom: '10px' }}>
         <Button
           onClick={() => {
@@ -356,7 +356,7 @@ const SubscriptionSection = props => {
           {contents.buttons.youtube}
         </Button>
       </div>
-      <div style={{ paddingTop: '10px' }}>
+      <div style={{ paddingTop: '15px' }}>
         <Button
           onClick={() => {
             const win = window.open(contents.links.patreon, '_blank')
@@ -372,8 +372,8 @@ const SubscriptionSection = props => {
           {contents.buttons.patreon}
         </Button>
       </div>
-      <div style={{ paddingTop: '10px' }}>
-        {/* <Button
+      {/* <div style={{ paddingTop: '10px' }}> */}
+      {/* <Button
           onClick={() => {
             const win = window.open(contents.links.onlineShop, '_blank')
             if (win) {
@@ -387,7 +387,7 @@ const SubscriptionSection = props => {
         >
           {contents.buttons.onlineShop}
         </Button> */}
-      </div>
+      {/* </div> */}
       <SubscribeForm classes={classes} />
     </Fragment>
   )
@@ -398,7 +398,7 @@ const InformationSection = props => {
 
   const classes = useStyles()
   const scene1Markdown = getMarkdownText(informationText)
-  return <div className={"text"} dangerouslySetInnerHTML={getMarkdownText(informationText)} />
+  return <div className={'text'} dangerouslySetInnerHTML={getMarkdownText(informationText)} />
 }
 
 const NavContents = ({
